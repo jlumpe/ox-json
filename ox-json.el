@@ -29,6 +29,7 @@
 ;;; Code:
 
 (require 'cl-lib)
+(require 's)
 (require 'json)
 (require 'ox)
 (require 'org-element)
@@ -143,7 +144,7 @@ The values are expected to be JSON-encoded already, keys are not."
     "[]"))
 
 (defun org-json-transcode-template (contents info)
-  (org-json-transcode-object-alist
+  (org-json--transcode-object-alist-raw
     "org-document"
     `(
       (contents . ,(org-json--transcode-contents contents)))))
