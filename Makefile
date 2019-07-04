@@ -1,3 +1,5 @@
+# Source: https://github.com/rolandwalker/emacs-travis
+
 EMACS=emacs
 
 EMACS_CLEAN=-Q
@@ -50,7 +52,7 @@ test-travis :
 
 test : build test-dep-1 test-autoloads
 	@cd $(TEST_DIR)                                   && \
-	(for test_lib in *-test.el; do                       \
+	(for test_lib in test-*.el; do                       \
 	    $(EMACS) $(EMACS_BATCH) -L . -L .. -l cl -l $(TEST_DEP_1) -l $$test_lib --eval \
 	    "(progn                                          \
 	      (fset 'ert--print-backtrace 'ignore)           \
