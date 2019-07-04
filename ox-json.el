@@ -34,6 +34,14 @@
 (require 'org-element)
 
 
+;;; Variables
+(defgroup org-json nil "Customization for the ox-json package" :group 'outline)
+
+(defcustom org-json-data-type-property "$$data_type"
+  "Property which indicates the data type of JSON objects."
+  :type '(string))
+
+
 ;;; Utility code
 
 (defmacro org-json--debug-print (expr)
@@ -109,9 +117,6 @@
 
 
 ;;; Transcoders
-
-; TODO make this configurable
-(setq org-json-data-type-property "$$data_type")
 
 (defun org-json--end-array-item (node info string)
   "Add newline to encoded node, plus comma if not last child."
