@@ -102,8 +102,10 @@
   (interactive)
   (let ((buffer (org-export-to-buffer 'json "*Org JSON Export*"
                   async subtreep visible-only body-only ext-plist)))
-    (with-current-buffer buffer
-      (json-mode))
+    ; Switch to json mode if available
+    (when (require 'json-mode nil t)
+      (with-current-buffer buffer
+        (json-mode)))
     buffer))
 
 (defun org-json-export-to-json
