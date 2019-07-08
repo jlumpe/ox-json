@@ -398,10 +398,6 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
 
 ;;; Export generic org data
 
-(defun org-json--end-array-item (node string info)
-  "Add newline to encoded node, plus comma if not last child."
-  (concat string (if (org-export-last-sibling-p node info) "\n" ",\n")))
-
 (defun org-json-export-data (data info)
   "Like `org-export-data' but properly format secondary strings as arrays."
   (let ((exported (s-trim (org-export-data data info))))
@@ -437,11 +433,23 @@ Interprets nil as null."
     (t
       (org-json--type-error "org node or nil" node info))))
 
-(defun org-json--encode-contents (contents)
-  "Convert concatenated, encoded contents into proper JSON list by surrounding with brackets."
-  (if contents
-    (format "[\n%s\n]" (s-trim contents))
-    "[]"))
+(defun org-json-export-contents (node info)
+  "Export the contents of an element/object as a JSON array.
+
+This is used in place of the \"contents\" argument passed to the transcoder
+functions in order to control how the transcoded values of each child node
+are joined together, which apparently is not override-able. This shouldn't
+result in too much extra work being done because the exported value of each
+node is memoized."
+  (cl-assert (org-json--is-node node))
+  (org-json-encode-array-raw
+    (cl-loop
+      with encoded-items = nil
+      for item in (org-element-contents node)
+      do (let ((encoded (org-json-export-data item info)))
+           (unless (s-blank? encoded)
+             (push encoded encoded-items)))
+      finally return (nreverse encoded-items))))
 
 (defun org-json-get-property-type (node-type property info)
   (let ((info-types (plist-get info :json-property-types))
@@ -464,40 +472,47 @@ Interprets nil as null."
       if property-type
         collect (cons key (org-json-encode-with-type property-type value info)))))
 
-(cl-defun org-json-export-node (node contents info &key properties extra)
-  "Export generic element/object NODE."
-  (unless properties
-    (setq properties (org-json-export-properties-alist node info)))
-  (let* ((node-type (org-element-type node))
-          (object-alist
-            `(
-               (type . ,(json-encode-string (symbol-name node-type)))
-               ,@extra
-               (properties . ,(org-json-encode-alist-raw "mapping" properties info))
-               (contents . ,(org-json--encode-contents contents))))
-          (strval (org-json-encode-alist-raw "org-node" object-alist info)))
-    (org-json--end-array-item node strval info)))
+(cl-defun org-json-export-node-base (node info &key extra
+                                      (properties (org-json-export-properties-alist node info))
+                                      (contents (org-json-export-contents node info)))
+  "Base export function for a generic org element/object.
+
+It is expected for all transcoding functions to call this function to do most
+of the work, possibly using the keyword arguments to override behavior.
+
+NODE is an org element or object and INFO is the export environment plist.
+PROPERTIES is an alist of pre-encoded property values that will be used in place
+of the return value of `org-json-export-properties-alist' if given (passing a
+value of nil will result in no properties being included).
+EXTRA is an alist of keys and pre-encoded values to add directly to the returned
+JSON object at the top level (note that this is not checked for conflicts with
+the existing keys).
+CONTENTS overrides the default way of encoding the node's contents with
+`org-json-export-node-contents'. It can either be a string containing the entire
+encoded JSON array or a list of pre-encoded strings.
+"
+  (unless (stringp contents)
+    (setq contents (org-json-encode-array-raw contents)))
+  (org-json-encode-alist-raw
+    "org-node"
+    `(
+      (type . ,(json-encode-string (symbol-name (org-element-type node))))
+      ,@extra
+      (properties . ,(org-json-encode-alist-raw "mapping" properties info))
+      (contents . ,contents))
+    info))
 
 
 ;;; Transcoder functions
 
 (defun org-json-transcode-plain-text (text info)
-  (assert (not (string= text "")))
-  (org-json--end-array-item text (json-encode-string text) info))
+  ; Ignore empty strings
+  (unless (string= text "")
+    (json-encode-string text)))
 
-(cl-defun org-json-transcode-base (node contents info &key properties extra)
-  "Base transcoding function for all element/object types."
-  (unless properties
-    (setq properties (org-json--export-properties node info)))
-  (let* ((node-type (org-element-type node))
-          (object-alist
-            `(
-               (type . ,(json-encode-string (symbol-name node-type)))
-               ,@extra
-               (properties . ,properties)
-               (contents . ,(org-json--encode-contents contents))))
-          (strval (org-json-encode-alist-raw "org-node" object-alist info)))
-    (org-json--end-array-item node strval info)))
+(cl-defun org-json-transcode-base (node contents info)
+  "Default transcoding function for all element/object types."
+  (org-json-export-node-base node info))
 
 (defun org-json--get-doc-info-alist (info)
   "Get alist of top-level document properties (values already encoded)."
@@ -514,14 +529,17 @@ Interprets nil as null."
 
 (defun org-json-transcode-template (contents info)
   (let* ((docinfo (org-json--get-doc-info-alist info))
-         (alist
-          `(
-             ,@docinfo
-             (contents . ,(org-json--encode-contents contents)))))
-    (org-json-encode-alist-raw "org-document" alist info)))
+         (parse-tree (plist-get info :parse-tree))
+         (contents-encoded (org-json-export-contents parse-tree info)))
+    (org-json-encode-alist-raw
+      "org-document"
+      `(
+         ,@docinfo
+         (contents . ,contents-encoded))
+      info)))
 
 (defun org-json-transcode-headline (node contents info)
-  (org-json-transcode-base node contents info
+  (org-json-export-node-base node info
     :extra `(
        (ref . ,(json-encode-string (org-export-get-reference node info))))))
 
