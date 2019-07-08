@@ -125,6 +125,7 @@
   "Check if Value is an org element/object."
   (and
     (listp value)
+    (>= (length value) 2)
     (symbolp (car value))
     (listp (cadr value))))
 
@@ -340,10 +341,10 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
 
 
 (defun org-json-export-data (data info)
-  "Like `org-export-data' but properly surround arrays with brackets."
+  "Like `org-export-data' but properly format secondary strings as arrays."
   (let ((exported (s-trim (org-export-data data info))))
     (if (and (listp data) (not (org-json--is-node data)))
-      (format (if (> (length data)) "[\n%s\n]" "[%s]") exported)
+      (format (if (> (length data) 1) "[\n%s\n]" "[%s]") exported)
       exported)))
 
 
