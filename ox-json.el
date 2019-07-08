@@ -51,6 +51,60 @@
     alist            ,#'org-json-encode-alist
     t                ,#'org-json-encode-auto))
 
+(defconst org-json--default-property-types
+  '(
+    all (
+      ; Never include parent, leads to infinite recursion
+      :parent nil
+      ; These properties have to do with absolute buffer positions and thus probably aren't useful to export
+      :begin nil
+      :end nil
+      :contents-begin nil
+      :contents-end nil
+      ; These can be useful when converting from JSON to another format
+      :post-affiliated number
+      :pre-blank number
+      :post-blank number)
+    babel (
+      :result (array string))
+    entity (
+      :latex-math-p bool
+      :use-brackets-p bool)
+    example-block (
+      :preserve-indent bool
+      :retain-labels bool
+      :use-labels bool)
+    headline (
+      :archivedp bool
+      :commentedp bool
+      ;; :deadline timestamp
+      :footnote-section-p bool
+      :quotedp bool
+      ;; :scheduled timestamp
+      :tags (array string)
+      :title secondary-string)
+    inlinetask (
+      ;; :closed timestamp
+      ;; :deadline timestamp
+      ;; :scheduled timestamp
+      :title secondary-string)
+    item (
+      :structure nil
+      :tag secondary-string)
+    macro (
+      :args (array string))
+    plain-list (
+      :structure array)
+    planning (
+      ;; :closed timestamp
+      ;; :deadline timestamp
+      ;; :scheduled timestamp)
+               )
+    property-drawer (
+      :properties nil) ; TODO
+     ))
+
+
 ;;; Variables
 (defgroup org-json nil "Customization for the ox-json package" :group 'outline)
 
@@ -147,11 +201,12 @@
   :filters-alist '()
   ;; Options
   :options-alist
-  `(
+  '(
      (:json-data-type-property nil "json-data-type-property" "$$data_type")
      (:json-exporters nil nil nil)
      (:json-property-types nil nil nil)
      (:json-strict nil nil nil)
+     (:json-include-extra-properties nil nil t)
      )
   ;; Menu
   :menu-entry
@@ -382,17 +437,29 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
   (org-json--end-array-item text (json-encode-string text) info))
 
 
-(defun org-json-export-property-value (node-type key value info)
-  (org-json-encode-auto value info))
+(defun org-json-get-property-type (node-type property info)
+  (let ((info-types (plist-get info :json-property-types))
+        (include-extra (plist-get info :json-include-extra-properties)))
+    (org-json--plists-get-default
+      property
+      (if include-extra t nil)
+      (plist-get info-types node-type)
+      (plist-get info-types 'all)
+      (plist-get org-json--default-property-types node-type)
+      (plist-get org-json--default-property-types 'all))))
 
 
 (defun org-json--export-properties (node info)
-  (org-json-encode-alist-raw
-    "mapping"
-    (org-json--loop-plist (key value (org-json-node-properties node))
-      unless (eq key :parent)
-        collect (cons key (org-json-export-property-value node key value info)))
-    info))
+  (let ((node-type (org-element-type node))
+        (property-type nil))
+    (org-json-encode-alist-raw
+      "mapping"
+      (org-json--loop-plist (key value (org-json-node-properties node))
+        with items = nil
+        do (setq property-type (org-json-get-property-type node-type key info))
+        if property-type
+          collect (cons key (org-json-encode-with-type property-type value info)))
+      info)))
 
 
 (cl-defun org-json-transcode-base (node contents info &key properties extra)
