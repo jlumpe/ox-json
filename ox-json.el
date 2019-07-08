@@ -404,9 +404,19 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
 
 (defun org-json-export-secondary-string (data info)
   "Export a secondary string."
-  ; For now just call org-json-export-data
-  ; TODO - check it actually is a secondary string
-  (org-json-export-data data info))
+  (if (listp data)
+    (org-json-encode-array-raw
+      (mapcar
+        (lambda (item)
+          (cond
+            ((stringp item)
+              (json-encode-string item))
+            ((org-json--is-node item)
+              (org-json-export-property-node data info))
+            (t
+              (org-json--type-error info "org node or string" item))))
+        data))
+    (org-json--type-error info "list" data)))
 
 (defun org-json-export-property-node (node info)
   "Export an object or element that appears in a property of another node.
@@ -417,7 +427,8 @@ Interprets nil as null."
       (org-json-export-data node info))
     ((not node)
       "null")
-    (org-json--error info "Expected org node or nil, got %S" node)))
+    (t
+      (org-json--type-error info "org node or nil" node))))
 
 (defun org-json--encode-contents (contents)
   "Convert concatenated, encoded contents into proper JSON list by surrounding with brackets."
@@ -484,9 +495,9 @@ Interprets nil as null."
 (defun org-json--get-doc-info-alist (info)
   "Get alist of top-level document properties (values already encoded)."
   `(
-     (title . ,(org-json-export-data (plist-get info :title) info))
+     (title . ,(org-json-export-secondary-string (plist-get info :title) info))
      (file_tags . ,(json-encode-list (plist-get info :filetags)))
-     (author . ,(org-json-export-data (plist-get info :author) info))
+     (author . ,(org-json-export-secondary-string (plist-get info :author) info))
      (creator . ,(org-json-encode-string (plist-get info :creator) info))
      (date . ,(org-json-encode-string (plist-get info :date) info))
      (description . ,(org-json-encode-string (plist-get info :description) info))
