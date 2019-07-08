@@ -388,12 +388,11 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
     valuetype))
 
 
-;;; Transcoders for org data
+;;; Export generic org data
 
 (defun org-json--end-array-item (node string info)
   "Add newline to encoded node, plus comma if not last child."
   (concat string (if (org-export-last-sibling-p node info) "\n" ",\n")))
-
 
 (defun org-json-export-data (data info)
   "Like `org-export-data' but properly format secondary strings as arrays."
@@ -402,40 +401,11 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
       (format (if (> (length data) 1) "[\n%s\n]" "[%s]") exported)
       exported)))
 
-
 (defun org-json--encode-contents (contents)
   "Convert concatenated, encoded contents into proper JSON list by surrounding with brackets."
   (if contents
     (format "[\n%s\n]" (s-trim contents))
     "[]"))
-
-
-(defun org-json--get-doc-info-alist (info)
-  "Get alist of top-level document properties (values already encoded)."
-  `(
-     (title . ,(org-json-export-data (plist-get info :title) info))
-     (file_tags . ,(json-encode-list (plist-get info :filetags)))
-     (author . ,(org-json-export-data (plist-get info :author) info))
-     (creator . ,(org-json-encode-string (plist-get info :creator)))
-     (date . ,(org-json-encode-string (plist-get info :date)))
-     (description . ,(org-json-encode-string (plist-get info :description)))
-     (email . ,(org-json-encode-string (plist-get info :email)))
-     (language . ,(org-json-encode-string (plist-get info :language)))
-     ))
-
-
-(defun org-json-transcode-template (contents info)
-  (let* ((docinfo (org-json--get-doc-info-alist info))
-         (alist
-          `(
-             ,@docinfo
-             (contents . ,(org-json--encode-contents contents)))))
-    (org-json-encode-alist-raw "org-document" alist info)))
-
-
-(defun org-json-transcode-plain-text (text info)
-  (org-json--end-array-item text (json-encode-string text) info))
-
 
 (defun org-json-get-property-type (node-type property info)
   (let ((info-types (plist-get info :json-property-types))
@@ -447,7 +417,6 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
       (plist-get info-types 'all)
       (plist-get org-json--default-property-types node-type)
       (plist-get org-json--default-property-types 'all))))
-
 
 (defun org-json--export-properties (node info)
   (let ((node-type (org-element-type node))
@@ -462,20 +431,45 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
       info)))
 
 
+;;; Transcoder functions
+
+(defun org-json-transcode-plain-text (text info)
+  (org-json--end-array-item text (json-encode-string text) info))
+
 (cl-defun org-json-transcode-base (node contents info &key properties extra)
   "Base transcoding function for all element/object types."
   (unless properties
     (setq properties (org-json--export-properties node info)))
   (let* ((node-type (org-element-type node))
-         (object-alist
-           `(
-             (type . ,(json-encode-string (symbol-name node-type)))
-             ,@extra
-             (properties . ,properties)
-             (contents . ,(org-json--encode-contents contents))))
-         (strval (org-json-encode-alist-raw "org-node" object-alist info)))
+          (object-alist
+            `(
+               (type . ,(json-encode-string (symbol-name node-type)))
+               ,@extra
+               (properties . ,properties)
+               (contents . ,(org-json--encode-contents contents))))
+          (strval (org-json-encode-alist-raw "org-node" object-alist info)))
     (org-json--end-array-item node strval info)))
 
+(defun org-json--get-doc-info-alist (info)
+  "Get alist of top-level document properties (values already encoded)."
+  `(
+     (title . ,(org-json-export-data (plist-get info :title) info))
+     (file_tags . ,(json-encode-list (plist-get info :filetags)))
+     (author . ,(org-json-export-data (plist-get info :author) info))
+     (creator . ,(org-json-encode-string (plist-get info :creator)))
+     (date . ,(org-json-encode-string (plist-get info :date)))
+     (description . ,(org-json-encode-string (plist-get info :description)))
+     (email . ,(org-json-encode-string (plist-get info :email)))
+     (language . ,(org-json-encode-string (plist-get info :language)))
+     ))
+
+(defun org-json-transcode-template (contents info)
+  (let* ((docinfo (org-json--get-doc-info-alist info))
+         (alist
+          `(
+             ,@docinfo
+             (contents . ,(org-json--encode-contents contents)))))
+    (org-json-encode-alist-raw "org-document" alist info)))
 
 (defun org-json-transcode-headline (node contents info)
   (org-json-transcode-base node contents info
