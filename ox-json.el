@@ -44,8 +44,8 @@
     bool             ,#'org-json-encode-bool
     string           ,#'org-json-encode-string
     number           ,#'org-json-encode-number
-    org              ,#'org-json-export-data
-    secondary-string ,#'org-json-export-data
+    node             ,#'org-json-export-property-node
+    secondary-string ,#'org-json-export-secondary-string
     array            ,#'org-json-encode-array
     plist            ,#'org-json-encode-plist
     alist            ,#'org-json-encode-alist
@@ -77,16 +77,16 @@
     headline (
       :archivedp bool
       :commentedp bool
-      ;; :deadline timestamp
+      :deadline node
       :footnote-section-p bool
       :quotedp bool
-      ;; :scheduled timestamp
+      :scheduled node
       :tags (array string)
       :title secondary-string)
     inlinetask (
-      ;; :closed timestamp
-      ;; :deadline timestamp
-      ;; :scheduled timestamp
+      :closed node
+      :deadline node
+      :scheduled node
       :title secondary-string)
     item (
       :structure nil
@@ -96,10 +96,9 @@
     plain-list (
       :structure array)
     planning (
-      ;; :closed timestamp
-      ;; :deadline timestamp
-      ;; :scheduled timestamp)
-               )
+      :closed node
+      :deadline node
+      :scheduled node)
     property-drawer (
       :properties nil) ; TODO
      ))
@@ -402,6 +401,23 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
       (format (if (> (length data) 1) "[\n%s\n]" "[%s]") exported)
       exported)))
 
+(defun org-json-export-secondary-string (data info)
+  "Export a secondary string."
+  ; For now just call org-json-export-data
+  ; TODO - check it actually is a secondary string
+  (org-json-export-data data info))
+
+(defun org-json-export-property-node (node info)
+  "Export an object or element that appears in a property of another node.
+
+Interprets nil as null."
+  (cond
+    ((org-json--is-node node)
+      (org-json-export-data node info))
+    ((not node)
+      "null")
+    (org-json--error info "Expected org node or nil, got %S" node)))
+
 (defun org-json--encode-contents (contents)
   "Convert concatenated, encoded contents into proper JSON list by surrounding with brackets."
   (if contents
@@ -419,22 +435,35 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
       (plist-get org-json--default-property-types node-type)
       (plist-get org-json--default-property-types 'all))))
 
-(defun org-json--export-properties (node info)
+(defun org-json-export-properties-alist (node info)
+  "Get alist of encoded property values for node."
   (let ((node-type (org-element-type node))
         (property-type nil))
-    (org-json-encode-alist-raw
-      "mapping"
-      (org-json--loop-plist (key value (org-json-node-properties node))
-        with items = nil
-        do (setq property-type (org-json-get-property-type node-type key info))
-        if property-type
-          collect (cons key (org-json-encode-with-type property-type value info)))
-      info)))
+    (org-json--loop-plist (key value (org-json-node-properties node))
+      with items = nil
+      do (setq property-type (org-json-get-property-type node-type key info))
+      if property-type
+        collect (cons key (org-json-encode-with-type property-type value info)))))
+
+(cl-defun org-json-export-node (node contents info &key properties extra)
+  "Export generic element/object NODE."
+  (unless properties
+    (setq properties (org-json-export-properties-alist node info)))
+  (let* ((node-type (org-element-type node))
+          (object-alist
+            `(
+               (type . ,(json-encode-string (symbol-name node-type)))
+               ,@extra
+               (properties . ,(org-json-encode-alist-raw "mapping" properties info))
+               (contents . ,(org-json--encode-contents contents))))
+          (strval (org-json-encode-alist-raw "org-node" object-alist info)))
+    (org-json--end-array-item node strval info)))
 
 
 ;;; Transcoder functions
 
 (defun org-json-transcode-plain-text (text info)
+  (assert (not (string= text "")))
   (org-json--end-array-item text (json-encode-string text) info))
 
 (cl-defun org-json-transcode-base (node contents info &key properties extra)
