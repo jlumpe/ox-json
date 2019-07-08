@@ -12,15 +12,16 @@
 
 (ert-deftest test-json-obj ()
   (let ((data-type-property (plist-get info :json-data-type-property))
-        (obj1 (json-obj info "myobj" 'foo 1 'bar 2))
-        (obj2 (json-obj info nil 'foo 1 'bar 2)))
+        (obj1 (json-obj info "myobj" 'foo 1 :bar 2 "baz" 3))
+        (obj2 (json-obj info nil :foo 1 :bar 2)))
     (should (hash-table-p obj1))
     (should (equal
               (sort (hash-table-keys obj1) #'string<)
-              (sort (list "foo" "bar" data-type-property) #'string<)))
+              (sort (list "foo" "bar" "baz" data-type-property) #'string<)))
     (should (equal (gethash data-type-property obj1) "myobj"))
     (should (equal (gethash "foo" obj1) 1))
     (should (equal (gethash "bar" obj1) 2))
+    (should (equal (gethash "baz" obj1) 3))
     ; 2nd variant shouldn't have data type key
     (should (equal
               (sort (hash-table-keys obj2) #'string<)

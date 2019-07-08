@@ -28,21 +28,25 @@
   (lambda (a b)
       (format "Encoded values differ: %S %S" (remove-ws a) (remove-ws b))))
 
+(defun normalize-key (key)
+  "Get JSON key value from string or symbol, removing colon at beginning of symbol names."
+  (cond
+    ((stringp key)
+      key)
+    ((symbolp key)
+      (s-replace-regexp "^:" "" (symbol-name key)))
+    (t
+      (error "Keys must be strings or symbols"))))
 
 (defun json-obj (info type &rest properties)
   "Create decoded JSON object to compare against."
-  (let ((myhash (make-hash-table :test 'equal))
+  (let ((obj (make-hash-table :test 'equal))
          (data-type-property (plist-get info :json-data-type-property)))
     (if (and data-type-property type)
-      (puthash data-type-property type myhash))
+      (puthash data-type-property type obj))
     (org-json--loop-plist (key value properties)
-      (cond
-        ((stringp key)
-          (puthash key value myhash))
-        ((symbolp key)
-          (puthash (symbol-name key) value myhash))
-        (t (error "Keys must be strings or symbols"))))
-    myhash))
+      do (puthash (normalize-key key) value obj))
+    obj))
 
 
 ;;; Recursive JSON comparison
