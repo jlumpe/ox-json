@@ -290,7 +290,7 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
     (t
       (org-json--error info "Don't know how to encode value %S"  value))))
 
-(defun org-json--get-type-encoder (typekey info)
+(defun org-json--get-type-encoder (typekey &optional info)
   (org-json--plists-get typekey
     (plist-get info :json-exporters)
     org-json--default-type-exporters))
@@ -303,7 +303,7 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
       (apply encoder value info args)
       (org-json--error info "Unknown type symbol %s" type))))
 
-(cl-defun org-json-encode-array (array info &optional (itemtype t))
+(cl-defun org-json-encode-array (array &optional info (itemtype t))
   (let ((encoder (org-json--get-type-encoder itemtype info)))
     (if encoder
       (org-json-encode-array-raw
