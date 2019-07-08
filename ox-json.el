@@ -227,7 +227,8 @@ Also accepts symbols."
       (json-encode-string value))
     ((symbolp value)
       (json-encode-string (symbol-name value)))
-    (org-json--type-error "string or symbol" value info)))
+    (t
+      (org-json--type-error "string or symbol" value info))))
 
 (defun org-json-encode-number (value &optional info)
   "Encode VALUE to JSON as number or null."
@@ -236,7 +237,8 @@ Also accepts symbols."
       (json-encode-number value))
     ((not value)
       "null")
-    (org-json--type-error "number" value info)))
+    (t
+      (org-json--type-error "number" value info))))
 
 (defun org-json-encode-array-raw (items &optional info)
   "Encode array to JSON given its already-encoded items."
