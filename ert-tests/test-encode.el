@@ -20,8 +20,8 @@
 (ert-deftest test-encode-bool ()
   (should (string= (org-json-encode-bool t info) "true"))
   (should (string= (org-json-encode-bool nil info) "false"))
-  (should-error (org-json-encode-bool 0))
-  (should-error (org-json-encode-bool "foo")))
+  (should-error (org-json-encode-bool 0 info))
+  (should-error (org-json-encode-bool "foo" info)))
 
 (ert-deftest test-encode-string ()
   (should (string= (org-json-encode-string "foo" info) "\"foo\""))
@@ -29,7 +29,7 @@
   (should (string= (org-json-encode-string t info) "\"t\""))
   (should (string= (org-json-encode-string "foo \" \\" info) "\"foo \\\" \\\\\""))
   (should (string= (org-json-encode-string nil info) "null"))
-  (should-error (org-json-encode-string 0)))
+  (should-error (org-json-encode-string 0 info)))
 
 (ert-deftest test-encode-number ()
   (should (string= (org-json-encode-number 0 info) "0"))
