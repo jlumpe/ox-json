@@ -306,13 +306,14 @@ Also accepts symbols."
   "Encode alist ALIST with encoded values into JSON object with data-type DATA-TYPE.
 
 The values are expected to be JSON-encoded already, keys are not."
-  (format "{\n%s\n}"
-    (s-join
-      ",\n"
-      (cl-loop
-        with initial = (cons (plist-get info :json-data-type-property) (json-encode-string data-type))
-        for (key . value) in (cons initial alist)
-        collect (format "%s: %s" (json-encode-key key) (s-trim value))))))
+  (let ((data-type-property (plist-get info :json-data-type-property)))
+    (when (and data-type-property data-type)
+      (push (cons data-type-property (json-encode-string data-type)) alist))
+    (format "{\n%s\n}"
+      (s-join ",\n"
+        (cl-loop
+          for (key . value) in alist
+          collect (format "%s: %s" (json-encode-key key) (s-trim value)))))))
 
 (defun org-json-encode-plist-raw (data-type plist &optional info)
   "Encode plist PLIST with encoded values into JSON object with data-type DATA-TYPE.

@@ -111,7 +111,13 @@
   ; String value type
   (decode-compare
     (org-json-encode-alist "mytype" '((string . "foo") (symbol . foo) (null . nil)) info 'string)
-    (json-obj info "mytype" :string "foo" :symbol "foo" :null :json-null)))
+    (json-obj info "mytype" :string "foo" :symbol "foo" :null :json-null))
+  ; No data type property
+  (let ((info2 (org-combine-plists info '(:json-data-type-property nil))))
+    (decode-compare
+      (org-json-encode-alist "ignored" '((foo . "bar")) info2)
+      (json-obj info2 nil :foo "bar"))))
+
 
 (ert-deftest test-encode-plist ()
   ; Auto value type
@@ -130,7 +136,12 @@
   ; String value type
   (decode-compare
     (org-json-encode-plist "mytype" '(:string "foo" :symbol foo :null nil) info 'string)
-    (json-obj info "mytype" :string "foo" :symbol "foo" :null :json-null)))
+    (json-obj info "mytype" :string "foo" :symbol "foo" :null :json-null))
+  ; No data type property
+  (let ((info2 (org-combine-plists info '(:json-data-type-property nil))))
+    (decode-compare
+      (org-json-encode-plist "ignored" '(:foo "bar") info2)
+      (json-obj info2 nil :foo "bar"))))
 
 
 ;;; Changing default encoding functions
