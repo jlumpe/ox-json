@@ -28,6 +28,8 @@
 
 ;;; Code:
 
+(eval-when-compile (require 'cl-macs))
+
 (require 'cl-lib)
 (require 's)
 (require 'json)
@@ -35,12 +37,22 @@
 (require 'org-element)
 
 
+;;; Private constants
+
+(defconst org-json--default-type-exporters
+  `(
+    bool             ,#'org-json-encode-bool
+    string           ,#'org-json-encode-string
+    number           ,#'org-json-encode-number
+    org              ,#'org-json-export-data
+    secondary-string ,#'org-json-export-data
+    array            ,#'org-json-encode-array
+    plist            ,#'org-json-encode-plist
+    alist            ,#'org-json-encode-alist
+    t                ,#'org-json-encode-auto))
+
 ;;; Variables
 (defgroup org-json nil "Customization for the ox-json package" :group 'outline)
-
-(defcustom org-json-data-type-property "$$data_type"
-  "Property which indicates the data type of JSON objects."
-  :type '(string))
 
 
 ;;; Utility code
@@ -49,7 +61,9 @@
   (let ((template (format "%s = %%S\n" expr)))
   `(princ (format ,template ,expr))))
 
+
 (defun org-json--merge-alists (&rest alists)
+  "Merge all alists in ALISTS, with keys in earlier alists overriding later ones."
   (cl-loop
     with keys = (make-hash-table :test 'equal)
     for alist in alists
@@ -60,10 +74,59 @@
           collect item
         do (puthash (car item) t keys))))
 
-(defun org-json--indent-string (string indent)
-  "Insert INDENTATION at the beginning of each non-empty line in STRING."
-  (replace-regexp-in-string "^" indent string))
 
+(defun org-json--plists-get-default (key default &rest plists)
+  "Try getting value for KEY from each plist in PLISTS in order, returning DEFAULT if not found."
+  (cl-loop
+    for plist in plists
+    if (plist-member plist key)
+      return (plist-get plist key)
+    finally return default))
+
+(defun org-json--plists-get (key &rest plists)
+  "Try getting value for KEY from each plist in PLISTS in order, returning nil if not found."
+  (apply #'org-json--plists-get-default key nil plists))
+
+
+(defun org-json--debug-print-plist (plist)
+  (cl-loop for i from 0 to (- (length plist) 1) by 2
+    do (let ((key (nth i plist))
+              (value (nth (+ i 1) plist)))
+         (princ (format "(%S . %S)\n" key value)))))
+
+
+(cl-defmacro org-json--loop-plist ((key value plist) &body body)
+  "Bind KEY and VALUE to each key-value pair in PLIST and execute BODY, returning results in list."
+  `(let ((--pl ,plist)
+          (,key nil)
+          (,value nil))
+     (cl-loop
+       while --pl
+       do (setq
+            ,key (car --pl)
+            ,value (cadr --pl)
+            --pl (cddr --pl))
+       ,@body)))
+
+
+(defun org-json--plist-to-alist (plist)
+  "Convert plist PLIST to alist."
+  (org-json--loop-plist (key value plist)
+    collect (cons key value)))
+
+
+(defun org-json-node-properties (node)
+  "Get property plist of element/object NODE."
+  ; It's the 2nd element of the list
+  (cadr node))
+
+
+(defun org-json--is-node (value)
+  "Check if Value is an org element/object."
+  (and
+    (listp value)
+    (symbolp (car value))
+    (listp (cadr value))))
 
 
 ;;; Define the backend
@@ -74,18 +137,21 @@
     '(
       (template . org-json-transcode-template)
       (plain-text . org-json-transcode-plain-text)
-      (headline . org-json-transcode-headline)
-      (headline . org-json-transcode-generic))
+      (headline . org-json-transcode-headline))
+    ; Default for all remaining element/object types
     (cl-loop
-      for type in org-element-all-elements
-      collect (cons type #'org-json-transcode-generic))
-    (cl-loop
-      for type in org-element-all-objects
-      collect (cons type #'org-json-transcode-generic)))
+      for type in (append org-element-all-elements org-element-all-objects)
+      collect (cons type #'org-json-transcode-base)))
   ;; Filters
   :filters-alist '()
   ;; Options
-  :options-alist '()
+  :options-alist
+  `(
+     (:json-data-type-property nil "json-data-type-property" "$$data_type")
+     (:json-exporters nil nil nil)
+     (:json-property-types nil nil nil)
+     (:json-strict nil nil nil)
+     )
   ;; Menu
   :menu-entry
   '(?j "JSON" (
@@ -109,6 +175,7 @@
         (json-mode)))
     buffer))
 
+
 (defun org-json-export-to-json
   (&optional async subtreep visible-only body-only ext-plist)
   "Export current buffer to a JSON file."
@@ -119,51 +186,213 @@
       async subtreep visible-only body-only ext-plist)))
 
 
-;;; Transcoders
+;;; Error handling
 
-(defun org-json--end-array-item (node info string)
-  "Add newline to encoded node, plus comma if not last child."
-  (concat string (if (org-export-last-sibling-p node info) "\n" ",\n")))
+(defun org-json--make-error-obj (info msg args)
+  "Create a JSON object with an error message."
+  (let ((msg-encoded (json-encode-string (apply #'format msg args))))
+    (org-json-encode-alist-raw "error" `((message . ,msg-encoded)) info)))
 
-(defun org-json--transcode-object-alist-raw (data-type properties)
-  "Transcode alist PROPERTIES into JSON object with data-type DATA-TYPE.
+(defun org-json--error (info msg &rest args)
+  "Either signal an error or return an encoded error object based off the :strict export setting."
+  (if (plist-get info :json-strict)
+    (apply #'error msg args)
+    (org-json--make-error-obj info msg args)))
+
+(defun org-json--type-error (type value info)
+  "Encode or signal an error when asked to encode a value that is not of the expected type."
+  (org-json--error info "Expected %s, got %S" type value))
+
+
+;;; Encoders for generic data types
+
+(defun org-json-encode-bool (value &optional info)
+  "Encode VALUE to JSON as boolean."
+  (cond
+    ((equal value t)
+      "true")
+    (value
+      (org-json--type-error "boolean" value info))
+    (t
+      "false")))
+
+(defun org-json-encode-string (value &optional info)
+  "Encode VALUE to JSON as string or null.
+
+Also accepts symbols."
+  (cond
+    ((not value)
+      "null")
+    ((stringp value)
+      (json-encode-string value))
+    ((symbolp value)
+      (json-encode-string (symbol-name value)))
+    (org-json--type-error "string or symbol" value info)))
+
+(defun org-json-encode-number (value &optional info)
+  "Encode VALUE to JSON as number or null."
+  (cond
+    ((numberp value)
+      (json-encode-number value))
+    ((not value)
+      "null")
+    (org-json--type-error "number" value info)))
+
+(defun org-json-encode-array-raw (items &optional info)
+  "Encode array to JSON given its already-encoded items."
+  (if items
+    (format "[\n%s\n]" (s-join ",\n" items))
+    "[]"))
+
+(defun org-json-encode-alist-raw (data-type alist &optional info)
+  "Encode alist ALIST with encoded values into JSON object with data-type DATA-TYPE.
 
 The values are expected to be JSON-encoded already, keys are not."
   (format "{\n%s\n}"
     (s-join
       ",\n"
       (cl-loop
-        with initial = (cons org-json-data-type-property (json-encode-string data-type))
-        for (key . value) in (cons initial properties)
-        collect (format "  %s: %s" (json-encode-key key) value)))))
+        with initial = (cons (plist-get info :json-data-type-property) (json-encode-string data-type))
+        for (key . value) in (cons initial alist)
+        collect (format "%s: %s" (json-encode-key key) (s-trim value))))))
 
-(defun org-json--transcode-contents (contents)
-  "Convert concatenated, encoded contents into proper JSON list."
+(defun org-json-encode-plist-raw (data-type plist &optional info)
+  "Encode plist PLIST with encoded values into JSON object with data-type DATA-TYPE.
+
+The values are expected to be JSON-encoded already, keys are not."
+  (org-json-encode-alist-raw data-type (org-json--plist-to-alist plist) info))
+
+(defun org-json-encode-auto (value &optional info)
+  "Encode a value to JSON when its type is not known ahead of time.
+
+Handles strings, numbers, and org elements/objects without a problem.
+Non-empty lists which are not elements/objects are recursively encoded as
+JSON arrays. Symbols are encoded as strings except for t which is encoded
+as true.  This function cannot tell whether a nil value should correspond to an
+empty array, false, or null. A null value is arbitrarily returned in this case."
+  (cond
+    ((not value)
+      "null")
+    ((stringp value)
+      (json-encode-string value))
+    ((numberp value)
+      (json-encode-number value))
+    ((equal value t)
+      "true")
+    ((symbolp value)
+      (json-encode-string (symbol-name value)))
+    ((listp value)
+      (if (org-json--is-node value)
+        (org-json-export-data value info)
+        (org-json-encode-array value info)))
+    (t
+      (org-json--error info "Don't know how to encode value %S"  value))))
+
+(defun org-json--get-type-encoder (typekey info)
+  (org-json--plists-get typekey
+    (plist-get info :json-exporters)
+    org-json--default-type-exporters))
+
+(defun org-json-encode-with-type (type value info)
+  (let* ((typekey (if (listp type) (car type) type))
+         (args (if (listp type) (cdr type) nil))
+         (encoder (org-json--get-type-encoder typekey info)))
+    (if encoder
+      (apply encoder value info args)
+      (org-json--error info "Unknown type symbol %s" type))))
+
+(cl-defun org-json-encode-array (array info &optional (itemtype t))
+  (let ((encoder (org-json--get-type-encoder itemtype info)))
+    (if encoder
+      (org-json-encode-array-raw
+        (cl-loop
+          for item in array
+          collect (funcall encoder item info))
+        info)
+      (org-json--error info "Unknown type symbol %s" itemtype))))
+
+
+;;; Transcoders for org data
+
+(defun org-json--end-array-item (node string info)
+  "Add newline to encoded node, plus comma if not last child."
+  (concat string (if (org-export-last-sibling-p node info) "\n" ",\n")))
+
+
+(defun org-json-export-data (data info)
+  "Like `org-export-data' but properly surround arrays with brackets."
+  (let ((exported (s-trim (org-export-data data info))))
+    (if (and (listp data) (not (org-json--is-node data)))
+      (format (if (> (length data)) "[\n%s\n]" "[%s]") exported)
+      exported)))
+
+
+(defun org-json--encode-contents (contents)
+  "Convert concatenated, encoded contents into proper JSON list by surrounding with brackets."
   (if contents
-    (format "[\n%s\n  ]" (org-json--indent-string (s-trim-right contents) "    "))
+    (format "[\n%s\n]" (s-trim contents))
     "[]"))
 
+
+(defun org-json--get-doc-info-alist (info)
+  "Get alist of top-level document properties (values already encoded)."
+  `(
+     (title . ,(org-json-export-data (plist-get info :title) info))
+     (file_tags . ,(json-encode-list (plist-get info :filetags)))
+     (author . ,(org-json-export-data (plist-get info :author) info))
+     (creator . ,(org-json-encode-string (plist-get info :creator)))
+     (date . ,(org-json-encode-string (plist-get info :date)))
+     (description . ,(org-json-encode-string (plist-get info :description)))
+     (email . ,(org-json-encode-string (plist-get info :email)))
+     (language . ,(org-json-encode-string (plist-get info :language)))
+     ))
+
+
 (defun org-json-transcode-template (contents info)
-  (org-json--transcode-object-alist-raw
-    "org-document"
-    `(
-      (contents . ,(org-json--transcode-contents contents)))))
+  (let* ((docinfo (org-json--get-doc-info-alist info))
+         (alist
+          `(
+             ,@docinfo
+             (contents . ,(org-json--encode-contents contents)))))
+    (org-json-encode-alist-raw "org-document" alist info)))
+
 
 (defun org-json-transcode-plain-text (text info)
-  (org-json--end-array-item text info (json-encode-string text)))
+  (org-json--end-array-item text (json-encode-string text) info))
 
-(defun org-json-transcode-generic (node contents info)
-  (let ((node-type (org-element-type node)))
-    (org-json--end-array-item node info
-      (org-json--transcode-object-alist-raw
-        "org-node"
-        `(
-          (type . ,(json-encode-string (symbol-name node-type)))
-          (contents . ,(org-json--transcode-contents contents)))))))
+
+(defun org-json-export-property-value (node-type key value info)
+  (org-json-encode-auto value info))
+
+
+(defun org-json--export-properties (node info)
+  (org-json-encode-alist-raw
+    "mapping"
+    (org-json--loop-plist (key value (org-json-node-properties node))
+      unless (eq key :parent)
+        collect (cons key (org-json-export-property-value node key value info)))
+    info))
+
+
+(cl-defun org-json-transcode-base (node contents info &key properties extra)
+  "Base transcoding function for all element/object types."
+  (unless properties
+    (setq properties (org-json--export-properties node info)))
+  (let* ((node-type (org-element-type node))
+         (object-alist
+           `(
+             (type . ,(json-encode-string (symbol-name node-type)))
+             ,@extra
+             (properties . ,properties)
+             (contents . ,(org-json--encode-contents contents))))
+         (strval (org-json-encode-alist-raw "org-node" object-alist info)))
+    (org-json--end-array-item node strval info)))
+
 
 (defun org-json-transcode-headline (node contents info)
-  (org-json-transcode-generic node contents info))
-
+  (org-json-transcode-base node contents info
+    :extra `(
+       (ref . ,(json-encode-string (org-export-get-reference node info))))))
 
 
 (provide 'ox-json)
