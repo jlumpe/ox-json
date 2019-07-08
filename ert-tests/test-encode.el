@@ -15,7 +15,7 @@
     (json-obj info-nonstrict "error" 'message "foo bar")))
 
 
-;;; Scalar encoding functions
+;;; Fixed-type scalar encoding functions
 
 (ert-deftest test-encode-bool ()
   (should (string= (org-json-encode-bool t info) "true"))
@@ -36,6 +36,9 @@
   (should (string= (org-json-encode-number 1.5 info) "1.5"))
   (should (string= (org-json-encode-number nil info) "null"))
   (should-error (org-json-encode-number "foo" info)))
+
+
+;;; Variable-type encoding functions
 
 (ert-deftest test-encode-auto ()
   (should (string= (org-json-encode-auto nil info) "null"))
@@ -71,6 +74,8 @@
             (org-json-encode-with-type '(array bool) '(nil t) info)
             "[false, true]")))
 
+;;; Encoding composite data types
+
 (ert-deftest test-encode-array ()
   ; Auto item type
   (decode-compare
@@ -88,6 +93,47 @@
     (org-json-encode-array '("foo" foo nil) info 'string)
     ["foo" "foo" :json-null])
   (should-error (org-json-encode-array '(1 t nil "foo" foo) info 'string)))
+
+(ert-deftest test-encode-alist ()
+  ; Auto value type
+  (decode-compare
+    (org-json-encode-alist "mytype" '((a . 1) (:b . t) (c . "foo")) info)
+    (json-obj info "mytype" :a 1 :b t :c "foo"))
+  ; Empty
+  (decode-compare
+    (org-json-encode-alist "mytype" nil info)
+    (json-obj info "mytype"))
+  ; Bool value type
+  (decode-compare
+    (org-json-encode-alist "mytype" '((true . t) (false . nil)) info 'bool)
+    (json-obj info "mytype" :true t :false :json-false))
+  (should-error (org-json-encode-alist "mytype" '((true . t) (invalid . 0)) info 'bool))
+  ; String value type
+  (decode-compare
+    (org-json-encode-alist "mytype" '((string . "foo") (symbol . foo) (null . nil)) info 'string)
+    (json-obj info "mytype" :string "foo" :symbol "foo" :null :json-null)))
+
+(ert-deftest test-encode-plist ()
+  ; Auto value type
+  (decode-compare
+    (org-json-encode-plist "mytype" '(:a 1 b t :c "foo") info)
+    (json-obj info "mytype" :a 1 :b t :c "foo"))
+  ; Empty
+  (decode-compare
+    (org-json-encode-plist "mytype" nil info)
+    (json-obj info "mytype"))
+  ; Bool value type
+  (decode-compare
+    (org-json-encode-plist "mytype" '(:true t :false nil) info 'bool)
+    (json-obj info "mytype" :true t :false :json-false))
+  (should-error (org-json-encode-plist "mytype" '(:true t :invalid 0) info 'bool))
+  ; String value type
+  (decode-compare
+    (org-json-encode-plist "mytype" '(:string "foo" :symbol foo :null nil) info 'string)
+    (json-obj info "mytype" :string "foo" :symbol "foo" :null :json-null)))
+
+
+;;; Changing default encoding functions
 
 (ert-deftest test-override-type-exporter ()
   (let* ((numencoder (lambda (value info) (format "%S" (+ value 1))))

@@ -313,6 +313,24 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
         info)
       (org-json--error info "Unknown type symbol %s" itemtype))))
 
+(cl-defun org-json-encode-alist (data-type alist &optional info (valuetype t))
+  (let ((encoder (org-json--get-type-encoder valuetype info)))
+    (if encoder
+      (org-json-encode-alist-raw
+        data-type
+        (cl-loop
+          for (key . value) in alist
+          collect (cons key (funcall encoder value info)))
+        info)
+      (org-json--error info "Unknown type symbol %s" valuetype))))
+
+(cl-defun org-json-encode-plist (data-type plist &optional info (valuetype t))
+  (org-json-encode-alist
+    data-type
+    (org-json--plist-to-alist plist)
+    info
+    valuetype))
+
 
 ;;; Transcoders for org data
 
