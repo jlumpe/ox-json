@@ -1,6 +1,7 @@
 ; Tests of utility code
 
 (require 'ox-json)
+(require 'ox-json-test-helpers)
 
 
 (ert-deftest test-merge-alists ()

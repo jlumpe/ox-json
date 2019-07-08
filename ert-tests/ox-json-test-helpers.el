@@ -156,3 +156,7 @@ list."
     (cl-loop
       for i from 0 to (- len1 1)
       do (json-compare (aref vec1 i) (aref vec2 i) (cons i path)))))
+
+
+
+(provide 'ox-json-test-helpers)

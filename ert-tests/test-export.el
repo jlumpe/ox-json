@@ -1,7 +1,7 @@
 ; Test full export
 
 (require 'ox-json)
-(require 'json)
+(require 'ox-json-test-helpers)
 
 
 (ert-deftest test-export ()

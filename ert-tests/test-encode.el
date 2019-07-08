@@ -1,5 +1,8 @@
 ;;; Test generic data encoder functions
 
+(require 'ox-json)
+(require 'ox-json-test-helpers)
+
 
 ;;; Error reporting
 (ert-deftest test-error ()

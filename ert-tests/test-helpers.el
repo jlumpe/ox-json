@@ -1,5 +1,8 @@
 ;;; Test the test helper functions.
 
+(require 'ox-json)
+(require 'ox-json-test-helpers)
+
 
 (ert-deftest test-encoded= ()
   (should (encoded= "[1,2]" "[1, 2]"))
