@@ -73,3 +73,14 @@
     (should (equal (org-json--plists-get :g pl1 pl2 pl3) nil))
     (should (equal (org-json--plists-get-default :g 123 pl1 pl2 pl3) 123))
     ))
+
+
+(ert-deftest test-is-node ()
+  (should (org-json--is-node '(bold (:begin 1 :end 100) "foo")))
+  (should (org-json--is-node '(bold (:begin 1 :end 100))))
+  (should-not (org-json--is-node nil))
+  (should-not (org-json--is-node "string"))
+  (should-not (org-json--is-node '(bold)))
+  (should-not (org-json--is-node '(bold "foo")))
+  ; Non-list cons was creating problems
+  (should-not (org-json--is-node '(foo . bar))))

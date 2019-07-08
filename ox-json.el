@@ -179,6 +179,7 @@
   "Check if Value is an org element/object."
   (and
     (listp value)
+    (listp (cdr value))
     (>= (length value) 2)
     (symbolp (car value))
     (listp (cadr value))))
