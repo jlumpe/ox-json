@@ -255,9 +255,16 @@
     (apply #'error msg args)
     (org-json--make-error-obj info msg args)))
 
-(defun org-json--type-error (type value info)
+(cl-defun org-json--type-error (type value info &optional (maxlen 200))
   "Encode or signal an error when asked to encode a value that is not of the expected type."
-  (org-json--error info "Expected %s, got %S" type value))
+  (cl-assert (stringp type))
+  (let ((value-str (format "%S" value)))
+    (when (> (length value-str) maxlen)
+      (setq value-str
+        (format "%s... (truncated printed value at %d characters)"
+          (substring value-str 0 maxlen)
+          maxlen)))
+    (org-json--error info "Expected %s, got %s" type value-str)))
 
 
 ;;; Encoders for generic data types
