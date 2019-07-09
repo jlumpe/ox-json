@@ -34,8 +34,6 @@
 env:
   matrix:
 #   - EMACS=xemacs21
-#   - EMACS=emacs22
-    - EMACS=emacs23
     - EMACS=emacs24
     - EMACS=emacs25
     - EMACS=emacs-snapshot
@@ -48,38 +46,10 @@ env:
 
 matrix:
   allow_failures:
-#   - env: EMACS=xemacs21
-#   - env: EMACS=emacs22
     - env: EMACS=emacs-snapshot
 
 ###
-### limit build attempts to defined branches
-###
-### notes
-###
-### This controls which branches are built.
-###
-### You can also control which branches affect the web badge, by
-### appending "?branch=master,staging,production" to the end of the
-### image URL (replacing "master,staging,production" with a
-### comma-separated list of branches to be reflected in the badge).
-###
-#
-#  branches:
-#    only:
-#      - master
-#
-
-###
 ### runtime initialization
-###
-### notes
-###
-### emacs22 is extracted manually from Ubuntu Maverick.
-###
-### emacs23 is the stock default, but is updated anyway to
-### a GUI-capable version, which will have certain additional
-### functions compiled in.
 ###
 ### emacs24 (current stable release) is obtained from the
 ### cassou PPA: http://launchpad.net/~cassou/+archive/emacs
@@ -138,13 +108,14 @@ install:
         sudo apt-get -qq install emacs-snapshot &&
         sudo apt-get -qq install emacs-snapshot-el;
     fi
+  - make install
 
-before_script:
-  - if [ "$EMACS" = 'emacs-snapshot' ]; then
-        make downloads-latest;
-    else
-        make downloads;
-    fi
+# before_script:
+  # - if [ "$EMACS" = 'emacs-snapshot' ]; then
+  #       make downloads-latest;
+  #   else
+  #       make downloads;
+  #   fi
 
 ###
 ### the actual build/test command
@@ -154,7 +125,7 @@ before_script:
 ###
 
 script:
-  $EMACS --version && ( test "$EMACS" != 'emacs22' && make test EMACS="$EMACS" || make test-batch EMACS="$EMACS" )
+  $EMACS --version && make test EMACS="$EMACS"
 
 ###
 ### settings
