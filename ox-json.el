@@ -110,11 +110,6 @@
 
 ;;; Utility code
 
-(defmacro org-json--debug-print (expr)
-  (let ((template (format "%s = %%S\n" expr)))
-  `(princ (format ,template ,expr))))
-
-
 (defun org-json--merge-alists (&rest alists)
   "Merge all alists in ALISTS, with keys in earlier alists overriding later ones."
   (cl-loop
@@ -127,7 +122,6 @@
           collect item
         do (puthash (car item) t keys))))
 
-
 (defun org-json--plists-get-default (key default &rest plists)
   "Try getting value for KEY from each plist in PLISTS in order, returning DEFAULT if not found."
   (cl-loop
@@ -139,14 +133,6 @@
 (defun org-json--plists-get (key &rest plists)
   "Try getting value for KEY from each plist in PLISTS in order, returning nil if not found."
   (apply #'org-json--plists-get-default key nil plists))
-
-
-(defun org-json--debug-print-plist (plist)
-  (cl-loop for i from 0 to (- (length plist) 1) by 2
-    do (let ((key (nth i plist))
-              (value (nth (+ i 1) plist)))
-         (princ (format "(%S . %S)\n" key value)))))
-
 
 (cl-defmacro org-json--loop-plist ((key value plist) &body body)
   "Bind KEY and VALUE to each key-value pair in PLIST and execute BODY, returning results in list."
@@ -161,18 +147,15 @@
             --pl (cddr --pl))
        ,@body)))
 
-
 (defun org-json--plist-to-alist (plist)
   "Convert plist PLIST to alist."
   (org-json--loop-plist (key value plist)
     collect (cons key value)))
 
-
 (defun org-json-node-properties (node)
   "Get property plist of element/object NODE."
   ; It's the 2nd element of the list
   (cadr node))
-
 
 (defun org-json--is-node (value)
   "Check if Value is an org element/object."
