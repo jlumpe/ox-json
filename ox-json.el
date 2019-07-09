@@ -7,7 +7,7 @@
 ;; Keywords: outlines
 ;; Homepage: https://github.com/jlumpe/ox-json
 
-;; Package-Requires: ((emacs "25") (org "9") (s "1.12"))
+;; Package-Requires: ((emacs "24") (org "9") (s "1.12"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
