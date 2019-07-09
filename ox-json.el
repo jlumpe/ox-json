@@ -412,7 +412,7 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
             ((stringp item)
               (json-encode-string item))
             ((org-json--is-node item)
-              (org-json-export-property-node data info))
+              (org-json-export-property-node item info))
             (t
               (org-json--type-error info "org node or string" item))))
         data))
@@ -428,7 +428,7 @@ Interprets nil as null."
     ((not node)
       "null")
     (t
-      (org-json--type-error info "org node or nil" node))))
+      (org-json--type-error "org node or nil" node info))))
 
 (defun org-json--encode-contents (contents)
   "Convert concatenated, encoded contents into proper JSON list by surrounding with brackets."
@@ -499,7 +499,7 @@ Interprets nil as null."
      (file_tags . ,(json-encode-list (plist-get info :filetags)))
      (author . ,(org-json-export-secondary-string (plist-get info :author) info))
      (creator . ,(org-json-encode-string (plist-get info :creator) info))
-     (date . ,(org-json-encode-string (plist-get info :date) info))
+     (date . ,(org-json-export-secondary-string (plist-get info :date) info))
      (description . ,(org-json-encode-string (plist-get info :description) info))
      (email . ,(org-json-encode-string (plist-get info :email) info))
      (language . ,(org-json-encode-string (plist-get info :language) info))
