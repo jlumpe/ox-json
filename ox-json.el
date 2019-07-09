@@ -595,7 +595,7 @@ INFO is the plist of export options."
      (author . ,(org-json-export-secondary-string (plist-get info :author) info))
      (creator . ,(org-json-encode-string (plist-get info :creator) info))
      (date . ,(org-json-export-secondary-string (plist-get info :date) info))
-     (description . ,(org-json-encode-string (plist-get info :description) info))
+     (description . ,(org-json-export-secondary-string (plist-get info :description) info))
      (email . ,(org-json-encode-string (plist-get info :email) info))
      (language . ,(org-json-encode-string (plist-get info :language) info))
      ))
