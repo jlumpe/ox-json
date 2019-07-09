@@ -135,7 +135,7 @@
   (apply #'org-json--plists-get-default key nil plists))
 
 (cl-defmacro org-json--loop-plist ((key value plist) &body body)
-  "Bind KEY and VALUE to each key-value pair in PLIST and execute BODY, returning results in list."
+  "Bind KEY and VALUE to each key-value pair in PLIST and execute BODY within a `cl-loop'."
   `(let ((--pl ,plist)
           (,key nil)
           (,value nil))
@@ -158,7 +158,7 @@
   (cadr node))
 
 (defun org-json--is-node (value)
-  "Check if Value is an org element/object."
+  "Check if VALUE is an org element/object."
   (and
     (listp value)
     (listp (cdr value))
@@ -253,7 +253,9 @@
 ;;; Encoders for generic data types
 
 (defun org-json-encode-bool (value &optional info)
-  "Encode VALUE to JSON as boolean."
+  "Encode VALUE to JSON as boolean.
+
+INFO is the plist of export options."
   (cond
     ((equal value t)
       "true")
@@ -264,6 +266,8 @@
 
 (defun org-json-encode-string (value &optional info)
   "Encode VALUE to JSON as string or null.
+
+INFO is the plist of export options.
 
 Also accepts symbols."
   (cond
@@ -277,7 +281,9 @@ Also accepts symbols."
       (org-json--type-error "string or symbol" value info))))
 
 (defun org-json-encode-number (value &optional info)
-  "Encode VALUE to JSON as number or null."
+  "Encode VALUE to JSON as number or null.
+
+INFO is the plist of export options."
   (cond
     ((numberp value)
       (json-encode-number value))
@@ -286,16 +292,20 @@ Also accepts symbols."
     (t
       (org-json--type-error "number" value info))))
 
-(defun org-json-encode-array-raw (items &optional info)
-  "Encode array to JSON given its already-encoded items."
-  (if items
-    (format "[\n%s\n]" (s-join ",\n" items))
+(defun org-json-encode-array-raw (array &optional info)
+  "Encode array to JSON given its already-encoded items.
+
+ARRAY is a list of strings with encoded JSON data.
+INFO is the plist of export options."
+  (if array
+    (format "[\n%s\n]" (s-join ",\n" array))
     "[]"))
 
 (defun org-json-encode-alist-raw (data-type alist &optional info)
-  "Encode alist ALIST with encoded values into JSON object with data-type DATA-TYPE.
+  "Encode alist ALIST containing pre-encoded values into JSON object.
 
-The values are expected to be JSON-encoded already, keys are not."
+DATA-TYPE is the data type string of the returned object.
+INFO is the plist of export options"
   (let ((data-type-property (plist-get info :json-data-type-property)))
     (when (and data-type-property data-type)
       (push (cons data-type-property (json-encode-string data-type)) alist))
@@ -306,18 +316,21 @@ The values are expected to be JSON-encoded already, keys are not."
           collect (format "%s: %s" (json-encode-key key) (s-trim value)))))))
 
 (defun org-json-encode-plist-raw (data-type plist &optional info)
-  "Encode plist PLIST with encoded values into JSON object with data-type DATA-TYPE.
+  "Encode plist PLIST containing pre-encoded values into JSON object.
 
-The values are expected to be JSON-encoded already, keys are not."
+DATA-TYPE is the data type string of the returned object.
+INFO is the plist of export options."
   (org-json-encode-alist-raw data-type (org-json--plist-to-alist plist) info))
 
 (defun org-json-encode-auto (value &optional info)
-  "Encode a value to JSON when its type is not known ahead of time.
+  "Encode VALUE to JSON when its type is not known ahead of time.
+
+INFO is the plist of export options.
 
 Handles strings, numbers, and org elements/objects without a problem.
 Non-empty lists which are not elements/objects are recursively encoded as
 JSON arrays. Symbols are encoded as strings except for t which is encoded
-as true.  This function cannot tell whether a nil value should correspond to an
+as true. This function cannot tell whether a nil value should correspond to an
 empty array, false, or null. A null value is arbitrarily returned in this case."
   (cond
     ((not value)
@@ -343,6 +356,10 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
     org-json--default-type-exporters))
 
 (defun org-json-encode-with-type (type value info)
+  "Encode a VALUE to JSON given its type.
+
+TYPE is a key in the plist under the :json-exporters option.
+INFO is the plist of export options."
   (let* ((typekey (if (listp type) (car type) type))
          (args (if (listp type) (cdr type) nil))
          (encoder (org-json--get-type-encoder typekey info)))
@@ -351,6 +368,11 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
       (org-json--error info "Unknown type symbol %s" type))))
 
 (cl-defun org-json-encode-array (array &optional info (itemtype t))
+  "Encode the list ARRAY as a JSON array.
+
+INFO is the plist of export options.
+ITEMTYPE is optional and is the type to pass to `org-json-encode-with-type'
+to encode the items of the array. By default `org-json-encode-auto' is used."
   (let ((encoder (org-json--get-type-encoder itemtype info)))
     (if encoder
       (org-json-encode-array-raw
@@ -361,6 +383,13 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
       (org-json--error info "Unknown type symbol %s" itemtype))))
 
 (cl-defun org-json-encode-alist (data-type alist &optional info (valuetype t))
+  "Encode the alist ALIST as a JSON object.
+
+DATA-TYPE is a data type string to add to the JSON object.
+INFO is the plist of export options.
+VALUETYPE is optional and is the type to pass to `org-json-encode-with-type'
+to encode the values of each key-value pair. By default
+`org-json-encode-auto' is used."
   (let ((encoder (org-json--get-type-encoder valuetype info)))
     (if encoder
       (org-json-encode-alist-raw
@@ -372,6 +401,13 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
       (org-json--error info "Unknown type symbol %s" valuetype))))
 
 (cl-defun org-json-encode-plist (data-type plist &optional info (valuetype t))
+  "Encode the plist PLIST as a JSON object.
+
+DATA-TYPE is a data type string to add to the JSON object.
+INFO is the plist of export options.
+VALUETYPE is optional and is the type to pass to `org-json-encode-with-type'
+to encode the values of each key-value pair. By default
+`org-json-encode-auto' is used."
   (org-json-encode-alist
     data-type
     (org-json--plist-to-alist plist)
@@ -382,15 +418,22 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
 ;;; Export generic org data
 
 (defun org-json-export-data (data info)
-  "Like `org-export-data' but properly format secondary strings as arrays."
+  "Like `org-export-data' but properly format secondary strings as arrays.
+
+DATA is an org element/object, string, or secondary string.
+INFO is the plist of export options."
   (let ((exported (s-trim (org-export-data data info))))
     (if (and (listp data) (not (org-json--is-node data)))
       (format (if (> (length data) 1) "[\n%s\n]" "[%s]") exported)
       exported)))
 
-(defun org-json-export-secondary-string (data info)
-  "Export a secondary string."
-  (if (listp data)
+(defun org-json-export-secondary-string (sstring info)
+  "Export the secondary string SSTRING as a JSON array.
+
+INFO is the plist of export options.
+
+A secondary string is alist of org elements/objects and strings."
+  (if (listp sstring)
     (org-json-encode-array-raw
       (mapcar
         (lambda (item)
@@ -401,11 +444,13 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
               (org-json-export-property-node item info))
             (t
               (org-json--type-error info "org node or string" item))))
-        data))
-    (org-json--type-error info "list" data)))
+        sstring))
+    (org-json--type-error info "list" sstring)))
 
 (defun org-json-export-property-node (node info)
-  "Export an object or element that appears in a property of another node.
+  "Export an object or element NODE that appears in a property of another node.
+
+INFO is the plist of export options.
 
 Interprets nil as null."
   (cond
@@ -417,11 +462,13 @@ Interprets nil as null."
       (org-json--type-error "org node or nil" node info))))
 
 (defun org-json-export-contents (node info)
-  "Export the contents of an element/object as a JSON array.
+  "Export the contents of org element/object NODE as a JSON array.
+
+INFO is the plist of export options.
 
 This is used in place of the \"contents\" argument passed to the transcoder
 functions in order to control how the transcoded values of each child node
-are joined together, which apparently is not override-able. This shouldn't
+are joined together, which apparently cannot be overridden. This shouldn't
 result in too much extra work being done because the exported value of each
 node is memoized."
   (cl-assert (org-json--is-node node))
@@ -435,6 +482,19 @@ node is memoized."
       finally return (nreverse encoded-items))))
 
 (defun org-json-get-property-type (node-type property info)
+  "Get the type of a property in elements/objects of a given type.
+
+NODE-TYPE is a symbol returned by `org-element-type', or 'all to
+get the default value.
+PROPERTY is the property key to be used with `org-element-property'
+\(should start with colon).
+INFO is the plist of export options.
+
+The type is looked up from the :json-property-types option, first
+looking up the type-specific plist of property types using
+NODE-TYPE and then defaulting to the \"all\" type if not found.
+The type symbol is then looked up in this plist using PROPERTY.
+Returns a symbol which can be passed to `org-json-encode-with-type'."
   (let ((info-types (plist-get info :json-property-types))
         (include-extra (plist-get info :json-include-extra-properties)))
     (org-json--plists-get-default
@@ -446,7 +506,12 @@ node is memoized."
       (plist-get org-json--default-property-types 'all))))
 
 (defun org-json-export-properties-alist (node info)
-  "Get alist of encoded property values for node."
+  "Get alist of encoded property values for element/object NODE.
+
+INFO is the plist of export options.
+
+Returns an alist where the items are property names and their
+JSON-encoded values."
   (let ((node-type (org-element-type node))
         (property-type nil))
     (org-json--loop-plist (key value (org-json-node-properties node))
@@ -460,10 +525,8 @@ node is memoized."
                                       (contents (org-json-export-contents node info)))
   "Base export function for a generic org element/object.
 
-It is expected for all transcoding functions to call this function to do most
-of the work, possibly using the keyword arguments to override behavior.
-
 NODE is an org element or object and INFO is the export environment plist.
+INFO is the plist of export options.
 PROPERTIES is an alist of pre-encoded property values that will be used in place
 of the return value of `org-json-export-properties-alist' if given (passing a
 value of nil will result in no properties being included).
@@ -473,7 +536,9 @@ the existing keys).
 CONTENTS overrides the default way of encoding the node's contents with
 `org-json-export-node-contents'. It can either be a string containing the entire
 encoded JSON array or a list of pre-encoded strings.
-"
+
+It is expected for all transcoding functions to call this function to do most
+of the work, possibly using the keyword arguments to override behavior."
   (unless (stringp contents)
     (setq contents (org-json-encode-array-raw contents)))
   (org-json-encode-alist-raw
@@ -489,12 +554,21 @@ encoded JSON array or a list of pre-encoded strings.
 ;;; Transcoder functions
 
 (defun org-json-transcode-plain-text (text info)
+  "Transcode plain text to a JSON string.
+
+TEXT is a string to encode.
+INFO is the plist of export options."
   ; Ignore empty strings
   (unless (string= text "")
     (json-encode-string text)))
 
 (cl-defun org-json-transcode-base (node contents info)
-  "Default transcoding function for all element/object types."
+  "Default transcoding function for all element/object types.
+
+NODE is an element or object to encode.
+CONTENTS is a string containing the encoded contents of the node,
+but its value is ignored (`org-json-export-contents' is used instead).
+INFO is the plist of export options."
   (org-json-export-node-base node info))
 
 (defun org-json--get-doc-info-alist (info)
@@ -511,6 +585,11 @@ encoded JSON array or a list of pre-encoded strings.
      ))
 
 (defun org-json-transcode-template (contents info)
+  "Transcode an entire org document to JSON.
+
+CONTENTS is a string containing the encoded document contents,
+but its value is ignored (`org-json-export-contents' is used instead).
+INFO is the plist of export options."
   (let* ((docinfo (org-json--get-doc-info-alist info))
          (parse-tree (plist-get info :parse-tree))
          (contents-encoded (org-json-export-contents parse-tree info)))
@@ -521,10 +600,16 @@ encoded JSON array or a list of pre-encoded strings.
          (contents . ,contents-encoded))
       info)))
 
-(defun org-json-transcode-headline (node contents info)
-  (org-json-export-node-base node info
+(defun org-json-transcode-headline (headline contents info)
+  "Transcode a headline element to JSON.
+
+HEADLINE is the parsed headline to encode.
+CONTENTS is a string containing the encoded contents of the headline,
+but its value is ignored (`org-json-export-contents' is used instead).
+INFO is the plist of export options."
+  (org-json-export-node-base headline info
     :extra `(
-       (ref . ,(json-encode-string (org-export-get-reference node info))))))
+       (ref . ,(json-encode-string (org-export-get-reference headline info))))))
 
 
 (provide 'ox-json)
