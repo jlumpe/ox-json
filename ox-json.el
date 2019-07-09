@@ -303,17 +303,19 @@ These can be overridden with the :json-property-types option."
 
 ;;; Encoders for generic data types
 
-(defun org-json-encode-bool (value &optional info)
+(cl-defun org-json-encode-bool (value &optional info (strict t))
   "Encode VALUE to JSON as boolean.
 
-INFO is the plist of export options."
+INFO is the plist of export options.
+If STRICT is true will only accept t as a true value and raise/return
+an error otherwise. If false will accept any truthy value."
   (cond
-    ((equal value t)
+    ((not value)
+      "false")
+    ((or (equal value t) (not strict))
       "true")
-    (value
-      (org-json--type-error "boolean" value info))
     (t
-      "false")))
+      (org-json--type-error "boolean" value info))))
 
 (defun org-json-encode-string (value &optional info)
   "Encode VALUE to JSON as string or null.

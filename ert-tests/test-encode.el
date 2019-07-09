@@ -21,7 +21,8 @@
   (should (string= (org-json-encode-bool t info) "true"))
   (should (string= (org-json-encode-bool nil info) "false"))
   (should-error (org-json-encode-bool 0 info))
-  (should-error (org-json-encode-bool "foo" info)))
+  (should-error (org-json-encode-bool "foo" info))
+  (should (string= (org-json-encode-bool 1 info nil) "true")))
 
 (ert-deftest test-encode-string ()
   (should (string= (org-json-encode-string "foo" info) "\"foo\""))
