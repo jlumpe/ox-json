@@ -343,7 +343,7 @@ INFO is the plist of export options."
     (t
       (org-json--type-error "number" value info))))
 
-(defun org-json-encode-array-raw (array)
+(defun org-json-encode-array-raw (array &optional info)
   "Encode array to JSON given its already-encoded items.
 
 ARRAY is a list of strings with encoded JSON data.
@@ -429,7 +429,8 @@ to encode the items of the array. By default `org-json-encode-auto' is used."
       (org-json-encode-array-raw
         (cl-loop
           for item in array
-          collect (funcall encoder item info)))
+          collect (funcall encoder item info))
+        info)
       (org-json--error info "Unknown type symbol %s" itemtype))))
 
 (cl-defun org-json-encode-alist (data-type alist &optional info (valuetype t))
