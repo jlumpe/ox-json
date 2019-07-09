@@ -596,6 +596,7 @@ of the work, possibly using the keyword arguments to override behavior."
   (org-json-encode-alist-raw
     "org-node"
     `(
+      (ref . ,(json-encode-string (org-export-get-reference node info)))
       (type . ,(json-encode-string (symbol-name (org-element-type node))))
       ,@extra
       (properties . ,(org-json-encode-alist-raw "mapping" properties info))
@@ -659,9 +660,7 @@ HEADLINE is the parsed headline to encode.
 CONTENTS is a string containing the encoded contents of the headline,
 but its value is ignored (`org-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (org-json-export-node-base headline info
-    :extra `(
-       (ref . ,(json-encode-string (org-export-get-reference headline info))))))
+  (org-json-export-node-base headline info))
 
 
 (provide 'ox-json)
