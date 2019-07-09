@@ -554,7 +554,7 @@ Returns a symbol which can be passed to `org-json-encode-with-type'."
       (plist-get info-types node-type)
       (plist-get info-types 'all)
       (plist-get org-json-default-property-types node-type)
-      (plist-get org-jsongdefault-property-types 'all))))
+      (plist-get org-json-default-property-types 'all))))
 
 (defun org-json-export-properties-alist (node info)
   "Get alist of encoded property values for element/object NODE.
