@@ -39,7 +39,7 @@
 
 ;;; Private constants
 
-(defconst org-json--default-type-exporters
+(defconst org-json-default-type-exporters
   `(
     bool             ,#'org-json-encode-bool
     string           ,#'org-json-encode-string
@@ -49,9 +49,14 @@
     array            ,#'org-json-encode-array
     plist            ,#'org-json-encode-plist
     alist            ,#'org-json-encode-alist
-    t                ,#'org-json-encode-auto))
+    t                ,#'org-json-encode-auto)
+  "Plist that stores the default exporter function for element/object
+properties by their type symbol.
 
-(defconst org-json--default-property-types
+These can be overridden with the :json-exporters option."
+  )
+
+(defconst org-json-default-property-types
   '(
     all (
       ; Never include parent, leads to infinite recursion
@@ -101,7 +106,18 @@
       :scheduled node)
     property-drawer (
       :properties nil) ; TODO
-     ))
+     )
+  "Nested set of plists storing the default type symbols for element/object
+properties by element type.
+
+Keys are element/object type symbols as returned by
+`org-element-type', along with \"all\" which sets the defaults
+for all types. The values are plists mapping property
+symbols (starting with colons) to type symbols in
+`org-json--default-type-exporters'.
+
+These can be overridden with the :json-property-types option."
+  )
 
 
 ;;; Variables
@@ -353,7 +369,7 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
 (defun org-json--get-type-encoder (typekey &optional info)
   (org-json--plists-get typekey
     (plist-get info :json-exporters)
-    org-json--default-type-exporters))
+    org-json-default-type-exporters))
 
 (defun org-json-encode-with-type (type value info)
   "Encode a VALUE to JSON given its type.
@@ -502,8 +518,8 @@ Returns a symbol which can be passed to `org-json-encode-with-type'."
       (if include-extra t nil)
       (plist-get info-types node-type)
       (plist-get info-types 'all)
-      (plist-get org-json--default-property-types node-type)
-      (plist-get org-json--default-property-types 'all))))
+      (plist-get org-json-default-property-types node-type)
+      (plist-get org-jsongdefault-property-types 'all))))
 
 (defun org-json-export-properties-alist (node info)
   "Get alist of encoded property values for element/object NODE.
