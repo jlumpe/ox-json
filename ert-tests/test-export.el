@@ -8,7 +8,7 @@
   "Test export of full org document."
   (let* ((exported-string
             (with-current-buffer (find-file-noselect "test.org")
-              (with-current-buffer (org-json-export-as-json)
+              (with-current-buffer (org-json-export-to-buffer)
                 (buffer-string))))
           (json-object-type 'hash-table)
           ; For now mostly just test that it is valid JSON:
