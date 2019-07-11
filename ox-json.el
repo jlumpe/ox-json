@@ -84,6 +84,7 @@
     array            ,#'org-json-encode-array
     plist            ,#'org-json-encode-plist
     alist            ,#'org-json-encode-alist
+    timestamp        ,#'org-json-export-timestamp-property
     t                ,#'org-json-encode-auto)
   "Plist that stores the default exporter function for element/object
 properties by their type symbol.
@@ -115,7 +116,7 @@ These can be overridden with the :json-exporters option."
     clock (
       :duration string
       :status string
-      :value node)
+      :value timestamp)
     code (
       :value string)
     comment (
@@ -160,15 +161,15 @@ These can be overridden with the :json-exporters option."
       :type string)
     headline (
       :archivedp bool
-      :closed node
+      :closed timestamp
       :commentedp bool
-      :deadline node
+      :deadline timestamp
       :footnote-section-p bool
       :level number
       :priority number
       :quotedp bool
       :raw-value string
-      :scheduled node
+      :scheduled timestamp
       :tags (array string)
       :title secondary-string
       :todo-keyword string
@@ -184,9 +185,9 @@ These can be overridden with the :json-exporters option."
       :parameters string
       :value string)
     inlinetask (
-      :closed node
-      :deadline node
-      :scheduled node
+      :closed timestamp
+      :deadline timestamp
+      :scheduled timestamp
       :title secondary-string)
     item (
       :bullet string
@@ -218,9 +219,9 @@ These can be overridden with the :json-exporters option."
     plain-list (
       :structure array)
     planning (
-      :closed node
-      :deadline node
-      :scheduled node)
+      :closed timestamp
+      :deadline timestamp
+      :scheduled timestamp)
     radio-target (
       :raw-value string)
     special-block (
@@ -251,14 +252,14 @@ These can be overridden with the :json-exporters option."
     target (
       :value string)
     timestamp (
-      :day-end number
-      :day-start number
-      :hour-end number
-      :hour-start number
-      :minute-end number
-      :minute-start number
-      :month-end number
-      :month-start number
+      :day-end nil  ; number
+      :day-start nil  ; number
+      :hour-end nil  ; number
+      :hour-start nil  ; number
+      :minute-end nil  ; number
+      :minute-start nil  ; number
+      :month-end nil  ; number
+      :month-start nil  ; number
       :raw-value string
       :repeater-type string
       :repeater-unit string
@@ -267,8 +268,9 @@ These can be overridden with the :json-exporters option."
       :warning-type string
       :warning-unit string
       :warning-value number
-      :year-end number
-      :year-start number)
+      :year-end nil  ; number
+      :year-start nil  ; number
+      )
     verbatim (
       :value string)
     )
@@ -289,7 +291,7 @@ These can be overridden with the :json-property-types option."
 (defgroup org-json nil "Customization for the ox-json package" :group 'outline)
 
 
-;;; Utility code
+;;; Generic utility code
 
 (defun org-json--merge-alists (&rest alists)
   "Merge all alists in ALISTS, with keys in earlier alists overriding later ones."
@@ -333,6 +335,8 @@ These can be overridden with the :json-property-types option."
   (org-json--loop-plist (key value plist)
     collect (cons key value)))
 
+;;; Org-mode utility code
+
 (defun org-json-node-properties (node)
   "Get property plist of element/object NODE."
   ; It's the 2nd element of the list
@@ -347,6 +351,21 @@ These can be overridden with the :json-property-types option."
     (symbolp (car value))
     (listp (cadr value))))
 
+(defun org-json-timestamp-isoformat (timestamp suffix info &optional zone)
+  "Convert timestamp time to ISO 8601 format."
+  (let* ((minute (org-element-property (intern (concat ":minute-" suffix)) timestamp))
+         (hour (org-element-property (intern (concat ":hour-" suffix)) timestamp))
+         (day (org-element-property (intern (concat ":day-" suffix)) timestamp))
+         (month (org-element-property (intern (concat ":month-" suffix)) timestamp))
+         (year (org-element-property (intern (concat ":year-" suffix)) timestamp)))
+    (cond
+      ; With time
+      (hour
+        (format-time-string "%Y-%m-%dT%H-%M-00" (encode-time 0 minute hour day month year zone) zone))
+      ; Date only (otherwise nil)
+      (year
+        (format-time-string "%Y-%m-%d" (encode-time 0 0 0 day month year zone) zone)))))
+
 
 ;;; Define the backend
 
@@ -354,10 +373,11 @@ These can be overridden with the :json-property-types option."
   ;; Transcoders
   (org-json--merge-alists
     '(
-      (template . org-json-transcode-template)
-      (plain-text . org-json-transcode-plain-text)
-      (headline . org-json-transcode-headline)
-      (link . org-json-transcode-link))
+       (template . org-json-transcode-template)
+       (plain-text . org-json-transcode-plain-text)
+       (headline . org-json-transcode-headline)
+       (link . org-json-transcode-link)
+       (timestamp . org-json-transcode-timestamp))
     ; Default for all remaining element/object types
     (cl-loop
       for type in (append org-element-all-elements org-element-all-objects)
@@ -598,6 +618,19 @@ to encode the values of each key-value pair. By default
     info
     valuetype))
 
+(defun org-json-make-object (type info properties)
+  "Make a JSON object."
+  (let ((props-alist
+          (cl-loop
+            for (key type value) in properties
+            collect
+            (cons
+              key
+              (if type
+                (org-json-encode-with-type type value info)
+                value)))))
+    (org-json-encode-alist-raw type props-alist info)))
+
 
 ;;; Export generic org data
 
@@ -644,6 +677,29 @@ Interprets nil as null."
       "null")
     (t
       (org-json--type-error "org node or nil" node info))))
+
+(defun org-json-export-timestamp-property (timestamp info)
+  (org-json-make-object "timestamp" info
+    `(
+      (begin string ,(org-json-timestamp-isoformat timestamp "begin" info))
+      (end string ,(org-json-timestamp-isoformat timestamp "end" info))
+      (type string ,(org-element-property :type timestamp))
+      (raw-value string ,(org-element-property :raw-value timestamp))
+      (repeater nil
+        ,(org-json-make-object nil info
+           `(
+              (type string ,(org-element-property :repeater-type timestamp))
+              (unit string ,(org-element-property :repeater-unit timestamp))
+              (value number ,(org-element-property :repeater-value timestamp))
+              )))
+       (warning nil
+         ,(org-json-make-object nil info
+            `(
+               (type string ,(org-element-property :warning-type timestamp))
+               (unit string ,(org-element-property :warning-unit timestamp))
+               (value number ,(org-element-property :warning-value timestamp))
+               )))
+       )))
 
 (defun org-json-export-contents (node info)
   "Export the contents of org element/object NODE as a JSON array.
@@ -824,6 +880,18 @@ but its value is ignored (`org-json-export-contents' is used instead).
 INFO is the plist of export options."
   (org-json-export-node-base link info
     :properties (org-json-link-properties link info)))
+
+(defun org-json-timestamp-properties (timestamp info)
+  (let ((properties (org-json-export-properties-alist timestamp info)))
+    (append
+      properties
+      (list
+        (cons 'start (org-json-encode-string (org-json-timestamp-isoformat timestamp "start" info)))
+        (cons 'end (org-json-encode-string (org-json-timestamp-isoformat timestamp "end" info)))))))
+
+(defun org-json-transcode-timestamp (timestamp contents info)
+  (org-json-export-node-base timestamp info
+    :properties (org-json-timestamp-properties timestamp info)))
 
 
 (provide 'ox-json)
