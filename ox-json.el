@@ -361,7 +361,7 @@ These can be overridden with the :json-property-types option."
     (cond
       ; With time
       (hour
-        (format-time-string "%Y-%m-%dT%H-%M-00" (encode-time 0 minute hour day month year zone) zone))
+        (format-time-string "%Y-%m-%dT%H:%M:00" (encode-time 0 minute hour day month year zone) zone))
       ; Date only (otherwise nil)
       (year
         (format-time-string "%Y-%m-%d" (encode-time 0 0 0 day month year zone) zone)))))
@@ -681,7 +681,7 @@ Interprets nil as null."
 (defun org-json-export-timestamp-property (timestamp info)
   (org-json-make-object "timestamp" info
     `(
-      (begin string ,(org-json-timestamp-isoformat timestamp "begin" info))
+      (begin string ,(org-json-timestamp-isoformat timestamp "start" info))
       (end string ,(org-json-timestamp-isoformat timestamp "end" info))
       (type string ,(org-element-property :type timestamp))
       (raw-value string ,(org-element-property :raw-value timestamp))
