@@ -106,42 +106,172 @@ These can be overridden with the :json-exporters option."
       :pre-blank number
       :post-blank number)
     babel (
+      :call string
+      :inside-header string
+      :arguments string
+      :end-header string
+      :value string
       :result (array string))
+    clock (
+      :duration string
+      :status string
+      :value node)
+    code (
+      :value string)
+    comment (
+      :value string)
+    comment-block (
+      :value string)
+    drawer (
+      :drawer-name string)
+    dynamic-block (
+      :arguments string
+      :block-name string
+      :drawer-name string)
     entity (
+      :ascii string
+      :ascii string
+      :html string
+      :latex string
       :latex-math-p bool
-      :use-brackets-p bool)
+      :latin1 string
+      :name string
+      :use-brackets-p bool
+      :utf-8 string)
     example-block (
+      :label-fmt string
+      :language string
+      :number-lines string
+      :options string
+      :parameters string
       :preserve-indent bool
       :retain-labels bool
-      :use-labels bool)
+      :switches string
+      :use-labels bool
+      :value string)
+    export-block (
+      :type string
+      :value string)
+    export-snipper (
+      :back-end string
+      :value string)
+    footnote-reference (
+      :label string
+      :type string)
     headline (
       :archivedp bool
+      :closed node
       :commentedp bool
       :deadline node
       :footnote-section-p bool
+      :level number
+      :priority number
       :quotedp bool
+      :raw-value string
       :scheduled node
       :tags (array string)
-      :title secondary-string)
+      :title secondary-string
+      :todo-keyword string
+      :todo-type string)
+    inline-babel-call (
+      :call string
+      :inside-header string
+      :arguments string
+      :end-header string
+      :value string)
+    inline-src-block (
+      :langauge string
+      :parameters string
+      :value string)
     inlinetask (
       :closed node
       :deadline node
       :scheduled node
       :title secondary-string)
     item (
-      :structure nil
-      :tag secondary-string)
+      :bullet string
+      :checkbox string
+      :counter number
+      :raw-tag string
+      :tag secondary-string
+      :structure nil  ; TODO
+      )
+    keyword (
+      :key string
+      :value string)
+    latex-environment (
+      :value string)
+    latex-fragment (
+      :value string)
+    link (
+      :application string
+      :format string
+      :path string
+      :raw-link string
+      :search-option string
+      :type string)
     macro (
       :args (array string))
+    node-property (
+      :key string
+      :value string)
     plain-list (
       :structure array)
     planning (
       :closed node
       :deadline node
       :scheduled node)
-    property-drawer (
-      :properties nil) ; TODO
-     )
+    radio-target (
+      :raw-value string)
+    special-block (
+      :type string
+      :raw-value string)
+    src-block (
+      :label-fmt string
+      :language string
+      :number-lines string
+      :parameters string
+      :preserve-indent bool
+      :retain-labels bool
+      :switches string
+      :use-labels bool
+      :value string)
+    statistics-cookie (
+      :value string)
+    subscript (
+      :use-brackets-p bool)
+    superscript (
+      :use-brackets-p bool)
+    table (
+      :tblfm string
+      :type string
+      :value string)
+    table-row (
+      :type string)
+    target (
+      :value string)
+    timestamp (
+      :day-end number
+      :day-start number
+      :hour-end number
+      :hour-start number
+      :minute-end number
+      :minute-start number
+      :month-end number
+      :month-start number
+      :raw-value string
+      :repeater-type string
+      :repeater-unit string
+      :repeater-value number
+      :type string
+      :warning-type string
+      :warning-unit string
+      :warning-value number
+      :year-end number
+      :year-start number)
+    verbatim (
+      :value string)
+    )
   "Nested set of plists storing the default type symbols for element/object
 properties by element type.
 
