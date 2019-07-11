@@ -395,15 +395,15 @@ These can be overridden with the :json-property-types option."
      )
   ;; Menu
   :menu-entry
-  '(?j "JSON" (
-	(?J "As JSON buffer" org-json-export-as-json)
-	(?j "To JSON file" org-json-export-to-json)))
+  '(?j "Export to JSON" (
+	(?J "As JSON buffer" org-json-export-to-buffer)
+	(?j "To JSON file" org-json-export-to-file)))
   )
 
 
 ;;; User export functions
 
-(defun org-json-export-as-json
+(defun org-json-export-to-buffer
   (&optional async subtreep visible-only body-only ext-plist)
   "Export current buffer to a JSON buffer."
   ; Modified from org-html-export-as-html:
@@ -417,7 +417,7 @@ These can be overridden with the :json-property-types option."
     buffer))
 
 
-(defun org-json-export-to-json
+(defun org-json-export-to-file
   (&optional async subtreep visible-only body-only ext-plist)
   "Export current buffer to a JSON file."
   ; Modified from org-html-export-to-html:
