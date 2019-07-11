@@ -9,7 +9,7 @@ JSON export back end for Emacs Org mode
 `(require 'ox-json')` somewhere and then use the `org-export-dispatch`
 interactive command and select the J key for JSON export.
 
-You can also use the `org-json-export-as-json` and `org-json-export-to-json`
+You can also use the `org-json-export-to-buffer` and `org-json-export-to-file`
 functions or any of the built-in `org-export-` functions with `'json`
 for the backend argument.
 
@@ -22,6 +22,7 @@ The output looks like:
 {
   "$$data_type": "org-node",
   "type": "headline",
+  "ref": "orgd51ec19",
   "properties": { ... },
   "contents": [ ... ]
 }
@@ -30,8 +31,9 @@ The output looks like:
 `"type"` is the node type returned by `org-element-type` and `"properties"` are property names and
 values obtained from `org-element-property` (see documentation for the
 [Org element API](https://orgmode.org/worg/dev/org-element-api.html) for a complete list of all node
-types and properties). Leading colons in the property keys are omitted. `"contents"` is the encoded
-return value of `org-element-contents`, the items of which are either more org nodes or strings.
+types and properties). `ref` is a unique ID assigned to the node by Org mode's export code. Leading
+colons in the property keys are omitted. `"contents"` is the encoded return value of
+`org-element-contents`, the items of which are either more org nodes or strings.
 
 The top-level data structure looks like:
 
