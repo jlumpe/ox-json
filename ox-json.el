@@ -356,7 +356,8 @@ These can be overridden with the :json-property-types option."
     '(
       (template . org-json-transcode-template)
       (plain-text . org-json-transcode-plain-text)
-      (headline . org-json-transcode-headline))
+      (headline . org-json-transcode-headline)
+      (link . org-json-transcode-link))
     ; Default for all remaining element/object types
     (cl-loop
       for type in (append org-element-all-elements org-element-all-objects)
@@ -791,6 +792,38 @@ CONTENTS is a string containing the encoded contents of the headline,
 but its value is ignored (`org-json-export-contents' is used instead).
 INFO is the plist of export options."
   (org-json-export-node-base headline info))
+
+(defun org-json-link-properties (link info)
+  "Get properties to export in link objects."
+  (let* ((properties (org-json-export-properties-alist link info))
+        (link-type (intern (org-element-property :type link)))
+        (target
+          (cl-case link-type
+            ('custom-id
+              (org-export-resolve-id-link link info))
+            ('fuzzy
+              (org-export-resolve-fuzzy-link link info))
+            ('radio
+              (org-export-resolve-radio-link link info))
+            )))
+    (push
+      (cons
+        'is-inline-image
+        (org-json-encode-bool (org-export-inline-image-p link) info nil))
+        properties)
+    (when target
+      (push (cons 'target (org-json-encode-string (org-export-get-reference target info))) properties))
+    properties))
+
+(defun org-json-transcode-link (link contents info)
+  "Transcode a link object to JSON.
+
+LINK is the parsed link to encode.
+CONTENTS is a string containing the encoded contents of the headline,
+but its value is ignored (`org-json-export-contents' is used instead).
+INFO is the plist of export options."
+  (org-json-export-node-base link info
+    :properties (org-json-link-properties link info)))
 
 
 (provide 'ox-json)
