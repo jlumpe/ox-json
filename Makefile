@@ -23,7 +23,7 @@ HOME := $(WORK_DIR)
 .emacs.d/elpa :
 	$(EMACS) $(EMACS_CLEAN) --script install.el "$(PACKAGE_NAME)" $(TEST_DEPS)
 
-install : .emacs.d/elpa
+install-deps : .emacs.d/elpa
 
 build :
 	$(EMACS) $(EMACS_BATCH) $(EMACS_PKG)
@@ -51,11 +51,11 @@ test-autoloads : autoloads
 test-travis :
 	@if test -z "$$TRAVIS" && test -e $(TRAVIS_FILE); then travis-lint $(TRAVIS_FILE); fi
 
-test : install test-deps #test-autoloads
+test : install-deps test-deps #test-autoloads
 	@cd $(TEST_DIR)                                   &&    \
 	(for test_lib in test-*.el; do                          \
 	    $(EMACS) $(EMACS_BATCH) $(EMACS_PKG)                \
-	    -L . -l cl                                          \
+	    -L .. -L . -l cl                                    \
 	    $$(for dep in $(TEST_DEPS); do echo -l $$dep; done) \
 		-l $$test_lib                                       \
 	    --eval                                              \

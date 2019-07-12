@@ -1,4 +1,4 @@
-;;; Script to install package and requirements prior to testing
+;;; Script to install package requirements prior to testing
 
 ;; Arguments are (PKG-NAME [TEST-DEPS ...])
 
@@ -16,8 +16,19 @@
   pkg-name (car argv)
   test-deps (mapcar #'intern (cdr argv)))
 
+
+; Read requirements from package file
+(setq
+  pkg-file (concat pkg-name ".el")
+  pkg-desc (with-temp-buffer
+             (insert-file-contents-literally pkg-file)
+             (package-buffer-info))
+  pkg-requires (package-desc-reqs pkg-desc))
+
+
 (message "pkg-name = %S" pkg-name)
 (message "test-deps = %S" test-deps)
+(message "pkg-requires = %S" pkg-requires)
 
 
 ; Configure package system
@@ -30,11 +41,11 @@
 (setq package-check-signature nil)
 
 
-; Install
-(let ((file (concat pkg-name ".el"))
+; Install package requirements
+(let ((transaction (package-compute-transaction nil pkg-requires))
       (byte-compile-warnings nil))
-  (message "\n********** Installing %s **********" file)
-  (package-install-file file))
+  (message "\n********** Installing package dependencies **********" file)
+  (package-download-transaction transaction))
 
 
 ; Install test dependencies
