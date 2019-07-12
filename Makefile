@@ -21,7 +21,7 @@ HOME := $(WORK_DIR)
          test test-interactive clean edit test-deps
 
 .emacs.d/elpa :
-	$(EMACS) $(EMACS_CLEAN) --script install.el "$(PACKAGE_NAME)" $(TEST_DEPS)
+	$(EMACS) $(EMACS_CLEAN) --script tests/install-deps.el "$(PACKAGE_NAME)" $(TEST_DEPS)
 
 install-deps : .emacs.d/elpa
 
