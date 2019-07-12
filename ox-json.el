@@ -868,7 +868,7 @@ INFO is the plist of export options."
         (org-json-encode-bool (org-export-inline-image-p link) info nil))
         properties)
     (when target
-      (push (cons 'target (org-json-encode-string (org-export-get-reference target info))) properties))
+      (push (cons 'target-ref (org-json-encode-string (org-export-get-reference target info))) properties))
     properties))
 
 (defun org-json-transcode-link (link contents info)
