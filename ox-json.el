@@ -496,7 +496,7 @@ INFO is the plist of export options."
     (t
       (org-json--type-error "number" value info))))
 
-(defun org-json-encode-array-raw (array &optional info)
+(defun org-json-encode-array-raw (array &optional _info)
   "Encode array to JSON given its already-encoded items.
 
 ARRAY is a list of strings with encoded JSON data.
