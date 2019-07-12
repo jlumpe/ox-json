@@ -26,7 +26,7 @@ HOME := $(WORK_DIR)
 install-deps : .emacs.d/elpa
 
 build :
-	$(EMACS) $(EMACS_BATCH) $(EMACS_PKG)
+	$(EMACS) $(EMACS_BATCH) $(EMACS_PKG)       \
 		--eval                                 \
 	    "(progn                                \
 	      (setq byte-compile-error-on-warn t)  \
