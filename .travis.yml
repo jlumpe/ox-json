@@ -46,6 +46,7 @@ env:
 
 matrix:
   allow_failures:
+    - env: EMACS=emacs24
     - env: EMACS=emacs-snapshot
 
 ###
