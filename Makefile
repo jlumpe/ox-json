@@ -12,7 +12,7 @@ WORK_DIR=$(shell pwd)
 PACKAGE_NAME=ox-json
 AUTOLOADS_FILE=$(PACKAGE_NAME)-autoloads.el
 TRAVIS_FILE=.travis.yml
-TEST_DIR=ert-tests
+TEST_DIR=tests
 TEST_DEPS=ert
 
 HOME := $(WORK_DIR)
