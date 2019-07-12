@@ -4,6 +4,9 @@
 JSON export back end for Emacs Org mode
 
 
+See the [documentation file](ox-json-docs.org) for more detailed information.
+
+
 ## Usage
 
 `(require 'ox-json')` somewhere and then use the `org-export-dispatch`

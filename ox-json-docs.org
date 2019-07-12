@@ -1,0 +1,83 @@
+#+title: ox-json documentation
+#+author: Jared Lumpe
+
+
+* TODO Installation
+
+* TODO Usage
+
+* Output format
+
+** Data types
+
+All objects in the exported JSON have a special data type property which indicates the type of data
+they are supposed to represent. This is meant to make it easier for external tools to interpret. By
+default this property is named ~"$$data_type"~ but its value can be customized with the
+=:json-data-type-property= option (see the [[*Options][options]] section).
+
+*** org-document
+**** Properties
+- =contents= (array of =org-node= objects) :: The top-level elements in the document. This should
+     consist of an optional =section= node followed by any number of =header= nodes.
+
+*** org-node
+A node (element or object) in the document's parse tree.
+
+See the [[https://orgmode.org/worg/dev/org-element-api.html][Org element API documentation]] for the list of node types and their properties.
+
+**** Properties
+- =type= (string) ::
+- =ref= (string) ::
+- =contents= (array) ::
+- =properties= (=mapping= object) ::
+
+*** mapping
+A mapping is just an association of strings to values without any specific structure. An
+example is the properties of an =org-node= object.
+
+*** error
+- =message= (array) :: A message describing why the error occurred.
+
+** Specific node types
+
+** Node types with specific handling
+*** org-data
+*** headline
+*** link
+**** Additional properties
+- =is-inline-image= (bool) :: Whether org mode think this link should be rendered as an inline
+  image.
+- =target-ref= (string) :: The =ref= property of the headline or other node this link resolves
+  to, if applicable.
+*** timestamp
+**** Additional properties
+- =start=, =end= (string) :: Year/month/day/hour/minute from the =start-*= and =end-*= sets of
+  properties combined together and encoded as a single string in
+  [[https://www.w3.org/TR/NOTE-datetime][ISO 8601]] format.
+
+* TODO Agenda
+
+* Customization
+** Options
+
+| Property                         | Data type | Default                                        |
+|----------------------------------+-----------+------------------------------------------------|
+| =:json-data-type-property=       | string    | ~"$$data_type"~                                |
+| =:json-exporters=                | plist     | See variable ~org-json-default-type-exporters~ |
+| =:json-property-types=           | plist     | See variable ~org-json-default-property-types~ |
+| =:json-strict=                   | bool      | ~nil~                                          |
+| =:json-include-extra-properties= | bool      | ~t~                                            |
+
+*** Details
+- =:json-data-type-property= ::
+  Set to ~nil~ to disable.
+- =:json-exporters= ::
+- =:json-property-types= ::
+- =:json-strict= ::
+- =:json-include-extra-properties= ::
+
+* TODO Internals
+** API
+*** Basic JSON encoding functions
+*** Advanced JSON encoding
+*** Exporting org nodes and properties
