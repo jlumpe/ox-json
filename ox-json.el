@@ -351,7 +351,7 @@ These can be overridden with the :json-property-types option."
     (symbolp (car value))
     (listp (cadr value))))
 
-(defun org-json-timestamp-isoformat (timestamp suffix info &optional zone)
+(defun org-json-timestamp-isoformat (timestamp suffix _info &optional zone)
   "Convert timestamp time to ISO 8601 format."
   (let* ((minute (org-element-property (intern (concat ":minute-" suffix)) timestamp))
          (hour (org-element-property (intern (concat ":hour-" suffix)) timestamp))
@@ -793,7 +793,7 @@ of the work, possibly using the keyword arguments to override behavior."
 
 ;;; Transcoder functions
 
-(defun org-json-transcode-plain-text (text info)
+(defun org-json-transcode-plain-text (text &optional _info)
   "Transcode plain text to a JSON string.
 
 TEXT is a string to encode.
@@ -802,7 +802,7 @@ INFO is the plist of export options."
   (unless (string= text "")
     (json-encode-string text)))
 
-(cl-defun org-json-transcode-base (node contents info)
+(cl-defun org-json-transcode-base (node _contents info)
   "Default transcoding function for all element/object types.
 
 NODE is an element or object to encode.
@@ -824,7 +824,7 @@ INFO is the plist of export options."
      (language . ,(org-json-encode-string (plist-get info :language) info))
      ))
 
-(defun org-json-transcode-template (contents info)
+(defun org-json-transcode-template (_contents info)
   "Transcode an entire org document to JSON.
 
 CONTENTS is a string containing the encoded document contents,
@@ -840,7 +840,7 @@ INFO is the plist of export options."
          (contents . ,contents-encoded))
       info)))
 
-(defun org-json-transcode-headline (headline contents info)
+(defun org-json-transcode-headline (headline _contents info)
   "Transcode a headline element to JSON.
 
 HEADLINE is the parsed headline to encode.
@@ -871,7 +871,7 @@ INFO is the plist of export options."
       (push (cons 'target-ref (org-json-encode-string (org-export-get-reference target info))) properties))
     properties))
 
-(defun org-json-transcode-link (link contents info)
+(defun org-json-transcode-link (link _contents info)
   "Transcode a link object to JSON.
 
 LINK is the parsed link to encode.
@@ -889,7 +889,7 @@ INFO is the plist of export options."
         (cons 'start (org-json-encode-string (org-json-timestamp-isoformat timestamp "start" info)))
         (cons 'end (org-json-encode-string (org-json-timestamp-isoformat timestamp "end" info)))))))
 
-(defun org-json-transcode-timestamp (timestamp contents info)
+(defun org-json-transcode-timestamp (timestamp _contents info)
   (org-json-export-node-base timestamp info
     :properties (org-json-timestamp-properties timestamp info)))
 
