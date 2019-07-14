@@ -335,6 +335,7 @@ These can be overridden with the :json-property-types option."
   (org-json--loop-plist (key value plist)
     collect (cons key value)))
 
+
 ;;; Org-mode utility code
 
 (defun org-json-node-properties (node)
@@ -431,8 +432,8 @@ These can be overridden with the :json-property-types option."
 
 (defun org-json--make-error-obj (info msg args)
   "Create a JSON object with an error message."
-  (let ((msg-encoded (json-encode-string (apply #'format msg args))))
-    (org-json-encode-alist-raw "error" `((message . ,msg-encoded)) info)))
+  (org-json-make-object "error" info
+    `((message string ,(apply #'format msg args)))))
 
 (defun org-json--error (info msg &rest args)
   "Either signal an error or return an encoded error object based off the :strict export setting."
@@ -745,16 +746,18 @@ Returns a symbol which can be passed to `org-json-encode-with-type'."
       (plist-get org-json-default-property-types node-type)
       (plist-get org-json-default-property-types 'all))))
 
-(defun org-json-export-properties-alist (node info)
+(cl-defun org-json-export-properties-alist (node info &optional (property-plist (org-json-node-properties node)))
   "Get alist of encoded property values for element/object NODE.
 
 INFO is the plist of export options.
+PROPERTY-PLIST is an optional plist of all property values for the node that
+overrides the default method of determining them.
 
 Returns an alist where the items are property names and their
 JSON-encoded values."
   (let ((node-type (org-element-type node))
         (property-type nil))
-    (org-json--loop-plist (key value (org-json-node-properties node))
+    (org-json--loop-plist (key value property-plist)
       do (setq property-type (org-json-get-property-type node-type key info))
       if property-type
         collect (cons key (org-json-encode-with-type property-type value info)))))
