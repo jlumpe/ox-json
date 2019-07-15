@@ -896,23 +896,31 @@ INFO is the plist of export options."
 (defun org-json-link-properties (link info)
   "Get properties to export in link objects."
   (let* ((properties (org-json-export-properties-alist link info))
-        (link-type (intern (org-element-property :type link)))
-        (target
-          (cl-case link-type
-            ('custom-id
-              (org-export-resolve-id-link link info))
-            ('fuzzy
-              (org-export-resolve-fuzzy-link link info))
-            ('radio
-              (org-export-resolve-radio-link link info))
-            )))
+         (link-type (intern (org-element-property :type link)))
+         (is-internal nil))
+    ; Check if Org thinks it should be an inline image
     (push
       (cons
         'is-inline-image
         (org-json-encode-bool (org-export-inline-image-p link) info nil))
         properties)
-    (when target
-      (push (cons 'target-ref (org-json-encode-string (org-export-get-reference target info))) properties))
+    ; Handle internal links
+    (when (memq link-type '(custom-id fuzzy radio))
+      (setq is-internal t)
+      (let* ((target
+              ; At least one of these functions throws an error if it doesn't resolve
+              (condition-case nil
+                (cl-case link-type
+                  ('custom-id
+                    (org-export-resolve-id-link link info))
+                  ('fuzzy
+                    (org-export-resolve-fuzzy-link link info))
+                  ('radio
+                    (org-export-resolve-radio-link link info)))
+                (error nil)))
+             (target-ref (if target (org-export-get-reference target info))))
+        (push (cons 'target-ref (org-json-encode-string target-ref)) properties)))
+    (push (cons 'is-internal (org-json-encode-bool is-internal)) properties)
     properties))
 
 (defun org-json-transcode-link (link _contents info)
