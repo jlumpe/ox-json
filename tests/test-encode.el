@@ -18,11 +18,16 @@
 ;;; Fixed-type scalar encoding functions
 
 (ert-deftest test-encode-bool ()
+  ; Non-strict (default)
   (should (string= (org-json-encode-bool t info) "true"))
   (should (string= (org-json-encode-bool nil info) "false"))
-  (should-error (org-json-encode-bool 0 info))
-  (should-error (org-json-encode-bool "foo" info))
-  (should (string= (org-json-encode-bool 1 info nil) "true")))
+  (should (string= (org-json-encode-bool 0 info) "true"))
+  (should (string= (org-json-encode-bool "foo" info) "true"))
+  ; Strict
+  (should (string= (org-json-encode-bool t info t) "true"))
+  (should (string= (org-json-encode-bool nil info t) "false"))
+  (should-error (org-json-encode-bool 0 info t))
+  (should-error (org-json-encode-bool "foo" info t)))
 
 (ert-deftest test-encode-string ()
   (should (string= (org-json-encode-string "foo" info) "\"foo\""))
@@ -58,7 +63,11 @@
   ; Bool
   (should (string= (org-json-encode-with-type 'bool nil info) "false"))
   (should (string= (org-json-encode-with-type 'bool t info) "true"))
-  (should-error (org-json-encode-with-type 'bool "foo" info))
+  (should (string= (org-json-encode-with-type 'bool "foo" info) "true"))
+  ; Bool (strict)
+  (should (string= (org-json-encode-with-type '(bool t) nil info) "false"))
+  (should (string= (org-json-encode-with-type '(bool t) t info) "true"))
+  (should-error (org-json-encode-with-type '(bool t) "foo" info))
   ; String
   (should (string= (org-json-encode-with-type 'string "foo" info) "\"foo\""))
   (should (string= (org-json-encode-with-type 'string nil info) "null"))
@@ -86,9 +95,12 @@
   (should (string= (org-json-encode-array nil info) "[]"))
   ; Bool item type
   (decode-compare
-    (org-json-encode-array '(t nil t nil) info 'bool)
-    [t :json-false t :json-false])
-  (should-error (org-json-encode-array '(1 t nil "foo" foo) info 'bool))
+    (org-json-encode-array '(1 t nil "foo" foo) info 'bool)
+    [t t :json-false t t])
+  (decode-compare
+    (org-json-encode-array '(t nil) info '(bool t))
+    [t :json-false])
+  (should-error (org-json-encode-array '(1 t nil "foo" foo) info '(bool t)))
   ; String item type
   (decode-compare
     (org-json-encode-array '("foo" foo nil) info 'string)
@@ -106,9 +118,12 @@
     (json-obj info "mytype"))
   ; Bool value type
   (decode-compare
-    (org-json-encode-alist "mytype" '((true . t) (false . nil)) info 'bool)
+    (org-json-encode-alist "mytype" '((true . t) (true2 . 1) (false . nil)) info 'bool)
+    (json-obj info "mytype" :true t :true2 t :false :json-false))
+  (decode-compare
+    (org-json-encode-alist "mytype" '((true . t) (false . nil)) info '(bool t))
     (json-obj info "mytype" :true t :false :json-false))
-  (should-error (org-json-encode-alist "mytype" '((true . t) (invalid . 0)) info 'bool))
+  (should-error (org-json-encode-alist "mytype" '((true . 1) (false . nil)) info '(bool t)))
   ; String value type
   (decode-compare
     (org-json-encode-alist "mytype" '((string . "foo") (symbol . foo) (null . nil)) info 'string)
@@ -131,9 +146,12 @@
     (json-obj info "mytype"))
   ; Bool value type
   (decode-compare
-    (org-json-encode-plist "mytype" '(:true t :false nil) info 'bool)
+    (org-json-encode-plist "mytype" '(:true t :true2 1 :false nil) info 'bool)
+    (json-obj info "mytype" :true t :true2 t :false :json-false))
+  (decode-compare
+    (org-json-encode-plist "mytype" '(:true t :false nil) info '(bool t))
     (json-obj info "mytype" :true t :false :json-false))
-  (should-error (org-json-encode-plist "mytype" '(:true t :invalid 0) info 'bool))
+  (should-error (org-json-encode-plist "mytype" '(:true 1 :false nil) info '(bool t)))
   ; String value type
   (decode-compare
     (org-json-encode-plist "mytype" '(:string "foo" :symbol foo :null nil) info 'string)

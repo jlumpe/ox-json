@@ -455,7 +455,7 @@ These can be overridden with the :json-property-types option."
 
 ;;; Encoders for generic data types
 
-(cl-defun org-json-encode-bool (value &optional info (strict t))
+(cl-defun org-json-encode-bool (value &optional info strict)
   "Encode VALUE to JSON as boolean.
 
 INFO is the plist of export options.
