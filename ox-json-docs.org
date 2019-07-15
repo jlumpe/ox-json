@@ -38,7 +38,6 @@ example is the properties of an =org-node= object.
 *** error
 - =message= (array) :: A message describing why the error occurred.
 
-** Specific node types
 
 ** Node types with specific handling
 *** org-data
@@ -47,8 +46,10 @@ example is the properties of an =org-node= object.
 **** Additional properties
 - =is-inline-image= (bool) :: Whether org mode think this link should be rendered as an inline
   image.
+- =is-internal= (bool) :: Whether this link points to a location in the same document. True for the
+     =id=, =fuzzy=, and =radio= link  types.
 - =target-ref= (string) :: The =ref= property of the headline or other node this link resolves
-  to, if applicable.
+  to. Only exists for internal links.
 *** timestamp
 **** Additional properties
 - =start=, =end= (string) :: Year/month/day/hour/minute from the =start-*= and =end-*= sets of
