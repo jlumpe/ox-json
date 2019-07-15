@@ -843,6 +843,37 @@ INFO is the plist of export options."
          (contents . ,contents-encoded))
       info)))
 
+(defun org-json--is-drawer-property-name (name info)
+  "Try to determine if a headline property name came from a property drawer."
+  (when (symbolp name)
+    (setq name (symbol-name name)))
+  (s-uppercase-p name))
+
+(defun org-json--separate-drawer-properties (properties info)
+  "Separate a headline's property plist into regular properties and those from a property drawer.
+
+PROPERTIES is a plist of the headline's properties, as from `org-json-node-properties'.
+INFO is the plist of export options.
+
+Returns a cons cell containing two plists, the regular properties in the car and
+the drawer properties in the cdr.
+"
+  (let ((regular-props nil)
+        (drawer-props nil))
+    (org-json--loop-plist (name value properties)
+      do (if (org-json--is-drawer-property-name name info)
+           ; Property drawer
+           (let* ((realname (intern (s-replace "+" "" (symbol-name name))))
+                  (existing (plist-get drawer-props realname))
+                  (strval (format "%s" value))
+                  (newval (if existing
+                             (concat existing " " strval)
+                             strval)))
+             (setq drawer-props (plist-put drawer-props realname newval)))
+           ; Regular property
+           (setq regular-props (plist-put regular-props name value))))
+    (cons regular-props drawer-props)))
+
 (defun org-json-transcode-headline (headline _contents info)
   "Transcode a headline element to JSON.
 
@@ -850,7 +881,17 @@ HEADLINE is the parsed headline to encode.
 CONTENTS is a string containing the encoded contents of the headline,
 but its value is ignored (`org-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (org-json-export-node-base headline info))
+  (let* ((all-props (org-json-node-properties headline))
+         (rval (org-json--separate-drawer-properties all-props info))
+         (regular-props-plist (car rval))
+         (regular-encoded (org-json-export-properties-alist headline info regular-props-plist))
+         (drawer-props-plist (cdr rval))
+         (drawer-encoded
+             (org-json-encode-plist "mapping" drawer-props-plist info 'string))
+         (extra (when drawer-props-plist `(("property_drawer" . ,drawer-encoded)))))
+    (when drawer-encoded
+      (cl-assert (stringp drawer-encoded)))
+    (org-json-export-node-base headline info :properties regular-encoded :extra extra)))
 
 (defun org-json-link-properties (link info)
   "Get properties to export in link objects."
