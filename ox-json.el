@@ -437,7 +437,7 @@ These can be overridden with the :json-property-types option."
     `((message string ,(apply #'format msg args)))))
 
 (defun org-json--error (info msg &rest args)
-  "Either signal an error or return an encoded error object based off the :strict export setting."
+  "Either signal an error or return an encoded error object based off the :json-strict export setting."
   (if (plist-get info :json-strict)
     (apply #'error msg args)
     (org-json--make-error-obj info msg args)))
