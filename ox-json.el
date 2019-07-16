@@ -499,13 +499,17 @@ INFO is the plist of export options."
     (t
       (org-json--type-error "number" value info))))
 
-(defun org-json-encode-array-raw (array &optional _info)
+(defun org-json-encode-array-raw (array &optional _info single-line)
   "Encode array to JSON given its already-encoded items.
 
 ARRAY is a list of strings with encoded JSON data.
-INFO is the plist of export options."
+INFO is the plist of export options.
+If SINGLE-LINE is non-nil will put all items on same line, otherwise will use
+one line per item."
   (if array
-    (format "[\n%s\n]" (s-join ",\n" array))
+    (if single-line
+      (format "[%s]" (s-join ", " array))
+      (format "[\n%s\n]" (s-join ",\n" array)))
     "[]"))
 
 (defun org-json-encode-alist-raw (data-type alist &optional info)
@@ -576,17 +580,20 @@ INFO is the plist of export options."
       (apply encoder value info args)
       (org-json--error info "Unknown type symbol %s" type))))
 
-(cl-defun org-json-encode-array (array &optional info (itemtype t))
+(cl-defun org-json-encode-array (array &optional info (itemtype t) single-line)
   "Encode the list ARRAY as a JSON array.
 
 INFO is the plist of export options.
 ITEMTYPE is optional and is the type to pass to `org-json-encode-with-type'
-to encode the items of the array. By default `org-json-encode-auto' is used."
+to encode the items of the array. By default `org-json-encode-auto' is used.
+If SINGLE-LINE is non-nil will put all items on same line, otherwise will use
+one line per item."
   (org-json-encode-array-raw
     (cl-loop
       for item in array
       collect (org-json-encode-with-type itemtype item info))
-    info))
+    info
+    single-line))
 
 (cl-defun org-json-encode-alist (data-type alist &optional info (valuetype t))
   "Encode the alist ALIST as a JSON object.

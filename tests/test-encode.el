@@ -84,6 +84,7 @@
             (org-json-encode-with-type '(array bool) '(nil t) info)
             "[false, true]")))
 
+
 ;;; Encoding composite data types
 
 (ert-deftest test-encode-array ()
@@ -105,7 +106,10 @@
   (decode-compare
     (org-json-encode-array '("foo" foo nil) info 'string)
     ["foo" "foo" :json-null])
-  (should-error (org-json-encode-array '(1 t nil "foo" foo) info 'string)))
+  (should-error (org-json-encode-array '(1 t nil "foo" foo) info 'string))
+  ; Single/multi-line
+  (should (string= (org-json-encode-array '(1 2 3) info 'number) "[\n1,\n2,\n3\n]"))
+  (should (string= (org-json-encode-array '(1 2 3) info 'number t) "[1, 2, 3]")))
 
 (ert-deftest test-encode-alist ()
   ; Auto value type
