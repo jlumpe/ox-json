@@ -245,7 +245,7 @@ These can be overridden with the :json-exporters option."
     superscript (
       :use-brackets-p bool)
     table (
-      :tblfm string
+      :tblfm t
       :type string
       :value string)
     table-row (
