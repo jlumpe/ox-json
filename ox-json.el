@@ -563,7 +563,9 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
 (defun org-json-encode-with-type (type value info)
   "Encode a VALUE to JSON given its type.
 
-TYPE is a key in the plist under the :json-exporters option.
+TYPE is a key in the plist under the :json-exporters option. It may also be list
+containing the key followed by additional arguments to pass to the encoder
+function.
 INFO is the plist of export options."
   (let* ((typekey (if (listp type) (car type) type))
          (args (if (listp type) (cdr type) nil))
@@ -578,14 +580,11 @@ INFO is the plist of export options."
 INFO is the plist of export options.
 ITEMTYPE is optional and is the type to pass to `org-json-encode-with-type'
 to encode the items of the array. By default `org-json-encode-auto' is used."
-  (let ((encoder (org-json--get-type-encoder itemtype info)))
-    (if encoder
-      (org-json-encode-array-raw
-        (cl-loop
-          for item in array
-          collect (funcall encoder item info))
-        info)
-      (org-json--error info "Unknown type symbol %s" itemtype))))
+  (org-json-encode-array-raw
+    (cl-loop
+      for item in array
+      collect (org-json-encode-with-type itemtype item info))
+    info))
 
 (cl-defun org-json-encode-alist (data-type alist &optional info (valuetype t))
   "Encode the alist ALIST as a JSON object.
@@ -595,15 +594,12 @@ INFO is the plist of export options.
 VALUETYPE is optional and is the type to pass to `org-json-encode-with-type'
 to encode the values of each key-value pair. By default
 `org-json-encode-auto' is used."
-  (let ((encoder (org-json--get-type-encoder valuetype info)))
-    (if encoder
-      (org-json-encode-alist-raw
-        data-type
-        (cl-loop
-          for (key . value) in alist
-          collect (cons key (funcall encoder value info)))
-        info)
-      (org-json--error info "Unknown type symbol %s" valuetype))))
+  (org-json-encode-alist-raw
+    data-type
+    (cl-loop
+      for (key . value) in alist
+      collect (cons key (org-json-encode-with-type valuetype value info)))
+    info))
 
 (cl-defun org-json-encode-plist (data-type plist &optional info (valuetype t))
   "Encode the plist PLIST as a JSON object.
