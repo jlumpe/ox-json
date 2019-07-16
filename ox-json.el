@@ -85,6 +85,7 @@
     plist            ,#'org-json-encode-plist
     alist            ,#'org-json-encode-alist
     timestamp        ,#'org-json-export-timestamp-property
+    tag-string       ,#'org-json-encode-tag-string
     t                ,#'org-json-encode-auto)
   "Plist that stores the default exporter function for element/object
 properties by their type symbol.
@@ -649,6 +650,13 @@ INFO is the plist of export options."
     (if (and (listp data) (not (org-json--is-node data)))
       (format (if (> (length data) 1) "[\n%s\n]" "[%s]") exported)
       exported)))
+
+(defun org-json-encode-tag-string (string info)
+  "Encode an un-split tag string as a JSON array.
+
+STRING is a collection of tags joined by colon characters.
+INFO is the plist of export options."
+  (org-json-encode-array (s-split ":" string t) info 'string t))
 
 (defun org-json-export-secondary-string (sstring info)
   "Export the secondary string SSTRING as a JSON array.

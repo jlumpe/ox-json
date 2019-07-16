@@ -43,6 +43,14 @@
   (should (string= (org-json-encode-number nil info) "null"))
   (should-error (org-json-encode-number "foo" info)))
 
+(ert-deftest test-encode-tag-string ()
+  (decode-compare (org-json-encode-tag-string "foo" info) ["foo"])
+  (decode-compare (org-json-encode-tag-string "foo:bar" info) ["foo" "bar"])
+  (decode-compare (org-json-encode-tag-string ":foo:bar:" info) ["foo" "bar"])
+  (decode-compare (org-json-encode-tag-string ":::foo::bar::::" info) ["foo" "bar"])
+  (decode-compare (org-json-encode-tag-string "" info) [])
+  (decode-compare (org-json-encode-tag-string ":" info) []))
+
 
 ;;; Variable-type encoding functions
 
