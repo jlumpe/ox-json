@@ -91,4 +91,4 @@ TODO
 
 ## Related repos
 
-Check out the [pyorg](github.com/jlumpe/pyorg) Python package, which contains tools for reading and manipulating the exported JSON data.
+Check out the [pyorg](http://github.com/jlumpe/pyorg) Python package, which contains tools for reading and manipulating the exported JSON data.
