@@ -475,13 +475,15 @@ an error otherwise. If false will accept any truthy value."
 INFO is the plist of export options.
 
 Also accepts symbols."
+  (when (and value (symbolp value))
+    (setq value (symbol-name value)))
   (cond
     ((not value)
       "null")
     ((stringp value)
-      (json-encode-string value))
-    ((symbolp value)
-      (json-encode-string (symbol-name value)))
+      ; Strip properties, doesn't make a difference to the final output to file
+      ; but makes viewing intermediate output while debugging much less messy
+      (json-encode-string (substring-no-properties value)))
     (t
       (org-json--type-error "string or symbol" value info))))
 
