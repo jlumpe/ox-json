@@ -25,7 +25,7 @@ HOME := $(WORK_DIR)
 
 install-deps : .emacs.d/elpa
 
-build :
+build : install-deps
 	$(EMACS) $(EMACS_BATCH) $(EMACS_PKG)       \
 		--eval                                 \
 	    "(progn                                \
