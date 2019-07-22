@@ -658,7 +658,9 @@ INFO is the plist of export options."
 
 STRING is a collection of tags joined by colon characters.
 INFO is the plist of export options."
-  (org-json-encode-array (s-split ":" string t) info 'string t))
+  (if string
+    (org-json-encode-array (s-split ":" string t) info 'string t)
+    "[]"))
 
 (defun org-json-export-secondary-string (sstring info)
   "Export the secondary string SSTRING as a JSON array.
