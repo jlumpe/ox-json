@@ -868,7 +868,7 @@ INFO is the plist of export options."
          (contents . ,contents-encoded))
       info)))
 
-(defun org-json--is-drawer-property-name (name info)
+(defun org-json--is-drawer-property-name (name &optional _info)
   "Try to determine if a headline property name came from a property drawer."
   (when (symbolp name)
     (setq name (symbol-name name)))
