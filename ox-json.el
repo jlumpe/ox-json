@@ -196,8 +196,7 @@ These can be overridden with the :json-exporters option."
       :counter number
       :raw-tag string
       :tag secondary-string
-      :structure nil  ; TODO
-      )
+      :structure nil)  ; TODO
     keyword (
       :key string
       :value string)
@@ -270,11 +269,9 @@ These can be overridden with the :json-exporters option."
       :warning-unit string
       :warning-value number
       :year-end nil  ; number
-      :year-start nil  ; number
-      )
+      :year-start nil)  ; number
     verbatim (
-      :value string)
-    )
+      :value string))
   "Nested set of plists storing the default type symbols for element/object
 properties by element type.
 
@@ -284,8 +281,7 @@ for all types. The values are plists mapping property
 symbols (starting with colons) to type symbols in
 `org-json--default-type-exporters'.
 
-These can be overridden with the :json-property-types option."
-  )
+These can be overridden with the :json-property-types option.")
 
 
 ;;; Variables
@@ -395,14 +391,12 @@ These can be overridden with the :json-property-types option."
      (:json-exporters nil nil nil)
      (:json-property-types nil nil nil)
      (:json-strict nil nil nil)
-     (:json-include-extra-properties nil nil t)
-     )
+     (:json-include-extra-properties nil nil t))
   ;; Menu
   :menu-entry
   '(?j "Export to JSON" (
 	(?J "As JSON buffer" org-json-export-to-buffer)
-	(?j "To JSON file" org-json-export-to-file)))
-  )
+	(?j "To JSON file" org-json-export-to-file))))
 
 
 ;;; User export functions
@@ -708,16 +702,13 @@ Interprets nil as null."
            `(
               (type string ,(org-element-property :repeater-type timestamp))
               (unit string ,(org-element-property :repeater-unit timestamp))
-              (value number ,(org-element-property :repeater-value timestamp))
-              )))
+              (value number ,(org-element-property :repeater-value timestamp)))))
        (warning nil
          ,(org-json-make-object nil info
             `(
                (type string ,(org-element-property :warning-type timestamp))
                (unit string ,(org-element-property :warning-unit timestamp))
-               (value number ,(org-element-property :warning-value timestamp))
-               )))
-       )))
+               (value number ,(org-element-property :warning-value timestamp))))))))
 
 (defun org-json-export-contents (node info)
   "Export the contents of org element/object NODE as a JSON array.
@@ -841,8 +832,7 @@ INFO is the plist of export options."
      (date . ,(org-json-export-secondary-string (plist-get info :date) info))
      (description . ,(org-json-export-secondary-string (plist-get info :description) info))
      (email . ,(org-json-encode-string (plist-get info :email) info))
-     (language . ,(org-json-encode-string (plist-get info :language) info))
-     ))
+     (language . ,(org-json-encode-string (plist-get info :language) info))))
 
 (defun org-json-transcode-template (_contents info)
   "Transcode an entire org document to JSON.
