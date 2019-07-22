@@ -320,16 +320,18 @@ These can be overridden with the :json-property-types option."
 
 (cl-defmacro org-json--loop-plist ((key value plist) &body body)
   "Bind KEY and VALUE to each key-value pair in PLIST and execute BODY within a `cl-loop'."
-  `(let ((--pl ,plist)
-          (,key nil)
-          (,value nil))
-     (cl-loop
-       while --pl
-       do (setq
-            ,key (car --pl)
-            ,value (cadr --pl)
-            --pl (cddr --pl))
-       ,@body)))
+  (let ((plist-var (gensym)))
+    `(let ((,plist-var ,plist)
+            (,key nil)
+            (,value nil))
+      (cl-loop
+        while ,plist-var
+        do (setq
+
+              ,key (car ,plist-var)
+              ,value (cadr ,plist-var)
+              ,plist-var (cddr ,plist-var))
+        ,@body))))
 
 (defun org-json--plist-to-alist (plist)
   "Convert plist PLIST to alist."

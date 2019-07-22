@@ -84,3 +84,11 @@
   (should-not (org-json--is-node '(bold "foo")))
   ; Non-list cons was creating problems
   (should-not (org-json--is-node '(foo . bar))))
+
+
+(ert-deftest test-loop-plist ()
+  (let ((plist '(:a 1 :b 2 :c 3 :d 4)))
+    (should (equal '(:a :c)
+              (org-json--loop-plist (key value plist)
+                if (oddp value)
+                collect key)))))
