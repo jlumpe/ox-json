@@ -87,11 +87,11 @@
     timestamp        ,#'org-json-export-timestamp-property
     tag-string       ,#'org-json-encode-tag-string
     t                ,#'org-json-encode-auto)
-  "Plist that stores the default exporter function for element/object
-properties by their type symbol.
+  "Default exporter function for each element property type.
 
-These can be overridden with the :json-exporters option."
-  )
+Plist mapping property symbols in
+`org-json-default-property-types' to exporter function. These can
+be overridden with the :json-exporters option.")
 
 (defconst org-json-default-property-types
   '(
@@ -272,14 +272,14 @@ These can be overridden with the :json-exporters option."
       :year-start nil)  ; number
     verbatim (
       :value string))
-  "Nested set of plists storing the default type symbols for element/object
-properties by element type.
+  "Default type symbols for properties of all Org element/object types.
 
-Keys are element/object type symbols as returned by
-`org-element-type', along with \"all\" which sets the defaults
-for all types. The values are plists mapping property
+Nested set of plists. Keys are element/object type symbols as
+returned by `org-element-type', along with \"all\" which sets the
+defaults for all types. The values are plists mapping property
 symbols (starting with colons) to type symbols in
-`org-json--default-type-exporters'.
+`org-json-default-type-exporters'. A value of nil means to ignore
+the property.
 
 These can be overridden with the :json-property-types option.")
 
@@ -352,7 +352,11 @@ These can be overridden with the :json-property-types option.")
     (listp (cadr value))))
 
 (defun org-json-timestamp-isoformat (timestamp suffix _info &optional zone)
-  "Convert timestamp time to ISO 8601 format."
+  "Convert timestamp time to ISO 8601 format.
+
+TIMESTAMP is a timestamp object from an Org mode parse tree.
+SUFFIX is either \"start\" or \"end\".
+ZONE is a time zone to pass to `format-time-string'."
   (let* ((minute (org-element-property (intern (concat ":minute-" suffix)) timestamp))
          (hour (org-element-property (intern (concat ":hour-" suffix)) timestamp))
          (day (org-element-property (intern (concat ":day-" suffix)) timestamp))
@@ -403,7 +407,10 @@ These can be overridden with the :json-property-types option.")
 
 (defun org-json-export-to-buffer
   (&optional async subtreep visible-only body-only ext-plist)
-  "Export current buffer to a JSON buffer."
+  "Export current buffer to a JSON buffer.
+
+ASYNC, SUBTREEP, VISIBLE-ONLY, BODY-ONLY, and EXT-PLIST are the arguments to
+`org-export-to-buffer'."
   ; Modified from org-html-export-as-html:
   (interactive)
   (let ((buffer (org-export-to-buffer 'json "*Org JSON Export*"
@@ -417,7 +424,10 @@ These can be overridden with the :json-property-types option.")
 
 (defun org-json-export-to-file
   (&optional async subtreep visible-only body-only ext-plist)
-  "Export current buffer to a JSON file."
+  "Export current buffer to a JSON file.
+
+ASYNC, SUBTREEP, VISIBLE-ONLY, BODY-ONLY, and EXT-PLIST are the arguments to
+`org-export-to-file'."
   ; Modified from org-html-export-to-html:
   (interactive)
   (let ((file (org-export-output-file-name ".json" subtreep)))
@@ -622,7 +632,11 @@ to encode the values of each key-value pair. By default
     valuetype))
 
 (defun org-json-make-object (type info properties)
-  "Make a JSON object."
+  "Make an encoded JSON object.
+
+TYPE is the data type string to add to the object.
+INFO is the plist of export options.
+PROPERTIES is an alist of property names and encoded property values."
   (let ((props-alist
           (cl-loop
             for (key type value) in properties
@@ -691,6 +705,10 @@ Interprets nil as null."
       (org-json--type-error "org node or nil" node info))))
 
 (defun org-json-export-timestamp-property (timestamp info)
+  "Export a timestamp object that appears in the properties of another element.
+
+TIMESTAMP is the timestamp object from the org buffer parse tree.
+INFO is the plist of export options."
   (org-json-make-object "timestamp" info
     `(
       (begin string ,(org-json-timestamp-isoformat timestamp "start" info))
@@ -863,8 +881,7 @@ PROPERTIES is a plist of the headline's properties, as from `org-json-node-prope
 INFO is the plist of export options.
 
 Returns a cons cell containing two plists, the regular properties in the car and
-the drawer properties in the cdr.
-"
+the drawer properties in the cdr."
   (let ((regular-props nil)
         (drawer-props nil))
     (org-json--loop-plist (name value properties)
@@ -901,7 +918,10 @@ INFO is the plist of export options."
     (org-json-export-node-base headline info :properties regular-encoded :extra extra)))
 
 (defun org-json-link-properties (link info)
-  "Get properties to export in link objects."
+  "Get properties to export from a link object.
+
+LINK is the parsed link object.
+INFO is the plist of export options."
   (let* ((properties (org-json-export-properties-alist link info))
          (link-type (intern (org-element-property :type link)))
          (is-internal nil))
@@ -933,14 +953,18 @@ INFO is the plist of export options."
 (defun org-json-transcode-link (link _contents info)
   "Transcode a link object to JSON.
 
-LINK is the parsed link to encode.
-CONTENTS is a string containing the encoded contents of the headline,
+LINK is the parsed link to transcode.
+CONTENTS is a string containing the encoded contents of the element,
 but its value is ignored (`org-json-export-contents' is used instead).
 INFO is the plist of export options."
   (org-json-export-node-base link info
     :properties (org-json-link-properties link info)))
 
 (defun org-json-timestamp-properties (timestamp info)
+  "Get properties to export from a timestamp object.
+
+TIMESTAMP is the parsed timestamp object.
+INFO is the plist of export options."
   (let ((properties (org-json-export-properties-alist timestamp info)))
     (append
       properties
@@ -949,6 +973,12 @@ INFO is the plist of export options."
         (cons 'end (org-json-encode-string (org-json-timestamp-isoformat timestamp "end" info)))))))
 
 (defun org-json-transcode-timestamp (timestamp _contents info)
+  "Transcode a timestamp object to JSON.
+
+TIMESTAMP is the parsed link to transcode.
+CONTENTS is a string containing the encoded contents of the element,
+but its value is ignored (`org-json-export-contents' is used instead).
+INFO is the plist of export options."
   (org-json-export-node-base timestamp info
     :properties (org-json-timestamp-properties timestamp info)))
 
