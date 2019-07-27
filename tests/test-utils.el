@@ -5,11 +5,11 @@
 
 
 (ert-deftest test-merge-alists ()
-  "Test `org-json--merge-alists'."
+  "Test `ox-json--merge-alists'."
   ; Complex case
   (should
     (equal
-      (org-json--merge-alists
+      (ox-json--merge-alists
         '(
            (a . 1)
            (b . 2)
@@ -33,20 +33,20 @@
   ; Edge case - one  list (duplicates should be removed)
   (should
     (equal
-      (org-json--merge-alists
+      (ox-json--merge-alists
         '((a . 1) (b . 2) (c . 3) (a . 100)))
       '((a . 1) (b . 2) (c . 3))))
   ; Edge case - merge no lists
   (should
     (equal
-      (org-json--merge-alists)
+      (ox-json--merge-alists)
       nil))
   )
 
 
 (ert-deftest test-plist-to-alist ()
   (should (equal
-    (org-json--plist-to-alist '(one 1 two 2 three 3))
+    (ox-json--plist-to-alist '(one 1 two 2 three 3))
     '((one . 1) (two . 2) (three . 3)))))
 
 
@@ -55,40 +55,40 @@
         (pl2 '(:b 20 :d 40))
         (pl3 '(:b 200 :d 400 :f 500)))
     ; No plists
-    (should (equal (org-json--plists-get :a) nil))
-    ;; (should (equal (org-json--plists-get :a :default 123) 123))
+    (should (equal (ox-json--plists-get :a) nil))
+    ;; (should (equal (ox-json--plists-get :a :default 123) 123))
     ; One plist
-    (should (equal (org-json--plists-get :a pl1) 1))
-    (should (equal (org-json--plists-get-default :a 123 pl1) 1))
-    (should (equal (org-json--plists-get :d pl1) nil))
-    (should (equal (org-json--plists-get-default :d 123 pl1) 123))
+    (should (equal (ox-json--plists-get :a pl1) 1))
+    (should (equal (ox-json--plists-get-default :a 123 pl1) 1))
+    (should (equal (ox-json--plists-get :d pl1) nil))
+    (should (equal (ox-json--plists-get-default :d 123 pl1) 123))
     ; Multiple
-    (should (equal (org-json--plists-get :a pl1 pl2 pl3) 1))
-    (should (equal (org-json--plists-get-default :a 123 pl1 pl2 pl3) 1))
-    (should (equal (org-json--plists-get :b pl1 pl2 pl3) 2))
-    (should (equal (org-json--plists-get :b pl2 pl3) 20))
-    (should (equal (org-json--plists-get :c pl1 pl2 pl3) 3))
-    (should (equal (org-json--plists-get :d pl1 pl2 pl3) 40))
-    (should (equal (org-json--plists-get :f pl1 pl2 pl3) 500))
-    (should (equal (org-json--plists-get :g pl1 pl2 pl3) nil))
-    (should (equal (org-json--plists-get-default :g 123 pl1 pl2 pl3) 123))
+    (should (equal (ox-json--plists-get :a pl1 pl2 pl3) 1))
+    (should (equal (ox-json--plists-get-default :a 123 pl1 pl2 pl3) 1))
+    (should (equal (ox-json--plists-get :b pl1 pl2 pl3) 2))
+    (should (equal (ox-json--plists-get :b pl2 pl3) 20))
+    (should (equal (ox-json--plists-get :c pl1 pl2 pl3) 3))
+    (should (equal (ox-json--plists-get :d pl1 pl2 pl3) 40))
+    (should (equal (ox-json--plists-get :f pl1 pl2 pl3) 500))
+    (should (equal (ox-json--plists-get :g pl1 pl2 pl3) nil))
+    (should (equal (ox-json--plists-get-default :g 123 pl1 pl2 pl3) 123))
     ))
 
 
 (ert-deftest test-is-node ()
-  (should (org-json--is-node '(bold (:begin 1 :end 100) "foo")))
-  (should (org-json--is-node '(bold (:begin 1 :end 100))))
-  (should-not (org-json--is-node nil))
-  (should-not (org-json--is-node "string"))
-  (should-not (org-json--is-node '(bold)))
-  (should-not (org-json--is-node '(bold "foo")))
+  (should (ox-json--is-node '(bold (:begin 1 :end 100) "foo")))
+  (should (ox-json--is-node '(bold (:begin 1 :end 100))))
+  (should-not (ox-json--is-node nil))
+  (should-not (ox-json--is-node "string"))
+  (should-not (ox-json--is-node '(bold)))
+  (should-not (ox-json--is-node '(bold "foo")))
   ; Non-list cons was creating problems
-  (should-not (org-json--is-node '(foo . bar))))
+  (should-not (ox-json--is-node '(foo . bar))))
 
 
 (ert-deftest test-loop-plist ()
   (let ((plist '(:a 1 :b 2 :c 3 :d 4)))
     (should (equal '(:a :c)
-              (org-json--loop-plist (key value plist)
+              (ox-json--loop-plist (key value plist)
                 if (oddp value)
                 collect key)))))

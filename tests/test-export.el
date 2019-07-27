@@ -8,7 +8,7 @@
   "Test export of full org document."
   (let* ((exported-string
             (with-current-buffer (find-file-noselect "test.org")
-              (with-current-buffer (org-json-export-to-buffer)
+              (with-current-buffer (ox-json-export-to-buffer)
                 (buffer-string))))
           (json-object-type 'hash-table)
           ; For now mostly just test that it is valid JSON:
@@ -19,7 +19,7 @@
 
 (ert-deftest test-get-property-type ()
   ; Test some values from the defaults
-  (should (equal (org-json-get-property-type nil :begin info) nil))
-  (should (equal (org-json-get-property-type nil :post-affiliated info) 'number))
-  (should (equal (org-json-get-property-type 'headline :archivedp info) 'bool))
+  (should (equal (ox-json-get-property-type nil :begin info) nil))
+  (should (equal (ox-json-get-property-type nil :post-affiliated info) 'number))
+  (should (equal (ox-json-get-property-type 'headline :archivedp info) 'bool))
   )

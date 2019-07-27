@@ -64,8 +64,8 @@ example is the properties of an =org-node= object.
 | Property                         | Data type | Default                                        |
 |----------------------------------+-----------+------------------------------------------------|
 | =:json-data-type-property=       | string    | ~"$$data_type"~                                |
-| =:json-exporters=                | plist     | See variable ~org-json-default-type-exporters~ |
-| =:json-property-types=           | plist     | See variable ~org-json-default-property-types~ |
+| =:json-exporters=                | plist     | See variable ~ox-json-default-type-exporters~ |
+| =:json-property-types=           | plist     | See variable ~ox-json-default-property-types~ |
 | =:json-strict=                   | bool      | ~nil~                                          |
 | =:json-include-extra-properties= | bool      | ~t~                                            |
 

@@ -44,7 +44,7 @@
          (data-type-property (plist-get info :json-data-type-property)))
     (if (and data-type-property type)
       (puthash data-type-property type obj))
-    (org-json--loop-plist (key value properties)
+    (ox-json--loop-plist (key value properties)
       do (puthash (normalize-key key) value obj))
     obj))
 

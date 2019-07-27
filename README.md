@@ -12,7 +12,7 @@ See the [documentation file](ox-json-docs.org) for more detailed information.
 `(require 'ox-json')` somewhere and then use the `org-export-dispatch`
 interactive command and select the J key for JSON export.
 
-You can also use the `org-json-export-to-buffer` and `org-json-export-to-file`
+You can also use the `ox-json-export-to-buffer` and `ox-json-export-to-file`
 functions or any of the built-in `org-export-` functions with `'json`
 for the backend argument.
 
