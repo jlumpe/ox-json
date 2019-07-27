@@ -71,6 +71,11 @@
 (require 'ox)
 (require 'org-element)
 
+;; Require json-mode if available, and tell the compiler the json-mode
+;; function should be defined
+(require 'json-mode nil t)
+(declare-function json-mode "ext:json-mode.el")
+
 
 ;;; Private constants
 
@@ -416,7 +421,7 @@ ASYNC, SUBTREEP, VISIBLE-ONLY, BODY-ONLY, and EXT-PLIST are the arguments to
   (let ((buffer (org-export-to-buffer 'json "*Org JSON Export*"
                   async subtreep visible-only body-only ext-plist)))
     ; Switch to json mode if available
-    (when (require 'json-mode nil t)
+    (when (fboundp 'json-mode)
       (with-current-buffer buffer
         (json-mode)))
     buffer))
