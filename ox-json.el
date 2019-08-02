@@ -443,12 +443,22 @@ ASYNC, SUBTREEP, VISIBLE-ONLY, BODY-ONLY, and EXT-PLIST are the arguments to
 ;;; Error handling
 
 (defun ox-json--make-error-obj (info msg args)
-  "Create a JSON object with an error message."
+  "Create a JSON object with an error message.
+
+INFO is the plist of export options.
+MSG is the error message.
+ARGS are objects to insert into MSG using `format'."
   (ox-json-make-object "error" info
     `((message string ,(apply #'format msg args)))))
 
 (defun ox-json--error (info msg &rest args)
-  "Either signal an error or return an encoded error object based off the :json-strict export setting."
+  "Either signal an error or return an encoded error object.
+
+Behavior is based off the :json-strict export setting.
+
+INFO is the plist of export options.
+MSG is the error message.
+ARGS are objects to insert into MSG using `format'."
   (if (plist-get info :json-strict)
     (apply #'error msg args)
     (ox-json--make-error-obj info msg args)))
@@ -574,6 +584,9 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
       (ox-json--error info "Don't know how to encode value %S"  value))))
 
 (defun ox-json--get-type-encoder (typekey &optional info)
+  "Get the type encoder function for type symbol TYPEKEY.
+
+INFO is the plist of export options."
   (ox-json--plists-get typekey
     (plist-get info :json-exporters)
     ox-json-default-type-exporters))
@@ -846,7 +859,9 @@ INFO is the plist of export options."
   (ox-json-export-node-base node info))
 
 (defun ox-json--get-doc-info-alist (info)
-  "Get alist of top-level document properties (values already encoded)."
+  "Get alist of top level document properties (values already encoded).
+
+INFO is the plist of export options."
   `(
      (title . ,(ox-json-export-secondary-string (plist-get info :title) info))
      (file_tags . ,(json-encode-list (plist-get info :filetags)))
@@ -874,19 +889,23 @@ INFO is the plist of export options."
       info)))
 
 (defun ox-json--is-drawer-property-name (name &optional _info)
-  "Try to determine if a headline property name came from a property drawer."
+  "Try to determine if a headline property name came from a property drawer.
+
+NAME is the property name as symbol or string."
   (when (symbolp name)
     (setq name (symbol-name name)))
   (s-uppercase-p name))
 
 (defun ox-json--separate-drawer-properties (properties info)
-  "Separate a headline's property plist into regular properties and those from a property drawer.
+  "Separate drawer properties from a headline's property plist.
 
-PROPERTIES is a plist of the headline's properties, as from `ox-json-node-properties'.
+PROPERTIES is a plist of the headline's properties, as from
+`ox-json-node-properties'.
+
 INFO is the plist of export options.
 
-Returns a cons cell containing two plists, the regular properties in the car and
-the drawer properties in the cdr."
+Returns a cons cell containing two plists, the regular properties in the car
+and the drawer properties in the cdr."
   (let ((regular-props nil)
         (drawer-props nil))
     (ox-json--loop-plist (name value properties)
