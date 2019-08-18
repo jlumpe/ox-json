@@ -288,6 +288,13 @@ the property.
 
 These can be overridden with the :json-property-types option.")
 
+(defconst ox-json-default-ql-property-types
+  '(
+    :post-affiliated nil
+    :pre-blank nil
+    :post-blank nil)
+  "TODO")
+
 
 ;;; Variables
 (defgroup ox-json nil "Customization for the ox-json package" :group 'outline)
@@ -400,7 +407,8 @@ ZONE is a time zone to pass to `format-time-string'."
      (:json-exporters nil nil nil)
      (:json-property-types nil nil nil)
      (:json-strict nil nil nil)
-     (:json-include-extra-properties nil nil t))
+     (:json-include-extra-properties nil nil t)
+     (:json-ql-property-types nil nil nil))
   ;; Menu
   :menu-entry
   '(?j "Export to JSON" (
@@ -1058,6 +1066,59 @@ but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
   (ox-json-export-node-base timestamp info
     :properties (ox-json-timestamp-properties timestamp info)))
+
+
+;;; org-ql
+
+(defun ox-json-transcode-headline-ql (headline marker info)
+  "Encode a single headline from org-ql.
+
+HEADLINE is the parsed headline to encode.
+MARKER is the marker at the beginning of the headline.
+INFO is the plist of export options."
+  (pcase-let*
+      ((all-props (ox-json-node-properties headline))
+       (`(,regular-props . ,drawer-props)
+         (ox-json--separate-drawer-properties all-props info))
+       (buffer (marker-buffer marker))
+       (property-types (ox-json--get-property-types 'headline info))
+       (regular-encoded
+         (apply #'ox-json--export-properties-base
+           regular-props nil info property-types))
+       (drawer-encoded
+         (ox-json-encode-plist "mapping" drawer-props info 'string)))
+    (push (cons 'file (ox-json-encode-string (buffer-file-name buffer))) regular-encoded)
+    (ox-json-export-node-base
+      headline
+      info
+      :properties regular-encoded
+      :extra `(("drawer" . ,drawer-encoded)))))
+
+(defun ox-json--ql-action (info)
+  "Callback use with the \":action\" argument in `org-ql-select'.
+
+INFO is the plist of export options.
+
+(This actually isn't meant to be used as the callback directly, because it
+requires an argument. The actual callback should call this function with the
+info plist within a closure)."
+  (let* ((headline (org-element-headline-parser (line-end-position)))
+         (marker (copy-marker (org-element-property :begin headline))))
+    (ox-json-transcode-headline-ql headline marker info)))
+
+(defun ox-json-ql-select (files query &optional ext-plist info)
+  "Query headlines using `org-ql-select' and return results as JSON.
+
+FILES and QUERY are the first two arguments to `org-ql-select' and are the list
+of files to search and the query form, respectively.
+EXT-PLIST is a property list with external parameters overriding default settings.
+INFO is an existing plist of export options."
+  (unless info
+    (setq info (ox-json--init-backend ext-plist)))
+  (ox-json-encode-array-raw
+    (org-ql-select files query
+      :action (lambda () (ox-json--ql-action info)))
+    info))
 
 
 (provide 'ox-json)
