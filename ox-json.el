@@ -947,16 +947,15 @@ HEADLINE is the parsed headline to encode.
 CONTENTS is a string containing the encoded contents of the headline,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (let* ((all-props (ox-json-node-properties headline))
-         (rval (ox-json--separate-drawer-properties all-props info))
-         (regular-props-plist (car rval))
-         (regular-encoded (ox-json-export-properties-alist headline info regular-props-plist))
-         (drawer-props-plist (cdr rval))
-         (drawer-encoded
-             (ox-json-encode-plist "mapping" drawer-props-plist info 'string))
-         (extra (when drawer-props-plist `(("property_drawer" . ,drawer-encoded)))))
-    (when drawer-encoded
-      (cl-assert (stringp drawer-encoded)))
+  (pcase-let*
+    ((all-props (ox-json-node-properties headline))
+     (`(,regular-props . ,drawer-props)
+       (ox-json--separate-drawer-properties all-props info))
+     (regular-encoded
+       (ox-json--export-properties-for-type 'headline regular-props info))
+     (drawer-encoded
+       (ox-json-encode-plist "mapping" drawer-props info 'string))
+     (extra `(("drawer" . ,drawer-encoded))))
     (ox-json-export-node-base headline info :properties regular-encoded :extra extra)))
 
 (defun ox-json-link-properties (link info)
