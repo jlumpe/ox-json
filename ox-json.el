@@ -440,6 +440,42 @@ ASYNC, SUBTREEP, VISIBLE-ONLY, BODY-ONLY, and EXT-PLIST are the arguments to
       async subtreep visible-only body-only ext-plist)))
 
 
+;;; Misc functions for exporting
+
+(defun ox-json--init-backend (&optional ext-plist)
+  "Initialize the export-options plist independent of any buffer.
+
+Optional argument EXT-PLIST is a plist of options that override the default
+values for the JSON back end.
+
+Creates the \"communication channel\" plist that is passed as the \"info\"
+argument to most export functions. Normally this is created inside functions
+like `org-export-as', but it incorporates information from the current
+Org mode buffer and so won't work when exporting agenda items from multiple
+files.
+
+Code copied from `org-export-as'."
+  ;; (save-excursion
+  ;;   (save-restriction
+  (let* ((backend-name 'json)
+         (org-export-current-backend 'json)
+         (backend (org-export-get-backend 'json))
+         (info (org-export--get-export-attributes backend)))
+    ;; Update communication channel with environment.
+    (setq info
+      (org-combine-plists
+        info (org-export-get-environment backend nil ext-plist)))
+    ;; Install user's and developer's filters.
+    (setq info (org-export-install-filters info))
+    ;; Call options filters and update export options.  We do not
+    ;; use `org-export-filter-apply-functions' here since the
+    ;; arity of such filters is different.
+    (dolist (filter (plist-get info :filter-options))
+      (let ((result (funcall filter info backend-name)))
+        (when result (setq info result))))
+    info))
+
+
 ;;; Error handling
 
 (defun ox-json--make-error-obj (info msg args)
