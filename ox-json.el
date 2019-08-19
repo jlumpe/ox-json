@@ -766,55 +766,73 @@ node is memoized."
              (push encoded encoded-items)))
       finally return (nreverse encoded-items))))
 
-(defun ox-json-get-property-type (node-type property info)
-  "Get the type of a property in elements/objects of a given type.
+(defun ox-json--get-property-types (node-type info)
+  "Get property type plists for a given node type.
 
-NODE-TYPE is a symbol returned by `org-element-type', or 'all to
-get the default value.
-PROPERTY is the property key to be used with `org-element-property'
-\(should start with colon).
-INFO is the plist of export options.
-
-The type is looked up from the :json-property-types option, first
-looking up the type-specific plist of property types using
-NODE-TYPE and then defaulting to the \"all\" type if not found.
-The type symbol is then looked up in this plist using PROPERTY.
-Returns a symbol which can be passed to `ox-json-encode-with-type'."
+NODE-TYPE is the symbol returned by `org-element-type'.
+INFO is the plist of export options."
   (let ((info-types (plist-get info :json-property-types))
         (include-extra (plist-get info :json-include-extra-properties)))
-    (ox-json--plists-get-default
-      property
-      (if include-extra t nil)
+    (list
       (plist-get info-types node-type)
       (plist-get info-types 'all)
       (plist-get ox-json-default-property-types node-type)
       (plist-get ox-json-default-property-types 'all))))
 
-(cl-defun ox-json-export-properties-alist (node info &optional (property-plist (ox-json-node-properties node)))
+(cl-defun ox-json-export-properties (node info)
   "Get alist of encoded property values for element/object NODE.
 
 INFO is the plist of export options.
-PROPERTY-PLIST is an optional plist of all property values for the node that
-overrides the default method of determining them.
 
 Returns an alist where the items are property names and their
 JSON-encoded values."
   (let ((node-type (org-element-type node))
-        (property-type nil))
+        (property-plist (ox-json-node-properties node)))
+    (ox-json--export-properties-for-type node-type property-plist info)))
+
+(cl-defun ox-json--export-properties-for-type (node-type property-plist info)
+  "Export a plist of properties for the given element/object type.
+
+NODE-TYPE is the symbol returned by `org-element-type'.
+PROPERTY-PLIST is the plist of all property values.
+INFO is the plist of export options.
+
+Returns an alist where the items are property names and their
+JSON-encoded values."
+  (let ((type-plists (ox-json--get-property-types node-type info))
+        (include-extra (plist-get info :json-include-extra-properties)))
+    (apply #'ox-json--export-properties-base
+      property-plist
+      (if include-extra t nil)
+      info
+      type-plists)))
+
+(cl-defun ox-json--export-properties-base (property-plist default-type info &rest type-plists)
+  "TODO
+
+PROPERTY-PLIST is the plist of all property values.
+DEFAULT-TYPE is the type symbol to be used for properties not found in
+TYPE-PLISTS. A value of nil means these properties will be ignored.
+TYPE-PLISTS TODO...
+
+Returns an alist where the items are property names and their
+JSON-encoded values."
+  (let ((property-type nil))
     (ox-json--loop-plist (key value property-plist)
-      do (setq property-type (ox-json-get-property-type node-type key info))
+      do (setq property-type
+           (apply #'ox-json--plists-get-default key default-type type-plists))
       if property-type
         collect (cons key (ox-json-encode-with-type property-type value info)))))
 
 (cl-defun ox-json-export-node-base (node info &key extra
-                                      (properties (ox-json-export-properties-alist node info))
+                                      (properties (ox-json-export-properties node info))
                                       (contents (ox-json-export-contents node info)))
   "Base export function for a generic org element/object.
 
 NODE is an org element or object and INFO is the export environment plist.
 INFO is the plist of export options.
 PROPERTIES is an alist of pre-encoded property values that will be used in place
-of the return value of `ox-json-export-properties-alist' if given (passing a
+of the return value of `ox-json-export-properties' if given (passing a
 value of nil will result in no properties being included).
 EXTRA is an alist of keys and pre-encoded values to add directly to the returned
 JSON object at the top level (note that this is not checked for conflicts with
@@ -946,7 +964,7 @@ INFO is the plist of export options."
 
 LINK is the parsed link object.
 INFO is the plist of export options."
-  (let* ((properties (ox-json-export-properties-alist link info))
+  (let* ((properties (ox-json-export-properties link info))
          (link-type (intern (org-element-property :type link)))
          (is-internal nil))
     ; Check if Org thinks it should be an inline image
@@ -989,7 +1007,7 @@ INFO is the plist of export options."
 
 TIMESTAMP is the parsed timestamp object.
 INFO is the plist of export options."
-  (let ((properties (ox-json-export-properties-alist timestamp info)))
+  (let ((properties (ox-json-export-properties timestamp info)))
     (append
       properties
       (list
