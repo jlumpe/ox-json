@@ -765,7 +765,7 @@ TIMESTAMP is the timestamp object from the org buffer parse tree.
 INFO is the plist of export options."
   (ox-json-make-object "timestamp" info
     `(
-      (begin string ,(ox-json-timestamp-isoformat timestamp "start" info))
+      (start string ,(ox-json-timestamp-isoformat timestamp "start" info))
       (end string ,(ox-json-timestamp-isoformat timestamp "end" info))
       (type string ,(org-element-property :type timestamp))
       (raw-value string ,(org-element-property :raw-value timestamp))
