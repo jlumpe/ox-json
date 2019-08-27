@@ -6,6 +6,9 @@
 
 * TODO Usage
 
+~ox-json-export-to-file~
+~ox-json-export-to-buffer~
+
 * Output format
 
 ** Data types
@@ -20,6 +23,15 @@ customized with the =:json-data-type-property= option (see the [[*Options][optio
 
 *** org-document
 **** Properties
+- =properties= (object) :: File-level properties
+  - =title= (array) :: Document title (secondary string)
+  - =filetags= (array of strings) ::
+  - =author= (string) ::
+  - =creator= (stirng) ::
+  - =date= (array) :: (secondary string)
+  - =description= (array) :: (secondary string)
+  - =email= (string) ::
+  - =language= (string) ::
 - =contents= (array of =org-node= objects) :: The top-level elements in the document. This should
      consist of an optional =section= node followed by any number of =header= nodes.
 
@@ -29,17 +41,18 @@ A node (element or object) in the document's parse tree.
 See the [[https://orgmode.org/worg/dev/org-element-api.html][Org element API documentation]] for the list of node types and their properties.
 
 **** Properties
-- =type= (string) ::
-- =ref= (string) ::
-- =contents= (array) ::
-- =properties= (object) ::
+- =type= (string) :: Type of node, given by ~org-element-type~.
+- =ref= (string) :: A unique string assigned to all nodes during the export process, from
+                    ~org-export-get-reference~.
+- =contents= (array) :: Contents of the node. Array of node objects or strings.
+- =properties= (object) :: Object/element properties from org element API.
+- =drawer= (object) :: (headline nodes only) Properties defined in ~:PROPERTIES:~ drawer.
 
 *** error
-- =message= (array) :: A message describing why the error occurred.
+- =message= (string) :: A message describing why the error occurred.
 
 
 ** Node types with specific handling
-*** org-data
 *** headline
 *** link
 **** Additional properties
