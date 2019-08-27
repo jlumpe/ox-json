@@ -887,7 +887,7 @@ of the work, possibly using the keyword arguments to override behavior."
       (ref . ,(json-encode-string (org-export-get-reference node info)))
       (type . ,(json-encode-string (symbol-name (org-element-type node))))
       ,@extra
-      (properties . ,(ox-json-encode-alist-raw "mapping" properties info))
+      (properties . ,(ox-json-encode-alist-raw nil properties info))
       (contents . ,contents))
     info))
 

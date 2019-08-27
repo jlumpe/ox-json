@@ -10,10 +10,13 @@
 
 ** Data types
 
-All objects in the exported JSON have a special data type property which indicates the type of data
-they are supposed to represent. This is meant to make it easier for external tools to interpret. By
-default this property is named ~"$$data_type"~ but its value can be customized with the
-=:json-data-type-property= option (see the [[*Options][options]] section).
+Exported JSON objects which contain structured data have a special "data type" property which
+indicates the type of data they represent. This is meant to make it easier for external tools to
+interpret. Objects lacking this property represent simple key-value mappings with no additional
+implied structure.
+
+By default this property is named ~"$$data_type"~ but its value can be
+customized with the =:json-data-type-property= option (see the [[*Options][options]] section).
 
 *** org-document
 **** Properties
@@ -29,11 +32,7 @@ See the [[https://orgmode.org/worg/dev/org-element-api.html][Org element API doc
 - =type= (string) ::
 - =ref= (string) ::
 - =contents= (array) ::
-- =properties= (=mapping= object) ::
-
-*** mapping
-A mapping is just an association of strings to values without any specific structure. An
-example is the properties of an =org-node= object.
+- =properties= (object) ::
 
 *** error
 - =message= (array) :: A message describing why the error occurred.
