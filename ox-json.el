@@ -888,16 +888,26 @@ JSON-encoded values."
       if property-type
         collect (cons key (ox-json-encode-with-type property-type value info)))))
 
-(cl-defun ox-json-export-node-base (node info &key extra
-                                      (properties (ox-json-export-properties node info))
-                                      (contents (ox-json-export-contents node info)))
+(cl-defun ox-json-export-node-base (node info &key
+                                     property-types
+                                     (ref (org-export-get-reference node info))
+                                     (properties (ox-json-export-properties node info property-types))
+                                     extra-properties
+                                     extra
+                                     (contents (ox-json-export-contents node info)))
   "Base export function for a generic org element/object.
 
 NODE is an org element or object and INFO is the export environment plist.
 INFO is the plist of export options.
+PROPERTY-TYPES is a plist of type symbols which override the default way of
+determining how to encode property values (see equivalent argument in
+`ox-json-export-properties').
 PROPERTIES is an alist of pre-encoded property values that will be used in place
 of the return value of `ox-json-export-properties' if given (passing a
 value of nil will result in no properties being included).
+EXTRA-PROPERTIES is an alist of pre-encoded property values to add to the
+automatically-derived ones instead of replacing them, as the PROPERTIES argument
+does.
 EXTRA is an alist of keys and pre-encoded values to add directly to the returned
 JSON object at the top level (note that this is not checked for conflicts with
 the existing keys).
@@ -909,11 +919,13 @@ It is expected for all transcoding functions to call this function to do most
 of the work, possibly using the keyword arguments to override behavior."
   (unless (stringp contents)
     (setq contents (ox-json-encode-array-raw contents)))
+  (when extra-properties
+    (setq properties (append properties extra-properties)))
   (ox-json-encode-alist-raw
     "org-node"
     `(
-      (ref . ,(json-encode-string (org-export-get-reference node info)))
       (type . ,(json-encode-string (symbol-name (org-element-type node))))
+      (ref . ,(json-encode-string ref))
       ,@extra
       (properties . ,(ox-json-encode-alist-raw nil properties info))
       (contents . ,contents))
