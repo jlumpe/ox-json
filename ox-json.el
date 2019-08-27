@@ -952,19 +952,21 @@ but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
   (ox-json-export-node-base node info))
 
-(defun ox-json--get-doc-info-alist (info)
+(defun ox-json-document-properties (info)
   "Get alist of top level document properties (values already encoded).
 
 INFO is the plist of export options."
-  `(
-     (title . ,(ox-json-export-secondary-string (plist-get info :title) info))
-     (file_tags . ,(json-encode-list (plist-get info :filetags)))
-     (author . ,(ox-json-export-secondary-string (plist-get info :author) info))
-     (creator . ,(ox-json-encode-string (plist-get info :creator) info))
-     (date . ,(ox-json-export-secondary-string (plist-get info :date) info))
-     (description . ,(ox-json-export-secondary-string (plist-get info :description) info))
-     (email . ,(ox-json-encode-string (plist-get info :email) info))
-     (language . ,(ox-json-encode-string (plist-get info :language) info))))
+  (ox-json-make-alist
+    info
+    (
+      ('title 'secondary-string (plist-get info :title))
+      ('filetags '(array string) (plist-get info :filetags))
+      ('author 'secondary-string (plist-get info :author))
+      ('creator 'string (plist-get info :creator))
+      ('date 'secondary-string (plist-get info :date))
+      ('description 'secondary-string (plist-get info :description))
+      ('email 'string (plist-get info :email))
+      ('language 'string (plist-get info :language)))))
 
 (defun ox-json-transcode-template (_contents info)
   "Transcode an entire org document to JSON.
@@ -972,13 +974,14 @@ INFO is the plist of export options."
 CONTENTS is a string containing the encoded document contents,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (let* ((docinfo (ox-json--get-doc-info-alist info))
+  (let* ((properties (ox-json-document-properties info))
+         (properties-encoded (ox-json-encode-alist-raw nil properties info))
          (parse-tree (plist-get info :parse-tree))
          (contents-encoded (ox-json-export-contents parse-tree info)))
     (ox-json-encode-alist-raw
       "org-document"
       `(
-         ,@docinfo
+         (properties . ,properties-encoded)
          (contents . ,contents-encoded))
       info)))
 
