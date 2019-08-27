@@ -815,41 +815,50 @@ INFO is the plist of export options."
       (plist-get ox-json-default-property-types node-type)
       (plist-get ox-json-default-property-types 'all))))
 
-(cl-defun ox-json-export-properties (node info)
+(defun ox-json-export-properties (node info &optional property-types)
   "Get alist of encoded property values for element/object NODE.
 
 INFO is the plist of export options.
+PROPERTY-TYPES is an optional additional plist of property type symbols that
+overrides the defaults for the type of NODE.
 
 Returns an alist where the items are property names and their
 JSON-encoded values."
   (let ((node-type (org-element-type node))
         (property-plist (ox-json-node-properties node)))
-    (ox-json--export-properties-for-type node-type property-plist info)))
+    (ox-json--export-properties-for-type node-type property-plist info property-types)))
 
-(cl-defun ox-json--export-properties-for-type (node-type property-plist info)
+(defun ox-json--export-properties-for-type (node-type property-plist info &optional property-types)
   "Export a plist of properties for the given element/object type.
 
 NODE-TYPE is the symbol returned by `org-element-type'.
-PROPERTY-PLIST is the plist of all property values.
+PROPERTY-PLIST is a plist containing the property values.
 INFO is the plist of export options.
+PROPERTY-TYPES is an optional additional plist of property type symbols that
+overrides the defaults derived from INFO and NODE-TYPE.
 
 Returns an alist where the items are property names and their
 JSON-encoded values."
   (let ((type-plists (ox-json--get-property-types node-type info))
         (include-extra (plist-get info :json-include-extra-properties)))
+    (when property-types
+      (push property-types type-plists))
     (apply #'ox-json--export-properties-base
       property-plist
       (if include-extra t nil)
       info
       type-plists)))
 
-(cl-defun ox-json--export-properties-base (property-plist default-type info &rest type-plists)
-  "TODO
+(defun ox-json--export-properties-base (property-plist default-type info &rest type-plists)
+  "Export org node property values by looking up their types in a series of plists.
 
-PROPERTY-PLIST is the plist of all property values.
+PROPERTY-PLIST is a plist containing the property values.
 DEFAULT-TYPE is the type symbol to be used for properties not found in
 TYPE-PLISTS. A value of nil means these properties will be ignored.
-TYPE-PLISTS TODO...
+INFO is the plist of export options.
+TYPE-PLISTS is a sequence of plists containing the type symbols used to encode
+property values with (see `ox-json-encode-with-type'). The lookup stops at the
+first match, so earlier plists override later ones.
 
 Returns an alist where the items are property names and their
 JSON-encoded values."
