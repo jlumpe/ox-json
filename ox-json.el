@@ -1019,13 +1019,16 @@ and the drawer properties in the cdr."
            (setq regular-props (plist-put regular-props name value))))
     (cons regular-props drawer-props)))
 
-(defun ox-json-transcode-headline (headline _contents info)
+(defun ox-json-transcode-headline (headline _contents info &rest kw &key extra)
   "Transcode a headline element to JSON.
 
 HEADLINE is the parsed headline to encode.
 CONTENTS is a string containing the encoded contents of the headline,
 but its value is ignored (`ox-json-export-contents' is used instead).
-INFO is the plist of export options."
+INFO is the plist of export options.
+KW is a plist of keyword arguments to pass to `ox-json-export-node-base'.
+EXTRA is an alist of additional properties to attach to the exported JSON object
+at the top level."
   (pcase-let*
     ((all-props (ox-json-node-properties headline))
      (`(,regular-props . ,drawer-props)
@@ -1033,25 +1036,28 @@ INFO is the plist of export options."
      (regular-encoded
        (ox-json--export-properties-for-type 'headline regular-props info))
      (drawer-encoded
-       (ox-json-encode-plist "mapping" drawer-props info 'string))
-     (extra `(("drawer" . ,drawer-encoded))))
-    (ox-json-export-node-base headline info :properties regular-encoded :extra extra)))
+       (ox-json-encode-plist nil drawer-props info 'string)))
+    ; Add "drawer" object to top-level JSON properties
+    (push
+      (cons "drawer" drawer-encoded)
+      extra)
+    ; Add list of tags including inherited
+    (push
+      (cons 'tags-all (ox-json-encode-array (org-get-tags) info 'string))
+      regular-encoded)
+    (apply #'ox-json-export-node-base headline info
+      :properties regular-encoded
+      :extra extra
+      kw)))
 
-(defun ox-json-link-properties (link info)
+(defun ox-json-link-extra-properties (link info)
   "Get properties to export from a link object.
 
 LINK is the parsed link object.
 INFO is the plist of export options."
-  (let* ((properties (ox-json-export-properties link info))
-         (link-type (intern (org-element-property :type link)))
-         (is-internal nil))
-    ; Check if Org thinks it should be an inline image
-    (push
-      (cons
-        'is-inline-image
-        (ox-json-encode-bool (org-export-inline-image-p link) info nil))
-        properties)
-    ; Handle internal links
+  (let* ((link-type (intern (org-element-property :type link)))
+         (is-internal nil)
+         (target-ref nil))
     (when (memq link-type '(custom-id fuzzy radio))
       (setq is-internal t)
       (let* ((target
@@ -1064,11 +1070,15 @@ INFO is the plist of export options."
                     (org-export-resolve-fuzzy-link link info))
                   ('radio
                     (org-export-resolve-radio-link link info)))
-                (error nil)))
-             (target-ref (if target (org-export-get-reference target info))))
-        (push (cons 'target-ref (ox-json-encode-string target-ref)) properties)))
-    (push (cons 'is-internal (ox-json-encode-bool is-internal)) properties)
-    properties))
+                (error nil))))
+        (when target
+          (setq target-ref (org-export-get-reference target info)))))
+    (ox-json-make-alist
+      info
+      `(
+        (is-internal bool ,is-internal)
+        (target-ref string ,target-ref)
+        (is-inline-image info ,(org-export-inline-image-p link))))))
 
 (defun ox-json-transcode-link (link _contents info)
   "Transcode a link object to JSON.
@@ -1078,19 +1088,18 @@ CONTENTS is a string containing the encoded contents of the element,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
   (ox-json-export-node-base link info
-    :properties (ox-json-link-properties link info)))
+    :extra-properties (ox-json-link-extra-properties link info)))
 
-(defun ox-json-timestamp-properties (timestamp info)
-  "Get properties to export from a timestamp object.
+(defun ox-json-timestamp-extra-properties (timestamp info)
+  "Get additional properties to export from a timestamp object.
 
 TIMESTAMP is the parsed timestamp object.
 INFO is the plist of export options."
-  (let ((properties (ox-json-export-properties timestamp info)))
-    (append
-      properties
-      (list
-        (cons 'start (ox-json-encode-string (ox-json-timestamp-isoformat timestamp "start" info)))
-        (cons 'end (ox-json-encode-string (ox-json-timestamp-isoformat timestamp "end" info)))))))
+  (ox-json-make-alist
+    info
+    `(
+      (start string ,(ox-json-timestamp-isoformat timestamp "start" info))
+      (end string ,(ox-json-timestamp-isoformat timestamp "end" info)))))
 
 (defun ox-json-transcode-timestamp (timestamp _contents info)
   "Transcode a timestamp object to JSON.
@@ -1100,7 +1109,7 @@ CONTENTS is a string containing the encoded contents of the element,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
   (ox-json-export-node-base timestamp info
-    :properties (ox-json-timestamp-properties timestamp info)))
+    :extra-properties (ox-json-timestamp-extra-properties timestamp info)))
 
 
 (provide 'ox-json)
