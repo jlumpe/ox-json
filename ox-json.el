@@ -685,22 +685,41 @@ to encode the values of each key-value pair. By default
     info
     valuetype))
 
-(defun ox-json-make-object (type info properties)
-  "Make an encoded JSON object.
+(defun ox-json-make-alist (info properties)
+  "Make an alist with JSON-encoded values of heterogeneous types.
 
-TYPE is the data type string to add to the object.
 INFO is the plist of export options.
-PROPERTIES is an alist of property names and encoded property values."
-  (let ((props-alist
-          (cl-loop
-            for (key type value) in properties
-            collect
-            (cons
-              key
-              (if type
-                (ox-json-encode-with-type type value info)
-                value)))))
-    (ox-json-encode-alist-raw type props-alist info)))
+PROPERTIES is a list of (key type value) forms for each property of the JSON
+object. Each value will be JSON-encoded with `ox-json-encode-with-type'
+according to the type symbol given. Values with a type of nil will be considered
+to be already encoded."
+  (cl-loop
+    for (key type value) in properties
+    collect
+    (cons
+      key
+      (if type
+        (ox-json-encode-with-type type value info)
+        value))))
+
+(defun ox-json-make-object (data-type info properties)
+  "Make an encoded JSON object from heterogeneous data.
+
+DATA-TYPE is the data type string to add to the object.
+INFO is the plist of export options.
+PROPERTIES is interpreted as in `ox-json-make-alist'."
+  (ox-json-encode-alist-raw data-type (ox-json-make-alist info properties) info))
+
+(cl-defmacro ox-json--add-alist-encoded (alist key value info &optional (type t))
+  "JSON-encode VALUE and add it to alist ALIST with key KEY.
+
+INFO is the plist of export options.
+TYPE is the data type symbol representing how VALUE should be encoded.
+The default is t, which means the type is chosen automatically based on the
+data."
+  `(push
+    (ox-json-encode-with-type ,type ,value ,info)
+     ,alist))
 
 
 ;;; Export generic org data
