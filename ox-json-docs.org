@@ -97,6 +97,22 @@ Some node types are exported with additional data:
 - =:json-strict= ::
 - =:json-include-extra-properties= ::
 
+* Changelog
+** 0.3.0
+*** Backwards-incompatible changes
+- All of the top-level document attributes (=author=, =date=, etc.) are now grouped under the
+  ~"properties"~ key of the =org-document= object.
+- Export =start= property of =timestamp= nodes with the correct name. Was being exported with the
+  name =begin=.
+- JSON objects representing generic key/value mappings no longer have the ~"$$data_type"~ property.
+*** Features
+- Data in property drawers is now exported with headlines in the ~"drawer"~ property.
+*** Other
+- Reorganized/cleaned up much of the internals.
+** 0.2.0
+** 0.1
+Initial version.
+
 * Internals
 ** TODO API
 *** Basic JSON encoding functions
