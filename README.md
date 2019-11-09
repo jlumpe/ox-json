@@ -14,13 +14,37 @@ See the [documentation file](ox-json-docs.org) for more detailed information.
 interactive command and select the J key for JSON export.
 
 You can also use the `ox-json-export-to-buffer` and `ox-json-export-to-file`
-functions or any of the built-in `org-export-` functions with `'json`
-for the backend argument.
+functions or any of the built-in `org-export-` functions by passing `'json`
+as the `backend` argument.
 
 
 ## Output
 
-The output looks like:
+An exported document looks like:
+
+```
+{
+  "$$data_type": "org-document",
+  "properties": {
+    "title": ["Test file"],
+    "file_tags": ["foo","bar"],
+    "author": ["jlumpe"],
+    "creator": "Emacs 26.2 (Org mode 9.2.4)",
+    "date": [],
+    "description": ["Test file"],
+    "email": "jlumpe@*****.org",
+    "language": "en"
+  },
+  "contents": [
+    ...
+  ]
+}
+```
+
+The `"contents"` property is an array containing the top-level elements of the document (which will
+be an optional `section` element followed by any number of `headline` elements).
+
+All nodes (elements and objects) in the document tree are exported like:
 
 ```
 {
@@ -39,57 +63,22 @@ types and properties). `ref` is a unique ID assigned to the node by Org mode's e
 colons in the property keys are omitted. `"contents"` is the encoded return value of
 `org-element-contents`, the items of which are either more org nodes or strings.
 
-The top-level data structure looks like:
-
-```
-{
-  "$$data_type": "org-document",
-  "title": ["Test file"],
-  "file_tags": ["foo","bar"],
-  "author": ["jlumpe"],
-  "creator": "Emacs 26.2 (Org mode 9.2.4)",
-  "date": [],
-  "description": ["Test file"],
-  "email": "jlumpe@*****.org",
-  "language": "en",
-  "contents": [
-    ...
-  ]
-}
-```
-
-The `title`, `author`, `date`, and `description` properties are secondary strings (lists of strings
-and possibly markup objects) which is why they are encoded as arrays.
-
 
 ### Nested data objects
 
-The `"$$data-type"` property is added to differentiate encoded org elements/objects and other data
-types from generic sets of key/value pairs that occur in alists or plists (the latter of which has
-`"$$data-type": "mapping"`).
-
-Additional data types are:
-
-```
-{
-  "$$data-type": "error",
-  "message": "Describes an error in automatically encoding this data structure."
-}
-```
+The `"$$data-type"` property is added to JSON objects to indicate the type of structured data they
+contain (the exception being generic sets of key/value pairs). See the documentation for more
+information.
 
 
 ## Notes
 
 The resulting JSON *should* include the correct choice of empty object (`{}`),
 empty list (`[]`), `null`, or `false` for the given context, even though these are
-given a value of `nil` in elisp (don`t get me started).
+represented as `nil` in elisp (don`t get me started).
 
 
-## Configuration
+## Related software
 
-TODO
-
-
-## Related repos
-
-Check out the [pyorg](http://github.com/jlumpe/pyorg) Python package, which contains tools for reading and manipulating the exported JSON data.
+Check out the [pyorg](http://github.com/jlumpe/pyorg) Python package, which contains tools for
+reading and manipulating the exported JSON data and interacting with a running Emacs process.
