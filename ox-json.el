@@ -710,17 +710,6 @@ INFO is the plist of export options.
 PROPERTIES is interpreted as in `ox-json-make-alist'."
   (ox-json-encode-alist-raw data-type (ox-json-make-alist info properties) info))
 
-(cl-defmacro ox-json--add-alist-encoded (alist key value info &optional (type t))
-  "JSON-encode VALUE and add it to alist ALIST with key KEY.
-
-INFO is the plist of export options.
-TYPE is the data type symbol representing how VALUE should be encoded.
-The default is t, which means the type is chosen automatically based on the
-data."
-  `(push
-    (ox-json-encode-with-type ,type ,value ,info)
-     ,alist))
-
 
 ;;; Export generic org data
 
