@@ -22,17 +22,19 @@ By default this property is named ~"$$data_type"~ but its value can be
 customized with the =:json-data-type-property= option (see the [[*Options][options]] section).
 
 *** org-document
+This is the top-level object generated when the entire file is exported.
+
 **** Properties
-- =properties= (object) :: File-level properties
-  - =title= (array) :: Document title (secondary string)
-  - =filetags= (array of strings) ::
-  - =author= (string) ::
-  - =creator= (stirng) ::
-  - =date= (array) :: (secondary string)
-  - =description= (array) :: (secondary string)
-  - =email= (string) ::
-  - =language= (string) ::
-- =contents= (array of =org-node= objects) :: The top-level elements in the document. This should
+- ~"properties"~ (object) :: File-level properties
+  - ~"title"~ (array) :: Document title (secondary string)
+  - ~"filetags"~ (array of strings) ::
+  - ~"author"~ (string) ::
+  - ~"creator"~ (string) ::
+  - ~"date"~ (array) :: (secondary string)
+  - ~"description"~ (array) :: (secondary string)
+  - ~"email"~ (string) ::
+  - ~"language"~ (string) ::
+- ~"contents"~ (array) :: The top-level elements in the document. This should
      consist of an optional =section= node followed by any number of =header= nodes.
 
 *** org-node
@@ -41,18 +43,23 @@ A node (element or object) in the document's parse tree.
 See the [[https://orgmode.org/worg/dev/org-element-api.html][Org element API documentation]] for the list of node types and their properties.
 
 **** Properties
-- =type= (string) :: Type of node, given by ~org-element-type~.
-- =ref= (string) :: A unique string assigned to all nodes during the export process, from
+- ~"type"~ (string) :: Type of node, given by ~org-element-type~.
+- ~"ref"~ (string) :: A unique string assigned to all nodes during the export process, from
                     ~org-export-get-reference~.
-- =contents= (array) :: Contents of the node. Array of node objects or strings.
-- =properties= (object) :: Object/element properties from org element API.
-- =drawer= (object) :: (headline nodes only) Properties defined in ~:PROPERTIES:~ drawer.
+- ~"contents"~ (array) :: Contents of the node. Array of node objects or strings.
+- ~"properties"~ (object) :: Object/element properties from org element API.
+- ~"drawer"~ (object) :: (headline nodes only) Properties defined in ~:PROPERTIES:~ drawer.
 
 *** error
-- =message= (string) :: A message describing why the error occurred.
+This object appears in place of other values (typically within an =org-node='s properties) when
+there was an error exporting that value.
+
+- ~"message"~ (string) :: A message describing why the error occurred.
 
 
 ** Node types with specific handling
+Some node types are exported with additional data:
+
 *** headline
 *** link
 **** Additional properties
@@ -64,7 +71,7 @@ See the [[https://orgmode.org/worg/dev/org-element-api.html][Org element API doc
   to. Only exists for internal links.
 *** timestamp
 **** Additional properties
-- =start=, =end= (string) :: Year/month/day/hour/minute from the =start-*= and =end-*= sets of
+- ~"start"~, ~"end"~ (string) :: Year/month/day/hour/minute from the =start-*= and =end-*= sets of
   properties combined together and encoded as a single string in
   [[https://www.w3.org/TR/NOTE-datetime][ISO 8601]] format.
 
@@ -83,14 +90,15 @@ See the [[https://orgmode.org/worg/dev/org-element-api.html][Org element API doc
 
 *** Details
 - =:json-data-type-property= ::
+  Name of the property added to JSON objects which indicates the type of data they represent.
   Set to ~nil~ to disable.
 - =:json-exporters= ::
 - =:json-property-types= ::
 - =:json-strict= ::
 - =:json-include-extra-properties= ::
 
-* TODO Internals
-** API
+* Internals
+** TODO API
 *** Basic JSON encoding functions
 *** Advanced JSON encoding
 *** Exporting org nodes and properties
