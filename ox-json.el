@@ -1008,7 +1008,7 @@ and the drawer properties in the cdr."
            (setq regular-props (plist-put regular-props name value))))
     (cons regular-props drawer-props)))
 
-(defun ox-json-transcode-headline (headline _contents info &rest kw &key extra)
+(cl-defun ox-json-transcode-headline (headline _contents info &rest kw &key extra)
   "Transcode a headline element to JSON.
 
 HEADLINE is the parsed headline to encode.
