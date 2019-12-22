@@ -815,8 +815,7 @@ node is memoized."
 
 NODE-TYPE is the symbol returned by `org-element-type'.
 INFO is the plist of export options."
-  (let ((info-types (plist-get info :json-property-types))
-        (include-extra (plist-get info :json-include-extra-properties)))
+  (let ((info-types (plist-get info :json-property-types)))
     (list
       (plist-get info-types node-type)
       (plist-get info-types 'all)
