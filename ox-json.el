@@ -947,15 +947,15 @@ INFO is the plist of export options."
 INFO is the plist of export options."
   (ox-json-make-alist
     info
-    (
-      ('title 'secondary-string (plist-get info :title))
-      ('filetags '(array string) (plist-get info :filetags))
-      ('author 'secondary-string (plist-get info :author))
-      ('creator 'string (plist-get info :creator))
-      ('date 'secondary-string (plist-get info :date))
-      ('description 'secondary-string (plist-get info :description))
-      ('email 'string (plist-get info :email))
-      ('language 'string (plist-get info :language)))))
+    `(
+      (title secondary-string ,(plist-get info :title))
+      (filetags (array string) ,(plist-get info :filetags))
+      (author secondary-string ,(plist-get info :author))
+      (creator string ,(plist-get info :creator))
+      (date secondary-string ,(plist-get info :date))
+      (description secondary-string ,(plist-get info :description))
+      (email string ,(plist-get info :email))
+      (language string ,(plist-get info :language)))))
 
 (defun ox-json-transcode-template (_contents info)
   "Transcode an entire org document to JSON.
