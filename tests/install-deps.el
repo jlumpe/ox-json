@@ -35,7 +35,7 @@
 (message "\n********** Initializing package system **********")
 (package-initialize)
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.org/packages/")
+  '("melpa" . "https://melpa.org/packages/")
   t)
 (package-refresh-contents)
 (setq package-check-signature nil)
