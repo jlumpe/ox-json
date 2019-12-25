@@ -22,7 +22,7 @@ as the `backend` argument.
 
 An exported document looks like:
 
-```
+```json
 {
   "$$data_type": "org-document",
   "properties": {
@@ -46,7 +46,7 @@ be an optional `section` element followed by any number of `headline` elements).
 
 All nodes (elements and objects) in the document tree are exported like:
 
-```
+```json
 {
   "$$data_type": "org-node",
   "type": "headline",
