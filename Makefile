@@ -54,6 +54,7 @@ test-travis :
 test : install-deps test-deps #test-autoloads
 	@cd $(TEST_DIR)                                   &&    \
 	(for test_lib in test-*.el; do                          \
+	    echo "Running tests in ${test_lib}:";               \
 	    $(EMACS) $(EMACS_BATCH) $(EMACS_PKG)                \
 	    -L .. -L . -l cl                                    \
 	    $$(for dep in $(TEST_DEPS); do echo -l $$dep; done) \
