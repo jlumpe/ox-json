@@ -815,8 +815,7 @@ node is memoized."
 
 NODE-TYPE is the symbol returned by `org-element-type'.
 INFO is the plist of export options."
-  (let ((info-types (plist-get info :json-property-types))
-        (include-extra (plist-get info :json-include-extra-properties)))
+  (let ((info-types (plist-get info :json-property-types)))
     (list
       (plist-get info-types node-type)
       (plist-get info-types 'all)
@@ -947,15 +946,15 @@ INFO is the plist of export options."
 INFO is the plist of export options."
   (ox-json-make-alist
     info
-    (
-      ('title 'secondary-string (plist-get info :title))
-      ('filetags '(array string) (plist-get info :filetags))
-      ('author 'secondary-string (plist-get info :author))
-      ('creator 'string (plist-get info :creator))
-      ('date 'secondary-string (plist-get info :date))
-      ('description 'secondary-string (plist-get info :description))
-      ('email 'string (plist-get info :email))
-      ('language 'string (plist-get info :language)))))
+    `(
+      (title secondary-string ,(plist-get info :title))
+      (filetags (array string) ,(plist-get info :filetags))
+      (author secondary-string ,(plist-get info :author))
+      (creator string ,(plist-get info :creator))
+      (date secondary-string ,(plist-get info :date))
+      (description secondary-string ,(plist-get info :description))
+      (email string ,(plist-get info :email))
+      (language string ,(plist-get info :language)))))
 
 (defun ox-json-transcode-template (_contents info)
   "Transcode an entire org document to JSON.
@@ -1008,7 +1007,7 @@ and the drawer properties in the cdr."
            (setq regular-props (plist-put regular-props name value))))
     (cons regular-props drawer-props)))
 
-(defun ox-json-transcode-headline (headline _contents info &rest kw &key extra)
+(cl-defun ox-json-transcode-headline (headline _contents info &rest kw &key extra)
   "Transcode a headline element to JSON.
 
 HEADLINE is the parsed headline to encode.
