@@ -10,7 +10,7 @@ See the [documentation file](ox-json-docs.org) for more detailed information.
 
 ## Usage
 
-`(require 'ox-json')` somewhere and then use the `org-export-dispatch`
+`(require 'ox-json)` somewhere and then use the `org-export-dispatch`
 interactive command and select the J key for JSON export.
 
 You can also use the `ox-json-export-to-buffer` and `ox-json-export-to-file`
