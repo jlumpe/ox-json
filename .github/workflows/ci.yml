@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
     strategy:
@@ -26,8 +26,13 @@ jobs:
       with:
         version: ${{ matrix.emacs-version }}
 
-    - name: Install dependencies
-      run: make install-deps test-deps
+    - name: MELPA checks
+      uses: leotaku/elisp-check@master
+      with:
+        file: ox-json.el
 
-    - name: Build and test
-      run: make build test
+    - name: Test
+      uses: leotaku/elisp-check@master
+      with:
+        check: ert
+        file: tests/test-*.el
