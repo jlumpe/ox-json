@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        emacs-version:
+          - 24-5
+          - 25-3
+          - 26-3
+          - 27-2
+          - snapshot
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Emacs ${{ matrix.emacs-version }}
+      uses: purcell/setup-emacs@master
+      with:
+        version: ${{ matrix.emacs-version }}
+
+    - name: Install dependencies
+      run: make install-deps test-deps
+
+    - name: Build and test
+      run: make build test
