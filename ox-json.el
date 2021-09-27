@@ -321,7 +321,7 @@ These can be overridden with the :json-property-types option.")
 
 (cl-defmacro ox-json--loop-plist ((key value plist) &body body)
   "Bind KEY and VALUE to each key-value pair in PLIST and execute BODY within a `cl-loop'."
-  (let ((plist-var (gensym)))
+  (let ((plist-var (make-symbol "plist")))
     `(let ((,plist-var ,plist)
             (,key nil)
             (,value nil))
