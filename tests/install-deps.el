@@ -1,5 +1,6 @@
-;;; Script to install package requirements prior to testing
+;;; Script to install package and test requirements prior to testing
 
+;; Requirements are extracted from the package file itself
 ;; Arguments are (PKG-NAME [TEST-DEPS ...])
 
 
@@ -9,6 +10,18 @@
 
 ; Print tracebacks on error
 (setq debug-on-error t)
+
+
+; Print messages prefixed with file name to better tell where they are coming from
+(setq msg-prefix (format "[%s] " (file-name-base (or load-file-name buffer-file-name))))
+
+(defun my-message (format-string &rest args)
+  (apply 'message (concat msg-prefix format-string) args))
+
+(defun my-message2 (format-string &rest args)
+  (apply 'message (format "\n%s********** %s **********" msg-prefix format-string) args))
+
+(my-message2 "Invoked")
 
 
 ; Parse arguments
@@ -26,13 +39,13 @@
   pkg-requires (package-desc-reqs pkg-desc))
 
 
-(message "pkg-name = %S" pkg-name)
-(message "test-deps = %S" test-deps)
-(message "pkg-requires = %S" pkg-requires)
+(my-message "pkg-name = %S" pkg-name)
+(my-message "test-deps = %S" test-deps)
+(my-message "pkg-requires = %S" pkg-requires)
 
 
 ; Configure package system
-(message "\n********** Initializing package system **********")
+(my-message2 "Initializing package system")
 (package-initialize)
 (add-to-list 'package-archives
   '("melpa" . "https://melpa.org/packages/")
@@ -42,19 +55,19 @@
 
 
 ; Install package requirements
+(my-message2 "Installing package dependencies")
 (let ((transaction (package-compute-transaction nil pkg-requires))
       (byte-compile-warnings nil))
-  (message "\n********** Installing package dependencies **********" file)
   (package-download-transaction transaction))
 
 
 ; Install test dependencies
-(message "\n********** Installing test dependencies **********")
+(my-message2 "Installing test dependencies")
 (dolist (pkg test-deps)
   (if (package-installed-p pkg)
-    (message "%s is already installed" pkg)
-    (message "installing %s" pkg)
+    (my-message "%s is already installed" pkg)
+    (my-message "installing %s" pkg)
     (package-install pkg)))
 
 
-(message "\nDone!\n\n")
+(my-message2 "Done!")
