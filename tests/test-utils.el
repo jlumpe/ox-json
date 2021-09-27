@@ -90,5 +90,5 @@
   (let ((plist '(:a 1 :b 2 :c 3 :d 4)))
     (should (equal '(:a :c)
               (ox-json--loop-plist (key value plist)
-                if (oddp value)
+                if (cl-oddp value)
                 collect key)))))
