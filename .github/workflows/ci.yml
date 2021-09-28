@@ -30,4 +30,6 @@ jobs:
       run: make install-deps test-deps
 
     - name: Build and test
-      run: make build test
+      run: |
+        echo org-version = $(make org-version)
+        make byte-compile run-tests
