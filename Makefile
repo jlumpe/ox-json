@@ -1,6 +1,7 @@
 # Install dependencies and run tests
 # Source: https://github.com/rolandwalker/emacs-travis
 
+
 EMACS=emacs
 EMACS_CLEAN=$(EMACS) --no-site-file
 EMACS_BATCH=$(EMACS_CLEAN) --batch
@@ -10,7 +11,7 @@ WORK_DIR=$(shell pwd)
 PACKAGE_NAME=ox-json
 
 TEST_DIR=tests
-TEST_DEPS=ert package-lint
+TEST_DEPS=ert
 TEST_FILES=$(notdir $(wildcard $(TEST_DIR)/test-*.el))
 # Regex to filter test names
 TESTS_REGEXP=
@@ -54,6 +55,13 @@ run-tests :
 	  --eval $(TESTS_EVAL) \
 	  || exit 1; \
 	done)
+
+# Run package-lint
+lint : install-deps
+	$(EMACS_BATCH) $(EMACS_PKG) -f 'package-lint-batch-and-exit' $(PACKAGE_NAME).el
+
+checkdoc : install-deps
+	$(EMACS_BATCH) $(EMACS_PKG) --script tests/checkdoc-batch.el -- $(PACKAGE_NAME).el
 
 # Print the version of org installed
 org-version :
