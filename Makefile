@@ -19,25 +19,32 @@ TESTS_EVAL="(ert-run-tests-batch-and-exit '(and \"$(TESTS_REGEXP)\" (not (tag :i
 
 EMACS_LIBS=-L $(WORK_DIR) -L $(WORK_DIR)/$(TEST_DIR) $(shell for dep in $(TEST_DEPS); do echo -l $$dep; done)
 
+# This is important, ensures that .emacs.d is in the working directory
 HOME := $(WORK_DIR)
+
+# Value of byte-compile-warnings elisp variable
+BYTE_COMPILE_WARNINGS='(not docstrings obsolete)
 
 
 .PHONY : install-deps byte-compile test run-tests test-interactive clean emacs test-deps org-version lint
 
 
-# Install package dependencies
+# Install package and test dependencies
 .emacs.d/elpa :
 	$(EMACS_CLEAN) --script tests/install-deps.el "$(PACKAGE_NAME)" $(TEST_DEPS)
 
+# Alias for previous
 install-deps : .emacs.d/elpa
 
 # Byte-compile elisp files
 byte-compile : install-deps
 	@$(EMACS_BATCH) $(EMACS_PKG) \
 	  --eval "(setq byte-compile-error-on-warn t)" \
+	  --eval "(setq byte-compile-warnings $(BYTE_COMPILE_WARNINGS))" \
 	  --eval "(batch-byte-compile)" \
 	  *.el
 
+# Check that test dependences can be loaded
 test-deps :
 	@for dep in $(TEST_DEPS); do \
 	  $(EMACS_BATCH) $(EMACS_PKG) -l $$dep \
