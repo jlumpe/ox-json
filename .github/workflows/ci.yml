@@ -16,10 +16,12 @@ jobs:
           - 25-3
           - 26-3
           - 27-2
+          - 28-2
+          - 29-1
           # - snapshot
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Install Emacs ${{ matrix.emacs-version }}
       uses: purcell/setup-emacs@master
