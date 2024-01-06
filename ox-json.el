@@ -1058,12 +1058,13 @@ INFO is the plist of export options."
               ; At least one of these functions throws an error if it doesn't resolve
               (condition-case nil
                 (cl-case link-type
-                  ('custom-id
+                  (('custom-id)
                     (org-export-resolve-id-link link info))
-                  ('fuzzy
+                  (('fuzzy)
                     (org-export-resolve-fuzzy-link link info))
-                  ('radio
+                  (('radio)
                     (org-export-resolve-radio-link link info)))
+                ; TODO: handle more specific error type?
                 (error nil))))
         (when target
           (setq target-ref (org-export-get-reference target info)))))
