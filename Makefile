@@ -31,7 +31,7 @@ BYTE_COMPILE_WARNINGS='(not docstrings obsolete)
 
 # Install package and test dependencies
 .emacs.d/elpa :
-	$(EMACS_CLEAN) --script tests/install-deps.el "$(PACKAGE_NAME)" $(TEST_DEPS)
+	$(EMACS_CLEAN) --script tests/install-deps.el "$(PACKAGE_NAME)" $(TEST_DEPS) package-lint
 
 # Alias for previous
 install-deps : .emacs.d/elpa
@@ -65,7 +65,10 @@ run-tests :
 
 # Run package-lint
 lint : install-deps
-	$(EMACS_BATCH) $(EMACS_PKG) -f 'package-lint-batch-and-exit' $(PACKAGE_NAME).el
+	$(EMACS_BATCH) $(EMACS_PKG) \
+	  -l package-lint \
+	  -f 'package-lint-batch-and-exit' \
+	  $(PACKAGE_NAME).el
 
 checkdoc : install-deps
 	$(EMACS_BATCH) $(EMACS_PKG) --script tests/checkdoc-batch.el -- $(PACKAGE_NAME).el
