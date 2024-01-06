@@ -1,8 +1,8 @@
 ;;; ox-json.el --- JSON export backend for Org mode  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2019 Jared Lumpe
+;; Copyright (C) 2019 - 2023 Jared Lumpe
 
-;; Author: Jared Lumpe <mjlumpe@gmail.com>
+;; Author: Jared Lumpe <jared@jaredlumpe.com>
 ;; Version: 0.3.0
 ;; Keywords: outlines
 ;; Homepage: https://github.com/jlumpe/ox-json
