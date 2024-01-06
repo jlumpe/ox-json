@@ -1,6 +1,6 @@
 # ox-json
 [![MELPA](https://melpa.org/packages/ox-json-badge.svg)](https://melpa.org/#/ox-json)
-[![Build Status](https://travis-ci.org/jlumpe/ox-json.svg?branch=master)](https://travis-ci.org/jlumpe/ox-json)
+[![Build Status](https://github.com/jlumpe/ox-json/actions/workflows/ci.yml/badge.svg)](https://github.com/jlumpe/ox-json/actions/workflows/ci.yml)
 
 JSON export back end for Emacs Org mode
 
