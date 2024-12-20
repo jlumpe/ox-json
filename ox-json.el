@@ -95,7 +95,7 @@
   "Default exporter function for each element property type.
 
 Plist mapping property symbols in
-`ox-json-default-property-types' to exporter function. These can
+`ox-json-default-property-types' to exporter functions. These can
 be overridden with the :json-exporters option.")
 
 (defconst ox-json-default-property-types
@@ -396,16 +396,21 @@ ZONE is a time zone to pass to `format-time-string'."
   ;; Options
   :options-alist
   '(
+     ; Property name specifying data type of exported JSON object
      (:json-data-type-property nil "json-data-type-property" "$$data_type")
+     ; Overrides to ox-json-default-type-exporters
      (:json-exporters nil nil nil)
+     ; Overrides to ox-json-default-property-types
      (:json-property-types nil nil nil)
+     ; If non-nil abort on encountering errors, otherwise encode errors in output JSON
      (:json-strict nil nil nil)
+     ; Include properties not defined in ox-json-default-property-types
      (:json-include-extra-properties nil nil t))
   ;; Menu
   :menu-entry
   '(?j "Export to JSON" (
-	(?J "As JSON buffer" ox-json-export-to-buffer)
-	(?j "To JSON file" ox-json-export-to-file))))
+	  (?J "As JSON buffer" ox-json-export-to-buffer)
+	  (?j "To JSON file" ox-json-export-to-file))))
 
 
 ;;; User export functions
@@ -891,7 +896,7 @@ JSON-encoded values."
     (contents (ox-json-export-contents node info)))
   "Base export function for a generic org element/object.
 
-NODE is an org element or object and INFO is the export environment plist.
+NODE is an org element or object.
 INFO is the plist of export options.
 PROPERTY-TYPES is a plist of type symbols which override the default way of
 determining how to encode property values (see equivalent argument in
