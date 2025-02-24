@@ -51,19 +51,19 @@
 
 ;;; Recursive JSON comparison
 
-(defun json-compare (data1 data2 &optional path)
+(defun json-compare (data1 data2 &optional path allow-missing-keys)
   "Recursively compare two decoded JSON values."
-  ; Compare types
+                                        ; Compare types
   (should (-json-cmp-types data1 data2 path))
-    ; Comparison based on type
-    (cl-case (type-of data1)
-      ((hash-table)
-        (-json-cmp-objects data1 data2 path))
-      ((vector)
-        (-json-cmp-arrays data1 data2 path))
-      ; Scalars, use direct equality
-      (t
-        (should (-json-cmp-scalars data1 data2 path)))))
+                                        ; Comparison based on type
+  (cl-case (type-of data1)
+    ((hash-table)
+     (-json-cmp-objects data1 data2 path allow-missing-keys))
+    ((vector)
+     (-json-cmp-arrays data1 data2 path allow-missing-keys))
+                                        ; Scalars, use direct equality
+    (t
+     (should (-json-cmp-scalars data1 data2 path)))))
 
 (defun json-decode-explicit (string)
   "Decode a JSON-encoded value in an unambiguous format.
@@ -133,33 +133,40 @@ list."
     (lambda (len1 len2 path)
         (-json-cmp-failed path "Arrays have different lengths (%d, %d)" len1 len2)))
 
-(defun -json-cmp-objects (table1 table2 path)
+(defun -json-cmp-objects (table1 table2 path &optional allow-missing-keys)
   "Compare JSON objects decoded as hash tables."
   (let ((keys1 (hash-table-keys table1))
         (keys2 (hash-table-keys table2)))
-      ; All keys in first
-      (dolist (key1 keys1)
-        ; Key missing from table 2
-        (should (-json-cmp-has-key "Object 2" key1 keys2 path))
-        ; Recursively compare values
-        (json-compare
-          (gethash key1 table1)
-          (gethash key1 table2)
-          (cons key1 path)))
-      ; Check keys in table 2 missing in 1
+                                        ; All keys in first
+    (dolist (key1 keys1)
+      (let* ((has-key (-json-cmp-has-key "Object 2" key1 keys2 path))
+             (should-compare (not (and allow-missing-keys (not has-key)))))
+        (if should-compare
+            (progn
+              (should (or allow-missing-keys has-key))
+                                        ; Recursively compare values
+              (json-compare
+               (gethash key1 table1)
+               (gethash key1 table2)
+               (cons key1 path)
+               allow-missing-keys)))))
+                                        ; Key missing from table 2
+                                        ; Check keys in table 2 missing in 1
+    (if allow-missing-keys
+        t
       (dolist (key2 keys2)
-        (should (-json-cmp-has-key "Object 1" key2 keys1 path)))))
+        (should (-json-cmp-has-key "Object 1" key2 keys1 path))))))
 
-(defun -json-cmp-arrays (vec1 vec2 path)
+(defun -json-cmp-arrays (vec1 vec2 path &optional allow-missing-keys)
   "Compare JSON arrays decoded as vectors."
   (let ((len1 (length vec1))
         (len2 (length vec2)))
-    ; Compare lengths
+                                        ; Compare lengths
     (should (-json-cmp-lengths len1 len2 path))
-    ; Compare values
+                                        ; Compare values
     (cl-loop
-      for i from 0 to (- len1 1)
-      do (json-compare (aref vec1 i) (aref vec2 i) (cons i path)))))
+     for i from 0 to (- len1 1)
+     do (json-compare (aref vec1 i) (aref vec2 i) (cons i path) allow-missing-keys))))
 
 
 

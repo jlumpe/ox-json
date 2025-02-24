@@ -11,7 +11,7 @@ WORK_DIR=$(shell pwd)
 PACKAGE_NAME=ox-json
 
 TEST_DIR=tests
-TEST_DEPS=ert
+TEST_DEPS=ert s
 TEST_FILES=$(notdir $(wildcard $(TEST_DIR)/test-*.el))
 # Regex to filter test names
 TESTS_REGEXP=
