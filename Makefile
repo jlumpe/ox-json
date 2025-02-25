@@ -11,7 +11,7 @@ WORK_DIR=$(shell pwd)
 PACKAGE_NAME=ox-json
 
 TEST_DIR=tests
-TEST_DEPS=ert
+TEST_DEPS=ert s
 TEST_FILES=$(notdir $(wildcard $(TEST_DIR)/test-*.el))
 # Regex to filter test names
 TESTS_REGEXP=
@@ -23,7 +23,7 @@ EMACS_LIBS=-L $(WORK_DIR) -L $(WORK_DIR)/$(TEST_DIR) $(shell for dep in $(TEST_D
 HOME := $(WORK_DIR)
 
 # Value of byte-compile-warnings elisp variable
-BYTE_COMPILE_WARNINGS='(not docstrings obsolete)
+BYTE_COMPILE_WARNINGS='(not docstrings obsolete suspicious)
 
 
 .PHONY : install-deps byte-compile test run-tests test-interactive clean emacs test-deps org-version lint

@@ -103,11 +103,14 @@ be overridden with the :json-exporters option.")
     all (
       ; Never include parent, leads to infinite recursion
       :parent nil
+      :buffer nil
       ; These properties have to do with absolute buffer positions and thus probably aren't useful to export
       :begin nil
       :end nil
       :contents-begin nil
       :contents-end nil
+      :robust-begin nil
+      :robust-end nil
       ; These can be useful when converting from JSON to another format
       :post-affiliated number
       :pre-blank number
@@ -343,9 +346,29 @@ These can be overridden with the :json-property-types option.")
 ;;; Org-mode utility code
 
 (defun ox-json-node-properties (node)
-  "Get property plist of element/object NODE."
-  ; It's the 2nd element of the list
-  (cadr node))
+  "Org v9.7 introduced two significant changes to the AST that must be
+considered when enumerating a node's properties:
+
+     1. Some properties which were previously present in the property
+     list (e.g. :begin and :end) are now stored as elements of a vector
+     under the :standard-properties key in the property list.
+
+     2. Property values can now be 'deferred', meaning they are not
+     calculated until accessed via a getter function like
+     ~org-element-property~.
+
+~org-element-properties-map~ is now the recommended way to traverse a
+node's properties and handles both of these changes."
+  (if (fboundp 'org-element-properties-map)
+    (let ((expanded-properties nil))
+      (org-element-properties-map
+       (lambda (name value)
+         (setq expanded-properties (plist-put expanded-properties name value)))
+       node t)
+      expanded-properties)
+    ; for org versions < 9.7, just return the property list, which is the second
+    ; element of the list
+    (cadr node)))
 
 (defun ox-json--is-node (value)
   "Check if VALUE is an org element/object."
@@ -1105,7 +1128,6 @@ but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
   (ox-json-export-node-base timestamp info
     :extra-properties (ox-json-timestamp-extra-properties timestamp info)))
-
 
 (provide 'ox-json)
 

@@ -1,0 +1,719 @@
+{
+"$$data_type": "org-document",
+"properties": {
+"title": [
+"Test"
+],
+"filetags": [],
+"date": [],
+"description": [],
+"language": "en"
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "section",
+"properties": {
+"post-affiliated": 1,
+"secondary": null,
+"mode": "first-section",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "keyword",
+"properties": {
+"post-affiliated": 1,
+"secondary": null,
+"mode": "top-comment",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null,
+"key": "TITLE",
+"value": "Test"
+},
+"contents": []
+},
+{
+"$$data_type": "org-node",
+"type": "paragraph",
+"properties": {
+"post-affiliated": 17,
+"secondary": null,
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+"File with lots of types of elements.\n"
+]
+}
+]
+},
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 56,
+"secondary": [
+":title"
+],
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 1,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "Level 1",
+"title": [
+"Level 1"
+],
+"level": 1,
+"priority": null,
+"tags": [],
+"todo-keyword": null,
+"todo-type": null,
+"commentedp": false
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 66,
+"secondary": [
+":title"
+],
+"mode": "section",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 2,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "Level 2",
+"title": [
+"Level 2"
+],
+"level": 2,
+"priority": null,
+"tags": [],
+"todo-keyword": null,
+"todo-type": null,
+"commentedp": false
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 77,
+"secondary": [
+":title"
+],
+"mode": "section",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 3,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "Level 3",
+"title": [
+"Level 3"
+],
+"level": 3,
+"priority": null,
+"tags": [],
+"todo-keyword": null,
+"todo-type": null,
+"commentedp": false
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 89,
+"secondary": [
+":title"
+],
+"mode": "section",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 4,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "Level 4",
+"title": [
+"Level 4"
+],
+"level": 4,
+"priority": null,
+"tags": [],
+"todo-keyword": null,
+"todo-type": null,
+"commentedp": false
+},
+"contents": []
+}
+]
+}
+]
+}
+]
+},
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 103,
+"secondary": [
+":title"
+],
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 1,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "Markup",
+"title": [
+"Markup"
+],
+"level": 1,
+"priority": null,
+"tags": [],
+"todo-keyword": null,
+"todo-type": null,
+"commentedp": false
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "section",
+"properties": {
+"post-affiliated": 112,
+"secondary": null,
+"mode": "section",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "paragraph",
+"properties": {
+"post-affiliated": 112,
+"secondary": null,
+"mode": "planning",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "bold",
+"properties": {
+"post-affiliated": null,
+"secondary": null,
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+"bold"
+]
+},
+{
+"$$data_type": "org-node",
+"type": "italic",
+"properties": {
+"post-affiliated": null,
+"secondary": null,
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+"italics"
+]
+},
+{
+"$$data_type": "org-node",
+"type": "underline",
+"properties": {
+"post-affiliated": null,
+"secondary": null,
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+"underline"
+]
+},
+{
+"$$data_type": "org-node",
+"type": "strike-through",
+"properties": {
+"post-affiliated": null,
+"secondary": null,
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+"strike"
+]
+},
+{
+"$$data_type": "org-node",
+"type": "verbatim",
+"properties": {
+"post-affiliated": null,
+"secondary": null,
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null,
+"value": "verbatim"
+},
+"contents": []
+},
+{
+"$$data_type": "org-node",
+"type": "code",
+"properties": {
+"post-affiliated": null,
+"secondary": null,
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null,
+"value": "code"
+},
+"contents": []
+},
+"\n"
+]
+}
+]
+}
+]
+},
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 169,
+"secondary": [
+":title"
+],
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 1,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "Links",
+"title": [
+"Links"
+],
+"level": 1,
+"priority": null,
+"tags": [],
+"todo-keyword": null,
+"todo-type": null,
+"commentedp": false
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "section",
+"properties": {
+"post-affiliated": 177,
+"secondary": null,
+"mode": "section",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "paragraph",
+"properties": {
+"post-affiliated": 177,
+"secondary": null,
+"mode": "planning",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "link",
+"properties": {
+"post-affiliated": null,
+"secondary": null,
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null,
+"type": "https",
+"type-explicit-p": true,
+"path": "//google.com",
+"format": "bracket",
+"raw-link": "https://google.com",
+"application": null,
+"search-option": null,
+"is-internal": false,
+"target-ref": null,
+"is-inline-image": false
+},
+"contents": [
+"With description"
+]
+},
+"\n"
+]
+},
+{
+"$$data_type": "org-node",
+"type": "paragraph",
+"properties": {
+"post-affiliated": 219,
+"secondary": null,
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": [
+"Raw: ",
+{
+"$$data_type": "org-node",
+"type": "link",
+"properties": {
+"post-affiliated": null,
+"secondary": null,
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null,
+"type": "https",
+"type-explicit-p": true,
+"path": "//google.com",
+"format": "bracket",
+"raw-link": "https://google.com",
+"application": null,
+"search-option": null,
+"is-internal": false,
+"target-ref": null,
+"is-inline-image": false
+},
+"contents": []
+},
+"\n"
+]
+}
+]
+}
+]
+},
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 248,
+"secondary": [
+":title"
+],
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 1,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "Todos",
+"title": [
+"Todos"
+],
+"level": 1,
+"priority": null,
+"tags": [],
+"todo-keyword": null,
+"todo-type": null,
+"commentedp": false
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 256,
+"secondary": [
+":title"
+],
+"mode": "section",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 2,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "Task1",
+"title": [
+"Task1"
+],
+"level": 2,
+"priority": null,
+"tags": [],
+"todo-keyword": "TODO",
+"todo-type": "todo",
+"commentedp": false
+},
+"contents": []
+},
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 270,
+"secondary": [
+":title"
+],
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 2,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "Task2",
+"title": [
+"Task2"
+],
+"level": 2,
+"priority": null,
+"tags": [],
+"todo-keyword": "DONE",
+"todo-type": "done",
+"commentedp": false
+},
+"contents": []
+},
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 284,
+"secondary": [
+":title"
+],
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 2,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "With priority",
+"title": [
+"With priority"
+],
+"level": 2,
+"priority": 65,
+"tags": [],
+"todo-keyword": "TODO",
+"todo-type": "todo",
+"commentedp": false
+},
+"contents": []
+},
+{
+"$$data_type": "org-node",
+"type": "headline",
+"drawer": {
+
+},
+"properties": {
+"tags-all": [],
+"post-affiliated": 311,
+"secondary": [
+":title"
+],
+"mode": null,
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": 2,
+"deferred": null,
+"structure": null,
+"pre-blank": 0,
+"raw-value": "With deadline",
+"title": [
+"With deadline"
+],
+"level": 2,
+"priority": null,
+"tags": [],
+"todo-keyword": "TODO",
+"todo-type": "todo",
+"commentedp": false,
+"deadline": {
+"$$data_type": "timestamp",
+"start": "2019-06-29",
+"end": "2019-06-29",
+"type": "active",
+"raw-value": "<2019-06-29 Sat>",
+"repeater": {
+"type": null,
+"unit": null,
+"value": null
+},
+"warning": {
+"type": null,
+"unit": null,
+"value": null
+}
+}
+},
+"contents": [
+{
+"$$data_type": "org-node",
+"type": "section",
+"properties": {
+"post-affiliated": 333,
+"secondary": null,
+"mode": "section",
+"granularity": null,
+"cached": null,
+"org-element--cache-sync-key": null,
+"true-level": null,
+"deferred": null,
+"structure": null
+},
+"contents": []
+}
+]
+}
+]
+}
+]
+}
