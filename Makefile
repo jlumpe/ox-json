@@ -88,7 +88,7 @@ test-interactive : install-deps test-deps
 
 # Run emacs with same configuration used for tests
 emacs :
-	$(EMACS_CLEAN) $(EMACS_PACKAGE)
+	$(EMACS_CLEAN) $(EMACS_PKG) $(EMACS_LIBS)
 
 clean :
 	@rm -f *.elc *~ */*.elc */*~
