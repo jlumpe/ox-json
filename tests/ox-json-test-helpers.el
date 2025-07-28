@@ -65,24 +65,24 @@
       (t
         (should (-json-cmp-scalars data1 data2 path)))))
 
-(defun json-decode-explicit (string)
-  "Decode a JSON-encoded value in an unambiguous format.
+(defmacro json-decode-explicit (&rest body)
+  "Set JSON decoding settings to make things less ambiguous.
 
 Decodes arrays as vectors, objects as hash maps, null as :json-null,
 and false as :json-false. Avoids all ambiguity around nil values
 and plists/alists because nothing is ever decoded into any type of
 list."
-
-  (let ((json-null :json-null)
-        (json-false :json-false)
-        (json-array-type 'vector)
-        (json-object-type 'hash-table))
-    (json-read-from-string string)))
+  `(let ((json-null :json-null)
+         (json-false :json-false)
+         (json-array-type 'vector)
+         (json-object-type 'hash-table))
+    ,@body))
 
 
 (defun decode-compare (encoded data2)
   "Compare exported/encoded string against decoded value."
-  (json-compare (json-decode-explicit encoded) data2))
+  (json-decode-explicit
+    (json-compare (json-read-from-string encoded) data2)))
 
 (defun -json-cmp-failed (path msg &rest rem)
     "Make the error message for json-compare."
