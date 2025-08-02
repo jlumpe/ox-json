@@ -26,7 +26,7 @@ HOME := $(WORK_DIR)
 BYTE_COMPILE_WARNINGS='(not docstrings obsolete)
 
 
-.PHONY : install-deps byte-compile test run-tests test-interactive clean emacs test-deps org-version lint
+.PHONY : install-deps byte-compile test run-tests test-interactive clean emacs test-deps org-version lint test-export
 
 
 # Install package and test dependencies
@@ -51,8 +51,10 @@ test-deps :
 	  || (echo "Can't load test dependency $$dep"; exit 1); \
 	done
 
+# Install dependencies then run the tests
 test : install-deps test-deps run-tests
 
+# Run the actual tests
 run-tests :
 	@cd $(TEST_DIR) \
 	&& (for test_file in $(TEST_FILES); do \
@@ -93,3 +95,10 @@ emacs :
 clean :
 	@rm -f *.elc *~ */*.elc */*~
 	@rm -rf .emacs.d/elpa
+
+# Export the test.org file.
+# Apparently --script doesn't interact properly with -l/-L, as I found out after several hours of
+# debugging. Use --eval and (load-file) instead.
+# I hate emacs so much.
+test-export : install-deps
+	$(EMACS_BATCH) $(EMACS_PKG) $(EMACS_LIBS) --eval '(load-file "tests/export.el")'
