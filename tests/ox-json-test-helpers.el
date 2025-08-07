@@ -13,10 +13,18 @@
   info-nonstrict (org-combine-plists info '(:json-strict nil)))
 
 
-;; Helper functions
+;; General helper functions
 
 (defun remove-ws (s)
   (s-replace-regexp "[[:blank:]\n]+" "" s))
+
+
+(defun alist-get-equal (key alist)
+  "(alist-get) with testfn = equal"
+  (alist-get key alist nil nil #'equal))
+
+
+;; JSON helper functions
 
 (defun encoded= (a b)
   "Check whether encoded JSON values are identical, up to differences in whitespace."
