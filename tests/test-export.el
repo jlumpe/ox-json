@@ -42,7 +42,7 @@
 
 (ert-deftest test-export ()
   "Test export of full org document."
-  (json-decode-explicit
+  (with-json-decode-explicit
     (let*
       (
         (ext-plist '(:json-strict t))

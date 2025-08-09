@@ -59,7 +59,7 @@
     obj))
 
 
-(defmacro json-decode-explicit (&rest body)
+(defmacro with-json-decode-explicit (&rest body)
   "Set JSON decoding settings to make things less ambiguous.
 
 Decodes arrays as vectors, objects as hash maps, null as :json-null,
@@ -230,7 +230,7 @@ list."
 
 (defun decode-compare (encoded data2)
   "Compare exported/encoded string against decoded value."
-  (json-decode-explicit
+  (with-json-decode-explicit
     (json-compare (json-read-from-string encoded) data2)))
 
 
