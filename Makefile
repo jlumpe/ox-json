@@ -2,25 +2,35 @@
 # Source: https://github.com/rolandwalker/emacs-travis
 
 
+WORK_DIR=$(shell pwd)
+
+
+# Customizable vars:
+
 EMACS=emacs
+
+# Regex to filter test names
+TESTS_REGEXP=
+
+# In general use, create separate self-contained .emacs.d in the working directory.
+# Can override for debugging.
+HOME := $(WORK_DIR)
+
+
+# Utility vars:
+
 EMACS_CLEAN=$(EMACS) --no-site-file
 EMACS_BATCH=$(EMACS_CLEAN) --batch
 EMACS_PKG=-l package -f package-initialize
 
-WORK_DIR=$(shell pwd)
 PACKAGE_NAME=ox-json
 
 TEST_DIR=tests
 TEST_DEPS=ert
 TEST_FILES=$(notdir $(wildcard $(TEST_DIR)/test-*.el))
-# Regex to filter test names
-TESTS_REGEXP=
 TESTS_EVAL="(ert-run-tests-batch-and-exit '(and \"$(TESTS_REGEXP)\" (not (tag :interactive))))"
 
 EMACS_LIBS=-L $(WORK_DIR) -L $(WORK_DIR)/$(TEST_DIR) $(shell for dep in $(TEST_DEPS); do echo -l $$dep; done)
-
-# This is important, ensures that .emacs.d is in the working directory
-HOME := $(WORK_DIR)
 
 # Value of byte-compile-warnings elisp variable
 BYTE_COMPILE_WARNINGS='(not docstrings obsolete)
