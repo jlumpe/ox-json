@@ -293,6 +293,14 @@ These can be overridden with the :json-property-types option.")
 (defgroup ox-json nil "Customization for the ox-json package" :group 'outline)
 
 
+;;; Private globals
+
+(defvar ox-json--current-node nil
+  "The current org node being transcoded, or a string indicating the current export context.
+
+Used for error reporting.")
+
+
 ;;; Generic utility code
 
 (defun ox-json--merge-alists (&rest alists)
@@ -522,9 +530,37 @@ Code copied from `org-export-as'."
 
 INFO is the plist of export options.
 MSG is the error message.
-ARGS are objects to insert into MSG using `format'."
+ARGS are objects to insert into MSG using `format-message'."
   (ox-json-make-object "error" info
-    `((message string ,(apply #'format msg args)))))
+    `((message string ,(apply #'format-message msg args)))))
+
+(defun ox-json--signal-error (msg &rest args)
+  "Signal an error, adding information on the current element being transcoded if applicable.
+
+MSG is the error message.
+ARGS are objects to insert into MSG using `format-message'."
+  (let* ((msg-formatted (apply #'format-message msg args))
+         (node-type (org-element-type ox-json--current-node))
+         (context-string))
+    (setq context-string
+      (cond
+        ; Is an actual org node - give type and location
+        (node-type
+          (format "%s element on line %s"
+            node-type
+            (line-number-at-pos (org-element-property :begin ox-json--current-node))
+          ))
+        ; A string - use directly for context
+        ((stringp ox-json--current-node)
+          ox-json--current-node)
+        ; Invalid?
+        (ox-json--current-node
+          "<unknown>")
+        ; Otherwise nil
+      ))
+    (when context-string
+      (setq msg-formatted (format "Error transcoding %s: %s" context-string msg-formatted)))
+    (error msg-formatted)))
 
 (defun ox-json--error (info msg &rest args)
   "Either signal an error or return an encoded error object.
@@ -535,7 +571,7 @@ INFO is the plist of export options.
 MSG is the error message.
 ARGS are objects to insert into MSG using `format'."
   (if (plist-get info :json-strict)
-    (apply #'error msg args)
+    (apply #'ox-json--signal-error msg args)
     (ox-json--make-error-obj info msg args)))
 
 (cl-defun ox-json--type-error (type value info &optional (maxlen 200))
@@ -661,7 +697,7 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
         (ox-json-export-data value info)
         (ox-json-encode-array value info)))
     (t
-      (ox-json--error info "Don't know how to encode value %S"  value))))
+      (ox-json--error info "Can't automatically encode value of type %S" (type-of value)))))
 
 (defun ox-json--get-type-encoder (typekey &optional info)
   "Get the type encoder function for type symbol TYPEKEY.
@@ -983,7 +1019,8 @@ NODE is an element or object to encode.
 CONTENTS is a string containing the encoded contents of the node,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (ox-json-export-node-base node info))
+  (let ((ox-json--current-node node))
+    (ox-json-export-node-base node info)))
 
 (defun ox-json-document-properties (info)
   "Get alist of top level document properties (values already encoded).
@@ -1007,7 +1044,8 @@ INFO is the plist of export options."
 CONTENTS is a string containing the encoded document contents,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (let* ((properties (ox-json-document-properties info))
+  (let* ((ox-json--current-node "<document root>")
+         (properties (ox-json-document-properties info))
          (properties-encoded (ox-json-encode-alist-raw nil properties info))
          (parse-tree (plist-get info :parse-tree))
          (contents-encoded (ox-json-export-contents parse-tree info)))
@@ -1029,7 +1067,8 @@ KW is a plist of keyword arguments to pass to `ox-json-export-node-base'.
 EXTRA is an alist of additional properties to attach to the exported JSON object
 at the top level."
   (pcase-let*
-    ((all-props (ox-json-node-properties headline))
+    ((ox-json--current-node headline)
+     (all-props (ox-json-node-properties headline))
      (`(,regular-props . ,drawer-props)
        (ox-json--separate-drawer-properties all-props info))
      (regular-encoded
@@ -1087,8 +1126,9 @@ LINK is the parsed link to transcode.
 CONTENTS is a string containing the encoded contents of the element,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (ox-json-export-node-base link info
-    :extra-properties (ox-json-link-extra-properties link info)))
+  (let ((ox-json--current-node link))
+    (ox-json-export-node-base link info
+      :extra-properties (ox-json-link-extra-properties link info))))
 
 (defun ox-json-timestamp-extra-properties (timestamp info)
   "Get additional properties to export from a timestamp object.
@@ -1108,8 +1148,9 @@ TIMESTAMP is the parsed link to transcode.
 CONTENTS is a string containing the encoded contents of the element,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (ox-json-export-node-base timestamp info
-    :extra-properties (ox-json-timestamp-extra-properties timestamp info)))
+  (let ((ox-json--current-node timestamp))
+    (ox-json-export-node-base timestamp info
+      :extra-properties (ox-json-timestamp-extra-properties timestamp info))))
 
 
 (provide 'ox-json)

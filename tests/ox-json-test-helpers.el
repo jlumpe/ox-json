@@ -113,7 +113,7 @@ list."
     (format
         "Comparison failed at %s: %s"
         (if path
-            (format "path %S" (reverse path))
+            (format "path %s" (reverse path))
             "top level")
         (apply 'format msg rem)))
 
