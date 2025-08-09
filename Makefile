@@ -16,6 +16,9 @@ TESTS_REGEXP=
 # Can override for debugging.
 HOME := $(WORK_DIR)
 
+# Set to 1 to enable (:json-strict t) in test-export rule
+EXPORT_STRICT=0
+
 
 # Utility vars:
 
@@ -111,4 +114,5 @@ clean :
 # debugging. Use --eval and (load-file) instead.
 # I hate emacs so much.
 test-export : install-deps
-	$(EMACS_BATCH) $(EMACS_PKG) $(EMACS_LIBS) --eval '(load-file "tests/export.el")'
+	EXPORT_STRICT=$(EXPORT_STRICT) $(EMACS_BATCH) $(EMACS_PKG) $(EMACS_LIBS) \
+		--eval '(load-file "tests/export.el")'

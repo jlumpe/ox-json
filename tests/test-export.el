@@ -45,9 +45,10 @@
   (json-decode-explicit
     (let*
       (
+        (ext-plist '(:json-strict t))
         (exported-string
           (with-current-buffer (find-file-noselect "test.org")
-            (with-current-buffer (ox-json-export-to-buffer)
+            (with-current-buffer (ox-json-export-to-buffer nil nil nil nil ext-plist)
               (buffer-string))))
         (exported-data (json-read-from-string exported-string))
         (test-data (json-read-file "test.json"))
