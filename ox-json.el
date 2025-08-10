@@ -375,6 +375,40 @@ ZONE is a time zone to pass to `format-time-string'."
       (year
         (format-time-string "%Y-%m-%d" (encode-time 0 0 0 day month year zone) zone)))))
 
+(defun ox-json--is-drawer-property-name (name &optional _info)
+  "Try to determine if a headline property name came from a property drawer.
+
+NAME is the property name as symbol or string."
+  (when (symbolp name)
+    (setq name (symbol-name name)))
+  (s-uppercase-p name))
+
+(defun ox-json--separate-drawer-properties (properties info)
+  "Separate drawer properties from a headline's property plist.
+
+PROPERTIES is a plist of the headline's properties, as from
+`ox-json-node-properties'.
+
+INFO is the plist of export options.
+
+Returns a cons cell containing two plists, the regular properties in the car
+and the drawer properties in the cdr."
+  (let ((regular-props nil)
+        (drawer-props nil))
+    (ox-json--loop-plist (name value properties)
+      do (if (ox-json--is-drawer-property-name name info)
+           ; Property drawer
+           (let* ((realname (intern (s-replace "+" "" (symbol-name name))))
+                  (existing (plist-get drawer-props realname))
+                  (strval (format "%s" value))
+                  (newval (if existing
+                             (concat existing " " strval)
+                             strval)))
+             (setq drawer-props (plist-put drawer-props realname newval)))
+           ; Regular property
+           (setq regular-props (plist-put regular-props name value))))
+    (cons regular-props drawer-props)))
+
 
 ;;; Define the backend
 
@@ -983,40 +1017,6 @@ INFO is the plist of export options."
          (properties . ,properties-encoded)
          (contents . ,contents-encoded))
       info)))
-
-(defun ox-json--is-drawer-property-name (name &optional _info)
-  "Try to determine if a headline property name came from a property drawer.
-
-NAME is the property name as symbol or string."
-  (when (symbolp name)
-    (setq name (symbol-name name)))
-  (s-uppercase-p name))
-
-(defun ox-json--separate-drawer-properties (properties info)
-  "Separate drawer properties from a headline's property plist.
-
-PROPERTIES is a plist of the headline's properties, as from
-`ox-json-node-properties'.
-
-INFO is the plist of export options.
-
-Returns a cons cell containing two plists, the regular properties in the car
-and the drawer properties in the cdr."
-  (let ((regular-props nil)
-        (drawer-props nil))
-    (ox-json--loop-plist (name value properties)
-      do (if (ox-json--is-drawer-property-name name info)
-           ; Property drawer
-           (let* ((realname (intern (s-replace "+" "" (symbol-name name))))
-                  (existing (plist-get drawer-props realname))
-                  (strval (format "%s" value))
-                  (newval (if existing
-                             (concat existing " " strval)
-                             strval)))
-             (setq drawer-props (plist-put drawer-props realname newval)))
-           ; Regular property
-           (setq regular-props (plist-put regular-props name value))))
-    (cons regular-props drawer-props)))
 
 (cl-defun ox-json-transcode-headline (headline _contents info &rest kw &key extra)
   "Transcode a headline element to JSON.
