@@ -959,6 +959,12 @@ JSON-encoded values."
       info
       type-plists)))
 
+(defun ox-json--skip-property (property)
+  "Return non-nil if an element property PROPERTY should be skipped, regardless of the value of the
+:json-property-types option."
+  ; Apparently 9.7 introduces some private property names, skip these.
+  (cl-search "--" (symbol-name property)))
+
 (defun ox-json--export-properties-base (property-plist default-type info &rest type-plists)
   "Export org node property values by looking up their types in a series of plists.
 
@@ -976,7 +982,7 @@ JSON-encoded values."
     (ox-json--loop-plist (key value property-plist)
       do (setq property-type
            (apply #'ox-json--plists-get-default key default-type type-plists))
-      if property-type
+      if (and property-type (not (ox-json--skip-property key)))
         collect (cons key (ox-json-encode-with-type property-type value info)))))
 
 (cl-defun ox-json-export-node-base
