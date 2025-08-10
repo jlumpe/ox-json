@@ -119,3 +119,7 @@ clean :
 export-test-org : install-deps
 	EXPORT_STRICT=$(EXPORT_STRICT) $(EMACS_BATCH) $(EMACS_PKG) $(EMACS_LIBS) \
 		--eval '(load-file "tests/export.el")'
+
+# Edit tests/test.org with same configuration used for tests
+edit-test-org :
+	$(EMACS_CLEAN) $(EMACS_PKG) $(EMACS_LIBS) -l ox-json tests/test.org
