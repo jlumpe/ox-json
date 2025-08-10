@@ -523,7 +523,7 @@ MAXLEN is the number of characters to truncate the representation of VALUE at."
 
 ;;; Encoders for generic data types
 
-(cl-defun ox-json-encode-bool (value &optional info strict)
+(defun ox-json-encode-bool (value &optional info strict)
   "Encode VALUE to JSON as boolean.
 
 INFO is the plist of export options.
@@ -942,7 +942,7 @@ INFO is the plist of export options."
   (unless (string= text "")
     (json-encode-string text)))
 
-(cl-defun ox-json-transcode-base (node _contents info)
+(defun ox-json-transcode-base (node _contents info)
   "Default transcoding function for all element/object types.
 
 NODE is an element or object to encode.
