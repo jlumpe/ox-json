@@ -16,7 +16,7 @@ TESTS_REGEXP=
 # Can override for debugging.
 HOME := $(WORK_DIR)
 
-# Set to 1 to enable (:json-strict t) in test-export rule
+# Set to 1 to enable (:json-strict t) in export-test-org rule
 EXPORT_STRICT=0
 
 
@@ -39,7 +39,7 @@ EMACS_LIBS=-L $(WORK_DIR) -L $(WORK_DIR)/$(TEST_DIR) $(shell for dep in $(TEST_D
 BYTE_COMPILE_WARNINGS='(not docstrings obsolete)
 
 
-.PHONY : install-deps byte-compile test run-tests test-interactive clean emacs test-deps org-version lint test-export
+.PHONY : install-deps byte-compile test run-tests test-interactive clean emacs test-deps org-version lint export-test-org
 
 
 # Install package and test dependencies
@@ -113,6 +113,6 @@ clean :
 # Apparently --script doesn't interact properly with -l/-L, as I found out after several hours of
 # debugging. Use --eval and (load-file) instead.
 # I hate emacs so much.
-test-export : install-deps
+export-test-org : install-deps
 	EXPORT_STRICT=$(EXPORT_STRICT) $(EMACS_BATCH) $(EMACS_PKG) $(EMACS_LIBS) \
 		--eval '(load-file "tests/export.el")'
