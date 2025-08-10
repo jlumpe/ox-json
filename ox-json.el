@@ -95,7 +95,7 @@
   "Default exporter function for each element property type.
 
 Plist mapping property symbols in
-`ox-json-default-property-types' to exporter function. These can
+`ox-json-default-property-types' to exporter functions. These can
 be overridden with the :json-exporters option.")
 
 (defconst ox-json-default-property-types
@@ -111,8 +111,8 @@ be overridden with the :json-exporters option.")
       :contents-end nil
       :robust-begin nil
       :robust-end nil
+      :post-affiliated nil
       ; These can be useful when converting from JSON to another format
-      :post-affiliated number
       :pre-blank number
       :post-blank number)
     babel (
@@ -296,6 +296,14 @@ These can be overridden with the :json-property-types option.")
 (defgroup ox-json nil "Customization for the ox-json package" :group 'outline)
 
 
+;;; Private globals
+
+(defvar ox-json--current-node nil
+  "The current org node being transcoded, or a string indicating the current export context.
+
+Used for error reporting.")
+
+
 ;;; Generic utility code
 
 (defun ox-json--merge-alists (&rest alists)
@@ -398,6 +406,40 @@ ZONE is a time zone to pass to `format-time-string'."
       (year
         (format-time-string "%Y-%m-%d" (encode-time 0 0 0 day month year zone) zone)))))
 
+(defun ox-json--is-drawer-property-name (name &optional _info)
+  "Try to determine if a headline property name came from a property drawer.
+
+NAME is the property name as symbol or string."
+  (when (symbolp name)
+    (setq name (symbol-name name)))
+  (s-uppercase-p name))
+
+(defun ox-json--separate-drawer-properties (properties info)
+  "Separate drawer properties from a headline's property plist.
+
+PROPERTIES is a plist of the headline's properties, as from
+`ox-json-node-properties'.
+
+INFO is the plist of export options.
+
+Returns a cons cell containing two plists, the regular properties in the car
+and the drawer properties in the cdr."
+  (let ((regular-props nil)
+        (drawer-props nil))
+    (ox-json--loop-plist (name value properties)
+      do (if (ox-json--is-drawer-property-name name info)
+           ; Property drawer
+           (let* ((realname (intern (s-replace "+" "" (symbol-name name))))
+                  (existing (plist-get drawer-props realname))
+                  (strval (format "%s" value))
+                  (newval (if existing
+                             (concat existing " " strval)
+                             strval)))
+             (setq drawer-props (plist-put drawer-props realname newval)))
+           ; Regular property
+           (setq regular-props (plist-put regular-props name value))))
+    (cons regular-props drawer-props)))
+
 
 ;;; Define the backend
 
@@ -419,16 +461,21 @@ ZONE is a time zone to pass to `format-time-string'."
   ;; Options
   :options-alist
   '(
+     ; Property name specifying data type of exported JSON object
      (:json-data-type-property nil "json-data-type-property" "$$data_type")
+     ; Overrides to ox-json-default-type-exporters
      (:json-exporters nil nil nil)
+     ; Overrides to ox-json-default-property-types
      (:json-property-types nil nil nil)
+     ; If non-nil abort on encountering errors, otherwise encode errors in output JSON
      (:json-strict nil nil nil)
+     ; Include properties not defined in ox-json-default-property-types
      (:json-include-extra-properties nil nil t))
   ;; Menu
   :menu-entry
   '(?j "Export to JSON" (
-	(?J "As JSON buffer" ox-json-export-to-buffer)
-	(?j "To JSON file" ox-json-export-to-file))))
+	  (?J "As JSON buffer" ox-json-export-to-buffer)
+	  (?j "To JSON file" ox-json-export-to-file))))
 
 
 ;;; User export functions
@@ -506,9 +553,37 @@ Code copied from `org-export-as'."
 
 INFO is the plist of export options.
 MSG is the error message.
-ARGS are objects to insert into MSG using `format'."
+ARGS are objects to insert into MSG using `format-message'."
   (ox-json-make-object "error" info
-    `((message string ,(apply #'format msg args)))))
+    `((message string ,(apply #'format-message msg args)))))
+
+(defun ox-json--signal-error (msg &rest args)
+  "Signal an error, adding information on the current element being transcoded if applicable.
+
+MSG is the error message.
+ARGS are objects to insert into MSG using `format-message'."
+  (let* ((msg-formatted (apply #'format-message msg args))
+         (node-type (org-element-type ox-json--current-node))
+         (context-string))
+    (setq context-string
+      (cond
+        ; Is an actual org node - give type and location
+        (node-type
+          (format "%s element on line %s"
+            node-type
+            (line-number-at-pos (org-element-property :begin ox-json--current-node))
+          ))
+        ; A string - use directly for context
+        ((stringp ox-json--current-node)
+          ox-json--current-node)
+        ; Invalid?
+        (ox-json--current-node
+          "<unknown>")
+        ; Otherwise nil
+      ))
+    (when context-string
+      (setq msg-formatted (format "Error transcoding %s: %s" context-string msg-formatted)))
+    (error msg-formatted)))
 
 (defun ox-json--error (info msg &rest args)
   "Either signal an error or return an encoded error object.
@@ -519,7 +594,7 @@ INFO is the plist of export options.
 MSG is the error message.
 ARGS are objects to insert into MSG using `format'."
   (if (plist-get info :json-strict)
-    (apply #'error msg args)
+    (apply #'ox-json--signal-error msg args)
     (ox-json--make-error-obj info msg args)))
 
 (cl-defun ox-json--type-error (type value info &optional (maxlen 200))
@@ -541,7 +616,7 @@ MAXLEN is the number of characters to truncate the representation of VALUE at."
 
 ;;; Encoders for generic data types
 
-(cl-defun ox-json-encode-bool (value &optional info strict)
+(defun ox-json-encode-bool (value &optional info strict)
   "Encode VALUE to JSON as boolean.
 
 INFO is the plist of export options.
@@ -645,7 +720,7 @@ empty array, false, or null. A null value is arbitrarily returned in this case."
         (ox-json-export-data value info)
         (ox-json-encode-array value info)))
     (t
-      (ox-json--error info "Don't know how to encode value %S"  value))))
+      (ox-json--error info "Can't automatically encode value of type %S" (type-of value)))))
 
 (defun ox-json--get-type-encoder (typekey &optional info)
   "Get the type encoder function for type symbol TYPEKEY.
@@ -914,7 +989,7 @@ JSON-encoded values."
     (contents (ox-json-export-contents node info)))
   "Base export function for a generic org element/object.
 
-NODE is an org element or object and INFO is the export environment plist.
+NODE is an org element or object.
 INFO is the plist of export options.
 PROPERTY-TYPES is a plist of type symbols which override the default way of
 determining how to encode property values (see equivalent argument in
@@ -960,14 +1035,15 @@ INFO is the plist of export options."
   (unless (string= text "")
     (json-encode-string text)))
 
-(cl-defun ox-json-transcode-base (node _contents info)
+(defun ox-json-transcode-base (node _contents info)
   "Default transcoding function for all element/object types.
 
 NODE is an element or object to encode.
 CONTENTS is a string containing the encoded contents of the node,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (ox-json-export-node-base node info))
+  (let ((ox-json--current-node node))
+    (ox-json-export-node-base node info)))
 
 (defun ox-json-document-properties (info)
   "Get alist of top level document properties (values already encoded).
@@ -991,7 +1067,8 @@ INFO is the plist of export options."
 CONTENTS is a string containing the encoded document contents,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (let* ((properties (ox-json-document-properties info))
+  (let* ((ox-json--current-node "<document root>")
+         (properties (ox-json-document-properties info))
          (properties-encoded (ox-json-encode-alist-raw nil properties info))
          (parse-tree (plist-get info :parse-tree))
          (contents-encoded (ox-json-export-contents parse-tree info)))
@@ -1001,40 +1078,6 @@ INFO is the plist of export options."
          (properties . ,properties-encoded)
          (contents . ,contents-encoded))
       info)))
-
-(defun ox-json--is-drawer-property-name (name &optional _info)
-  "Try to determine if a headline property name came from a property drawer.
-
-NAME is the property name as symbol or string."
-  (when (symbolp name)
-    (setq name (symbol-name name)))
-  (s-uppercase-p name))
-
-(defun ox-json--separate-drawer-properties (properties info)
-  "Separate drawer properties from a headline's property plist.
-
-PROPERTIES is a plist of the headline's properties, as from
-`ox-json-node-properties'.
-
-INFO is the plist of export options.
-
-Returns a cons cell containing two plists, the regular properties in the car
-and the drawer properties in the cdr."
-  (let ((regular-props nil)
-        (drawer-props nil))
-    (ox-json--loop-plist (name value properties)
-      do (if (ox-json--is-drawer-property-name name info)
-           ; Property drawer
-           (let* ((realname (intern (s-replace "+" "" (symbol-name name))))
-                  (existing (plist-get drawer-props realname))
-                  (strval (format "%s" value))
-                  (newval (if existing
-                             (concat existing " " strval)
-                             strval)))
-             (setq drawer-props (plist-put drawer-props realname newval)))
-           ; Regular property
-           (setq regular-props (plist-put regular-props name value))))
-    (cons regular-props drawer-props)))
 
 (cl-defun ox-json-transcode-headline (headline _contents info &rest kw &key extra)
   "Transcode a headline element to JSON.
@@ -1047,7 +1090,8 @@ KW is a plist of keyword arguments to pass to `ox-json-export-node-base'.
 EXTRA is an alist of additional properties to attach to the exported JSON object
 at the top level."
   (pcase-let*
-    ((all-props (ox-json-node-properties headline))
+    ((ox-json--current-node headline)
+     (all-props (ox-json-node-properties headline))
      (`(,regular-props . ,drawer-props)
        (ox-json--separate-drawer-properties all-props info))
      (regular-encoded
@@ -1105,8 +1149,9 @@ LINK is the parsed link to transcode.
 CONTENTS is a string containing the encoded contents of the element,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (ox-json-export-node-base link info
-    :extra-properties (ox-json-link-extra-properties link info)))
+  (let ((ox-json--current-node link))
+    (ox-json-export-node-base link info
+      :extra-properties (ox-json-link-extra-properties link info))))
 
 (defun ox-json-timestamp-extra-properties (timestamp info)
   "Get additional properties to export from a timestamp object.
@@ -1126,8 +1171,10 @@ TIMESTAMP is the parsed link to transcode.
 CONTENTS is a string containing the encoded contents of the element,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
-  (ox-json-export-node-base timestamp info
-    :extra-properties (ox-json-timestamp-extra-properties timestamp info)))
+  (let ((ox-json--current-node timestamp))
+    (ox-json-export-node-base timestamp info
+      :extra-properties (ox-json-timestamp-extra-properties timestamp info))))
+
 
 (provide 'ox-json)
 

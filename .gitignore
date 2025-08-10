@@ -1,2 +1,6 @@
 *.elc
 .emacs.d/
+
+# Emacs backup/recovery files
+*~
+\#*\#

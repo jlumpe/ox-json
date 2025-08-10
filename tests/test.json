@@ -1,719 +1,610 @@
 {
-"$$data_type": "org-document",
-"properties": {
-"title": [
-"Test"
-],
-"filetags": [],
-"date": [],
-"description": [],
-"language": "en"
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "section",
-"properties": {
-"post-affiliated": 1,
-"secondary": null,
-"mode": "first-section",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "keyword",
-"properties": {
-"post-affiliated": 1,
-"secondary": null,
-"mode": "top-comment",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null,
-"key": "TITLE",
-"value": "Test"
-},
-"contents": []
-},
-{
-"$$data_type": "org-node",
-"type": "paragraph",
-"properties": {
-"post-affiliated": 17,
-"secondary": null,
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-"File with lots of types of elements.\n"
-]
-}
-]
-},
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 56,
-"secondary": [
-":title"
-],
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 1,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "Level 1",
-"title": [
-"Level 1"
-],
-"level": 1,
-"priority": null,
-"tags": [],
-"todo-keyword": null,
-"todo-type": null,
-"commentedp": false
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 66,
-"secondary": [
-":title"
-],
-"mode": "section",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 2,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "Level 2",
-"title": [
-"Level 2"
-],
-"level": 2,
-"priority": null,
-"tags": [],
-"todo-keyword": null,
-"todo-type": null,
-"commentedp": false
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 77,
-"secondary": [
-":title"
-],
-"mode": "section",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 3,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "Level 3",
-"title": [
-"Level 3"
-],
-"level": 3,
-"priority": null,
-"tags": [],
-"todo-keyword": null,
-"todo-type": null,
-"commentedp": false
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 89,
-"secondary": [
-":title"
-],
-"mode": "section",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 4,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "Level 4",
-"title": [
-"Level 4"
-],
-"level": 4,
-"priority": null,
-"tags": [],
-"todo-keyword": null,
-"todo-type": null,
-"commentedp": false
-},
-"contents": []
-}
-]
-}
-]
-}
-]
-},
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 103,
-"secondary": [
-":title"
-],
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 1,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "Markup",
-"title": [
-"Markup"
-],
-"level": 1,
-"priority": null,
-"tags": [],
-"todo-keyword": null,
-"todo-type": null,
-"commentedp": false
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "section",
-"properties": {
-"post-affiliated": 112,
-"secondary": null,
-"mode": "section",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "paragraph",
-"properties": {
-"post-affiliated": 112,
-"secondary": null,
-"mode": "planning",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "bold",
-"properties": {
-"post-affiliated": null,
-"secondary": null,
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-"bold"
-]
-},
-{
-"$$data_type": "org-node",
-"type": "italic",
-"properties": {
-"post-affiliated": null,
-"secondary": null,
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-"italics"
-]
-},
-{
-"$$data_type": "org-node",
-"type": "underline",
-"properties": {
-"post-affiliated": null,
-"secondary": null,
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-"underline"
-]
-},
-{
-"$$data_type": "org-node",
-"type": "strike-through",
-"properties": {
-"post-affiliated": null,
-"secondary": null,
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-"strike"
-]
-},
-{
-"$$data_type": "org-node",
-"type": "verbatim",
-"properties": {
-"post-affiliated": null,
-"secondary": null,
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null,
-"value": "verbatim"
-},
-"contents": []
-},
-{
-"$$data_type": "org-node",
-"type": "code",
-"properties": {
-"post-affiliated": null,
-"secondary": null,
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null,
-"value": "code"
-},
-"contents": []
-},
-"\n"
-]
-}
-]
-}
-]
-},
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 169,
-"secondary": [
-":title"
-],
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 1,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "Links",
-"title": [
-"Links"
-],
-"level": 1,
-"priority": null,
-"tags": [],
-"todo-keyword": null,
-"todo-type": null,
-"commentedp": false
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "section",
-"properties": {
-"post-affiliated": 177,
-"secondary": null,
-"mode": "section",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "paragraph",
-"properties": {
-"post-affiliated": 177,
-"secondary": null,
-"mode": "planning",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "link",
-"properties": {
-"post-affiliated": null,
-"secondary": null,
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null,
-"type": "https",
-"type-explicit-p": true,
-"path": "//google.com",
-"format": "bracket",
-"raw-link": "https://google.com",
-"application": null,
-"search-option": null,
-"is-internal": false,
-"target-ref": null,
-"is-inline-image": false
-},
-"contents": [
-"With description"
-]
-},
-"\n"
-]
-},
-{
-"$$data_type": "org-node",
-"type": "paragraph",
-"properties": {
-"post-affiliated": 219,
-"secondary": null,
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": [
-"Raw: ",
-{
-"$$data_type": "org-node",
-"type": "link",
-"properties": {
-"post-affiliated": null,
-"secondary": null,
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null,
-"type": "https",
-"type-explicit-p": true,
-"path": "//google.com",
-"format": "bracket",
-"raw-link": "https://google.com",
-"application": null,
-"search-option": null,
-"is-internal": false,
-"target-ref": null,
-"is-inline-image": false
-},
-"contents": []
-},
-"\n"
-]
-}
-]
-}
-]
-},
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 248,
-"secondary": [
-":title"
-],
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 1,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "Todos",
-"title": [
-"Todos"
-],
-"level": 1,
-"priority": null,
-"tags": [],
-"todo-keyword": null,
-"todo-type": null,
-"commentedp": false
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 256,
-"secondary": [
-":title"
-],
-"mode": "section",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 2,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "Task1",
-"title": [
-"Task1"
-],
-"level": 2,
-"priority": null,
-"tags": [],
-"todo-keyword": "TODO",
-"todo-type": "todo",
-"commentedp": false
-},
-"contents": []
-},
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 270,
-"secondary": [
-":title"
-],
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 2,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "Task2",
-"title": [
-"Task2"
-],
-"level": 2,
-"priority": null,
-"tags": [],
-"todo-keyword": "DONE",
-"todo-type": "done",
-"commentedp": false
-},
-"contents": []
-},
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 284,
-"secondary": [
-":title"
-],
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 2,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "With priority",
-"title": [
-"With priority"
-],
-"level": 2,
-"priority": 65,
-"tags": [],
-"todo-keyword": "TODO",
-"todo-type": "todo",
-"commentedp": false
-},
-"contents": []
-},
-{
-"$$data_type": "org-node",
-"type": "headline",
-"drawer": {
-
-},
-"properties": {
-"tags-all": [],
-"post-affiliated": 311,
-"secondary": [
-":title"
-],
-"mode": null,
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": 2,
-"deferred": null,
-"structure": null,
-"pre-blank": 0,
-"raw-value": "With deadline",
-"title": [
-"With deadline"
-],
-"level": 2,
-"priority": null,
-"tags": [],
-"todo-keyword": "TODO",
-"todo-type": "todo",
-"commentedp": false,
-"deadline": {
-"$$data_type": "timestamp",
-"start": "2019-06-29",
-"end": "2019-06-29",
-"type": "active",
-"raw-value": "<2019-06-29 Sat>",
-"repeater": {
-"type": null,
-"unit": null,
-"value": null
-},
-"warning": {
-"type": null,
-"unit": null,
-"value": null
-}
-}
-},
-"contents": [
-{
-"$$data_type": "org-node",
-"type": "section",
-"properties": {
-"post-affiliated": 333,
-"secondary": null,
-"mode": "section",
-"granularity": null,
-"cached": null,
-"org-element--cache-sync-key": null,
-"true-level": null,
-"deferred": null,
-"structure": null
-},
-"contents": []
-}
-]
-}
-]
-}
-]
+  "$$data_type": "org-document",
+  "properties": {
+    "title": [
+      "Test"
+    ],
+    "filetags": [],
+    "author": [
+      "Jared Lumpe"
+    ],
+    "creator": "Emacs 29.4 (Org mode 9.6.15)",
+    "date": [
+      {
+        "$$data_type": "org-node",
+        "type": "timestamp",
+        "ref": "orgcc2fdcb",
+        "properties": {
+          "type": "active",
+          "raw-value": "<2025-01-01 Wed>",
+          "post-blank": 0,
+          "start": "2025-01-01",
+          "end": "2025-01-01"
+        },
+        "contents": []
+      }
+    ],
+    "description": [],
+    "email": "jared@jaredlumpe.com",
+    "language": "en"
+  },
+  "contents": [
+    {
+      "$$data_type": "org-node",
+      "type": "section",
+      "ref": "org5af1316",
+      "properties": {
+        "post-blank": 2,
+        "mode": "first-section",
+        "granularity": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org5e8f4eb",
+          "properties": {
+            "key": "TITLE",
+            "value": "Test",
+            "post-blank": 0,
+            "mode": "top-comment",
+            "granularity": null
+          },
+          "contents": []
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "orga673d3e",
+          "properties": {
+            "key": "AUTHOR",
+            "value": "Jared Lumpe",
+            "post-blank": 0,
+            "mode": null,
+            "granularity": null
+          },
+          "contents": []
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "orgf9be3d5",
+          "properties": {
+            "key": "DATE",
+            "value": "<2025-01-01 Wed>",
+            "post-blank": 0,
+            "mode": null,
+            "granularity": null
+          },
+          "contents": []
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "orgea705ef",
+          "properties": {
+            "key": "EMAIL",
+            "value": "jared@jaredlumpe.com",
+            "post-blank": 0,
+            "mode": null,
+            "granularity": null
+          },
+          "contents": []
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "orge02fd3b",
+          "properties": {
+            "key": "LANGUAGE",
+            "value": "en",
+            "post-blank": 2,
+            "mode": null,
+            "granularity": null
+          },
+          "contents": []
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "paragraph",
+          "ref": "orgd8a84eb",
+          "properties": {
+            "post-blank": 0,
+            "mode": null,
+            "granularity": null
+          },
+          "contents": [
+            "File with lots of types of elements.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org3c6ba46",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Level 1",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Level 1"
+        ],
+        "mode": null,
+        "granularity": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "headline",
+          "ref": "org49b9e48",
+          "drawer": {},
+          "properties": {
+            "tags-all": [],
+            "raw-value": "Level 2",
+            "pre-blank": 0,
+            "level": 2,
+            "priority": null,
+            "tags": [],
+            "todo-keyword": null,
+            "todo-type": null,
+            "post-blank": 1,
+            "footnote-section-p": false,
+            "archivedp": false,
+            "commentedp": false,
+            "title": [
+              "Level 2"
+            ],
+            "mode": "section",
+            "granularity": null
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "headline",
+              "ref": "orgee4830a",
+              "drawer": {},
+              "properties": {
+                "tags-all": [],
+                "raw-value": "Level 3",
+                "pre-blank": 0,
+                "level": 3,
+                "priority": null,
+                "tags": [],
+                "todo-keyword": null,
+                "todo-type": null,
+                "post-blank": 1,
+                "footnote-section-p": false,
+                "archivedp": false,
+                "commentedp": false,
+                "title": [
+                  "Level 3"
+                ],
+                "mode": "section",
+                "granularity": null
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "headline",
+                  "ref": "orga7c1f2c",
+                  "drawer": {},
+                  "properties": {
+                    "tags-all": [],
+                    "raw-value": "Level 4",
+                    "pre-blank": 0,
+                    "level": 4,
+                    "priority": null,
+                    "tags": [],
+                    "todo-keyword": null,
+                    "todo-type": null,
+                    "post-blank": 1,
+                    "footnote-section-p": false,
+                    "archivedp": false,
+                    "commentedp": false,
+                    "title": [
+                      "Level 4"
+                    ],
+                    "mode": "section",
+                    "granularity": null
+                  },
+                  "contents": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "orgc4129e0",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Markup",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Markup"
+        ],
+        "mode": null,
+        "granularity": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org5b7d054",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section",
+            "granularity": null
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org80e3c61",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning",
+                "granularity": null
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "bold",
+                  "ref": "org804f630",
+                  "properties": {
+                    "post-blank": 1
+                  },
+                  "contents": [
+                    "bold"
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "italic",
+                  "ref": "org20c5ddd",
+                  "properties": {
+                    "post-blank": 1
+                  },
+                  "contents": [
+                    "italics"
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "underline",
+                  "ref": "org31eed61",
+                  "properties": {
+                    "post-blank": 1
+                  },
+                  "contents": [
+                    "underline"
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "strike-through",
+                  "ref": "orgb9524ba",
+                  "properties": {
+                    "post-blank": 1
+                  },
+                  "contents": [
+                    "strike"
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "verbatim",
+                  "ref": "org041a47f",
+                  "properties": {
+                    "post-blank": 1,
+                    "value": "verbatim"
+                  },
+                  "contents": []
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "code",
+                  "ref": "org2a92ea8",
+                  "properties": {
+                    "post-blank": 0,
+                    "value": "code"
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "orgf45dc23",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Links",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Links"
+        ],
+        "mode": null,
+        "granularity": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "orgfd88dfc",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section",
+            "granularity": null
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "orgc99e3e5",
+              "properties": {
+                "post-blank": 1,
+                "mode": "planning",
+                "granularity": null
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "link",
+                  "ref": "org9085b08",
+                  "properties": {
+                    "type": "https",
+                    "path": "//google.com",
+                    "format": "bracket",
+                    "raw-link": "https://google.com",
+                    "application": null,
+                    "search-option": null,
+                    "post-blank": 0,
+                    "is-internal": false,
+                    "target-ref": null,
+                    "is-inline-image": false
+                  },
+                  "contents": [
+                    "With description"
+                  ]
+                },
+                "\n"
+              ]
+            },
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org5712c9c",
+              "properties": {
+                "post-blank": 0,
+                "mode": null,
+                "granularity": null
+              },
+              "contents": [
+                "Raw: ",
+                {
+                  "$$data_type": "org-node",
+                  "type": "link",
+                  "ref": "orgfdae973",
+                  "properties": {
+                    "type": "https",
+                    "path": "//google.com",
+                    "format": "bracket",
+                    "raw-link": "https://google.com",
+                    "application": null,
+                    "search-option": null,
+                    "post-blank": 0,
+                    "is-internal": false,
+                    "target-ref": null,
+                    "is-inline-image": false
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org06335d5",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Todos",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 0,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Todos"
+        ],
+        "mode": null,
+        "granularity": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "headline",
+          "ref": "orgfc93a03",
+          "drawer": {},
+          "properties": {
+            "tags-all": [],
+            "raw-value": "Task1",
+            "pre-blank": 0,
+            "level": 2,
+            "priority": null,
+            "tags": [],
+            "todo-keyword": "TODO",
+            "todo-type": "todo",
+            "post-blank": 0,
+            "footnote-section-p": false,
+            "archivedp": false,
+            "commentedp": false,
+            "title": [
+              "Task1"
+            ],
+            "mode": "section",
+            "granularity": null
+          },
+          "contents": []
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "headline",
+          "ref": "org881717c",
+          "drawer": {},
+          "properties": {
+            "tags-all": [],
+            "raw-value": "Task2",
+            "pre-blank": 0,
+            "level": 2,
+            "priority": null,
+            "tags": [],
+            "todo-keyword": "DONE",
+            "todo-type": "done",
+            "post-blank": 0,
+            "footnote-section-p": false,
+            "archivedp": false,
+            "commentedp": false,
+            "title": [
+              "Task2"
+            ],
+            "mode": null,
+            "granularity": null
+          },
+          "contents": []
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "headline",
+          "ref": "org7a17a63",
+          "drawer": {},
+          "properties": {
+            "tags-all": [],
+            "raw-value": "With priority",
+            "pre-blank": 0,
+            "level": 2,
+            "priority": 65,
+            "tags": [],
+            "todo-keyword": "TODO",
+            "todo-type": "todo",
+            "post-blank": 0,
+            "footnote-section-p": false,
+            "archivedp": false,
+            "commentedp": false,
+            "title": [
+              "With priority"
+            ],
+            "mode": null,
+            "granularity": null
+          },
+          "contents": []
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "headline",
+          "ref": "org61b1cf3",
+          "drawer": {},
+          "properties": {
+            "tags-all": [],
+            "raw-value": "With deadline",
+            "pre-blank": 0,
+            "level": 2,
+            "priority": null,
+            "tags": [],
+            "todo-keyword": "TODO",
+            "todo-type": "todo",
+            "post-blank": 0,
+            "footnote-section-p": false,
+            "archivedp": false,
+            "commentedp": false,
+            "deadline": {
+              "$$data_type": "timestamp",
+              "start": "2019-06-29",
+              "end": "2019-06-29",
+              "type": "active",
+              "raw-value": "<2019-06-29 Sat>",
+              "repeater": {
+                "type": null,
+                "unit": null,
+                "value": null
+              },
+              "warning": {
+                "type": null,
+                "unit": null,
+                "value": null
+              }
+            },
+            "title": [
+              "With deadline"
+            ],
+            "mode": null,
+            "granularity": null
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "section",
+              "ref": "org120b38b",
+              "properties": {
+                "post-blank": 0,
+                "mode": "section",
+                "granularity": null
+              },
+              "contents": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

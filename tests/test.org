@@ -1,4 +1,8 @@
 #+title: Test
+#+author: Jared Lumpe
+#+date: <2025-01-01 Wed>
+#+email: jared@jaredlumpe.com
+#+language: en
 
 
 File with lots of types of elements.
