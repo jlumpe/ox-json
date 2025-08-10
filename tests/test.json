@@ -8,12 +8,12 @@
     "author": [
       "Jared Lumpe"
     ],
-    "creator": "Emacs 27.2 (Org mode 9.4.4)",
+    "creator": "Emacs 29.4 (Org mode 9.6.15)",
     "date": [
       {
         "$$data_type": "org-node",
         "type": "timestamp",
-        "ref": "org5393d4c",
+        "ref": "orgcc2fdcb",
         "properties": {
           "type": "active",
           "raw-value": "<2025-01-01 Wed>",
@@ -32,79 +32,86 @@
     {
       "$$data_type": "org-node",
       "type": "section",
-      "ref": "orgdc1a7f2",
+      "ref": "org5af1316",
       "properties": {
         "post-blank": 2,
-        "post-affiliated": 1
+        "mode": "first-section",
+        "granularity": null
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "orge286f7a",
+          "ref": "org5e8f4eb",
           "properties": {
             "key": "TITLE",
             "value": "Test",
             "post-blank": 0,
-            "post-affiliated": 1
+            "mode": "top-comment",
+            "granularity": null
           },
           "contents": []
         },
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org25861c2",
+          "ref": "orga673d3e",
           "properties": {
             "key": "AUTHOR",
             "value": "Jared Lumpe",
             "post-blank": 0,
-            "post-affiliated": 15
+            "mode": null,
+            "granularity": null
           },
           "contents": []
         },
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org50c52c7",
+          "ref": "orgf9be3d5",
           "properties": {
             "key": "DATE",
             "value": "<2025-01-01 Wed>",
             "post-blank": 0,
-            "post-affiliated": 37
+            "mode": null,
+            "granularity": null
           },
           "contents": []
         },
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org841b998",
+          "ref": "orgea705ef",
           "properties": {
             "key": "EMAIL",
             "value": "jared@jaredlumpe.com",
             "post-blank": 0,
-            "post-affiliated": 62
+            "mode": null,
+            "granularity": null
           },
           "contents": []
         },
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org9291145",
+          "ref": "orge02fd3b",
           "properties": {
             "key": "LANGUAGE",
             "value": "en",
             "post-blank": 2,
-            "post-affiliated": 92
+            "mode": null,
+            "granularity": null
           },
           "contents": []
         },
         {
           "$$data_type": "org-node",
           "type": "paragraph",
-          "ref": "orgc2b7faa",
+          "ref": "orgd8a84eb",
           "properties": {
             "post-blank": 0,
-            "post-affiliated": 109
+            "mode": null,
+            "granularity": null
           },
           "contents": [
             "File with lots of types of elements.\n"
@@ -115,7 +122,7 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "orgbae456e",
+      "ref": "org3c6ba46",
       "drawer": {},
       "properties": {
         "tags-all": [],
@@ -130,16 +137,17 @@
         "footnote-section-p": false,
         "archivedp": false,
         "commentedp": false,
-        "post-affiliated": 148,
         "title": [
           "Level 1"
-        ]
+        ],
+        "mode": null,
+        "granularity": null
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "orgfbf62bb",
+          "ref": "org49b9e48",
           "drawer": {},
           "properties": {
             "tags-all": [],
@@ -150,20 +158,21 @@
             "tags": [],
             "todo-keyword": null,
             "todo-type": null,
-            "post-blank": 0,
+            "post-blank": 1,
             "footnote-section-p": false,
             "archivedp": false,
             "commentedp": false,
-            "post-affiliated": 158,
             "title": [
               "Level 2"
-            ]
+            ],
+            "mode": "section",
+            "granularity": null
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "headline",
-              "ref": "org975a763",
+              "ref": "orgee4830a",
               "drawer": {},
               "properties": {
                 "tags-all": [],
@@ -174,20 +183,21 @@
                 "tags": [],
                 "todo-keyword": null,
                 "todo-type": null,
-                "post-blank": 0,
+                "post-blank": 1,
                 "footnote-section-p": false,
                 "archivedp": false,
                 "commentedp": false,
-                "post-affiliated": 169,
                 "title": [
                   "Level 3"
-                ]
+                ],
+                "mode": "section",
+                "granularity": null
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "headline",
-                  "ref": "org6d92f1c",
+                  "ref": "orga7c1f2c",
                   "drawer": {},
                   "properties": {
                     "tags-all": [],
@@ -198,14 +208,15 @@
                     "tags": [],
                     "todo-keyword": null,
                     "todo-type": null,
-                    "post-blank": 0,
+                    "post-blank": 1,
                     "footnote-section-p": false,
                     "archivedp": false,
                     "commentedp": false,
-                    "post-affiliated": 181,
                     "title": [
                       "Level 4"
-                    ]
+                    ],
+                    "mode": "section",
+                    "granularity": null
                   },
                   "contents": []
                 }
@@ -218,7 +229,7 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org6199d8b",
+      "ref": "orgc4129e0",
       "drawer": {},
       "properties": {
         "tags-all": [],
@@ -233,34 +244,37 @@
         "footnote-section-p": false,
         "archivedp": false,
         "commentedp": false,
-        "post-affiliated": 195,
         "title": [
           "Markup"
-        ]
+        ],
+        "mode": null,
+        "granularity": null
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org6db17d8",
+          "ref": "org5b7d054",
           "properties": {
             "post-blank": 1,
-            "post-affiliated": 204
+            "mode": "section",
+            "granularity": null
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org123298f",
+              "ref": "org80e3c61",
               "properties": {
                 "post-blank": 0,
-                "post-affiliated": 204
+                "mode": "planning",
+                "granularity": null
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "bold",
-                  "ref": "orgbe835a3",
+                  "ref": "org804f630",
                   "properties": {
                     "post-blank": 1
                   },
@@ -271,7 +285,7 @@
                 {
                   "$$data_type": "org-node",
                   "type": "italic",
-                  "ref": "org0242b07",
+                  "ref": "org20c5ddd",
                   "properties": {
                     "post-blank": 1
                   },
@@ -282,7 +296,7 @@
                 {
                   "$$data_type": "org-node",
                   "type": "underline",
-                  "ref": "orgbeeba41",
+                  "ref": "org31eed61",
                   "properties": {
                     "post-blank": 1
                   },
@@ -293,7 +307,7 @@
                 {
                   "$$data_type": "org-node",
                   "type": "strike-through",
-                  "ref": "orga50419c",
+                  "ref": "orgb9524ba",
                   "properties": {
                     "post-blank": 1
                   },
@@ -304,20 +318,20 @@
                 {
                   "$$data_type": "org-node",
                   "type": "verbatim",
-                  "ref": "orga7f47df",
+                  "ref": "org041a47f",
                   "properties": {
-                    "value": "verbatim",
-                    "post-blank": 1
+                    "post-blank": 1,
+                    "value": "verbatim"
                   },
                   "contents": []
                 },
                 {
                   "$$data_type": "org-node",
                   "type": "code",
-                  "ref": "org28ee8f2",
+                  "ref": "org2a92ea8",
                   "properties": {
-                    "value": "code",
-                    "post-blank": 0
+                    "post-blank": 0,
+                    "value": "code"
                   },
                   "contents": []
                 },
@@ -331,7 +345,7 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org2eaaef6",
+      "ref": "orgf45dc23",
       "drawer": {},
       "properties": {
         "tags-all": [],
@@ -346,34 +360,37 @@
         "footnote-section-p": false,
         "archivedp": false,
         "commentedp": false,
-        "post-affiliated": 261,
         "title": [
           "Links"
-        ]
+        ],
+        "mode": null,
+        "granularity": null
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org6f692e2",
+          "ref": "orgfd88dfc",
           "properties": {
             "post-blank": 1,
-            "post-affiliated": 269
+            "mode": "section",
+            "granularity": null
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org26a6f01",
+              "ref": "orgc99e3e5",
               "properties": {
                 "post-blank": 1,
-                "post-affiliated": 269
+                "mode": "planning",
+                "granularity": null
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "link",
-                  "ref": "orgb6a8256",
+                  "ref": "org9085b08",
                   "properties": {
                     "type": "https",
                     "path": "//google.com",
@@ -396,17 +413,18 @@
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org1a1fcd1",
+              "ref": "org5712c9c",
               "properties": {
                 "post-blank": 0,
-                "post-affiliated": 311
+                "mode": null,
+                "granularity": null
               },
               "contents": [
                 "Raw: ",
                 {
                   "$$data_type": "org-node",
                   "type": "link",
-                  "ref": "orgc7a9ad8",
+                  "ref": "orgfdae973",
                   "properties": {
                     "type": "https",
                     "path": "//google.com",
@@ -431,7 +449,7 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0c603e7",
+      "ref": "org06335d5",
       "drawer": {},
       "properties": {
         "tags-all": [],
@@ -446,16 +464,17 @@
         "footnote-section-p": false,
         "archivedp": false,
         "commentedp": false,
-        "post-affiliated": 340,
         "title": [
           "Todos"
-        ]
+        ],
+        "mode": null,
+        "granularity": null
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "orgbf733f2",
+          "ref": "orgfc93a03",
           "drawer": {},
           "properties": {
             "tags-all": [],
@@ -470,17 +489,18 @@
             "footnote-section-p": false,
             "archivedp": false,
             "commentedp": false,
-            "post-affiliated": 348,
             "title": [
               "Task1"
-            ]
+            ],
+            "mode": "section",
+            "granularity": null
           },
           "contents": []
         },
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org9bc7433",
+          "ref": "org881717c",
           "drawer": {},
           "properties": {
             "tags-all": [],
@@ -495,17 +515,18 @@
             "footnote-section-p": false,
             "archivedp": false,
             "commentedp": false,
-            "post-affiliated": 362,
             "title": [
               "Task2"
-            ]
+            ],
+            "mode": null,
+            "granularity": null
           },
           "contents": []
         },
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org3ba68d6",
+          "ref": "org7a17a63",
           "drawer": {},
           "properties": {
             "tags-all": [],
@@ -520,17 +541,18 @@
             "footnote-section-p": false,
             "archivedp": false,
             "commentedp": false,
-            "post-affiliated": 376,
             "title": [
               "With priority"
-            ]
+            ],
+            "mode": null,
+            "granularity": null
           },
           "contents": []
         },
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org948d0c8",
+          "ref": "org61b1cf3",
           "drawer": {},
           "properties": {
             "tags-all": [],
@@ -545,7 +567,6 @@
             "footnote-section-p": false,
             "archivedp": false,
             "commentedp": false,
-            "post-affiliated": 403,
             "deadline": {
               "$$data_type": "timestamp",
               "start": "2019-06-29",
@@ -565,16 +586,19 @@
             },
             "title": [
               "With deadline"
-            ]
+            ],
+            "mode": null,
+            "granularity": null
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "section",
-              "ref": "org21a0a7d",
+              "ref": "org120b38b",
               "properties": {
                 "post-blank": 0,
-                "post-affiliated": 425
+                "mode": "section",
+                "granularity": null
               },
               "contents": []
             }
