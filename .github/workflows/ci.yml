@@ -16,6 +16,7 @@ jobs:
           - 27-2
           - 28-2
           - 29-1
+          - snapshot
         allow-failure: [false]
         include:
           - emacs-version: 26-3

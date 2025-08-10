@@ -22,6 +22,19 @@
         ("mode" . t)
         ; Seems to have a different value in 9.6 vs others?
         ("post-blank" . t)
+        ; Added in org 9.7
+        ; Not sure if all are useful, some should probably be excluded from export
+        ("cached" . t)
+        ("deferred" . t)
+        ("raw-value" . t)
+        ("structure" . t)
+        ("secondary" . t)
+        ("true-level" . t)
+        ; And these seem to have a different value in 9.7...
+        ("archivedp" . t)
+        ("footnote-section-p" . t)
+        ("type-explicit-p" . t)
+        ("range-type" . t)
       )
     )
   )
