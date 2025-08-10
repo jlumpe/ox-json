@@ -61,6 +61,9 @@
 ;;   in the :json-property-types option. If true these properties will be exported
 ;;   using `ox-json-encode-auto'.
 
+;; :json-postprocess (symbol) - How to postprocess the final output. Values are `pretty'
+;    (indent properly), `minimal' (remove whitespace), and nil (nothing, maybe faster?).
+
 ;;; Code:
 
 (eval-when-compile (require 'cl-lib))
@@ -457,7 +460,9 @@ and the drawer properties in the cdr."
       for type in (append org-element-all-elements org-element-all-objects)
       collect (cons type #'ox-json-transcode-base)))
   ;; Filters
-  :filters-alist '()
+  :filters-alist `(
+    (:filter-final-output . ,#'ox-json-filter-final-output)
+  )
   ;; Options
   :options-alist
   '(
@@ -470,7 +475,9 @@ and the drawer properties in the cdr."
      ; If non-nil abort on encountering errors, otherwise encode errors in output JSON
      (:json-strict nil nil nil)
      ; Include properties not defined in ox-json-default-property-types
-     (:json-include-extra-properties nil nil t))
+     (:json-include-extra-properties nil nil t)
+     ; How to post-process the final output
+     (:json-postprocess nil nil 'pretty))
   ;; Menu
   :menu-entry
   '(?j "Export to JSON" (
@@ -1180,6 +1187,35 @@ INFO is the plist of export options."
   (let ((ox-json--current-node timestamp))
     (ox-json-export-node-base timestamp info
       :extra-properties (ox-json-timestamp-extra-properties timestamp info))))
+
+
+;;; Filter functions functions
+
+(defun ox-json-filter-final-output (text back-end info)
+  "Post-process the entire output."
+  (let ((postprocess (plist-get info :json-postprocess)))
+    (cond
+      ; Not JSON?
+      ((not (eq back-end 'json))
+        text)
+      ; Post-process
+      ((memq postprocess '(pretty minimal))
+        ; Is this always available?
+        (if (fboundp 'json-pretty-print-buffer)
+          (with-temp-buffer
+            (insert text)
+            (json-pretty-print-buffer (eq postprocess 'minimal))
+            (buffer-string))
+          (warn "Unable to post-process JSON, json-pretty-print-buffer not available.")
+          text))
+      ; No post-processing
+      ((not postprocess)
+        text)
+      ; Invalid
+      (t
+        (warn "Invalid value for :json-postprocess option: %S" postprocess)
+        text)
+    )))
 
 
 (provide 'ox-json)
