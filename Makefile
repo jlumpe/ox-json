@@ -19,6 +19,9 @@ HOME := $(WORK_DIR)
 # Set to 1 to enable (:json-strict t) in export-test-org rule
 EXPORT_STRICT=0
 
+# If non-empty, install-deps rule is a no-op (for running in container with deps already installed)
+NO_INSTALL_DEPS=
+
 
 # Utility vars:
 
@@ -46,8 +49,8 @@ BYTE_COMPILE_WARNINGS='(not docstrings obsolete)
 .emacs.d/elpa :
 	$(EMACS_CLEAN) --script tests/install-deps.el "$(PACKAGE_NAME)" $(TEST_DEPS) package-lint
 
-# Alias for previous
-install-deps : .emacs.d/elpa
+# Alias for previous (unless SKIP_INSTALL_DEPS)
+install-deps : $(if $(NO_INSTALL_DEPS),,.emacs.d/elpa)
 
 # Byte-compile elisp files
 byte-compile : install-deps
