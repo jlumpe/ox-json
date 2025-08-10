@@ -14,7 +14,15 @@
       )
     )
     ("org-node"
+      ; This changes in every export
       ("ref" . t)
+      ("properties"
+        ; Introduced in org 9.6
+        ("granularity" . t)
+        ("mode" . t)
+        ; Seems to have a different value in 9.6 vs others?
+        ("post-blank" . t)
+      )
     )
   )
 )

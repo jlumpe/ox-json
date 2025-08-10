@@ -108,8 +108,10 @@ be overridden with the :json-exporters option.")
       :end nil
       :contents-begin nil
       :contents-end nil
+      :robust-begin nil
+      :robust-end nil
+      :post-affiliated nil
       ; These can be useful when converting from JSON to another format
-      :post-affiliated number
       :pre-blank number
       :post-blank number)
     babel (
