@@ -62,7 +62,7 @@
 ;;   using `ox-json-encode-auto'.
 
 ;; :json-postprocess (symbol) - How to postprocess the final output. Values are `pretty'
-;    (indent properly), `minimal' (remove whitespace), and nil (nothing, maybe faster?).
+;;   (indent properly), `minimal' (remove whitespace), and nil (nothing, maybe faster?).
 
 ;;; Code:
 
@@ -1162,7 +1162,7 @@ INFO is the plist of export options."
       :extra-properties (ox-json-timestamp-extra-properties timestamp info))))
 
 
-;;; Filter functions functions
+;;; Filter functions
 
 (defun ox-json-filter-final-output (text back-end info)
   "Post-process the entire output."
