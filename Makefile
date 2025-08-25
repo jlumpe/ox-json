@@ -38,11 +38,11 @@ TESTS_EVAL="(ert-run-tests-batch-and-exit '(and \"$(TESTS_REGEXP)\" (not (tag :i
 
 EMACS_LIBS=-L $(WORK_DIR) -L $(WORK_DIR)/$(TEST_DIR) $(shell for dep in $(TEST_DEPS); do echo -l $$dep; done)
 
-# Value of byte-compile-warnings elisp variable
+# Value of byte-compile-warnings elisp variable in byte-compile-strict rule
 BYTE_COMPILE_WARNINGS='(not docstrings obsolete)
 
 
-.PHONY : install-deps byte-compile test run-tests test-interactive clean emacs test-deps org-version lint export-test-org
+.PHONY : install-deps byte-compile byte-compile-strict test run-tests test-interactive clean emacs test-deps org-version lint export-test-org
 
 
 # Install package and test dependencies
@@ -52,11 +52,18 @@ BYTE_COMPILE_WARNINGS='(not docstrings obsolete)
 # Alias for previous (unless SKIP_INSTALL_DEPS)
 install-deps : $(if $(NO_INSTALL_DEPS),,.emacs.d/elpa)
 
-# Byte-compile elisp files
-byte-compile : install-deps
-	@$(EMACS_BATCH) $(EMACS_PKG) \
+# Byte-compile elisp files, throwing error on warnings
+byte-compile-strict : install-deps
+	$(EMACS_BATCH) $(EMACS_PKG) \
 	  --eval "(setq byte-compile-error-on-warn t)" \
 	  --eval "(setq byte-compile-warnings $(BYTE_COMPILE_WARNINGS))" \
+	  --eval "(batch-byte-compile)" \
+	  *.el
+
+# Byte-compile elisp files
+byte-compile : install-deps
+	$(EMACS_BATCH) $(EMACS_PKG) \
+	  --eval "(setq byte-compile-warnings t)" \
 	  --eval "(batch-byte-compile)" \
 	  *.el
 

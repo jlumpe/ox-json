@@ -35,5 +35,5 @@ jobs:
     - name: Build and test
       run: |
         echo org-version = $(make org-version)
-        make byte-compile
+        make byte-compile-strict
         make run-tests
