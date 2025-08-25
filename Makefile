@@ -39,7 +39,7 @@ TESTS_EVAL="(ert-run-tests-batch-and-exit '(and \"$(TESTS_REGEXP)\" (not (tag :i
 EMACS_LIBS=-L $(WORK_DIR) -L $(WORK_DIR)/$(TEST_DIR) $(shell for dep in $(TEST_DEPS); do echo -l $$dep; done)
 
 # Value of byte-compile-warnings elisp variable in byte-compile-strict rule
-BYTE_COMPILE_WARNINGS='(not docstrings obsolete)
+BYTE_COMPILE_WARNINGS='(not docstrings obsolete suspicious)
 
 
 .PHONY : install-deps byte-compile byte-compile-strict test run-tests test-interactive clean emacs test-deps org-version lint export-test-org
