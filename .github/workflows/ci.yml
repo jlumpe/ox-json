@@ -16,6 +16,7 @@ jobs:
           - 27-2
           - 28-2
           - 29-1
+          - snapshot
         allow-failure: [false]
         include:
           - emacs-version: 26-3
@@ -35,5 +36,5 @@ jobs:
     - name: Build and test
       run: |
         echo org-version = $(make org-version)
-        make byte-compile
+        make byte-compile-strict
         make run-tests

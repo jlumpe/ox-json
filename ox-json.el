@@ -62,7 +62,7 @@
 ;;   using `ox-json-encode-auto'.
 
 ;; :json-postprocess (symbol) - How to postprocess the final output. Values are `pretty'
-;    (indent properly), `minimal' (remove whitespace), and nil (nothing, maybe faster?).
+;;   (indent properly), `minimal' (remove whitespace), and nil (nothing, maybe faster?).
 
 ;;; Code:
 
@@ -106,6 +106,7 @@ be overridden with the :json-exporters option.")
     all (
       ; Never include parent, leads to infinite recursion
       :parent nil
+      :buffer nil
       ; These properties have to do with absolute buffer positions and thus probably aren't useful to export
       :begin nil
       :end nil
@@ -356,9 +357,29 @@ Used for error reporting.")
 ;;; Org-mode utility code
 
 (defun ox-json-node-properties (node)
-  "Get property plist of element/object NODE."
-  ; It's the 2nd element of the list
-  (cadr node))
+  "Org v9.7 introduced two significant changes to the AST that must be
+considered when enumerating a node's properties:
+
+     1. Some properties which were previously present in the property
+     list (e.g. :begin and :end) are now stored as elements of a vector
+     under the :standard-properties key in the property list.
+
+     2. Property values can now be 'deferred', meaning they are not
+     calculated until accessed via a getter function like
+     ~org-element-property~.
+
+~org-element-properties-map~ is now the recommended way to traverse a
+node's properties and handles both of these changes."
+  (if (fboundp 'org-element-properties-map)
+    (let ((expanded-properties nil))
+      (org-element-properties-map
+       (lambda (name value)
+         (setq expanded-properties (plist-put expanded-properties name value)))
+       node t)
+      expanded-properties)
+    ; for org versions < 9.7, just return the property list, which is the second
+    ; element of the list
+    (cadr node)))
 
 (defun ox-json--is-node (value)
   "Check if VALUE is an org element/object."
@@ -945,6 +966,12 @@ JSON-encoded values."
       info
       type-plists)))
 
+(defun ox-json--skip-property (property)
+  "Return non-nil if an element property PROPERTY should be skipped, regardless of the value of the
+:json-property-types option."
+  ; Apparently 9.7 introduces some private property names, skip these.
+  (cl-search "--" (symbol-name property)))
+
 (defun ox-json--export-properties-base (property-plist default-type info &rest type-plists)
   "Export org node property values by looking up their types in a series of plists.
 
@@ -962,7 +989,7 @@ JSON-encoded values."
     (ox-json--loop-plist (key value property-plist)
       do (setq property-type
            (apply #'ox-json--plists-get-default key default-type type-plists))
-      if property-type
+      if (and property-type (not (ox-json--skip-property key)))
         collect (cons key (ox-json-encode-with-type property-type value info)))))
 
 (cl-defun ox-json-export-node-base
@@ -1162,7 +1189,7 @@ INFO is the plist of export options."
       :extra-properties (ox-json-timestamp-extra-properties timestamp info))))
 
 
-;;; Filter functions functions
+;;; Filter functions
 
 (defun ox-json-filter-final-output (text back-end info)
   "Post-process the entire output."
