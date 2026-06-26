@@ -1,6 +1,5 @@
 *.elc
-.emacs.d/
-*.eask/
+.eask/
 
 # Emacs backup/recovery files
 *~

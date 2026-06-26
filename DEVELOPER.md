@@ -125,30 +125,32 @@ Supporting files:
 
 ## Makefile
 
-The Makefile is retained for tasks that don't have a direct Eask equivalent, and for the legacy `make`-based workflow. For standard build/test/lint operations, prefer the Eask commands above.
+The Makefile is a thin facade over Eask — short `make` commands for local development. CI calls `eask` directly. All targets depend on `install-deps`, which uses a `.eask/` stamp file (via `eask install-deps --dev`).
 
 | Target | Description |
 |--------|-------------|
+| `install-deps` | Install runtime + dev dependencies into `.eask/` (no-op when `NO_INSTALL_DEPS` is set) |
+| `test` | Run the full ERT test suite |
+| `run-tests` | Same as `test` without implying a fresh install when deps are present |
+| `byte-compile` | Byte-compile the package |
+| `byte-compile-strict` | Byte-compile with warnings as errors (suppresses `docstrings`, `obsolete`, and `suspicious` categories) |
+| `lint` | Run `package-lint` on all `ox-json*.el` files |
+| `checkdoc` | Run `checkdoc` on all `ox-json*.el` files |
 | `test-interactive` | Open an Emacs session with test files loaded for interactive `M-x ert` |
 | `export-test-org` | Re-export `tests/test.org` to `test.json` (use `EXPORT_STRICT=1` for strict mode) |
-| `edit-test-org` | Open `tests/test.org` in Emacs with `ox-json` loaded |
-| `org-version` | Print the version of `org-mode` that would be used |
-| `clean` | Remove byte-compiled `.elc` files and the local `.emacs.d/elpa` |
-| `install-deps` | Install package + test dependencies into `.emacs.d/elpa` (no-op when `NO_INSTALL_DEPS` is set) |
-| `test` | Legacy pipeline: `install-deps` → `test-deps` → `run-tests` |
-| `run-tests` | Run all `test-*.el` files via ERT in batch mode |
-| `byte-compile-strict` | Byte-compile with warnings-as-errors (suppresses `docstrings`, `obsolete`, and `suspicious` categories) |
-| `lint` | Run `package-lint` on `ox-json.el` |
-| `checkdoc` | Run Emacs `checkdoc` on `ox-json.el` (via `tests/checkdoc-batch.el`) |
+| `emacs` | Open Emacs with the project and test load-path configured |
+| `org-version` | Print the version of `org-mode` in use |
+| `clean` | Remove byte-compiled `.elc` files and `.eask/` |
 
 
 ### Key Makefile variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `EMACS` | `emacs` | Emacs executable to use |
+| `EASK` | `eask` | Eask executable |
 | `EXPORT_STRICT` | `0` | Set to `1` to enable `(:json-strict t)` when running `export-test-org` |
 | `NO_INSTALL_DEPS` | _(empty)_ | Set to any non-empty value to skip dependency installation |
+| `TESTS_REGEXP` | _(empty)_ | When set, filter ERT tests by name (default runs all via `eask test ert`) |
 
 
 ## CI pipeline
@@ -208,7 +210,6 @@ The comparison ignores properties that are known to vary across Org versions (e.
 
 ## Tips
 
-- Eask installs dependencies into `.eask/<emacs-version>/elpa/`, keeping them completely separate from your personal `~/.emacs.d`. You can safely delete `.eask/` at any time and re-run `eask install-deps --dev` to restore it.
+- Eask installs dependencies into `.eask/<emacs-version>/elpa/`, keeping them completely separate from your personal `~/.emacs.d`. You can safely delete `.eask/` at any time and re-run `make install-deps` or `eask install-deps --dev` to restore it.
 - Each test file adds its own directory to `load-path` via `(add-to-list 'load-path (file-name-directory load-file-name))`, so `ox-json-test-helpers` is always findable regardless of the working directory or how the file is loaded.
 - The `encoded=` helper in the test suite compares JSON strings after stripping all whitespace, so formatting differences don't cause false failures.
-- The Makefile `install-deps` target still works and installs into a local `.emacs.d/elpa/` (with `HOME` overridden to the project directory). Set `NO_INSTALL_DEPS` to any non-empty value to skip it when dependencies are already installed.
