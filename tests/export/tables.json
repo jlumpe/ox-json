@@ -1,0 +1,500 @@
+{
+  "$$data_type": "org-document",
+  "properties": {
+    "title": [
+      "Tables"
+    ],
+    "filetags": [],
+    "author": [
+      "Test User"
+    ],
+    "creator": "Emacs 29.3 (Org mode 9.6.15)",
+    "date": [
+      "2026-01-01"
+    ],
+    "description": [],
+    "email": "test@example.com",
+    "language": "en"
+  },
+  "contents": [
+    {
+      "$$data_type": "org-node",
+      "type": "section",
+      "ref": "org0000001",
+      "properties": {
+        "post-blank": 1,
+        "mode": "first-section"
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org0000001",
+          "properties": {
+            "key": "TITLE",
+            "value": "Tables",
+            "post-blank": 0,
+            "mode": "top-comment"
+          },
+          "contents": []
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000012",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Basic table",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Basic table"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000020",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "table",
+              "ref": "org0000020",
+              "properties": {
+                "type": "org",
+                "tblfm": null,
+                "value": null,
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "table-row",
+                  "ref": "org0000020",
+                  "properties": {
+                    "type": "standard",
+                    "post-blank": 0,
+                    "mode": "table-row"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org0000021",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "Name"
+                      ]
+                    },
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org0000028",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "Value"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "table-row",
+                  "ref": "org0000031",
+                  "properties": {
+                    "type": "rule",
+                    "post-blank": 0,
+                    "mode": "table-row"
+                  },
+                  "contents": []
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "table-row",
+                  "ref": "org0000042",
+                  "properties": {
+                    "type": "standard",
+                    "post-blank": 0,
+                    "mode": "table-row"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org0000043",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "foo"
+                      ]
+                    },
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org000004a",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "1"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "table-row",
+                  "ref": "org0000053",
+                  "properties": {
+                    "type": "standard",
+                    "post-blank": 0,
+                    "mode": "table-row"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org0000054",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "bar"
+                      ]
+                    },
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org000005b",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "2"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000065",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Column groups",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Column groups"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000075",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "table",
+              "ref": "org0000075",
+              "properties": {
+                "type": "org",
+                "tblfm": null,
+                "value": null,
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "table-row",
+                  "ref": "org0000075",
+                  "properties": {
+                    "type": "standard",
+                    "post-blank": 0,
+                    "mode": "table-row"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org0000076",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "<"
+                      ]
+                    },
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org000007a",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        ">"
+                      ]
+                    },
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org000007e",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "<>"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "table-row",
+                  "ref": "org0000084",
+                  "properties": {
+                    "type": "rule",
+                    "post-blank": 0,
+                    "mode": "table-row"
+                  },
+                  "contents": []
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "table-row",
+                  "ref": "org0000093",
+                  "properties": {
+                    "type": "standard",
+                    "post-blank": 0,
+                    "mode": "table-row"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org0000094",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "a"
+                      ]
+                    },
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org0000098",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "b"
+                      ]
+                    },
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org000009c",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "c"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org00000a3",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Table formula",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 0,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Table formula"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org00000b3",
+          "properties": {
+            "post-blank": 0,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "keyword",
+              "ref": "org00000b3",
+              "properties": {
+                "key": "TBLFM",
+                "value": "@2$2=(@1$2+1)",
+                "post-blank": 1,
+                "mode": "planning"
+              },
+              "contents": []
+            },
+            {
+              "$$data_type": "org-node",
+              "type": "table",
+              "ref": "org00000cb",
+              "properties": {
+                "type": "org",
+                "tblfm": null,
+                "value": null,
+                "post-blank": 0,
+                "mode": null
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "table-row",
+                  "ref": "org00000cb",
+                  "properties": {
+                    "type": "standard",
+                    "post-blank": 0,
+                    "mode": "table-row"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org00000cc",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "Start"
+                      ]
+                    },
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org00000d4",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "Next"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "table-row",
+                  "ref": "org00000dc",
+                  "properties": {
+                    "type": "rule",
+                    "post-blank": 0,
+                    "mode": "table-row"
+                  },
+                  "contents": []
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "table-row",
+                  "ref": "org00000ed",
+                  "properties": {
+                    "type": "standard",
+                    "post-blank": 0,
+                    "mode": "table-row"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org00000ee",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": [
+                        "1"
+                      ]
+                    },
+                    {
+                      "$$data_type": "org-node",
+                      "type": "table-cell",
+                      "ref": "org00000f6",
+                      "properties": {
+                        "post-blank": 0
+                      },
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

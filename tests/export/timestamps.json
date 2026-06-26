@@ -1,0 +1,455 @@
+{
+  "$$data_type": "org-document",
+  "properties": {
+    "title": [
+      "Timestamps"
+    ],
+    "filetags": [],
+    "author": [
+      "Test User"
+    ],
+    "creator": "Emacs 29.3 (Org mode 9.6.15)",
+    "date": [
+      "2026-01-01"
+    ],
+    "description": [],
+    "email": "test@example.com",
+    "language": "en"
+  },
+  "contents": [
+    {
+      "$$data_type": "org-node",
+      "type": "section",
+      "ref": "org0000001",
+      "properties": {
+        "post-blank": 1,
+        "mode": "first-section"
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org0000001",
+          "properties": {
+            "key": "TITLE",
+            "value": "Timestamps",
+            "post-blank": 0,
+            "mode": "top-comment"
+          },
+          "contents": []
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000016",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Active timestamps",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Active timestamps"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org000002a",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org000002a",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "timestamp",
+                  "ref": "org000002a",
+                  "properties": {
+                    "type": "active",
+                    "raw-value": "<2024-01-15 Mon>",
+                    "post-blank": 0,
+                    "start": "2024-01-15",
+                    "end": "2024-01-15"
+                  },
+                  "contents": []
+                },
+                "\n",
+                {
+                  "$$data_type": "org-node",
+                  "type": "timestamp",
+                  "ref": "org000003b",
+                  "properties": {
+                    "type": "active",
+                    "raw-value": "<2024-01-15 Mon 10:30>",
+                    "post-blank": 0,
+                    "start": "2024-01-15T10:30:00",
+                    "end": "2024-01-15T10:30:00"
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000053",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Inactive timestamps",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Inactive timestamps"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000069",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org0000069",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "timestamp",
+                  "ref": "org0000069",
+                  "properties": {
+                    "type": "inactive",
+                    "raw-value": "[2024-01-15 Mon]",
+                    "post-blank": 0,
+                    "start": "2024-01-15",
+                    "end": "2024-01-15"
+                  },
+                  "contents": []
+                },
+                "\n",
+                {
+                  "$$data_type": "org-node",
+                  "type": "timestamp",
+                  "ref": "org000007a",
+                  "properties": {
+                    "type": "inactive",
+                    "raw-value": "[2024-01-15 Mon 10:30]",
+                    "post-blank": 0,
+                    "start": "2024-01-15T10:30:00",
+                    "end": "2024-01-15T10:30:00"
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000092",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Date ranges",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Date ranges"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org00000a0",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org00000a0",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "timestamp",
+                  "ref": "org00000a0",
+                  "properties": {
+                    "type": "active-range",
+                    "raw-value": "<2024-01-15>--<2024-01-20>",
+                    "post-blank": 0,
+                    "start": "2024-01-15",
+                    "end": "2024-01-20"
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org00000bc",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Time ranges",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Time ranges"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org00000ca",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org00000ca",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "timestamp",
+                  "ref": "org00000ca",
+                  "properties": {
+                    "type": "active-range",
+                    "raw-value": "<2024-01-15 Mon 10:00-11:00>",
+                    "post-blank": 0,
+                    "start": "2024-01-15T10:00:00",
+                    "end": "2024-01-15T11:00:00"
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org00000e8",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Repeaters",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Repeaters"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org00000f4",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org00000f4",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "timestamp",
+                  "ref": "org00000f4",
+                  "properties": {
+                    "type": "active",
+                    "raw-value": "<2024-01-15 Mon +1w>",
+                    "post-blank": 0,
+                    "repeater-type": "cumulate",
+                    "repeater-value": 1,
+                    "repeater-unit": "week",
+                    "start": "2024-01-15",
+                    "end": "2024-01-15"
+                  },
+                  "contents": []
+                },
+                "\n",
+                {
+                  "$$data_type": "org-node",
+                  "type": "timestamp",
+                  "ref": "org0000109",
+                  "properties": {
+                    "type": "active",
+                    "raw-value": "<2024-01-15 Mon .+1m>",
+                    "post-blank": 0,
+                    "repeater-type": "restart",
+                    "repeater-value": 1,
+                    "repeater-unit": "month",
+                    "start": "2024-01-15",
+                    "end": "2024-01-15"
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000120",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Warning period",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 0,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "deadline": {
+          "$$data_type": "timestamp",
+          "start": "2024-01-15",
+          "end": "2024-01-15",
+          "type": "active",
+          "raw-value": "<2024-01-15 Mon -3d>",
+          "repeater": {
+            "type": null,
+            "unit": null,
+            "value": null
+          },
+          "warning": {
+            "type": "all",
+            "unit": "day",
+            "value": 3
+          }
+        },
+        "title": [
+          "Warning period"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000131",
+          "properties": {
+            "post-blank": 0,
+            "mode": "section"
+          },
+          "contents": []
+        }
+      ]
+    }
+  ]
+}

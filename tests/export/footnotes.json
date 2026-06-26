@@ -1,0 +1,318 @@
+{
+  "$$data_type": "org-document",
+  "properties": {
+    "title": [
+      "Footnotes"
+    ],
+    "filetags": [],
+    "author": [
+      "Test User"
+    ],
+    "creator": "Emacs 29.3 (Org mode 9.6.15)",
+    "date": [
+      "2026-01-01"
+    ],
+    "description": [],
+    "email": "test@example.com",
+    "language": "en"
+  },
+  "contents": [
+    {
+      "$$data_type": "org-node",
+      "type": "section",
+      "ref": "org0000001",
+      "properties": {
+        "post-blank": 1,
+        "mode": "first-section"
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org0000001",
+          "properties": {
+            "key": "TITLE",
+            "value": "Footnotes",
+            "post-blank": 0,
+            "mode": "top-comment"
+          },
+          "contents": []
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000015",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Labeled footnotes",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Labeled footnotes"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000029",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org0000029",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                "Text with footnote",
+                {
+                  "$$data_type": "org-node",
+                  "type": "footnote-reference",
+                  "ref": "org000003b",
+                  "properties": {
+                    "label": "1",
+                    "type": "standard",
+                    "post-blank": 0
+                  },
+                  "contents": []
+                },
+                ".\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000044",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Inline footnotes",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Inline footnotes"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000057",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org0000057",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                "Text with inline footnote",
+                {
+                  "$$data_type": "org-node",
+                  "type": "footnote-reference",
+                  "ref": "org0000070",
+                  "properties": {
+                    "label": null,
+                    "type": "inline",
+                    "post-blank": 0
+                  },
+                  "contents": [
+                    " inline text"
+                  ]
+                },
+                ".\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000085",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Named footnotes",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Named footnotes"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000097",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org0000097",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                "Text with named footnote",
+                {
+                  "$$data_type": "org-node",
+                  "type": "footnote-reference",
+                  "ref": "org00000af",
+                  "properties": {
+                    "label": "name",
+                    "type": "inline",
+                    "post-blank": 0
+                  },
+                  "contents": [
+                    " named text"
+                  ]
+                },
+                ".\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org00000c7",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Footnote definitions",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 0,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Footnote definitions"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org00000de",
+          "properties": {
+            "post-blank": 0,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "footnote-definition",
+              "ref": "org00000de",
+              "properties": {
+                "label": "1",
+                "pre-blank": 0,
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "paragraph",
+                  "ref": "org00000e5",
+                  "properties": {
+                    "post-blank": 0,
+                    "mode": null
+                  },
+                  "contents": [
+                    "Footnote definition one.\n"
+                  ]
+                }
+              ]
+            },
+            {
+              "$$data_type": "org-node",
+              "type": "footnote-definition",
+              "ref": "org00000fe",
+              "properties": {
+                "label": "name",
+                "pre-blank": 0,
+                "post-blank": 0,
+                "mode": null
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "paragraph",
+                  "ref": "org0000108",
+                  "properties": {
+                    "post-blank": 0,
+                    "mode": null
+                  },
+                  "contents": [
+                    "Footnote definition two.\n"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

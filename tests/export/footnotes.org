@@ -1,0 +1,14 @@
+#+title: Footnotes
+
+* Labeled footnotes
+Text with footnote[fn:1].
+
+* Inline footnotes
+Text with inline footnote[fn:: inline text].
+
+* Named footnotes
+Text with named footnote[fn:name: named text].
+
+* Footnote definitions
+[fn:1] Footnote definition one.
+[fn:name] Footnote definition two.

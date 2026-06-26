@@ -1,0 +1,27 @@
+#+title: Lists
+
+* Unordered lists
+- Item one
++ Item two
+* Item three
+
+* Ordered lists
+1. First
+2. Second
+1) Third
+2) Fourth
+
+* Description list
+Term one :: Definition one
+Term two :: Definition two
+
+* Nested list
+- Parent
+  - Child one
+  - Child two
+    - Grandchild
+
+* Checkbox items
+- [ ] Todo item
+- [X] Done item
+- [-] Partial item

@@ -1,0 +1,46 @@
+#+title: Blocks
+
+* Source block
+#+begin_src emacs-lisp :exports results
+(+ 1 2)
+#+end_src
+
+* Example block
+#+begin_example
+Example content
+#+end_example
+
+* Quote block
+#+begin_quote
+Quoted text
+#+end_quote
+
+* Verse block
+#+begin_verse
+Line one
+Line two
+#+end_verse
+
+* Center block
+#+begin_center
+Centered text
+#+end_center
+
+* Special block
+#+begin_special
+Special content
+#+end_special
+
+* Export block
+#+begin_export html
+<p>HTML export</p>
+#+end_export
+
+* Comment block
+#+begin_comment
+Hidden comment
+#+end_comment
+
+* Fixed width
+: Fixed width line one
+: Fixed width line two

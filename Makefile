@@ -35,7 +35,7 @@ COVERAGE_FILE=$(COVERAGE_DIR)/lcov.info
 COVERAGE_HTML=$(COVERAGE_DIR)/html
 
 
-.PHONY : install-deps byte-compile byte-compile-strict test run-tests test-interactive clean emacs org-version lint checkdoc export-test-org edit-test-org coverage
+.PHONY : install-deps byte-compile byte-compile-strict test run-tests test-interactive clean emacs org-version lint checkdoc update-exports coverage
 
 
 # Install package and dependencies into .eask/
@@ -105,6 +105,7 @@ clean :
 	$(EASK) clean elc
 	@rm -rf .eask $(COVERAGE_DIR)
 
-export-test-org : install-deps
-	EXPORT_STRICT=$(EXPORT_STRICT) $(EASK) emacs --batch \
-	  --eval '(load-file "tests/export.el")'
+
+# Re-export all .org fixtures in tests/export/ to .json snapshots
+update-exports : install-deps
+	$(EASK) emacs --batch -l tests/update-exports.el

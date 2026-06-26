@@ -1,0 +1,233 @@
+{
+  "$$data_type": "org-document",
+  "properties": {
+    "title": [
+      "LaTeX"
+    ],
+    "filetags": [],
+    "author": [
+      "Test User"
+    ],
+    "creator": "Emacs 29.3 (Org mode 9.6.15)",
+    "date": [
+      "2026-01-01"
+    ],
+    "description": [],
+    "email": "test@example.com",
+    "language": "en"
+  },
+  "contents": [
+    {
+      "$$data_type": "org-node",
+      "type": "section",
+      "ref": "org0000001",
+      "properties": {
+        "post-blank": 1,
+        "mode": "first-section"
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org0000001",
+          "properties": {
+            "key": "TITLE",
+            "value": "LaTeX",
+            "post-blank": 0,
+            "mode": "top-comment"
+          },
+          "contents": []
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000011",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Inline LaTeX",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Inline LaTeX"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000020",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org0000020",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                "Inline math ",
+                {
+                  "$$data_type": "org-node",
+                  "type": "latex-fragment",
+                  "ref": "org000002c",
+                  "properties": {
+                    "value": "$x^2$",
+                    "post-blank": 1
+                  },
+                  "contents": []
+                },
+                "and ",
+                {
+                  "$$data_type": "org-node",
+                  "type": "latex-fragment",
+                  "ref": "org0000036",
+                  "properties": {
+                    "value": "\\(x^2\\)",
+                    "post-blank": 0
+                  },
+                  "contents": []
+                },
+                ".\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000040",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Display math",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Display math"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org000004f",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org000004f",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "latex-fragment",
+                  "ref": "org000004f",
+                  "properties": {
+                    "value": "$$x^2 + y^2 = z^2$$",
+                    "post-blank": 0
+                  },
+                  "contents": []
+                },
+                "\n",
+                {
+                  "$$data_type": "org-node",
+                  "type": "latex-fragment",
+                  "ref": "org0000063",
+                  "properties": {
+                    "value": "\\[x^2 + y^2 = z^2\\]",
+                    "post-blank": 0
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000078",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "LaTeX environment",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 0,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "LaTeX environment"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org000008c",
+          "properties": {
+            "post-blank": 0,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "latex-environment",
+              "ref": "org000008c",
+              "properties": {
+                "value": "\\begin{equation}\nE = mc^2\n\\end{equation}\n",
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

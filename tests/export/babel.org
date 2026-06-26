@@ -1,0 +1,16 @@
+#+title: Babel
+
+#+name: add-one
+#+begin_src emacs-lisp :exports code
+(+ 1 2)
+#+end_src
+
+#+begin_src emacs-lisp :exports code
+"hello"
+#+end_src
+
+* Inline call syntax
+call_add-one() appears in inline call syntax.
+
+* Call line syntax
+#+CALL: add-one()

@@ -1,0 +1,26 @@
+#+title: Links
+
+* External links
+[[https://example.com][With description]]
+[[https://example.com]]
+
+* File links
+[[file:other.org][Other file]]
+[[file:other.org]]
+
+* Internal links
+<<internal-target>>
+[[internal-target]]
+
+* Custom ID target
+:PROPERTIES:
+:CUSTOM_ID: custom-id
+:end:
+[[#custom-id]]
+
+* Radio links
+Radio link: radio-target
+<<<radio-target>>>
+
+* Image links
+[[file:image.png]]

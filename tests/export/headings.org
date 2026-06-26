@@ -1,0 +1,28 @@
+#+title: Headings
+
+* Level 1
+** Level 2
+*** Level 3
+**** Level 4
+***** Level 5
+****** Level 6
+
+* TODO states
+** TODO Task one
+** DONE Task two
+** TODO [#A] High priority
+** TODO [#B] Medium priority
+** TODO [#C] Low priority
+
+* Tags
+:tag1:tag2:
+** Child with inherited tags
+
+* Planning keywords
+DEADLINE: <2024-01-15 Mon>
+SCHEDULED: <2024-01-20 Sat>
+CLOSED: [2024-01-10 Wed 14:30]
+
+* Statistics cookies
+** [1/2] Half done
+** [50%] Half percent

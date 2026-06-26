@@ -1,0 +1,22 @@
+#+title: Timestamps
+
+* Active timestamps
+<2024-01-15 Mon>
+<2024-01-15 Mon 10:30>
+
+* Inactive timestamps
+[2024-01-15 Mon]
+[2024-01-15 Mon 10:30]
+
+* Date ranges
+<2024-01-15>--<2024-01-20>
+
+* Time ranges
+<2024-01-15 Mon 10:00-11:00>
+
+* Repeaters
+<2024-01-15 Mon +1w>
+<2024-01-15 Mon .+1m>
+
+* Warning period
+DEADLINE: <2024-01-15 Mon -3d>

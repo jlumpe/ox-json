@@ -1,0 +1,13 @@
+#+title: LaTeX
+
+* Inline LaTeX
+Inline math $x^2$ and \(x^2\).
+
+* Display math
+$$x^2 + y^2 = z^2$$
+\[x^2 + y^2 = z^2\]
+
+* LaTeX environment
+\begin{equation}
+E = mc^2
+\end{equation}

@@ -1,0 +1,903 @@
+{
+  "$$data_type": "org-document",
+  "properties": {
+    "title": [
+      "Lists"
+    ],
+    "filetags": [],
+    "author": [
+      "Test User"
+    ],
+    "creator": "Emacs 29.3 (Org mode 9.6.15)",
+    "date": [
+      "2026-01-01"
+    ],
+    "description": [],
+    "email": "test@example.com",
+    "language": "en"
+  },
+  "contents": [
+    {
+      "$$data_type": "org-node",
+      "type": "section",
+      "ref": "org0000001",
+      "properties": {
+        "post-blank": 1,
+        "mode": "first-section"
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org0000001",
+          "properties": {
+            "key": "TITLE",
+            "value": "Lists",
+            "post-blank": 0,
+            "mode": "top-comment"
+          },
+          "contents": []
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000011",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Unordered lists",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 0,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Unordered lists"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000023",
+          "properties": {
+            "post-blank": 0,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "plain-list",
+              "ref": "org0000023",
+              "properties": {
+                "type": "unordered",
+                "structure": [
+                  [
+                    35,
+                    0,
+                    "- ",
+                    null,
+                    null,
+                    null,
+                    46
+                  ],
+                  [
+                    46,
+                    0,
+                    "+ ",
+                    null,
+                    null,
+                    null,
+                    57
+                  ]
+                ],
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "item",
+                  "ref": "org0000023",
+                  "properties": {
+                    "bullet": "- ",
+                    "checkbox": null,
+                    "counter": null,
+                    "pre-blank": 0,
+                    "post-blank": 0,
+                    "tag": [],
+                    "mode": "item"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "paragraph",
+                      "ref": "org0000025",
+                      "properties": {
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        "Item one\n"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "item",
+                  "ref": "org000002e",
+                  "properties": {
+                    "bullet": "+ ",
+                    "checkbox": null,
+                    "counter": null,
+                    "pre-blank": 0,
+                    "post-blank": 0,
+                    "tag": [],
+                    "mode": "item"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "paragraph",
+                      "ref": "org0000030",
+                      "properties": {
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        "Item two\n"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000039",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Item three",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Item three"
+        ],
+        "mode": null
+      },
+      "contents": []
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000047",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Ordered lists",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Ordered lists"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000057",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "plain-list",
+              "ref": "org0000057",
+              "properties": {
+                "type": "ordered",
+                "structure": [
+                  [
+                    87,
+                    0,
+                    "1. ",
+                    null,
+                    null,
+                    null,
+                    96
+                  ],
+                  [
+                    96,
+                    0,
+                    "2. ",
+                    null,
+                    null,
+                    null,
+                    106
+                  ],
+                  [
+                    106,
+                    0,
+                    "1) ",
+                    null,
+                    null,
+                    null,
+                    115
+                  ],
+                  [
+                    115,
+                    0,
+                    "2) ",
+                    null,
+                    null,
+                    null,
+                    125
+                  ]
+                ],
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "item",
+                  "ref": "org0000057",
+                  "properties": {
+                    "bullet": "1. ",
+                    "checkbox": null,
+                    "counter": null,
+                    "pre-blank": 0,
+                    "post-blank": 0,
+                    "tag": [],
+                    "mode": "item"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "paragraph",
+                      "ref": "org000005a",
+                      "properties": {
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        "First\n"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "item",
+                  "ref": "org0000060",
+                  "properties": {
+                    "bullet": "2. ",
+                    "checkbox": null,
+                    "counter": null,
+                    "pre-blank": 0,
+                    "post-blank": 0,
+                    "tag": [],
+                    "mode": "item"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "paragraph",
+                      "ref": "org0000063",
+                      "properties": {
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        "Second\n"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "item",
+                  "ref": "org000006a",
+                  "properties": {
+                    "bullet": "1) ",
+                    "checkbox": null,
+                    "counter": null,
+                    "pre-blank": 0,
+                    "post-blank": 0,
+                    "tag": [],
+                    "mode": "item"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "paragraph",
+                      "ref": "org000006d",
+                      "properties": {
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        "Third\n"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "item",
+                  "ref": "org0000073",
+                  "properties": {
+                    "bullet": "2) ",
+                    "checkbox": null,
+                    "counter": null,
+                    "pre-blank": 0,
+                    "post-blank": 0,
+                    "tag": [],
+                    "mode": "item"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "paragraph",
+                      "ref": "org0000076",
+                      "properties": {
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        "Fourth\n"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org000007e",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Description list",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Description list"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000091",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org0000091",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                "Term one :: Definition one\nTerm two :: Definition two\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org00000c8",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Nested list",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Nested list"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org00000d6",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "plain-list",
+              "ref": "org00000d6",
+              "properties": {
+                "type": "unordered",
+                "structure": [
+                  [
+                    214,
+                    0,
+                    "- ",
+                    null,
+                    null,
+                    null,
+                    268
+                  ],
+                  [
+                    223,
+                    2,
+                    "- ",
+                    null,
+                    null,
+                    null,
+                    237
+                  ],
+                  [
+                    237,
+                    2,
+                    "- ",
+                    null,
+                    null,
+                    null,
+                    268
+                  ],
+                  [
+                    251,
+                    4,
+                    "- ",
+                    null,
+                    null,
+                    null,
+                    268
+                  ]
+                ],
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "item",
+                  "ref": "org00000d6",
+                  "properties": {
+                    "bullet": "- ",
+                    "checkbox": null,
+                    "counter": null,
+                    "pre-blank": 0,
+                    "post-blank": 0,
+                    "tag": [],
+                    "mode": "item"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "paragraph",
+                      "ref": "org00000d8",
+                      "properties": {
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        "Parent\n"
+                      ]
+                    },
+                    {
+                      "$$data_type": "org-node",
+                      "type": "plain-list",
+                      "ref": "org00000df",
+                      "properties": {
+                        "type": "unordered",
+                        "structure": [
+                          [
+                            214,
+                            0,
+                            "- ",
+                            null,
+                            null,
+                            null,
+                            268
+                          ],
+                          [
+                            223,
+                            2,
+                            "- ",
+                            null,
+                            null,
+                            null,
+                            237
+                          ],
+                          [
+                            237,
+                            2,
+                            "- ",
+                            null,
+                            null,
+                            null,
+                            268
+                          ],
+                          [
+                            251,
+                            4,
+                            "- ",
+                            null,
+                            null,
+                            null,
+                            268
+                          ]
+                        ],
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        {
+                          "$$data_type": "org-node",
+                          "type": "item",
+                          "ref": "org00000df",
+                          "properties": {
+                            "bullet": "- ",
+                            "checkbox": null,
+                            "counter": null,
+                            "pre-blank": 0,
+                            "post-blank": 0,
+                            "tag": [],
+                            "mode": "item"
+                          },
+                          "contents": [
+                            {
+                              "$$data_type": "org-node",
+                              "type": "paragraph",
+                              "ref": "org00000e3",
+                              "properties": {
+                                "post-blank": 0,
+                                "mode": null
+                              },
+                              "contents": [
+                                "Child one\n"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "$$data_type": "org-node",
+                          "type": "item",
+                          "ref": "org00000ed",
+                          "properties": {
+                            "bullet": "- ",
+                            "checkbox": null,
+                            "counter": null,
+                            "pre-blank": 0,
+                            "post-blank": 0,
+                            "tag": [],
+                            "mode": "item"
+                          },
+                          "contents": [
+                            {
+                              "$$data_type": "org-node",
+                              "type": "paragraph",
+                              "ref": "org00000f1",
+                              "properties": {
+                                "post-blank": 0,
+                                "mode": null
+                              },
+                              "contents": [
+                                "Child two\n"
+                              ]
+                            },
+                            {
+                              "$$data_type": "org-node",
+                              "type": "plain-list",
+                              "ref": "org00000fb",
+                              "properties": {
+                                "type": "unordered",
+                                "structure": [
+                                  [
+                                    214,
+                                    0,
+                                    "- ",
+                                    null,
+                                    null,
+                                    null,
+                                    268
+                                  ],
+                                  [
+                                    223,
+                                    2,
+                                    "- ",
+                                    null,
+                                    null,
+                                    null,
+                                    237
+                                  ],
+                                  [
+                                    237,
+                                    2,
+                                    "- ",
+                                    null,
+                                    null,
+                                    null,
+                                    268
+                                  ],
+                                  [
+                                    251,
+                                    4,
+                                    "- ",
+                                    null,
+                                    null,
+                                    null,
+                                    268
+                                  ]
+                                ],
+                                "post-blank": 0,
+                                "mode": null
+                              },
+                              "contents": [
+                                {
+                                  "$$data_type": "org-node",
+                                  "type": "item",
+                                  "ref": "org00000fb",
+                                  "properties": {
+                                    "bullet": "- ",
+                                    "checkbox": null,
+                                    "counter": null,
+                                    "pre-blank": 0,
+                                    "post-blank": 0,
+                                    "tag": [],
+                                    "mode": "item"
+                                  },
+                                  "contents": [
+                                    {
+                                      "$$data_type": "org-node",
+                                      "type": "paragraph",
+                                      "ref": "org0000101",
+                                      "properties": {
+                                        "post-blank": 0,
+                                        "mode": null
+                                      },
+                                      "contents": [
+                                        "Grandchild\n"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org000010d",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Checkbox items",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 0,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Checkbox items"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org000011e",
+          "properties": {
+            "post-blank": 0,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "plain-list",
+              "ref": "org000011e",
+              "properties": {
+                "type": "unordered",
+                "structure": [
+                  [
+                    286,
+                    0,
+                    "- ",
+                    null,
+                    "[ ]",
+                    null,
+                    302
+                  ],
+                  [
+                    302,
+                    0,
+                    "- ",
+                    null,
+                    "[X]",
+                    null,
+                    318
+                  ],
+                  [
+                    318,
+                    0,
+                    "- ",
+                    null,
+                    "[-]",
+                    null,
+                    337
+                  ]
+                ],
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "item",
+                  "ref": "org000011e",
+                  "properties": {
+                    "bullet": "- ",
+                    "checkbox": "off",
+                    "counter": null,
+                    "pre-blank": 0,
+                    "post-blank": 0,
+                    "tag": [],
+                    "mode": "item"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "paragraph",
+                      "ref": "org0000124",
+                      "properties": {
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        "Todo item\n"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "item",
+                  "ref": "org000012e",
+                  "properties": {
+                    "bullet": "- ",
+                    "checkbox": "on",
+                    "counter": null,
+                    "pre-blank": 0,
+                    "post-blank": 0,
+                    "tag": [],
+                    "mode": "item"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "paragraph",
+                      "ref": "org0000134",
+                      "properties": {
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        "Done item\n"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "item",
+                  "ref": "org000013e",
+                  "properties": {
+                    "bullet": "- ",
+                    "checkbox": "trans",
+                    "counter": null,
+                    "pre-blank": 0,
+                    "post-blank": 0,
+                    "tag": [],
+                    "mode": "item"
+                  },
+                  "contents": [
+                    {
+                      "$$data_type": "org-node",
+                      "type": "paragraph",
+                      "ref": "org0000144",
+                      "properties": {
+                        "post-blank": 0,
+                        "mode": null
+                      },
+                      "contents": [
+                        "Partial item\n"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

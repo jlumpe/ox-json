@@ -6,7 +6,25 @@
 (require 'subr-x)
 
 
-;;; Get backend and default options
+; Export environment setup
+(setq
+  ; Disable Emacs version control integration (can slow down scripts)
+  vc-handled-backends nil
+  ; Don't ask for confirmation when evaluating babel code
+  org-confirm-babel-evaluate nil)
+
+; Export options plist for test-export.el and update-exports.el
+(setq ox-json-test-export-options
+  '(
+    ; General metadata - make this deterministic
+    :author ("Test User")
+    :date ("2026-01-01")
+    :email "test@example.com"
+    ; ox-json options
+    :json-strict t
+    :json-deterministic-refs t
+  ))
+
 (setq
   backend (org-export-get-backend 'json)
   info (org-export-get-environment backend nil '(:json-strict t))

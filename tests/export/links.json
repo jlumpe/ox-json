@@ -1,0 +1,517 @@
+{
+  "$$data_type": "org-document",
+  "properties": {
+    "title": [
+      "Links"
+    ],
+    "filetags": [],
+    "author": [
+      "Test User"
+    ],
+    "creator": "Emacs 29.3 (Org mode 9.6.15)",
+    "date": [
+      "2026-01-01"
+    ],
+    "description": [],
+    "email": "test@example.com",
+    "language": "en"
+  },
+  "contents": [
+    {
+      "$$data_type": "org-node",
+      "type": "section",
+      "ref": "org0000001",
+      "properties": {
+        "post-blank": 1,
+        "mode": "first-section"
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org0000001",
+          "properties": {
+            "key": "TITLE",
+            "value": "Links",
+            "post-blank": 0,
+            "mode": "top-comment"
+          },
+          "contents": []
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000011",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "External links",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "External links"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000022",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org0000022",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "link",
+                  "ref": "org0000022",
+                  "properties": {
+                    "type": "https",
+                    "path": "//example.com",
+                    "format": "bracket",
+                    "raw-link": "https://example.com",
+                    "application": null,
+                    "search-option": null,
+                    "post-blank": 0,
+                    "is-internal": false,
+                    "target-ref": null,
+                    "is-inline-image": false
+                  },
+                  "contents": [
+                    "With description"
+                  ]
+                },
+                "\n",
+                {
+                  "$$data_type": "org-node",
+                  "type": "link",
+                  "ref": "org000004c",
+                  "properties": {
+                    "type": "https",
+                    "path": "//example.com",
+                    "format": "bracket",
+                    "raw-link": "https://example.com",
+                    "application": null,
+                    "search-option": null,
+                    "post-blank": 0,
+                    "is-internal": false,
+                    "target-ref": null,
+                    "is-inline-image": false
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000065",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "File links",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "File links"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000072",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org0000072",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "link",
+                  "ref": "org0000072",
+                  "properties": {
+                    "type": "file",
+                    "path": "other.org",
+                    "format": "bracket",
+                    "raw-link": "file:other.org",
+                    "application": null,
+                    "search-option": null,
+                    "post-blank": 0,
+                    "is-internal": false,
+                    "target-ref": null,
+                    "is-inline-image": false
+                  },
+                  "contents": [
+                    "Other file"
+                  ]
+                },
+                "\n",
+                {
+                  "$$data_type": "org-node",
+                  "type": "link",
+                  "ref": "org0000091",
+                  "properties": {
+                    "type": "file",
+                    "path": "other.org",
+                    "format": "bracket",
+                    "raw-link": "file:other.org",
+                    "application": null,
+                    "search-option": null,
+                    "post-blank": 0,
+                    "is-internal": false,
+                    "target-ref": null,
+                    "is-inline-image": false
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org00000a5",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Internal links",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Internal links"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org00000b6",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org00000b6",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "target",
+                  "ref": "org00000b6",
+                  "properties": {
+                    "value": "internal-target",
+                    "post-blank": 0
+                  },
+                  "contents": []
+                },
+                "\n",
+                {
+                  "$$data_type": "org-node",
+                  "type": "link",
+                  "ref": "org00000ca",
+                  "properties": {
+                    "type": "fuzzy",
+                    "path": "internal-target",
+                    "format": "bracket",
+                    "raw-link": "internal-target",
+                    "application": null,
+                    "search-option": null,
+                    "post-blank": 0,
+                    "is-internal": true,
+                    "target-ref": "org00000b6",
+                    "is-inline-image": false
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org00000df",
+      "drawer": {
+        "CUSTOM_ID": "custom-id"
+      },
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Custom ID target",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Custom ID target"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org00000f2",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org000011b",
+              "properties": {
+                "post-blank": 0,
+                "mode": null
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "link",
+                  "ref": "org000011b",
+                  "properties": {
+                    "type": "custom-id",
+                    "path": "custom-id",
+                    "format": "bracket",
+                    "raw-link": "#custom-id",
+                    "application": null,
+                    "search-option": null,
+                    "post-blank": 0,
+                    "is-internal": true,
+                    "target-ref": "org00000df",
+                    "is-inline-image": false
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org000012b",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Radio links",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Radio links"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000139",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org0000139",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                "Radio link: ",
+                {
+                  "$$data_type": "org-node",
+                  "type": "link",
+                  "ref": "org0000145",
+                  "properties": {
+                    "type": "radio",
+                    "path": "radio-target",
+                    "format": "plain",
+                    "raw-link": "radio-target",
+                    "application": null,
+                    "search-option": null,
+                    "post-blank": 0,
+                    "is-internal": true,
+                    "target-ref": "org0000152",
+                    "is-inline-image": false
+                  },
+                  "contents": [
+                    "radio-target"
+                  ]
+                },
+                "\n",
+                {
+                  "$$data_type": "org-node",
+                  "type": "radio-target",
+                  "ref": "org0000152",
+                  "properties": {
+                    "post-blank": 0,
+                    "value": "radio-target"
+                  },
+                  "contents": [
+                    "radio-target"
+                  ]
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000166",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Image links",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 0,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Image links"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org0000174",
+          "properties": {
+            "post-blank": 0,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org0000174",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "link",
+                  "ref": "org0000174",
+                  "properties": {
+                    "type": "file",
+                    "path": "image.png",
+                    "format": "bracket",
+                    "raw-link": "file:image.png",
+                    "application": null,
+                    "search-option": null,
+                    "post-blank": 0,
+                    "is-internal": false,
+                    "target-ref": null,
+                    "is-inline-image": true
+                  },
+                  "contents": []
+                },
+                "\n"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

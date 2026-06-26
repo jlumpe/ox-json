@@ -1,0 +1,193 @@
+{
+  "$$data_type": "org-document",
+  "properties": {
+    "title": [
+      "Babel"
+    ],
+    "filetags": [],
+    "author": [
+      "Test User"
+    ],
+    "creator": "Emacs 29.3 (Org mode 9.6.15)",
+    "date": [
+      "2026-01-01"
+    ],
+    "description": [],
+    "email": "test@example.com",
+    "language": "en"
+  },
+  "contents": [
+    {
+      "$$data_type": "org-node",
+      "type": "section",
+      "ref": "org0000001",
+      "properties": {
+        "post-blank": 1,
+        "mode": "first-section"
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org0000001",
+          "properties": {
+            "key": "TITLE",
+            "value": "Babel",
+            "post-blank": 1,
+            "mode": "top-comment"
+          },
+          "contents": []
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "src-block",
+          "ref": "org0000011",
+          "properties": {
+            "language": "emacs-lisp",
+            "switches": null,
+            "parameters": null,
+            "number-lines": null,
+            "preserve-indent": false,
+            "retain-labels": true,
+            "use-labels": true,
+            "label-fmt": null,
+            "value": "(+ 1 2)\n",
+            "post-blank": 1,
+            "name": "add-one",
+            "mode": null
+          },
+          "contents": []
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "src-block",
+          "ref": "org000004b",
+          "properties": {
+            "language": "emacs-lisp",
+            "switches": null,
+            "parameters": null,
+            "number-lines": null,
+            "preserve-indent": false,
+            "retain-labels": true,
+            "use-labels": true,
+            "label-fmt": null,
+            "value": "\"hello\"\n",
+            "post-blank": 0,
+            "mode": null
+          },
+          "contents": []
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0000075",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Inline call syntax",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 1,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Inline call syntax"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org000008a",
+          "properties": {
+            "post-blank": 1,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "paragraph",
+              "ref": "org000008a",
+              "properties": {
+                "post-blank": 0,
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "verbatim",
+                  "ref": "org000008a",
+                  "properties": {
+                    "post-blank": 1,
+                    "value": "3"
+                  },
+                  "contents": []
+                },
+                "appears in inline call syntax.\n"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org00000ae",
+      "drawer": {},
+      "properties": {
+        "tags-all": [],
+        "raw-value": "Call line syntax",
+        "pre-blank": 0,
+        "level": 1,
+        "priority": null,
+        "tags": [],
+        "todo-keyword": null,
+        "todo-type": null,
+        "post-blank": 0,
+        "footnote-section-p": false,
+        "archivedp": false,
+        "commentedp": false,
+        "title": [
+          "Call line syntax"
+        ],
+        "mode": null
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org00000c1",
+          "properties": {
+            "post-blank": 0,
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "fixed-width",
+              "ref": "org00000c1",
+              "properties": {
+                "value": "3",
+                "post-blank": 1,
+                "results": [
+                  ""
+                ],
+                "mode": "planning"
+              },
+              "contents": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

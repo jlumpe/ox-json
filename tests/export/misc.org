@@ -1,0 +1,44 @@
+#+title: Misc
+#+author: Test Author
+#+date: 2024-01-15
+#+filetags: :foo:bar:
+#+description: Description with /markup/ *in* _it_
+#+OPTIONS: toc:t
+
+#+MACRO: hello Hello, $1!
+
+* Horizontal rule
+-----
+
+* Comment
+# This is a comment line
+
+* Clock entry
+CLOCK: [2024-01-15 Mon 10:00]--[2024-01-15 Mon 11:00] =>  1:00
+
+* Diary sexp
+%%(org-agenda-date-from-calendar)
+
+* Dynamic block
+#+BEGIN: columnview :hlines 1 :id local
+| Headline | Time |
+|----------+------|
+| Item     | 1:00 |
+#+END:
+
+* Inlinetask
+******** TODO Inline task
+Inline task body
+********
+
+* Macro
+{{{hello(World)}}}
+
+* Target
+<<misc-target>>
+
+* Export snippet
+@@html:<b>bold</b>@@
+
+* Keyword
+#+CUSTOM_KEY: custom value

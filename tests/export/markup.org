@@ -1,0 +1,15 @@
+#+title: Markup
+
+* Basic markup
+*bold* /italic/ _underline_ +strike-through+ =verbatim= ~code~
+
+* Subscript and superscript
+H_2 O and a^2 + b^2 = c^2
+H_{2}O and a^{2}
+
+* Entities
+\alpha \beta \rarr \rightarrow
+
+* Line breaks
+First line \\
+Second line

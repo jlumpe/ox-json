@@ -16,11 +16,9 @@
 | `ox-json-export.el` | Org element export handlers |
 | `ox-json-docs.org` | User-facing documentation (Org format) |
 | `tests/` | ERT test suite and helpers |
-| `tests/test.org` | Sample Org document used by the export test |
-| `tests/test.json` | Reference JSON export of `test.org` (generated, checked in) |
-| `tests/export.el` | Script to regenerate `test.json` from `test.org` |
 | `tests/run-coverage.el` | Single-process test runner used by `make coverage` |
 | `coverage/` | Coverage output directory (not checked in) |
+| `tests/export/` | Org fixture files and exported JSON snapshots |
 | `Eask` | Package metadata, dependencies, and Eask build config |
 | `Makefile` | Additional automation (interactive testing, export regeneration) |
 | `.github/workflows/ci.yml` | GitHub Actions CI config |
@@ -142,15 +140,16 @@ The test suite uses Emacs's built-in ERT (Emacs Lisp Regression Testing) framewo
 | File | What it tests |
 |------|---------------|
 | `test-encode.el` | Low-level encoding functions: booleans, strings, numbers, tag strings, arrays, alists, plists, auto-type detection, and custom type encoders |
-| `test-export.el` | Full document export — exports `tests/test.org` with `(:json-strict t)` and recursively compares the result against the reference file `tests/test.json`. Certain properties that vary across Org versions (e.g. properties introduced in 9.6 or 9.7, and `ref` which changes every export) are ignored during comparison. |
+| `test-export.el` | Full document export — exports each `.org` file in `tests/export/` with `(:json-strict t)` and compares against its saved `.json` snapshot; also checks export invariants. Certain properties that vary across Org versions or export runs (e.g. `ref`, `creator`, `email`, and various properties introduced in Org 9.6 and 9.7) are ignored during comparison. |
 | `test-utils.el` | Internal utility functions: alist merging, plist-to-alist conversion, plist lookup across multiple plists, node detection, plist looping |
 | `test-helpers.el` | Self-tests for the test helper functions themselves (`encoded=`, `json-obj`) |
 
 Supporting files:
 
 - `ox-json-test-helpers.el` — shared test infrastructure: sets up the export backend and `info` plist, provides `encoded=` (whitespace-insensitive JSON string comparison), `json-obj` (builds expected hash-table objects), `decode-compare` (round-trip encode-then-decode comparison), `with-json-decode-explicit` (macro that configures unambiguous JSON decoding settings), and recursive JSON structure comparison via `json-compare` (supports `:ignore` lists and pluggable object comparison functions).
-- `tests/export.el` — standalone script used by `make export-test-org` to regenerate `tests/test.json`. Supports `EXPORT_STRICT=1` environment variable to export with `(:json-strict t)`.
-- `tests/export/` — reference JSON exports broken down by feature (headings, markup, links, tables, lists, blocks, drawers, footnotes, timestamps, latex, babel, misc).
+- `tests/export/*.org` — Org fixture files covering headlines, markup, blocks, lists, tables, links, timestamps, footnotes, LaTeX, Babel, drawers, and miscellaneous elements.
+- `tests/export/*.json` — exported JSON snapshots checked into version control; regenerated with `make update-exports`.
+- `tests/update-exports.el` — batch script that re-exports all `.org` fixtures to `.json`.
 
 
 ## Makefile
@@ -185,6 +184,7 @@ EASK_DOCKER=29.1 make org-version
 | `emacs` | Open Emacs with the project and test load-path configured |
 | `org-version` | Print the version of `org-mode` in use |
 | `clean` | Remove byte-compiled `.elc` files, `.eask/`, and `coverage/` |
+| `update-exports` | Re-export all `.org` fixtures in `tests/export/` to `.json` snapshots |
 
 
 ### Key Makefile variables
@@ -242,15 +242,15 @@ eask lint checkdoc
 ```
 
 
-## Updating the reference export
+## Updating export snapshots
 
-The export test (`test-export.el`) compares a live export of `tests/test.org` against the checked-in reference file `tests/test.json`. If you change `ox-json.el` in a way that alters the output, or modify `tests/test.org`, you need to regenerate the reference:
+The export tests (`test-export.el`) compare live exports of each `.org` file in `tests/export/` against the checked-in `.json` snapshots. If you change `ox-json.el` in a way that alters the output, or modify a fixture file, regenerate the snapshots:
 
 ```bash
-make export-test-org
+make update-exports
 ```
 
-The comparison ignores properties that are known to vary across Org versions (e.g. `ref`, `creator`, and various properties introduced in Org 9.6 and 9.7). This ignore list is defined in `tests/test-export.el` in the `ignore-by-data-type` variable.
+The comparison ignores properties that are known to vary across Org versions or export runs (e.g. `ref`, `creator`, `email`, `target-ref`, and various properties introduced in Org 9.6 and 9.7). This ignore list is defined in `tests/test-export.el` in the `ignore-by-data-type` variable.
 
 
 ## Tips
