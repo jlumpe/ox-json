@@ -224,6 +224,84 @@ and the drawer properties in the cdr."
            (setq regular-props (plist-put regular-props name value))))
     (cons regular-props drawer-props)))
 
+(defun ox-json--normalize-drawer-property-name (name)
+  "Normalize drawer property NAME to canonical symbol form.
+
+Returns nil when NAME does not look like a drawer property name."
+  (when (symbolp name)
+    (setq name (symbol-name name)))
+  (when (stringp name)
+    (setq name (s-replace-regexp "^:" "" name))
+    (setq name (s-replace "+" "" name))
+    (when (s-uppercase-p name)
+      (intern name))))
+
+(defun ox-json--document-drawer-properties-from-parse-tree (parse-tree)
+  "Collect top-level drawer properties from document PARSE-TREE properties."
+  (let ((drawer-props nil))
+    (ox-json--loop-plist (name value (ox-json-node-properties parse-tree))
+      do (let ((normalized-name (ox-json--normalize-drawer-property-name name)))
+           (when (and normalized-name
+                      value
+                      (not (eq normalized-name 'CATEGORY)))
+             (setq drawer-props
+                   (plist-put drawer-props normalized-name (format "%s" value))))))
+    drawer-props))
+
+(defun ox-json--document-drawer-properties-from-node (node)
+  "Collect drawer properties from drawer NODE.
+
+Returns a plist with symbols as keys and string values."
+  (let ((node-type (org-element-type node))
+        (drawer-props nil))
+    (cond
+      ((eq node-type 'property-drawer)
+        (dolist (child (org-element-contents node))
+          (when (eq (org-element-type child) 'node-property)
+            (setq drawer-props
+                  (plist-put drawer-props
+                             (intern (s-replace "+" "" (org-element-property :key child)))
+                             (org-element-property :value child))))))
+      ((and (eq node-type 'drawer)
+            (string= (org-element-property :drawer-name node) "PROPERTIES"))
+        (let ((contents (org-element-interpret-data (org-element-contents node))))
+          (with-temp-buffer
+            (insert contents)
+            (goto-char (point-min))
+            (while (re-search-forward
+                    "^:\\([[:upper:]][[:upper:][:digit:]_+-]*\\):[ \t]*\\(.*\\)$"
+                    nil
+                    t)
+              (setq drawer-props
+                    (plist-put drawer-props
+                               (intern (s-replace "+" "" (match-string 1)))
+                               (match-string 2))))))))
+    drawer-props))
+
+(defun ox-json-document-drawer-properties (parse-tree &optional info)
+  "Collect top-level drawer properties from document PARSE-TREE.
+
+Looks for properties both in parse-tree properties and in top-level
+PROPERTIES drawer nodes inside first section.
+
+When INFO is non-nil and PARSE-TREE does not retain the top-level
+PROPERTIES drawer, fall back to parsing the source input buffer."
+  (let* ((drawer-props (ox-json--document-drawer-properties-from-parse-tree parse-tree))
+         (first-child (car (org-element-contents parse-tree))))
+    (when (eq (org-element-type first-child) 'section)
+      (dolist (child (org-element-contents first-child))
+        (when (memq (org-element-type child) '(drawer property-drawer))
+          (ox-json--loop-plist (name value
+                                (ox-json--document-drawer-properties-from-node child))
+            do (setq drawer-props (plist-put drawer-props name value))))))
+    (or drawer-props
+        (when info
+          (let ((input-buffer (plist-get info :input-buffer)))
+            (when input-buffer
+              (with-current-buffer input-buffer
+                (ox-json-document-drawer-properties
+                 (org-element-parse-buffer)
+                 nil))))))))
 
 (provide 'ox-json-utils)
 

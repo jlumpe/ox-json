@@ -192,3 +192,5 @@ ENTRY-VERSION is nil for all versions, otherwise a major/minor list."
 (ox-json-def-export-test "babel")
 (ox-json-def-export-test "drawers")
 (ox-json-def-export-test "misc")
+(ox-json-def-export-test "document-properties-before-title")
+(ox-json-def-export-test "document-properties-after-title")

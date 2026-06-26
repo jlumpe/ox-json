@@ -342,10 +342,15 @@ INFO is the plist of export options."
          (properties (ox-json--sort-alist-by-key (ox-json-document-properties info)))
          (properties-encoded (ox-json-encode-alist-raw nil properties info))
          (parse-tree (plist-get info :parse-tree))
+         (drawer-properties (ox-json-document-drawer-properties parse-tree info))
+         (drawer-encoded (when drawer-properties
+                           (ox-json-encode-plist nil drawer-properties info 'string)))
          (contents-encoded (ox-json-export-contents parse-tree info)))
     (ox-json-encode-alist-raw
       "org-document"
-      (let ((base `((properties . ,properties-encoded))))
+      (let ((base `((properties . ,properties-encoded)
+                    ,@(when drawer-encoded
+                        `((drawer . ,drawer-encoded))))))
         (if (string= contents-encoded "[]")
             base
           (append base (list (cons 'contents contents-encoded)))))
