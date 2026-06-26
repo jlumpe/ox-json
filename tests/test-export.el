@@ -3,6 +3,10 @@
 (require 'ox-json)
 (require 'ox-json-test-helpers)
 
+(defvar ox-json-test-dir
+  (file-name-directory (or load-file-name (expand-file-name "test-export.el")))
+  "Directory containing this test file and the test.org/test.json fixtures.")
+
 
 ; JSON object keys to ignore in comparison based on $$data_type
 ; Alist, values are ignore alists to pass to (json-compare-exported)
@@ -68,11 +72,11 @@
       (
         (ext-plist '(:json-strict t))
         (exported-string
-          (with-current-buffer (find-file-noselect "test.org")
+          (with-current-buffer (find-file-noselect (expand-file-name "test.org" ox-json-test-dir))
             (with-current-buffer (ox-json-export-to-buffer nil nil nil nil ext-plist)
               (buffer-string))))
         (exported-data (json-read-from-string exported-string))
-        (test-data (json-read-file "test.json"))
+        (test-data (json-read-file (expand-file-name "test.json" ox-json-test-dir)))
       )
       ; Check $$data_type key is present and has correct value
       (should (string= (gethash "$$data_type" exported-data) "org-document"))

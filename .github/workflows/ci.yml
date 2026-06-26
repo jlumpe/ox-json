@@ -30,11 +30,19 @@ jobs:
       with:
         version: ${{ matrix.emacs-version }}
 
-    - name: Install dependencies
-      run: make install-deps test-deps
+    - name: Install Eask
+      uses: emacs-eask/setup-eask@master
+      with:
+        version: 'snapshot'
 
-    - name: Build and test
-      run: |
-        echo org-version = $(make org-version)
-        make byte-compile-strict
-        make run-tests
+    - name: Install dependencies
+      run: eask install-deps --dev
+
+    - name: Print org-mode version
+      run: eask exec emacs --batch -l org --eval "(princ (org-version))"
+
+    - name: Byte compile
+      run: eask compile
+
+    - name: Run tests
+      run: eask run script test

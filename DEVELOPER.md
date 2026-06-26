@@ -15,68 +15,80 @@
 | `tests/test.org` | Sample Org document used by the export test |
 | `tests/test.json` | Reference JSON export of `test.org` (generated, checked in) |
 | `tests/export.el` | Script to regenerate `test.json` from `test.org` |
-| `Makefile` | Build, test, and lint automation |
+| `Eask` | Package metadata, dependencies, and Eask build config |
+| `Makefile` | Additional automation (interactive testing, export regeneration) |
 | `.github/workflows/ci.yml` | GitHub Actions CI config |
 
 
 ### Dependencies
 
-Runtime (declared in the `Package-Requires` header of `ox-json.el`):
+Runtime (declared in the `Package-Requires` header of `ox-json.el` and `depends-on` in `Eask`):
 
 - Emacs >= 26.1
 - `org` >= 9
 - `s` >= 1.12
 
-Test-only: `ert` (bundled with Emacs), `package-lint`.
+Development-only (declared in the `(development ...)` block of `Eask`): `package-lint`, `ellsp`.
+
+Test-only: `ert` (bundled with Emacs).
 
 
 ## Running the tests
 
 ### Prerequisites
 
-You need a working `emacs` on your `$PATH`. The Makefile defaults to the `emacs` command but you can override it:
+You need:
+
+- A working `emacs` on your `$PATH`
+- [Eask](https://emacs-eask.github.io/) installed
+
+Install Eask with:
 
 ```bash
-make EMACS=/path/to/emacs test
+npm install -g @emacs-eask/cli
 ```
+
+Or see the [Eask installation docs](https://emacs-eask.github.io/Getting-Started/Install-Eask/) for other methods.
 
 
 ### Quick start
 
 ```bash
-# Install deps, check test deps load, and run the full suite:
-make test
-```
+# Install all dependencies (runtime + dev):
+eask install-deps --dev
 
-This is equivalent to running `install-deps`, `test-deps`, and `run-tests` in sequence.
+# Byte-compile the package:
+eask compile
+
+# Run the full test suite:
+eask run script test
+```
 
 
 ### Step by step
 
-1. **Install dependencies** — downloads package and test dependencies into a local `.emacs.d/elpa` directory (kept out of version control via `.gitignore`). The `HOME` variable is overridden to the working directory so this `.emacs.d` is used instead of your real one.
+1. **Install dependencies** — downloads all declared dependencies (runtime and dev) into the local `.eask/` directory, which is kept out of version control.
 
    ```bash
-   make install-deps
+   eask install-deps --dev
    ```
 
-   Under the hood this runs `tests/install-deps.el`, which reads the `Package-Requires` header from `ox-json.el`, refreshes the MELPA package index, and installs everything.
-
-2. **Verify test dependencies load** — a quick smoke test that each test dep (`ert`) can be `require`'d:
+2. **Byte-compile:**
 
    ```bash
-   make test-deps
+   eask compile
    ```
 
 3. **Run the test suite:**
 
    ```bash
-   make run-tests
+   eask run script test
    ```
 
-   You can filter tests by name with a regex:
+   To run a specific test file (always from the project root):
 
    ```bash
-   make run-tests TESTS_REGEXP=encode
+   eask exec emacs --batch -L . -L tests -l tests/test-encode.el -f ert-run-tests-batch-and-exit
    ```
 
 
@@ -103,28 +115,28 @@ The test suite uses Emacs's built-in ERT (Emacs Lisp Regression Testing) framewo
 Supporting files:
 
 - `ox-json-test-helpers.el` — shared test infrastructure: sets up the export backend and `info` plist, provides `encoded=` (whitespace-insensitive JSON string comparison), `json-obj` (builds expected hash-table objects), `decode-compare` (round-trip encode-then-decode comparison), `with-json-decode-explicit` (macro that configures unambiguous JSON decoding settings), and recursive JSON structure comparison via `json-compare` (supports `:ignore` lists and pluggable object comparison functions).
+- `run-tests.el` — entry point for `eask run script test`; loads all test files and calls `ert-run-tests-batch-and-exit`.
 - `tests/export.el` — standalone script used by `make export-test-org` to regenerate `tests/test.json`. Supports `EXPORT_STRICT=1` environment variable to export with `(:json-strict t)`.
 - `tests/export/` — reference JSON exports broken down by feature (headings, markup, links, tables, lists, blocks, drawers, footnotes, timestamps, latex, babel, misc).
 
 
-## Makefile targets
+## Makefile
+
+The Makefile is retained for tasks that don't have a direct Eask equivalent, and for the legacy `make`-based workflow. For standard build/test/lint operations, prefer the Eask commands above.
 
 | Target | Description |
 |--------|-------------|
-| `install-deps` | Install package + test dependencies into `.emacs.d/elpa` (no-op when `NO_INSTALL_DEPS` is set) |
-| `test` | Full pipeline: `install-deps` → `test-deps` → `run-tests` |
-| `run-tests` | Run all `test-*.el` files via ERT in batch mode |
-| `test-deps` | Verify each test dependency can be loaded |
 | `test-interactive` | Open an Emacs session with test files loaded for interactive `M-x ert` |
-| `byte-compile` | Byte-compile all `.el` files (warnings shown but not fatal) |
-| `byte-compile-strict` | Byte-compile with warnings-as-errors (suppresses `docstrings`, `obsolete`, and `suspicious` categories) |
-| `lint` | Run `package-lint` on `ox-json.el` |
-| `checkdoc` | Run Emacs `checkdoc` on `ox-json.el` (via `tests/checkdoc-batch.el`) |
 | `export-test-org` | Re-export `tests/test.org` to `test.json` (use `EXPORT_STRICT=1` for strict mode) |
 | `edit-test-org` | Open `tests/test.org` in Emacs with `ox-json` loaded |
 | `org-version` | Print the version of `org-mode` that would be used |
-| `emacs` | Start an Emacs session with the same package config and load paths used for tests |
 | `clean` | Remove byte-compiled `.elc` files and the local `.emacs.d/elpa` |
+| `install-deps` | Install package + test dependencies into `.emacs.d/elpa` (no-op when `NO_INSTALL_DEPS` is set) |
+| `test` | Legacy pipeline: `install-deps` → `test-deps` → `run-tests` |
+| `run-tests` | Run all `test-*.el` files via ERT in batch mode |
+| `byte-compile-strict` | Byte-compile with warnings-as-errors (suppresses `docstrings`, `obsolete`, and `suspicious` categories) |
+| `lint` | Run `package-lint` on `ox-json.el` |
+| `checkdoc` | Run Emacs `checkdoc` on `ox-json.el` (via `tests/checkdoc-batch.el`) |
 
 
 ### Key Makefile variables
@@ -132,9 +144,8 @@ Supporting files:
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `EMACS` | `emacs` | Emacs executable to use |
-| `TESTS_REGEXP` | _(empty — all tests)_ | Regex to filter which tests to run |
 | `EXPORT_STRICT` | `0` | Set to `1` to enable `(:json-strict t)` when running `export-test-org` |
-| `NO_INSTALL_DEPS` | _(empty)_ | Set to any non-empty value to skip dependency installation (useful in containers with pre-installed deps) |
+| `NO_INSTALL_DEPS` | _(empty)_ | Set to any non-empty value to skip dependency installation |
 
 
 ## CI pipeline
@@ -160,23 +171,24 @@ The matrix uses `fail-fast: false` so all Emacs versions are tested even if one 
 For each Emacs version the job:
 
 1. Checks out the repository.
-2. Installs the target Emacs version.
-3. Runs `make install-deps test-deps` to install and verify dependencies.
-4. Prints the installed `org-mode` version for debugging.
-5. Runs `make byte-compile-strict` — byte-compiles with warnings treated as errors (excluding `docstrings`, `obsolete`, and `suspicious` categories).
-6. Runs `make run-tests` — executes the full ERT test suite.
+2. Installs the target Emacs version via `purcell/setup-emacs`.
+3. Installs Eask via `emacs-eask/setup-eask`.
+4. Runs `eask install-deps --dev` to install all dependencies.
+5. Prints the installed `org-mode` version for debugging.
+6. Runs `eask compile` — byte-compiles the package.
+7. Runs `eask run script test` — executes the full ERT test suite.
 
 
 ## Linting and style checks
 
-Two lint targets are available (not currently run in CI):
+Two lint checks are available via Eask (not currently run in CI):
 
 ```bash
 # MELPA package-lint (checks headers, dependencies, naming conventions):
-make lint
+eask lint package
 
 # Emacs checkdoc (checks docstring conventions):
-make checkdoc
+eask lint checkdoc
 ```
 
 
@@ -193,7 +205,7 @@ The comparison ignores properties that are known to vary across Org versions (e.
 
 ## Tips
 
-- The Makefile sets `HOME` to the project working directory so that dependency installation uses a local `.emacs.d/` rather than your real home directory. This is intentional — don't be surprised if `~/.emacs.d` is unaffected.
-- `byte-compile-strict` (used in CI) suppresses the `docstrings`, `obsolete`, and `suspicious` warning categories but treats all other warnings as errors. The plain `byte-compile` target shows warnings without failing.
+- Eask installs dependencies into `.eask/<emacs-version>/elpa/`, keeping them completely separate from your personal `~/.emacs.d`. You can safely delete `.eask/` at any time and re-run `eask install-deps --dev` to restore it.
+- The `test` script in `Eask` uses `eask exec emacs` with explicit `-L . -L tests` flags so that both the package root and `tests/` (where `ox-json-test-helpers.el` lives) are on the load path.
 - The `encoded=` helper in the test suite compares JSON strings after stripping all whitespace, so formatting differences don't cause false failures.
-- Set `NO_INSTALL_DEPS` to a non-empty value when running in a container or environment where dependencies are already installed to skip the install step.
+- The Makefile `install-deps` target still works and installs into a local `.emacs.d/elpa/` (with `HOME` overridden to the project directory). Set `NO_INSTALL_DEPS` to any non-empty value to skip it when dependencies are already installed.
