@@ -856,9 +856,9 @@ A secondary string is alist of org elements/objects and strings."
             ((ox-json--is-node item)
               (ox-json-export-property-node item info))
             (t
-              (ox-json--type-error info "org node or string" item))))
+              (ox-json--type-error "org node or string" item info))))
         sstring))
-    (ox-json--type-error info "list" sstring)))
+    (ox-json--type-error "list" sstring info)))
 
 (defun ox-json-export-property-node (node info)
   "Export an object or element NODE that appears in a property of another node.
