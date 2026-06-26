@@ -141,7 +141,6 @@ be overridden with the :json-exporters option.")
       :drawer-name string)
     entity (
       :ascii string
-      :ascii string
       :html string
       :latex string
       :latex-math-p bool
@@ -163,7 +162,7 @@ be overridden with the :json-exporters option.")
     export-block (
       :type string
       :value string)
-    export-snipper (
+    export-snippet (
       :back-end string
       :value string)
     footnote-reference (
@@ -191,7 +190,7 @@ be overridden with the :json-exporters option.")
       :end-header string
       :value string)
     inline-src-block (
-      :langauge string
+      :language string
       :parameters string
       :value string)
     inlinetask (
