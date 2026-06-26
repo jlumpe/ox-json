@@ -18,4 +18,5 @@
 (depends-on "s" "1.12")
 
 (development
- (depends-on "package-lint"))
+ (depends-on "package-lint")
+ (depends-on "undercover"))

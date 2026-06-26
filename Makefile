@@ -20,8 +20,13 @@ TESTS_EVAL="(ert-run-tests-batch-and-exit '(and \"$(TESTS_REGEXP)\" (not (tag :i
 # Suppress selected warning categories while still treating others as errors
 BYTE_COMPILE_WARNINGS='(not docstrings obsolete suspicious)
 
+COVERAGE_DIR=coverage
+COVERAGE_FILE=$(COVERAGE_DIR)/lcov.info
+COVERAGE_HTML=$(COVERAGE_DIR)/html
 
-.PHONY : install-deps byte-compile byte-compile-strict test run-tests test-interactive clean emacs org-version lint checkdoc export-test-org edit-test-org
+
+.PHONY : install-deps byte-compile byte-compile-strict test run-tests test-interactive clean emacs org-version lint checkdoc export-test-org edit-test-org coverage
+
 
 # Install package and dependencies into .eask/
 .eask :
@@ -68,9 +73,25 @@ test-interactive : install-deps
 emacs : install-deps
 	$(EASK) emacs -L $(TEST_DIR)
 
+# Collect test coverage using undercover.el and optionally generate HTML via genhtml.
+# Install the lcov package (apt install lcov) to get genhtml and enable HTML output.
+coverage : install-deps
+	@mkdir -p $(COVERAGE_DIR)
+	$(EASK) clean elc
+	$(EASK) emacs --batch -L $(TEST_DIR) \
+	  -l $(TEST_DIR)/run-coverage.el
+	@echo ""
+	@echo "Coverage data written to $(COVERAGE_FILE)"
+	@if command -v genhtml > /dev/null 2>&1; then \
+	  genhtml $(COVERAGE_FILE) --output-directory $(COVERAGE_HTML) \
+	  && echo "HTML report:  open $(COVERAGE_HTML)/index.html"; \
+	else \
+	  echo "Tip: install lcov (apt install lcov) to generate an HTML report"; \
+	fi
+
 clean :
 	$(EASK) clean elc
-	@rm -rf .eask
+	@rm -rf .eask $(COVERAGE_DIR)
 
 export-test-org : install-deps
 	EXPORT_STRICT=$(EXPORT_STRICT) $(EASK) emacs --batch \

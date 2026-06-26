@@ -19,6 +19,8 @@
 | `tests/test.org` | Sample Org document used by the export test |
 | `tests/test.json` | Reference JSON export of `test.org` (generated, checked in) |
 | `tests/export.el` | Script to regenerate `test.json` from `test.org` |
+| `tests/run-coverage.el` | Single-process test runner used by `make coverage` |
+| `coverage/` | Coverage output directory (not checked in) |
 | `Eask` | Package metadata, dependencies, and Eask build config |
 | `Makefile` | Additional automation (interactive testing, export regeneration) |
 | `.github/workflows/ci.yml` | GitHub Actions CI config |
@@ -32,9 +34,13 @@ Runtime (declared in the `Package-Requires` header of `ox-json.el` and `depends-
 - `org` >= 9
 - `s` >= 1.12
 
-Development-only (declared in the `(development ...)` block of `Eask`): `package-lint`, `ellsp`.
+Development-only (declared in the `(development ...)` block of `Eask`): `package-lint`, `undercover`.
 
 Test-only: `ert` (bundled with Emacs).
+
+Optional system tools:
+
+- [`lcov`](https://github.com/linux-test-project/lcov) — generates HTML coverage reports from the LCOV data produced by `make coverage`. Install with `apt install lcov` (or your distro's equivalent).
 
 
 ## Running the tests
@@ -105,6 +111,30 @@ make test-interactive
 ```
 
 
+### Test coverage
+
+Coverage is collected via [`undercover.el`](https://github.com/undercover-el/undercover.el), which instruments the source files at load time and writes an LCOV report. Run:
+
+```bash
+make coverage
+```
+
+This will:
+
+1. Clean any byte-compiled `.elc` files (undercover requires source, not compiled code).
+2. Run the full test suite through `tests/run-coverage.el`, a single-process runner that initialises undercover before any source file is loaded.
+3. Write the raw coverage data to `coverage/lcov.info`.
+4. If `genhtml` (from the `lcov` package) is available, generate an HTML report at `coverage/html/index.html`.
+
+To install `genhtml` on Debian/Ubuntu:
+
+```bash
+sudo apt install lcov
+```
+
+The `coverage/` directory is not checked in (it's in `.gitignore`).
+
+
 ## What the tests cover
 
 The test suite uses Emacs's built-in ERT (Emacs Lisp Regression Testing) framework. Test files live in `tests/` and follow the naming convention `test-*.el`.
@@ -137,10 +167,11 @@ The Makefile is a thin facade over Eask — short `make` commands for local deve
 | `lint` | Run `package-lint` on all `ox-json*.el` files |
 | `checkdoc` | Run `checkdoc` on all `ox-json*.el` files |
 | `test-interactive` | Open an Emacs session with test files loaded for interactive `M-x ert` |
+| `coverage` | Run tests with `undercover.el` and write `coverage/lcov.info`; generates HTML with `genhtml` if available |
 | `export-test-org` | Re-export `tests/test.org` to `test.json` (use `EXPORT_STRICT=1` for strict mode) |
 | `emacs` | Open Emacs with the project and test load-path configured |
 | `org-version` | Print the version of `org-mode` in use |
-| `clean` | Remove byte-compiled `.elc` files and `.eask/` |
+| `clean` | Remove byte-compiled `.elc` files, `.eask/`, and `coverage/` |
 
 
 ### Key Makefile variables
