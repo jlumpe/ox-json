@@ -9,7 +9,11 @@
 
 | Path | Description |
 |------|-------------|
-| `ox-json.el` | Main package source — the export backend |
+| `ox-json.el` | Package entry point — loads all other source files |
+| `ox-json-core.el` | Core data types and backend registration |
+| `ox-json-utils.el` | Internal utility functions |
+| `ox-json-encode.el` | JSON encoding functions |
+| `ox-json-export.el` | Org element export handlers |
 | `ox-json-docs.org` | User-facing documentation (Org format) |
 | `tests/` | ERT test suite and helpers |
 | `tests/test.org` | Sample Org document used by the export test |

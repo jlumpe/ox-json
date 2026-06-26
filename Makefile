@@ -93,10 +93,11 @@ lint : install-deps
 	$(EMACS_BATCH) $(EMACS_PKG) \
 	  -l package-lint \
 	  -f 'package-lint-batch-and-exit' \
-	  $(PACKAGE_NAME).el
+	  $(PACKAGE_NAME).el $(PACKAGE_NAME)-core.el $(PACKAGE_NAME)-utils.el $(PACKAGE_NAME)-encode.el $(PACKAGE_NAME)-export.el
 
 checkdoc : install-deps
-	$(EMACS_BATCH) $(EMACS_PKG) --script tests/checkdoc-batch.el -- $(PACKAGE_NAME).el
+	$(EMACS_BATCH) $(EMACS_PKG) --script tests/checkdoc-batch.el -- \
+	  $(PACKAGE_NAME).el $(PACKAGE_NAME)-core.el $(PACKAGE_NAME)-utils.el $(PACKAGE_NAME)-encode.el $(PACKAGE_NAME)-export.el
 
 # Print the version of org installed
 org-version :
