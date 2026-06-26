@@ -1189,7 +1189,11 @@ INFO is the plist of export options."
 ;;; Filter functions
 
 (defun ox-json-filter-final-output (text back-end info)
-  "Post-process the entire output."
+  "Post-process the entire output.
+
+TEXT is the full exported text string.
+BACK-END is the export back-end symbol.
+INFO is the plist of export options."
   (let ((postprocess (plist-get info :json-postprocess)))
     (cond
       ; Not JSON?
