@@ -65,7 +65,7 @@ eask install-deps --dev
 eask compile
 
 # Run the full test suite:
-eask run script test
+eask test ert tests/test-*.el
 ```
 
 
@@ -86,13 +86,13 @@ eask run script test
 3. **Run the test suite:**
 
    ```bash
-   eask run script test
+   eask test ert tests/test-*.el
    ```
 
-   To run a specific test file (always from the project root):
+   To run a specific test file:
 
    ```bash
-   eask exec emacs --batch -L . -L tests -l tests/test-encode.el -f ert-run-tests-batch-and-exit
+   eask test ert tests/test-encode.el
    ```
 
 
@@ -119,7 +119,6 @@ The test suite uses Emacs's built-in ERT (Emacs Lisp Regression Testing) framewo
 Supporting files:
 
 - `ox-json-test-helpers.el` — shared test infrastructure: sets up the export backend and `info` plist, provides `encoded=` (whitespace-insensitive JSON string comparison), `json-obj` (builds expected hash-table objects), `decode-compare` (round-trip encode-then-decode comparison), `with-json-decode-explicit` (macro that configures unambiguous JSON decoding settings), and recursive JSON structure comparison via `json-compare` (supports `:ignore` lists and pluggable object comparison functions).
-- `run-tests.el` — entry point for `eask run script test`; loads all test files and calls `ert-run-tests-batch-and-exit`.
 - `tests/export.el` — standalone script used by `make export-test-org` to regenerate `tests/test.json`. Supports `EXPORT_STRICT=1` environment variable to export with `(:json-strict t)`.
 - `tests/export/` — reference JSON exports broken down by feature (headings, markup, links, tables, lists, blocks, drawers, footnotes, timestamps, latex, babel, misc).
 
@@ -180,7 +179,7 @@ For each Emacs version the job:
 4. Runs `eask install-deps --dev` to install all dependencies.
 5. Prints the installed `org-mode` version for debugging.
 6. Runs `eask compile` — byte-compiles the package.
-7. Runs `eask run script test` — executes the full ERT test suite.
+7. Runs `eask test ert tests/test-*.el` — executes the full ERT test suite.
 
 
 ## Linting and style checks
@@ -210,6 +209,6 @@ The comparison ignores properties that are known to vary across Org versions (e.
 ## Tips
 
 - Eask installs dependencies into `.eask/<emacs-version>/elpa/`, keeping them completely separate from your personal `~/.emacs.d`. You can safely delete `.eask/` at any time and re-run `eask install-deps --dev` to restore it.
-- The `test` script in `Eask` uses `eask exec emacs` with explicit `-L . -L tests` flags so that both the package root and `tests/` (where `ox-json-test-helpers.el` lives) are on the load path.
+- Each test file adds its own directory to `load-path` via `(add-to-list 'load-path (file-name-directory load-file-name))`, so `ox-json-test-helpers` is always findable regardless of the working directory or how the file is loaded.
 - The `encoded=` helper in the test suite compares JSON strings after stripping all whitespace, so formatting differences don't cause false failures.
 - The Makefile `install-deps` target still works and installs into a local `.emacs.d/elpa/` (with `HOME` overridden to the project directory). Set `NO_INSTALL_DEPS` to any non-empty value to skip it when dependencies are already installed.

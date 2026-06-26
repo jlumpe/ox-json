@@ -45,4 +45,4 @@ jobs:
       run: eask compile
 
     - name: Run tests
-      run: eask run script test
+      run: eask test ert tests/test-*.el

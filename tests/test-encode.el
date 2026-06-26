@@ -1,5 +1,7 @@
 ;;; Test generic data encoder functions
 
+(add-to-list 'load-path (file-name-directory load-file-name))
+
 (require 'ox-json)
 (require 'ox-json-test-helpers)
 

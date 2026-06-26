@@ -19,5 +19,3 @@
 
 (development
  (depends-on "package-lint"))
-
-(script "test" "eask exec emacs --batch -L . -L tests -l tests/run-tests.el")
