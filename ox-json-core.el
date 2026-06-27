@@ -75,6 +75,10 @@ be overridden with the :json-exporters option.")
       :robust-begin nil
       :robust-end nil
       :post-affiliated nil
+      ; Parser-internal metadata: records the recursion depth used when the node was parsed (e.g. headline,
+      ; greater-element, element, object). Not a property of document content - it reflects the org-element
+      ; parser invocation and is almost always nil for a full parse. Introduced in org 9.6.
+      :granularity nil
       ; These can be useful when converting from JSON to another format
       :pre-blank number
       :post-blank number)
