@@ -146,6 +146,28 @@ INFO is the plist of export options."
       (plist-get ox-json-default-property-types node-type)
       (plist-get ox-json-default-property-types 'all))))
 
+(defun ox-json--get-property-defaults (node-type)
+  "Get property default value plists for NODE-TYPE in priority order."
+  (list
+    (plist-get ox-json-default-property-values node-type)
+    (plist-get ox-json-default-property-values 'all)))
+
+(defun ox-json--is-default-property-value (key value node-type)
+  "Return non-nil if VALUE is the configured default for KEY in NODE-TYPE."
+  (let* ((default-plists (ox-json--get-property-defaults node-type))
+         (default-val (apply #'ox-json--plists-get-default
+                        key ox-json--absent default-plists)))
+    (and (not (eq default-val ox-json--absent))
+         (equal value default-val))))
+
+(defun ox-json--remove-default-properties (property-plist node-type)
+  "Return a copy of PROPERTY-PLIST with default-valued properties removed."
+  (let ((result nil))
+    (ox-json--loop-plist (key value property-plist)
+      do (unless (ox-json--is-default-property-value key value node-type)
+           (setq result (append result (list key value)))))
+    result))
+
 (defun ox-json-export-properties (node info &optional property-types)
   "Get alist of encoded property values for element/object NODE.
 
@@ -171,9 +193,13 @@ overrides the defaults derived from INFO and NODE-TYPE.
 Returns an alist where the items are property names and their
 JSON-encoded values."
   (let ((type-plists (ox-json--get-property-types node-type info))
-        (include-extra (plist-get info :json-include-extra-properties)))
+        (include-extra (plist-get info :json-include-extra-properties))
+        (omit-defaults (plist-get info :json-omit-default-property-values)))
     (when property-types
       (push property-types type-plists))
+    (when omit-defaults
+      (setq property-plist
+        (ox-json--remove-default-properties property-plist node-type)))
     (apply #'ox-json--export-properties-base
       property-plist
       (if include-extra t nil)

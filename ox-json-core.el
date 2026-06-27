@@ -42,6 +42,9 @@
 
 ;;; Private constants
 
+(defconst ox-json--absent (make-symbol "ox-json--absent")
+  "Sentinel for `ox-json--plists-get-default' when KEY is not found.")
+
 (defconst ox-json-default-type-exporters
   `(
     bool             ,#'ox-json-encode-bool
@@ -256,6 +259,53 @@ symbols (starting with colons) to type symbols in
 the property.
 
 These can be overridden with the :json-property-types option.")
+
+(defconst ox-json-default-property-values
+  '(
+    all (
+      :pre-blank  0
+      :post-blank 0
+      :mode nil
+      :secondary nil
+      :cached nil
+      :true-level nil
+      :deferred nil
+      :structure nil
+    )
+    headline (
+      :tags nil
+      :archivedp nil
+      :commentedp nil
+      :footnote-section-p nil
+      :priority nil
+      :todo-keyword nil
+      :todo-type nil
+      ;; :quotedp            nil
+      ;; :closed             nil
+      ;; :deadline           nil
+      ;; :scheduled          nil)
+    )
+    item (
+      :checkbox nil
+      :counter nil
+      :tag nil
+    )
+    link (
+      :application nil
+      :search-option nil
+      :target-ref nil
+      :is-inline-image nil
+    )
+    timestamp (
+      :range-type nil
+    )
+  )
+  "Default property values to omit from export.
+
+Same nested-plist structure as `ox-json-default-property-types'.
+Top-level keys are element/object type symbols or \"all\".
+Inner plists map property symbols to the value for which the
+property will NOT be exported.")
 
 
 ;;; Variables

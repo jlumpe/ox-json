@@ -61,6 +61,10 @@
 ;;   in the :json-property-types option. If true these properties will be exported
 ;;   using `ox-json-encode-auto'.
 
+;; :json-omit-default-property-values (bool) - When non-nil, properties matching their
+;;   default value in `ox-json-default-property-values' are omitted from export. Set
+;;   to nil to include all properties (backwards-compatible behavior). Defaults to t.
+
 ;; :json-postprocess (symbol) - How to postprocess the final output. Values are `pretty'
 ;;   (indent properly), `minimal' (remove whitespace), and nil (nothing, maybe faster?).
 
@@ -122,6 +126,8 @@
      (:json-strict nil nil nil)
      ; Include properties not defined in ox-json-default-property-types
      (:json-include-extra-properties nil nil t)
+     ; Omit properties matching default values in ox-json-default-property-values
+     (:json-omit-default-property-values nil nil t)
      ; How to post-process the final output
      (:json-postprocess nil nil 'pretty)
      ; Derive node refs from structural path instead of random numbers

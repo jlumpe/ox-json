@@ -130,10 +130,13 @@ Additional properties:
 | `:json-property-types`                | plist     | See variable `ox-json-default-property-types`  |
 | `:json-strict`                        | bool      | `nil`                                          |
 | `:json-include-extra-properties`      | bool      | `t`                                            |
+| `:json-omit-default-property-values`  | bool      | `t`                                            |
 
 - `:json-data-type-property`: Name of the property added to JSON objects which indicates the type of
   data they represent. Set to `nil` to disable.
-
+- `:json-omit-default-property-values`: When non-nil, node properties whose value equals the
+  configured default are omitted from export. Defaults are defined in
+  `ox-json-default-property-values` (not customizable currently).
 
 
 ## Related software
