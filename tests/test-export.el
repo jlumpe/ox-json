@@ -51,6 +51,9 @@
           ("mode" . t)
           ("type-explicit-p" . t)
           ("range-type" . t)
+          ("post-blank" . t)
+          ; src-block :parameters is exported in 9.7 but null in 9.6
+          ("parameters" . t)
         )
       )
     )
@@ -59,10 +62,6 @@
         ; Specific failure in headings.org - 9.6 is case sensitive, 9.5 is not
         ("drawer" . t)
         ("properties"
-          ; Seems to have a different value in 9.6 vs others?
-          ("post-blank" . t)
-          ; Added in 9.6
-          ("parameters" . t)  ; In special-block
         )
       )
     )
