@@ -1,84 +1,75 @@
 {
   "$$data_type": "org-document",
   "properties": {
-    "title": [
-      "Lists"
-    ],
-    "filetags": [],
     "author": [
       "Test User"
     ],
-    "creator": "Emacs 29.3 (Org mode 9.6.15)",
+    "creator": "Emacs 30.2 (Org mode 9.7.11)",
     "date": [
       "2026-01-01"
     ],
     "description": [],
     "email": "test@example.com",
-    "language": "en"
+    "filetags": [],
+    "language": "en",
+    "title": [
+      "Lists"
+    ]
   },
   "contents": [
     {
       "$$data_type": "org-node",
       "type": "section",
-      "ref": "org0000001",
+      "ref": "org354809b",
       "properties": {
-        "post-blank": 1,
         "mode": "first-section"
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000001",
+          "ref": "org636f48c",
           "properties": {
             "key": "TITLE",
-            "value": "Lists",
-            "post-blank": 0,
-            "mode": "top-comment"
-          },
-          "contents": []
+            "mode": "top-comment",
+            "post-blank": 1,
+            "value": "Lists"
+          }
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000011",
+      "ref": "org8950e07",
       "tags-all": [],
       "drawer": {},
       "properties": {
-        "raw-value": "Unordered lists",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 0,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Unordered lists",
+        "secondary": [
+          ":title"
+        ],
         "title": [
           "Unordered lists"
         ],
-        "mode": null
+        "true-level": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000023",
+          "ref": "org4e839db",
           "properties": {
-            "post-blank": 0,
             "mode": "section"
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "plain-list",
-              "ref": "org0000023",
+              "ref": "org7b4b3a2",
               "properties": {
-                "type": "unordered",
+                "mode": "planning",
                 "structure": [
                   [
                     35,
@@ -99,32 +90,26 @@
                     57
                   ]
                 ],
-                "post-blank": 0,
-                "mode": "planning"
+                "type": "unordered"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "item",
-                  "ref": "org0000023",
+                  "ref": "orgd3f9108",
                   "properties": {
                     "bullet": "- ",
-                    "checkbox": null,
-                    "counter": null,
-                    "pre-blank": 0,
-                    "post-blank": 0,
-                    "tag": [],
-                    "mode": "item"
+                    "mode": "item",
+                    "secondary": [
+                      ":tag"
+                    ]
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "paragraph",
-                      "ref": "org0000025",
-                      "properties": {
-                        "post-blank": 0,
-                        "mode": null
-                      },
+                      "ref": "org068f754",
+                      "properties": {},
                       "contents": [
                         "Item one\n"
                       ]
@@ -134,25 +119,20 @@
                 {
                   "$$data_type": "org-node",
                   "type": "item",
-                  "ref": "org000002e",
+                  "ref": "org3646d8f",
                   "properties": {
                     "bullet": "+ ",
-                    "checkbox": null,
-                    "counter": null,
-                    "pre-blank": 0,
-                    "post-blank": 0,
-                    "tag": [],
-                    "mode": "item"
+                    "mode": "item",
+                    "secondary": [
+                      ":tag"
+                    ]
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "paragraph",
-                      "ref": "org0000030",
-                      "properties": {
-                        "post-blank": 0,
-                        "mode": null
-                      },
+                      "ref": "orgdd137c4",
+                      "properties": {},
                       "contents": [
                         "Item two\n"
                       ]
@@ -168,67 +148,55 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000039",
+      "ref": "orgfb6e679",
       "tags-all": [],
       "drawer": {},
       "properties": {
-        "raw-value": "Item three",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Item three",
+        "secondary": [
+          ":title"
+        ],
         "title": [
           "Item three"
         ],
-        "mode": null
-      },
-      "contents": []
+        "true-level": 1
+      }
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000047",
+      "ref": "org04c8511",
       "tags-all": [],
       "drawer": {},
       "properties": {
-        "raw-value": "Ordered lists",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Ordered lists",
+        "secondary": [
+          ":title"
+        ],
         "title": [
           "Ordered lists"
         ],
-        "mode": null
+        "true-level": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000057",
+          "ref": "org1095095",
           "properties": {
-            "post-blank": 1,
             "mode": "section"
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "plain-list",
-              "ref": "org0000057",
+              "ref": "org03cd29f",
               "properties": {
-                "type": "ordered",
+                "mode": "planning",
+                "post-blank": 1,
                 "structure": [
                   [
                     87,
@@ -267,32 +235,26 @@
                     125
                   ]
                 ],
-                "post-blank": 0,
-                "mode": "planning"
+                "type": "ordered"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "item",
-                  "ref": "org0000057",
+                  "ref": "org150ac48",
                   "properties": {
                     "bullet": "1. ",
-                    "checkbox": null,
-                    "counter": null,
-                    "pre-blank": 0,
-                    "post-blank": 0,
-                    "tag": [],
-                    "mode": "item"
+                    "mode": "item",
+                    "secondary": [
+                      ":tag"
+                    ]
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "paragraph",
-                      "ref": "org000005a",
-                      "properties": {
-                        "post-blank": 0,
-                        "mode": null
-                      },
+                      "ref": "orgeac3176",
+                      "properties": {},
                       "contents": [
                         "First\n"
                       ]
@@ -302,25 +264,20 @@
                 {
                   "$$data_type": "org-node",
                   "type": "item",
-                  "ref": "org0000060",
+                  "ref": "org1357ded",
                   "properties": {
                     "bullet": "2. ",
-                    "checkbox": null,
-                    "counter": null,
-                    "pre-blank": 0,
-                    "post-blank": 0,
-                    "tag": [],
-                    "mode": "item"
+                    "mode": "item",
+                    "secondary": [
+                      ":tag"
+                    ]
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "paragraph",
-                      "ref": "org0000063",
-                      "properties": {
-                        "post-blank": 0,
-                        "mode": null
-                      },
+                      "ref": "org3200797",
+                      "properties": {},
                       "contents": [
                         "Second\n"
                       ]
@@ -330,25 +287,20 @@
                 {
                   "$$data_type": "org-node",
                   "type": "item",
-                  "ref": "org000006a",
+                  "ref": "orged14e85",
                   "properties": {
                     "bullet": "1) ",
-                    "checkbox": null,
-                    "counter": null,
-                    "pre-blank": 0,
-                    "post-blank": 0,
-                    "tag": [],
-                    "mode": "item"
+                    "mode": "item",
+                    "secondary": [
+                      ":tag"
+                    ]
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "paragraph",
-                      "ref": "org000006d",
-                      "properties": {
-                        "post-blank": 0,
-                        "mode": null
-                      },
+                      "ref": "orgb97f245",
+                      "properties": {},
                       "contents": [
                         "Third\n"
                       ]
@@ -358,25 +310,20 @@
                 {
                   "$$data_type": "org-node",
                   "type": "item",
-                  "ref": "org0000073",
+                  "ref": "org96750c8",
                   "properties": {
                     "bullet": "2) ",
-                    "checkbox": null,
-                    "counter": null,
-                    "pre-blank": 0,
-                    "post-blank": 0,
-                    "tag": [],
-                    "mode": "item"
+                    "mode": "item",
+                    "secondary": [
+                      ":tag"
+                    ]
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "paragraph",
-                      "ref": "org0000076",
-                      "properties": {
-                        "post-blank": 0,
-                        "mode": null
-                      },
+                      "ref": "orgd4dac7a",
+                      "properties": {},
                       "contents": [
                         "Fourth\n"
                       ]
@@ -392,43 +339,36 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org000007e",
+      "ref": "orgec79af1",
       "tags-all": [],
       "drawer": {},
       "properties": {
-        "raw-value": "Description list",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Description list",
+        "secondary": [
+          ":title"
+        ],
         "title": [
           "Description list"
         ],
-        "mode": null
+        "true-level": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000091",
+          "ref": "org1bec060",
           "properties": {
-            "post-blank": 1,
             "mode": "section"
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org0000091",
+              "ref": "org08d9c23",
               "properties": {
-                "post-blank": 0,
-                "mode": "planning"
+                "mode": "planning",
+                "post-blank": 1
               },
               "contents": [
                 "Term one :: Definition one\nTerm two :: Definition two\n"
@@ -441,42 +381,36 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00000c8",
+      "ref": "org753a788",
       "tags-all": [],
       "drawer": {},
       "properties": {
-        "raw-value": "Nested list",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Nested list",
+        "secondary": [
+          ":title"
+        ],
         "title": [
           "Nested list"
         ],
-        "mode": null
+        "true-level": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000d6",
+          "ref": "org7dceac0",
           "properties": {
-            "post-blank": 1,
             "mode": "section"
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "plain-list",
-              "ref": "org00000d6",
+              "ref": "orgf024868",
               "properties": {
-                "type": "unordered",
+                "mode": "planning",
+                "post-blank": 1,
                 "structure": [
                   [
                     214,
@@ -515,32 +449,26 @@
                     268
                   ]
                 ],
-                "post-blank": 0,
-                "mode": "planning"
+                "type": "unordered"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "item",
-                  "ref": "org00000d6",
+                  "ref": "orgdf618ec",
                   "properties": {
                     "bullet": "- ",
-                    "checkbox": null,
-                    "counter": null,
-                    "pre-blank": 0,
-                    "post-blank": 0,
-                    "tag": [],
-                    "mode": "item"
+                    "mode": "item",
+                    "secondary": [
+                      ":tag"
+                    ]
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "paragraph",
-                      "ref": "org00000d8",
-                      "properties": {
-                        "post-blank": 0,
-                        "mode": null
-                      },
+                      "ref": "orgbcdeeba",
+                      "properties": {},
                       "contents": [
                         "Parent\n"
                       ]
@@ -548,9 +476,8 @@
                     {
                       "$$data_type": "org-node",
                       "type": "plain-list",
-                      "ref": "org00000df",
+                      "ref": "org5544f04",
                       "properties": {
-                        "type": "unordered",
                         "structure": [
                           [
                             214,
@@ -589,32 +516,26 @@
                             268
                           ]
                         ],
-                        "post-blank": 0,
-                        "mode": null
+                        "type": "unordered"
                       },
                       "contents": [
                         {
                           "$$data_type": "org-node",
                           "type": "item",
-                          "ref": "org00000df",
+                          "ref": "org39f3c90",
                           "properties": {
                             "bullet": "- ",
-                            "checkbox": null,
-                            "counter": null,
-                            "pre-blank": 0,
-                            "post-blank": 0,
-                            "tag": [],
-                            "mode": "item"
+                            "mode": "item",
+                            "secondary": [
+                              ":tag"
+                            ]
                           },
                           "contents": [
                             {
                               "$$data_type": "org-node",
                               "type": "paragraph",
-                              "ref": "org00000e3",
-                              "properties": {
-                                "post-blank": 0,
-                                "mode": null
-                              },
+                              "ref": "org57af98a",
+                              "properties": {},
                               "contents": [
                                 "Child one\n"
                               ]
@@ -624,25 +545,20 @@
                         {
                           "$$data_type": "org-node",
                           "type": "item",
-                          "ref": "org00000ed",
+                          "ref": "orga637971",
                           "properties": {
                             "bullet": "- ",
-                            "checkbox": null,
-                            "counter": null,
-                            "pre-blank": 0,
-                            "post-blank": 0,
-                            "tag": [],
-                            "mode": "item"
+                            "mode": "item",
+                            "secondary": [
+                              ":tag"
+                            ]
                           },
                           "contents": [
                             {
                               "$$data_type": "org-node",
                               "type": "paragraph",
-                              "ref": "org00000f1",
-                              "properties": {
-                                "post-blank": 0,
-                                "mode": null
-                              },
+                              "ref": "org3242cad",
+                              "properties": {},
                               "contents": [
                                 "Child two\n"
                               ]
@@ -650,9 +566,8 @@
                             {
                               "$$data_type": "org-node",
                               "type": "plain-list",
-                              "ref": "org00000fb",
+                              "ref": "org6c880c3",
                               "properties": {
-                                "type": "unordered",
                                 "structure": [
                                   [
                                     214,
@@ -691,32 +606,26 @@
                                     268
                                   ]
                                 ],
-                                "post-blank": 0,
-                                "mode": null
+                                "type": "unordered"
                               },
                               "contents": [
                                 {
                                   "$$data_type": "org-node",
                                   "type": "item",
-                                  "ref": "org00000fb",
+                                  "ref": "org2f2aa45",
                                   "properties": {
                                     "bullet": "- ",
-                                    "checkbox": null,
-                                    "counter": null,
-                                    "pre-blank": 0,
-                                    "post-blank": 0,
-                                    "tag": [],
-                                    "mode": "item"
+                                    "mode": "item",
+                                    "secondary": [
+                                      ":tag"
+                                    ]
                                   },
                                   "contents": [
                                     {
                                       "$$data_type": "org-node",
                                       "type": "paragraph",
-                                      "ref": "org0000101",
-                                      "properties": {
-                                        "post-blank": 0,
-                                        "mode": null
-                                      },
+                                      "ref": "org62fb1c9",
+                                      "properties": {},
                                       "contents": [
                                         "Grandchild\n"
                                       ]
@@ -740,42 +649,35 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org000010d",
+      "ref": "org71a8606",
       "tags-all": [],
       "drawer": {},
       "properties": {
-        "raw-value": "Checkbox items",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 0,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Checkbox items",
+        "secondary": [
+          ":title"
+        ],
         "title": [
           "Checkbox items"
         ],
-        "mode": null
+        "true-level": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org000011e",
+          "ref": "orga54a7d4",
           "properties": {
-            "post-blank": 0,
             "mode": "section"
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "plain-list",
-              "ref": "org000011e",
+              "ref": "orgb8e9498",
               "properties": {
-                "type": "unordered",
+                "mode": "planning",
                 "structure": [
                   [
                     286,
@@ -805,32 +707,27 @@
                     337
                   ]
                 ],
-                "post-blank": 0,
-                "mode": "planning"
+                "type": "unordered"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "item",
-                  "ref": "org000011e",
+                  "ref": "orgb917800",
                   "properties": {
                     "bullet": "- ",
                     "checkbox": "off",
-                    "counter": null,
-                    "pre-blank": 0,
-                    "post-blank": 0,
-                    "tag": [],
-                    "mode": "item"
+                    "mode": "item",
+                    "secondary": [
+                      ":tag"
+                    ]
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "paragraph",
-                      "ref": "org0000124",
-                      "properties": {
-                        "post-blank": 0,
-                        "mode": null
-                      },
+                      "ref": "org0730072",
+                      "properties": {},
                       "contents": [
                         "Todo item\n"
                       ]
@@ -840,25 +737,21 @@
                 {
                   "$$data_type": "org-node",
                   "type": "item",
-                  "ref": "org000012e",
+                  "ref": "org0fe4225",
                   "properties": {
                     "bullet": "- ",
                     "checkbox": "on",
-                    "counter": null,
-                    "pre-blank": 0,
-                    "post-blank": 0,
-                    "tag": [],
-                    "mode": "item"
+                    "mode": "item",
+                    "secondary": [
+                      ":tag"
+                    ]
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "paragraph",
-                      "ref": "org0000134",
-                      "properties": {
-                        "post-blank": 0,
-                        "mode": null
-                      },
+                      "ref": "orgddb7afc",
+                      "properties": {},
                       "contents": [
                         "Done item\n"
                       ]
@@ -868,25 +761,21 @@
                 {
                   "$$data_type": "org-node",
                   "type": "item",
-                  "ref": "org000013e",
+                  "ref": "orgdd4c8e5",
                   "properties": {
                     "bullet": "- ",
                     "checkbox": "trans",
-                    "counter": null,
-                    "pre-blank": 0,
-                    "post-blank": 0,
-                    "tag": [],
-                    "mode": "item"
+                    "mode": "item",
+                    "secondary": [
+                      ":tag"
+                    ]
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "paragraph",
-                      "ref": "org0000144",
-                      "properties": {
-                        "post-blank": 0,
-                        "mode": null
-                      },
+                      "ref": "org31cc05e",
+                      "properties": {},
                       "contents": [
                         "Partial item\n"
                       ]
