@@ -33,6 +33,9 @@
       )
       ("org-node"
         ("properties"
+          ; These seem to vary in CI even when the org version is the same?
+          ("pre-blank" . t)
+          ("post-blank" . t)
         )
       )
     )
@@ -51,7 +54,6 @@
           ("mode" . t)
           ("type-explicit-p" . t)
           ("range-type" . t)
-          ("post-blank" . t)
           ; src-block :parameters is exported in 9.7 but null in 9.6
           ("parameters" . t)
         )
