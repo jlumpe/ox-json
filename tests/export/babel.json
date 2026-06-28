@@ -1,10 +1,6 @@
 {
   "$$data_type": "org-document",
   "properties": {
-    "title": [
-      "Babel"
-    ],
-    "filetags": [],
     "author": [
       "Test User"
     ],
@@ -14,122 +10,109 @@
     ],
     "description": [],
     "email": "test@example.com",
-    "language": "en"
+    "filetags": [],
+    "language": "en",
+    "title": [
+      "Babel"
+    ]
   },
   "contents": [
     {
       "$$data_type": "org-node",
       "type": "section",
-      "ref": "org0000001",
+      "ref": "org354809b",
       "properties": {
-        "post-blank": 1,
-        "mode": "first-section"
+        "mode": "first-section",
+        "post-blank": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000001",
+          "ref": "org636f48c",
           "properties": {
             "key": "TITLE",
-            "value": "Babel",
+            "mode": "top-comment",
             "post-blank": 1,
-            "mode": "top-comment"
-          },
-          "contents": []
+            "value": "Babel"
+          }
         },
         {
           "$$data_type": "org-node",
           "type": "src-block",
-          "ref": "org0000011",
+          "ref": "org5692a7b",
           "properties": {
-            "language": "emacs-lisp",
-            "switches": null,
-            "parameters": null,
-            "number-lines": null,
-            "preserve-indent": false,
-            "retain-labels": true,
-            "use-labels": true,
             "label-fmt": null,
-            "value": "(+ 1 2)\n",
-            "post-blank": 1,
+            "language": "emacs-lisp",
             "name": "add-one",
-            "mode": null
-          },
-          "contents": []
+            "number-lines": null,
+            "parameters": null,
+            "post-blank": 1,
+            "preserve-indent": false,
+            "retain-labels": true,
+            "switches": null,
+            "use-labels": true,
+            "value": "(+ 1 2)\n"
+          }
         },
         {
           "$$data_type": "org-node",
           "type": "src-block",
-          "ref": "org000004b",
+          "ref": "org95b47e2",
           "properties": {
+            "label-fmt": null,
             "language": "emacs-lisp",
-            "switches": null,
-            "parameters": null,
             "number-lines": null,
+            "parameters": null,
             "preserve-indent": false,
             "retain-labels": true,
+            "switches": null,
             "use-labels": true,
-            "label-fmt": null,
-            "value": "\"hello\"\n",
-            "post-blank": 0,
-            "mode": null
-          },
-          "contents": []
+            "value": "\"hello\"\n"
+          }
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000075",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org8950e07",
       "properties": {
-        "raw-value": "Inline call syntax",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Inline call syntax",
         "title": [
           "Inline call syntax"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org000008a",
+          "ref": "org4e839db",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org000008a",
+              "ref": "org63f2898",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "verbatim",
-                  "ref": "org000008a",
+                  "ref": "orgc984691",
                   "properties": {
                     "post-blank": 1,
                     "value": "3"
-                  },
-                  "contents": []
+                  }
                 },
                 "appears in inline call syntax.\n"
               ]
@@ -141,49 +124,37 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00000ae",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "orgfb6e679",
       "properties": {
-        "raw-value": "Call line syntax",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 0,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Call line syntax",
         "title": [
           "Call line syntax"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000c1",
+          "ref": "org4023f2c",
           "properties": {
-            "post-blank": 0,
             "mode": "section"
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "fixed-width",
-              "ref": "org00000c1",
+              "ref": "orga50b0e2",
               "properties": {
-                "value": "3",
+                "mode": "planning",
                 "post-blank": 1,
                 "results": [
                   ""
                 ],
-                "mode": "planning"
-              },
-              "contents": []
+                "value": "3"
+              }
             }
           ]
         }

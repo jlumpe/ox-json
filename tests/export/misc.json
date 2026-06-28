@@ -1,13 +1,6 @@
 {
   "$$data_type": "org-document",
   "properties": {
-    "title": [
-      "Misc"
-    ],
-    "filetags": [
-      "foo",
-      "bar"
-    ],
     "author": [
       "Test Author"
     ],
@@ -17,149 +10,126 @@
     ],
     "description": [],
     "email": "test@example.com",
-    "language": "en"
+    "filetags": [
+      "foo",
+      "bar"
+    ],
+    "language": "en",
+    "title": [
+      "Misc"
+    ]
   },
   "contents": [
     {
       "$$data_type": "org-node",
       "type": "section",
-      "ref": "org0000001",
+      "ref": "org354809b",
       "properties": {
-        "post-blank": 1,
-        "mode": "first-section"
+        "mode": "first-section",
+        "post-blank": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000001",
+          "ref": "org636f48c",
           "properties": {
             "key": "TITLE",
-            "value": "Misc",
-            "post-blank": 0,
-            "mode": "top-comment"
-          },
-          "contents": []
+            "mode": "top-comment",
+            "value": "Misc"
+          }
         },
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org000000f",
+          "ref": "org34540e8",
           "properties": {
             "key": "AUTHOR",
-            "value": "Test Author",
-            "post-blank": 0,
-            "mode": null
-          },
-          "contents": []
+            "value": "Test Author"
+          }
         },
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000025",
+          "ref": "org79aac9c",
           "properties": {
             "key": "DATE",
-            "value": "2024-01-15",
-            "post-blank": 0,
-            "mode": null
-          },
-          "contents": []
+            "value": "2024-01-15"
+          }
         },
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000038",
+          "ref": "org6e9c275",
           "properties": {
             "key": "FILETAGS",
-            "value": ":foo:bar:",
-            "post-blank": 0,
-            "mode": null
-          },
-          "contents": []
+            "value": ":foo:bar:"
+          }
         },
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org000004e",
+          "ref": "org3f33d2c",
           "properties": {
             "key": "DESCRIPTION",
-            "value": "Description with /markup/ *in* _it_",
-            "post-blank": 0,
-            "mode": null
-          },
-          "contents": []
+            "value": "Description with /markup/ *in* _it_"
+          }
         },
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000081",
+          "ref": "org9d8e8ba",
           "properties": {
             "key": "OPTIONS",
-            "value": "toc:t",
             "post-blank": 1,
-            "mode": null
-          },
-          "contents": []
+            "value": "toc:t"
+          }
         },
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000093",
+          "ref": "orgb4b3c64",
           "properties": {
             "key": "MACRO",
-            "value": "hello Hello, $1!",
-            "post-blank": 0,
-            "mode": null
-          },
-          "contents": []
+            "value": "hello Hello, $1!"
+          }
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00000ae",
+      "ref": "org8950e07",
+      "properties": {
+        "level": 1,
+        "post-blank": 1,
+        "raw-value": "Horizontal rule",
+        "title": [
+          "Horizontal rule"
+        ]
+      },
       "tags-all": [
         "foo",
         "bar"
       ],
       "drawer": {},
-      "properties": {
-        "raw-value": "Horizontal rule",
-        "pre-blank": 0,
-        "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
-        "title": [
-          "Horizontal rule"
-        ],
-        "mode": null
-      },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000c0",
+          "ref": "org4e839db",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "horizontal-rule",
-              "ref": "org00000c0",
+              "ref": "org8868b15",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
-              },
-              "contents": []
+              }
             }
           ]
         }
@@ -168,127 +138,96 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00000c7",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
-      "drawer": {},
+      "ref": "orgfb6e679",
       "properties": {
-        "raw-value": "Comment",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Comment",
         "title": [
           "Comment"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000d1",
+          "ref": "org4023f2c",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
-          },
-          "contents": []
+            "mode": "section",
+            "post-blank": 1
+          }
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00000eb",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
-      "drawer": {},
+      "ref": "org04c8511",
       "properties": {
-        "raw-value": "Clock entry",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Clock entry",
         "title": [
           "Clock entry"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000f9",
+          "ref": "org1095095",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
-          },
-          "contents": []
+            "mode": "section",
+            "post-blank": 1
+          }
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000139",
+      "ref": "orgec79af1",
+      "properties": {
+        "level": 1,
+        "post-blank": 1,
+        "raw-value": "Diary sexp",
+        "title": [
+          "Diary sexp"
+        ]
+      },
       "tags-all": [
         "foo",
         "bar"
       ],
       "drawer": {},
-      "properties": {
-        "raw-value": "Diary sexp",
-        "pre-blank": 0,
-        "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
-        "title": [
-          "Diary sexp"
-        ],
-        "mode": null
-      },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000146",
+          "ref": "org1bec060",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "diary-sexp",
-              "ref": "org0000146",
+              "ref": "org1085c65",
               "properties": {
-                "value": "%%(org-agenda-date-from-calendar)",
-                "post-blank": 0,
-                "mode": "planning"
-              },
-              "contents": []
+                "mode": "planning",
+                "value": "%%(org-agenda-date-from-calendar)"
+              }
             }
           ]
         }
@@ -297,79 +236,63 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000169",
+      "ref": "org753a788",
+      "properties": {
+        "level": 1,
+        "post-blank": 1,
+        "raw-value": "Dynamic block",
+        "title": [
+          "Dynamic block"
+        ]
+      },
       "tags-all": [
         "foo",
         "bar"
       ],
       "drawer": {},
-      "properties": {
-        "raw-value": "Dynamic block",
-        "pre-blank": 0,
-        "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
-        "title": [
-          "Dynamic block"
-        ],
-        "mode": null
-      },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000179",
+          "ref": "org7dceac0",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "dynamic-block",
-              "ref": "org0000179",
+              "ref": "org2e1144c",
               "properties": {
-                "block-name": "columnview",
                 "arguments": ":hlines 1 :id local",
-                "post-blank": 0,
+                "block-name": "columnview",
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "table",
-                  "ref": "org00001a1",
+                  "ref": "orgdc33570",
                   "properties": {
-                    "type": "org",
                     "tblfm": null,
-                    "value": null,
-                    "post-blank": 0,
-                    "mode": null
+                    "type": "org",
+                    "value": null
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "table-row",
-                      "ref": "org00001a1",
+                      "ref": "orgb13647a",
                       "properties": {
-                        "type": "standard",
-                        "post-blank": 0,
-                        "mode": "table-row"
+                        "mode": "table-row",
+                        "type": "standard"
                       },
                       "contents": [
                         {
                           "$$data_type": "org-node",
                           "type": "table-cell",
-                          "ref": "org00001a2",
-                          "properties": {
-                            "post-blank": 0
-                          },
+                          "ref": "orgffba736",
                           "contents": [
                             "Headline"
                           ]
@@ -377,10 +300,7 @@
                         {
                           "$$data_type": "org-node",
                           "type": "table-cell",
-                          "ref": "org00001ad",
-                          "properties": {
-                            "post-blank": 0
-                          },
+                          "ref": "org63a4b05",
                           "contents": [
                             "Time"
                           ]
@@ -390,31 +310,25 @@
                     {
                       "$$data_type": "org-node",
                       "type": "table-row",
-                      "ref": "org00001b5",
+                      "ref": "org4871d24",
                       "properties": {
-                        "type": "rule",
-                        "post-blank": 0,
-                        "mode": "table-row"
-                      },
-                      "contents": []
+                        "mode": "table-row",
+                        "type": "rule"
+                      }
                     },
                     {
                       "$$data_type": "org-node",
                       "type": "table-row",
-                      "ref": "org00001c9",
+                      "ref": "org33d3f6b",
                       "properties": {
-                        "type": "standard",
-                        "post-blank": 0,
-                        "mode": "table-row"
+                        "mode": "table-row",
+                        "type": "standard"
                       },
                       "contents": [
                         {
                           "$$data_type": "org-node",
                           "type": "table-cell",
-                          "ref": "org00001ca",
-                          "properties": {
-                            "post-blank": 0
-                          },
+                          "ref": "orgbc5de3b",
                           "contents": [
                             "Item"
                           ]
@@ -422,10 +336,7 @@
                         {
                           "$$data_type": "org-node",
                           "type": "table-cell",
-                          "ref": "org00001d5",
-                          "properties": {
-                            "post-blank": 0
-                          },
+                          "ref": "org1966ed1",
                           "contents": [
                             "1:00"
                           ]
@@ -443,72 +354,56 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00001e5",
+      "ref": "org71a8606",
+      "properties": {
+        "level": 1,
+        "post-blank": 1,
+        "raw-value": "Inlinetask",
+        "title": [
+          "Inlinetask"
+        ]
+      },
       "tags-all": [
         "foo",
         "bar"
       ],
       "drawer": {},
-      "properties": {
-        "raw-value": "Inlinetask",
-        "pre-blank": 0,
-        "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
-        "title": [
-          "Inlinetask"
-        ],
-        "mode": null
-      },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org00001f2",
+          "ref": "org14e5b64",
+          "properties": {
+            "level": 8,
+            "mode": "section",
+            "post-blank": 1,
+            "raw-value": "Inline task",
+            "title": [
+              "Inline task"
+            ],
+            "todo-keyword": "TODO",
+            "todo-type": "todo"
+          },
           "tags-all": [
             "foo",
             "bar"
           ],
           "drawer": {},
-          "properties": {
-            "raw-value": "Inline task",
-            "pre-blank": 0,
-            "level": 8,
-            "priority": null,
-            "tags": [],
-            "todo-keyword": "TODO",
-            "todo-type": "todo",
-            "post-blank": 1,
-            "footnote-section-p": false,
-            "archivedp": false,
-            "commentedp": false,
-            "title": [
-              "Inline task"
-            ],
-            "mode": "section"
-          },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "section",
-              "ref": "org000020c",
+              "ref": "org9a8a2ac",
               "properties": {
-                "post-blank": 1,
-                "mode": "section"
+                "mode": "section",
+                "post-blank": 1
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "paragraph",
-                  "ref": "org000020c",
+                  "ref": "org48ea5cf",
                   "properties": {
-                    "post-blank": 0,
                     "mode": "planning"
                   },
                   "contents": [
@@ -516,26 +411,17 @@
                     {
                       "$$data_type": "org-node",
                       "type": "bold",
-                      "ref": "org000021d",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "org9255e0e",
                       "contents": [
                         {
                           "$$data_type": "org-node",
                           "type": "bold",
-                          "ref": "org000021e",
-                          "properties": {
-                            "post-blank": 0
-                          },
+                          "ref": "org174964a",
                           "contents": [
                             {
                               "$$data_type": "org-node",
                               "type": "bold",
-                              "ref": "org000021f",
-                              "properties": {
-                                "post-blank": 0
-                              },
+                              "ref": "orgb5d34b1",
                               "contents": [
                                 "**"
                               ]
@@ -556,45 +442,35 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000227",
+      "ref": "orge3066e0",
+      "properties": {
+        "level": 1,
+        "post-blank": 1,
+        "raw-value": "Macro",
+        "title": [
+          "Macro"
+        ]
+      },
       "tags-all": [
         "foo",
         "bar"
       ],
       "drawer": {},
-      "properties": {
-        "raw-value": "Macro",
-        "pre-blank": 0,
-        "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
-        "title": [
-          "Macro"
-        ],
-        "mode": null
-      },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org000022f",
+          "ref": "org6de6135",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org000022f",
+              "ref": "org6b63ea9",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
@@ -608,57 +484,45 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org000023e",
+      "ref": "org871e643",
+      "properties": {
+        "level": 1,
+        "post-blank": 1,
+        "raw-value": "Target",
+        "title": [
+          "Target"
+        ]
+      },
       "tags-all": [
         "foo",
         "bar"
       ],
       "drawer": {},
-      "properties": {
-        "raw-value": "Target",
-        "pre-blank": 0,
-        "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
-        "title": [
-          "Target"
-        ],
-        "mode": null
-      },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000247",
+          "ref": "orga1aeb81",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org0000247",
+              "ref": "orgf66591b",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "target",
-                  "ref": "org0000247",
+                  "ref": "org8de3dbc",
                   "properties": {
-                    "value": "misc-target",
-                    "post-blank": 0
-                  },
-                  "contents": []
+                    "value": "misc-target"
+                  }
                 },
                 "\n"
               ]
@@ -670,58 +534,46 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000258",
+      "ref": "org5c794c1",
+      "properties": {
+        "level": 1,
+        "post-blank": 1,
+        "raw-value": "Export snippet",
+        "title": [
+          "Export snippet"
+        ]
+      },
       "tags-all": [
         "foo",
         "bar"
       ],
       "drawer": {},
-      "properties": {
-        "raw-value": "Export snippet",
-        "pre-blank": 0,
-        "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
-        "title": [
-          "Export snippet"
-        ],
-        "mode": null
-      },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000269",
+          "ref": "orgbe9324a",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org0000269",
+              "ref": "org8345076",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "export-snippet",
-                  "ref": "org0000269",
+                  "ref": "org721e82c",
                   "properties": {
                     "back-end": "html",
-                    "value": "<b>bold</b>",
-                    "post-blank": 0
-                  },
-                  "contents": []
+                    "value": "<b>bold</b>"
+                  }
                 },
                 "\n"
               ]
@@ -733,50 +585,37 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org000027f",
+      "ref": "org658f461",
+      "properties": {
+        "level": 1,
+        "raw-value": "Keyword",
+        "title": [
+          "Keyword"
+        ]
+      },
       "tags-all": [
         "foo",
         "bar"
       ],
       "drawer": {},
-      "properties": {
-        "raw-value": "Keyword",
-        "pre-blank": 0,
-        "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 0,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
-        "title": [
-          "Keyword"
-        ],
-        "mode": null
-      },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000289",
+          "ref": "org9514483",
           "properties": {
-            "post-blank": 0,
             "mode": "section"
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "keyword",
-              "ref": "org0000289",
+              "ref": "orgcfe4d13",
               "properties": {
                 "key": "CUSTOM_KEY",
-                "value": "custom value",
-                "post-blank": 0,
-                "mode": "planning"
-              },
-              "contents": []
+                "mode": "planning",
+                "value": "custom value"
+              }
             }
           ]
         }

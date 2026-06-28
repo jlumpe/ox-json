@@ -1,10 +1,6 @@
 {
   "$$data_type": "org-document",
   "properties": {
-    "title": [
-      "Tables"
-    ],
-    "filetags": [],
     "author": [
       "Test User"
     ],
@@ -14,94 +10,82 @@
     ],
     "description": [],
     "email": "test@example.com",
-    "language": "en"
+    "filetags": [],
+    "language": "en",
+    "title": [
+      "Tables"
+    ]
   },
   "contents": [
     {
       "$$data_type": "org-node",
       "type": "section",
-      "ref": "org0000001",
+      "ref": "org354809b",
       "properties": {
-        "post-blank": 1,
-        "mode": "first-section"
+        "mode": "first-section",
+        "post-blank": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000001",
+          "ref": "org636f48c",
           "properties": {
             "key": "TITLE",
-            "value": "Tables",
-            "post-blank": 0,
-            "mode": "top-comment"
-          },
-          "contents": []
+            "mode": "top-comment",
+            "value": "Tables"
+          }
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000012",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org8950e07",
       "properties": {
-        "raw-value": "Basic table",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Basic table",
         "title": [
           "Basic table"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000020",
+          "ref": "org4e839db",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "table",
-              "ref": "org0000020",
+              "ref": "org86a4523",
               "properties": {
-                "type": "org",
+                "mode": "planning",
                 "tblfm": null,
-                "value": null,
-                "post-blank": 0,
-                "mode": "planning"
+                "type": "org",
+                "value": null
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "table-row",
-                  "ref": "org0000020",
+                  "ref": "orgf28f7ea",
                   "properties": {
-                    "type": "standard",
-                    "post-blank": 0,
-                    "mode": "table-row"
+                    "mode": "table-row",
+                    "type": "standard"
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org0000021",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "orgb5b1532",
                       "contents": [
                         "Name"
                       ]
@@ -109,10 +93,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org0000028",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "orge4335ec",
                       "contents": [
                         "Value"
                       ]
@@ -122,31 +103,25 @@
                 {
                   "$$data_type": "org-node",
                   "type": "table-row",
-                  "ref": "org0000031",
+                  "ref": "orgcfb5bb2",
                   "properties": {
-                    "type": "rule",
-                    "post-blank": 0,
-                    "mode": "table-row"
-                  },
-                  "contents": []
+                    "mode": "table-row",
+                    "type": "rule"
+                  }
                 },
                 {
                   "$$data_type": "org-node",
                   "type": "table-row",
-                  "ref": "org0000042",
+                  "ref": "org3046d67",
                   "properties": {
-                    "type": "standard",
-                    "post-blank": 0,
-                    "mode": "table-row"
+                    "mode": "table-row",
+                    "type": "standard"
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org0000043",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "org5c628e8",
                       "contents": [
                         "foo"
                       ]
@@ -154,10 +129,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org000004a",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "org7b7ef3a",
                       "contents": [
                         "1"
                       ]
@@ -167,20 +139,16 @@
                 {
                   "$$data_type": "org-node",
                   "type": "table-row",
-                  "ref": "org0000053",
+                  "ref": "org8b66525",
                   "properties": {
-                    "type": "standard",
-                    "post-blank": 0,
-                    "mode": "table-row"
+                    "mode": "table-row",
+                    "type": "standard"
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org0000054",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "org83b9200",
                       "contents": [
                         "bar"
                       ]
@@ -188,10 +156,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org000005b",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "org4aecc70",
                       "contents": [
                         "2"
                       ]
@@ -207,65 +172,51 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000065",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "orgfb6e679",
       "properties": {
-        "raw-value": "Column groups",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Column groups",
         "title": [
           "Column groups"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000075",
+          "ref": "org4023f2c",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "table",
-              "ref": "org0000075",
+              "ref": "org32d1d62",
               "properties": {
-                "type": "org",
+                "mode": "planning",
                 "tblfm": null,
-                "value": null,
-                "post-blank": 0,
-                "mode": "planning"
+                "type": "org",
+                "value": null
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "table-row",
-                  "ref": "org0000075",
+                  "ref": "org3e55afc",
                   "properties": {
-                    "type": "standard",
-                    "post-blank": 0,
-                    "mode": "table-row"
+                    "mode": "table-row",
+                    "type": "standard"
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org0000076",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "orga476fbb",
                       "contents": [
                         "<"
                       ]
@@ -273,10 +224,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org000007a",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "org4a7b44b",
                       "contents": [
                         ">"
                       ]
@@ -284,10 +232,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org000007e",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "org25d4484",
                       "contents": [
                         "<>"
                       ]
@@ -297,31 +242,25 @@
                 {
                   "$$data_type": "org-node",
                   "type": "table-row",
-                  "ref": "org0000084",
+                  "ref": "org09abbf6",
                   "properties": {
-                    "type": "rule",
-                    "post-blank": 0,
-                    "mode": "table-row"
-                  },
-                  "contents": []
+                    "mode": "table-row",
+                    "type": "rule"
+                  }
                 },
                 {
                   "$$data_type": "org-node",
                   "type": "table-row",
-                  "ref": "org0000093",
+                  "ref": "org1b90b7e",
                   "properties": {
-                    "type": "standard",
-                    "post-blank": 0,
-                    "mode": "table-row"
+                    "mode": "table-row",
+                    "type": "standard"
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org0000094",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "org507aaaf",
                       "contents": [
                         "a"
                       ]
@@ -329,10 +268,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org0000098",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "orgd2c2c87",
                       "contents": [
                         "b"
                       ]
@@ -340,10 +276,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org000009c",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "orge6758a7",
                       "contents": [
                         "c"
                       ]
@@ -359,77 +292,59 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00000a3",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org04c8511",
       "properties": {
-        "raw-value": "Table formula",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 0,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Table formula",
         "title": [
           "Table formula"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000b3",
+          "ref": "org1095095",
           "properties": {
-            "post-blank": 0,
             "mode": "section"
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "keyword",
-              "ref": "org00000b3",
+              "ref": "org50181a4",
               "properties": {
                 "key": "TBLFM",
-                "value": "@2$2=(@1$2+1)",
+                "mode": "planning",
                 "post-blank": 1,
-                "mode": "planning"
-              },
-              "contents": []
+                "value": "@2$2=(@1$2+1)"
+              }
             },
             {
               "$$data_type": "org-node",
               "type": "table",
-              "ref": "org00000cb",
+              "ref": "orgd28a17a",
               "properties": {
-                "type": "org",
                 "tblfm": null,
-                "value": null,
-                "post-blank": 0,
-                "mode": null
+                "type": "org",
+                "value": null
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "table-row",
-                  "ref": "org00000cb",
+                  "ref": "orgd7d7bb1",
                   "properties": {
-                    "type": "standard",
-                    "post-blank": 0,
-                    "mode": "table-row"
+                    "mode": "table-row",
+                    "type": "standard"
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org00000cc",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "org8c2b52c",
                       "contents": [
                         "Start"
                       ]
@@ -437,10 +352,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org00000d4",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "org7de1247",
                       "contents": [
                         "Next"
                       ]
@@ -450,31 +362,25 @@
                 {
                   "$$data_type": "org-node",
                   "type": "table-row",
-                  "ref": "org00000dc",
+                  "ref": "org2feeb36",
                   "properties": {
-                    "type": "rule",
-                    "post-blank": 0,
-                    "mode": "table-row"
-                  },
-                  "contents": []
+                    "mode": "table-row",
+                    "type": "rule"
+                  }
                 },
                 {
                   "$$data_type": "org-node",
                   "type": "table-row",
-                  "ref": "org00000ed",
+                  "ref": "org99c8e1f",
                   "properties": {
-                    "type": "standard",
-                    "post-blank": 0,
-                    "mode": "table-row"
+                    "mode": "table-row",
+                    "type": "standard"
                   },
                   "contents": [
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org00000ee",
-                      "properties": {
-                        "post-blank": 0
-                      },
+                      "ref": "orge7ff145",
                       "contents": [
                         "1"
                       ]
@@ -482,11 +388,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "table-cell",
-                      "ref": "org00000f6",
-                      "properties": {
-                        "post-blank": 0
-                      },
-                      "contents": []
+                      "ref": "org4f8c5a8"
                     }
                   ]
                 }

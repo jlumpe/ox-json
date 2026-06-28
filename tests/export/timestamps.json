@@ -1,10 +1,6 @@
 {
   "$$data_type": "org-document",
   "properties": {
-    "title": [
-      "Timestamps"
-    ],
-    "filetags": [],
     "author": [
       "Test User"
     ],
@@ -14,100 +10,88 @@
     ],
     "description": [],
     "email": "test@example.com",
-    "language": "en"
+    "filetags": [],
+    "language": "en",
+    "title": [
+      "Timestamps"
+    ]
   },
   "contents": [
     {
       "$$data_type": "org-node",
       "type": "section",
-      "ref": "org0000001",
+      "ref": "org354809b",
       "properties": {
-        "post-blank": 1,
-        "mode": "first-section"
+        "mode": "first-section",
+        "post-blank": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000001",
+          "ref": "org636f48c",
           "properties": {
             "key": "TITLE",
-            "value": "Timestamps",
-            "post-blank": 0,
-            "mode": "top-comment"
-          },
-          "contents": []
+            "mode": "top-comment",
+            "value": "Timestamps"
+          }
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000016",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org8950e07",
       "properties": {
-        "raw-value": "Active timestamps",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Active timestamps",
         "title": [
           "Active timestamps"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org000002a",
+          "ref": "org4e839db",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org000002a",
+              "ref": "org63f2898",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "timestamp",
-                  "ref": "org000002a",
+                  "ref": "orgcba6bea",
                   "properties": {
-                    "type": "active",
                     "raw-value": "<2024-01-15 Mon>",
-                    "post-blank": 0,
-                    "start": "2024-01-15",
-                    "end": "2024-01-15"
+                    "type": "active"
                   },
-                  "contents": []
+                  "start": "2024-01-15",
+                  "end": "2024-01-15"
                 },
                 "\n",
                 {
                   "$$data_type": "org-node",
                   "type": "timestamp",
-                  "ref": "org000003b",
+                  "ref": "orgace9392",
                   "properties": {
-                    "type": "active",
                     "raw-value": "<2024-01-15 Mon 10:30>",
-                    "post-blank": 0,
-                    "start": "2024-01-15T10:30:00",
-                    "end": "2024-01-15T10:30:00"
+                    "type": "active"
                   },
-                  "contents": []
+                  "start": "2024-01-15T10:30:00",
+                  "end": "2024-01-15T10:30:00"
                 },
                 "\n"
               ]
@@ -119,71 +103,57 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000053",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "orgfb6e679",
       "properties": {
-        "raw-value": "Inactive timestamps",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Inactive timestamps",
         "title": [
           "Inactive timestamps"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000069",
+          "ref": "org4023f2c",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org0000069",
+              "ref": "org83d63ec",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "timestamp",
-                  "ref": "org0000069",
+                  "ref": "orgac67fb7",
                   "properties": {
-                    "type": "inactive",
                     "raw-value": "[2024-01-15 Mon]",
-                    "post-blank": 0,
-                    "start": "2024-01-15",
-                    "end": "2024-01-15"
+                    "type": "inactive"
                   },
-                  "contents": []
+                  "start": "2024-01-15",
+                  "end": "2024-01-15"
                 },
                 "\n",
                 {
                   "$$data_type": "org-node",
                   "type": "timestamp",
-                  "ref": "org000007a",
+                  "ref": "org5be019c",
                   "properties": {
-                    "type": "inactive",
                     "raw-value": "[2024-01-15 Mon 10:30]",
-                    "post-blank": 0,
-                    "start": "2024-01-15T10:30:00",
-                    "end": "2024-01-15T10:30:00"
+                    "type": "inactive"
                   },
-                  "contents": []
+                  "start": "2024-01-15T10:30:00",
+                  "end": "2024-01-15T10:30:00"
                 },
                 "\n"
               ]
@@ -195,57 +165,45 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000092",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org04c8511",
       "properties": {
-        "raw-value": "Date ranges",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Date ranges",
         "title": [
           "Date ranges"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000a0",
+          "ref": "org1095095",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org00000a0",
+              "ref": "orgb4c7513",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "timestamp",
-                  "ref": "org00000a0",
+                  "ref": "org67c01da",
                   "properties": {
-                    "type": "active-range",
                     "raw-value": "<2024-01-15>--<2024-01-20>",
-                    "post-blank": 0,
-                    "start": "2024-01-15",
-                    "end": "2024-01-20"
+                    "type": "active-range"
                   },
-                  "contents": []
+                  "start": "2024-01-15",
+                  "end": "2024-01-20"
                 },
                 "\n"
               ]
@@ -257,57 +215,45 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00000bc",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "orgec79af1",
       "properties": {
-        "raw-value": "Time ranges",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Time ranges",
         "title": [
           "Time ranges"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000ca",
+          "ref": "org1bec060",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org00000ca",
+              "ref": "org08d9c23",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "timestamp",
-                  "ref": "org00000ca",
+                  "ref": "orgfc83679",
                   "properties": {
-                    "type": "active-range",
                     "raw-value": "<2024-01-15 Mon 10:00-11:00>",
-                    "post-blank": 0,
-                    "start": "2024-01-15T10:00:00",
-                    "end": "2024-01-15T11:00:00"
+                    "type": "active-range"
                   },
-                  "contents": []
+                  "start": "2024-01-15T10:00:00",
+                  "end": "2024-01-15T11:00:00"
                 },
                 "\n"
               ]
@@ -319,77 +265,63 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00000e8",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org753a788",
       "properties": {
-        "raw-value": "Repeaters",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Repeaters",
         "title": [
           "Repeaters"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000f4",
+          "ref": "org7dceac0",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org00000f4",
+              "ref": "org54eee89",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "timestamp",
-                  "ref": "org00000f4",
+                  "ref": "orgea76a8c",
                   "properties": {
-                    "type": "active",
                     "raw-value": "<2024-01-15 Mon +1w>",
-                    "post-blank": 0,
                     "repeater-type": "cumulate",
-                    "repeater-value": 1,
                     "repeater-unit": "week",
-                    "start": "2024-01-15",
-                    "end": "2024-01-15"
+                    "repeater-value": 1,
+                    "type": "active"
                   },
-                  "contents": []
+                  "start": "2024-01-15",
+                  "end": "2024-01-15"
                 },
                 "\n",
                 {
                   "$$data_type": "org-node",
                   "type": "timestamp",
-                  "ref": "org0000109",
+                  "ref": "org19f7bf4",
                   "properties": {
-                    "type": "active",
                     "raw-value": "<2024-01-15 Mon .+1m>",
-                    "post-blank": 0,
                     "repeater-type": "restart",
-                    "repeater-value": 1,
                     "repeater-unit": "month",
-                    "start": "2024-01-15",
-                    "end": "2024-01-15"
+                    "repeater-value": 1,
+                    "type": "active"
                   },
-                  "contents": []
+                  "start": "2024-01-15",
+                  "end": "2024-01-15"
                 },
                 "\n"
               ]
@@ -401,21 +333,8 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000120",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org71a8606",
       "properties": {
-        "raw-value": "Warning period",
-        "pre-blank": 0,
-        "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 0,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
         "deadline": {
           "$$data_type": "timestamp",
           "start": "2024-01-15",
@@ -433,21 +352,22 @@
             "value": 3
           }
         },
+        "level": 1,
+        "raw-value": "Warning period",
         "title": [
           "Warning period"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000131",
+          "ref": "orga54a7d4",
           "properties": {
-            "post-blank": 0,
             "mode": "section"
-          },
-          "contents": []
+          }
         }
       ]
     }

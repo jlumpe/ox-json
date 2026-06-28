@@ -1,10 +1,6 @@
 {
   "$$data_type": "org-document",
   "properties": {
-    "title": [
-      "Links"
-    ],
-    "filetags": [],
     "author": [
       "Test User"
     ],
@@ -14,90 +10,77 @@
     ],
     "description": [],
     "email": "test@example.com",
-    "language": "en"
+    "filetags": [],
+    "language": "en",
+    "title": [
+      "Links"
+    ]
   },
   "contents": [
     {
       "$$data_type": "org-node",
       "type": "section",
-      "ref": "org0000001",
+      "ref": "org354809b",
       "properties": {
-        "post-blank": 1,
-        "mode": "first-section"
+        "mode": "first-section",
+        "post-blank": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000001",
+          "ref": "org636f48c",
           "properties": {
             "key": "TITLE",
-            "value": "Links",
-            "post-blank": 0,
-            "mode": "top-comment"
-          },
-          "contents": []
+            "mode": "top-comment",
+            "value": "Links"
+          }
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000011",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org8950e07",
       "properties": {
-        "raw-value": "External links",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "External links",
         "title": [
           "External links"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000022",
+          "ref": "org4e839db",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org0000022",
+              "ref": "org63f2898",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "link",
-                  "ref": "org0000022",
+                  "ref": "orgdf09804",
                   "properties": {
-                    "type": "https",
-                    "path": "//example.com",
                     "format": "bracket",
+                    "path": "//example.com",
                     "raw-link": "https://example.com",
-                    "application": null,
-                    "search-option": null,
-                    "post-blank": 0,
-                    "is-internal": false,
-                    "target-ref": null,
-                    "is-inline-image": false
+                    "type": "https"
                   },
+                  "is-internal": false,
                   "contents": [
                     "With description"
                   ]
@@ -106,20 +89,14 @@
                 {
                   "$$data_type": "org-node",
                   "type": "link",
-                  "ref": "org000004c",
+                  "ref": "org1fa44ce",
                   "properties": {
-                    "type": "https",
-                    "path": "//example.com",
                     "format": "bracket",
+                    "path": "//example.com",
                     "raw-link": "https://example.com",
-                    "application": null,
-                    "search-option": null,
-                    "post-blank": 0,
-                    "is-internal": false,
-                    "target-ref": null,
-                    "is-inline-image": false
+                    "type": "https"
                   },
-                  "contents": []
+                  "is-internal": false
                 },
                 "\n"
               ]
@@ -131,61 +108,46 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000065",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "orgfb6e679",
       "properties": {
-        "raw-value": "File links",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "File links",
         "title": [
           "File links"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000072",
+          "ref": "org4023f2c",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org0000072",
+              "ref": "org83d63ec",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "link",
-                  "ref": "org0000072",
+                  "ref": "org58f2be6",
                   "properties": {
-                    "type": "file",
-                    "path": "other.org",
                     "format": "bracket",
+                    "path": "other.org",
                     "raw-link": "file:other.org",
-                    "application": null,
-                    "search-option": null,
-                    "post-blank": 0,
-                    "is-internal": false,
-                    "target-ref": null,
-                    "is-inline-image": false
+                    "type": "file"
                   },
+                  "is-internal": false,
                   "contents": [
                     "Other file"
                   ]
@@ -194,20 +156,14 @@
                 {
                   "$$data_type": "org-node",
                   "type": "link",
-                  "ref": "org0000091",
+                  "ref": "org9bf4e0f",
                   "properties": {
-                    "type": "file",
-                    "path": "other.org",
                     "format": "bracket",
+                    "path": "other.org",
                     "raw-link": "file:other.org",
-                    "application": null,
-                    "search-option": null,
-                    "post-blank": 0,
-                    "is-internal": false,
-                    "target-ref": null,
-                    "is-inline-image": false
+                    "type": "file"
                   },
-                  "contents": []
+                  "is-internal": false
                 },
                 "\n"
               ]
@@ -219,73 +175,56 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00000a5",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org04c8511",
       "properties": {
-        "raw-value": "Internal links",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Internal links",
         "title": [
           "Internal links"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000b6",
+          "ref": "org1095095",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org00000b6",
+              "ref": "orgb4c7513",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "target",
-                  "ref": "org00000b6",
+                  "ref": "orgf3dbf42",
                   "properties": {
-                    "value": "internal-target",
-                    "post-blank": 0
-                  },
-                  "contents": []
+                    "value": "internal-target"
+                  }
                 },
                 "\n",
                 {
                   "$$data_type": "org-node",
                   "type": "link",
-                  "ref": "org00000ca",
+                  "ref": "orgd2f1f5f",
                   "properties": {
-                    "type": "fuzzy",
-                    "path": "internal-target",
                     "format": "bracket",
+                    "path": "internal-target",
                     "raw-link": "internal-target",
-                    "application": null,
-                    "search-option": null,
-                    "post-blank": 0,
-                    "is-internal": true,
-                    "target-ref": "org00000b6",
-                    "is-inline-image": false
+                    "type": "fuzzy"
                   },
-                  "contents": []
+                  "is-internal": true,
+                  "target-ref": "orgf3dbf42"
                 },
                 "\n"
               ]
@@ -297,64 +236,46 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org00000df",
+      "ref": "orgec79af1",
+      "properties": {
+        "level": 1,
+        "post-blank": 1,
+        "raw-value": "Custom ID target",
+        "title": [
+          "Custom ID target"
+        ]
+      },
       "tags-all": [],
       "drawer": {
         "CUSTOM_ID": "custom-id"
       },
-      "properties": {
-        "raw-value": "Custom ID target",
-        "pre-blank": 0,
-        "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
-        "title": [
-          "Custom ID target"
-        ],
-        "mode": null
-      },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org00000f2",
+          "ref": "org1bec060",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org000011b",
-              "properties": {
-                "post-blank": 0,
-                "mode": null
-              },
+              "ref": "org08d9c23",
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "link",
-                  "ref": "org000011b",
+                  "ref": "org91e050f",
                   "properties": {
-                    "type": "custom-id",
-                    "path": "custom-id",
                     "format": "bracket",
+                    "path": "custom-id",
                     "raw-link": "#custom-id",
-                    "application": null,
-                    "search-option": null,
-                    "post-blank": 0,
-                    "is-internal": true,
-                    "target-ref": "org00000df",
-                    "is-inline-image": false
+                    "type": "custom-id"
                   },
-                  "contents": []
+                  "is-internal": true,
+                  "target-ref": "orgec79af1"
                 },
                 "\n"
               ]
@@ -366,42 +287,32 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org000012b",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org753a788",
       "properties": {
-        "raw-value": "Radio links",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Radio links",
         "title": [
           "Radio links"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000139",
+          "ref": "org7dceac0",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org0000139",
+              "ref": "org54eee89",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
@@ -409,19 +320,15 @@
                 {
                   "$$data_type": "org-node",
                   "type": "link",
-                  "ref": "org0000145",
+                  "ref": "org893b83e",
                   "properties": {
-                    "type": "radio",
-                    "path": "radio-target",
                     "format": "plain",
+                    "path": "radio-target",
                     "raw-link": "radio-target",
-                    "application": null,
-                    "search-option": null,
-                    "post-blank": 0,
-                    "is-internal": true,
-                    "target-ref": "org0000152",
-                    "is-inline-image": false
+                    "type": "radio"
                   },
+                  "is-internal": true,
+                  "target-ref": "org72b3874",
                   "contents": [
                     "radio-target"
                   ]
@@ -430,9 +337,8 @@
                 {
                   "$$data_type": "org-node",
                   "type": "radio-target",
-                  "ref": "org0000152",
+                  "ref": "org72b3874",
                   "properties": {
-                    "post-blank": 0,
                     "value": "radio-target"
                   },
                   "contents": [
@@ -449,62 +355,45 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000166",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org71a8606",
       "properties": {
-        "raw-value": "Image links",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 0,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Image links",
         "title": [
           "Image links"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000174",
+          "ref": "orga54a7d4",
           "properties": {
-            "post-blank": 0,
             "mode": "section"
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org0000174",
+              "ref": "org7a4bd6e",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "link",
-                  "ref": "org0000174",
+                  "ref": "org02917ac",
                   "properties": {
-                    "type": "file",
-                    "path": "image.png",
                     "format": "bracket",
+                    "path": "image.png",
                     "raw-link": "file:image.png",
-                    "application": null,
-                    "search-option": null,
-                    "post-blank": 0,
-                    "is-internal": false,
-                    "target-ref": null,
-                    "is-inline-image": true
+                    "type": "file"
                   },
-                  "contents": []
+                  "is-internal": false,
+                  "is-inline-image": true
                 },
                 "\n"
               ]

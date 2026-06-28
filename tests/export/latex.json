@@ -1,10 +1,6 @@
 {
   "$$data_type": "org-document",
   "properties": {
-    "title": [
-      "LaTeX"
-    ],
-    "filetags": [],
     "author": [
       "Test User"
     ],
@@ -14,71 +10,63 @@
     ],
     "description": [],
     "email": "test@example.com",
-    "language": "en"
+    "filetags": [],
+    "language": "en",
+    "title": [
+      "LaTeX"
+    ]
   },
   "contents": [
     {
       "$$data_type": "org-node",
       "type": "section",
-      "ref": "org0000001",
+      "ref": "org354809b",
       "properties": {
-        "post-blank": 1,
-        "mode": "first-section"
+        "mode": "first-section",
+        "post-blank": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "keyword",
-          "ref": "org0000001",
+          "ref": "org636f48c",
           "properties": {
             "key": "TITLE",
-            "value": "LaTeX",
-            "post-blank": 0,
-            "mode": "top-comment"
-          },
-          "contents": []
+            "mode": "top-comment",
+            "value": "LaTeX"
+          }
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000011",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org8950e07",
       "properties": {
-        "raw-value": "Inline LaTeX",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Inline LaTeX",
         "title": [
           "Inline LaTeX"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org0000020",
+          "ref": "org4e839db",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org0000020",
+              "ref": "org63f2898",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
@@ -86,23 +74,20 @@
                 {
                   "$$data_type": "org-node",
                   "type": "latex-fragment",
-                  "ref": "org000002c",
+                  "ref": "org0a23b96",
                   "properties": {
-                    "value": "$x^2$",
-                    "post-blank": 1
-                  },
-                  "contents": []
+                    "post-blank": 1,
+                    "value": "$x^2$"
+                  }
                 },
                 "and ",
                 {
                   "$$data_type": "org-node",
                   "type": "latex-fragment",
-                  "ref": "org0000036",
+                  "ref": "orgdd54661",
                   "properties": {
-                    "value": "\\(x^2\\)",
-                    "post-blank": 0
-                  },
-                  "contents": []
+                    "value": "\\(x^2\\)"
+                  }
                 },
                 ".\n"
               ]
@@ -114,65 +99,51 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000040",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "orgfb6e679",
       "properties": {
-        "raw-value": "Display math",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
         "post-blank": 1,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "Display math",
         "title": [
           "Display math"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org000004f",
+          "ref": "org4023f2c",
           "properties": {
-            "post-blank": 1,
-            "mode": "section"
+            "mode": "section",
+            "post-blank": 1
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "paragraph",
-              "ref": "org000004f",
+              "ref": "org83d63ec",
               "properties": {
-                "post-blank": 0,
                 "mode": "planning"
               },
               "contents": [
                 {
                   "$$data_type": "org-node",
                   "type": "latex-fragment",
-                  "ref": "org000004f",
+                  "ref": "org6bd8479",
                   "properties": {
-                    "value": "$$x^2 + y^2 = z^2$$",
-                    "post-blank": 0
-                  },
-                  "contents": []
+                    "value": "$$x^2 + y^2 = z^2$$"
+                  }
                 },
                 "\n",
                 {
                   "$$data_type": "org-node",
                   "type": "latex-fragment",
-                  "ref": "org0000063",
+                  "ref": "orgb26f79c",
                   "properties": {
-                    "value": "\\[x^2 + y^2 = z^2\\]",
-                    "post-blank": 0
-                  },
-                  "contents": []
+                    "value": "\\[x^2 + y^2 = z^2\\]"
+                  }
                 },
                 "\n"
               ]
@@ -184,46 +155,33 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org0000078",
-      "tags-all": [],
-      "drawer": {},
+      "ref": "org04c8511",
       "properties": {
-        "raw-value": "LaTeX environment",
-        "pre-blank": 0,
         "level": 1,
-        "priority": null,
-        "tags": [],
-        "todo-keyword": null,
-        "todo-type": null,
-        "post-blank": 0,
-        "footnote-section-p": false,
-        "archivedp": false,
-        "commentedp": false,
+        "raw-value": "LaTeX environment",
         "title": [
           "LaTeX environment"
-        ],
-        "mode": null
+        ]
       },
+      "tags-all": [],
+      "drawer": {},
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "section",
-          "ref": "org000008c",
+          "ref": "org1095095",
           "properties": {
-            "post-blank": 0,
             "mode": "section"
           },
           "contents": [
             {
               "$$data_type": "org-node",
               "type": "latex-environment",
-              "ref": "org000008c",
+              "ref": "org0cdfed3",
               "properties": {
-                "value": "\\begin{equation}\nE = mc^2\n\\end{equation}\n",
-                "post-blank": 0,
-                "mode": "planning"
-              },
-              "contents": []
+                "mode": "planning",
+                "value": "\\begin{equation}\nE = mc^2\n\\end{equation}\n"
+              }
             }
           ]
         }
