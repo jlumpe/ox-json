@@ -64,6 +64,11 @@
 ;; :json-postprocess (symbol) - How to postprocess the final output. Values are `pretty'
 ;;   (indent properly), `minimal' (remove whitespace), and nil (nothing, maybe faster?).
 
+;; :json-deterministic-refs (bool) - When non-nil, node refs are derived from
+;;   the element's :begin buffer position rather than a random number, producing
+;;   refs that are stable across repeated exports of identical source. Defaults
+;;   to nil (random refs, original behavior).
+
 ;;; Code:
 
 (eval-when-compile (require 'cl-lib))
@@ -117,7 +122,9 @@
      ; Include properties not defined in ox-json-default-property-types
      (:json-include-extra-properties nil nil t)
      ; How to post-process the final output
-     (:json-postprocess nil nil 'pretty))
+     (:json-postprocess nil nil 'pretty)
+     ; Derive node refs from :begin position instead of random numbers
+     (:json-deterministic-refs nil nil nil))
   ;; Menu
   :menu-entry
   '(?j "Export to JSON" (

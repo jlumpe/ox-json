@@ -10,8 +10,11 @@
   - Skip private properties (names containing `--`)
   - Stop exporting `:post-affiliated`, `:robust-begin`, and `:robust-end`
   - Export test now compares full document output against checked-in reference JSON (`tests/test.json`).
-- New `:json-postprocess` export option (`pretty`, `minimal`, or nil) to control final JSON
-  formatting.
+- New export options:
+  - `:json-postprocess` (`pretty`, `minimal`, or nil): to control final JSON formatting (default
+    `:pretty`).
+  - `:json-deterministic-refs` (`t` or nil): Make element `ref` values deterministic (based on
+    buffer position) (default nil).
 
 ### Bug fixes
 
