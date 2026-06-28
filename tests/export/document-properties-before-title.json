@@ -1,0 +1,64 @@
+{
+  "$$data_type": "org-document",
+  "properties": {
+    "author": [
+      "Test User"
+    ],
+    "creator": "Emacs 30.2 (Org mode 9.8.3)",
+    "date": [
+      "2026-01-01"
+    ],
+    "description": [],
+    "email": "test@example.com",
+    "filetags": [],
+    "language": "en",
+    "title": [
+      "Before"
+    ]
+  },
+  "drawer": {
+    "ID": "before-title-id"
+  },
+  "contents": [
+    {
+      "$$data_type": "org-node",
+      "type": "section",
+      "ref": "org354809b",
+      "properties": {
+        "mode": "first-section"
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org636f48c",
+          "properties": {
+            "key": "TITLE",
+            "post-blank": 1,
+            "value": "Before"
+          }
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org8950e07",
+      "tags-all": [],
+      "drawer": {},
+      "properties": {
+        "archivedp": true,
+        "footnote-section-p": true,
+        "level": 1,
+        "raw-value": "H",
+        "secondary": [
+          ":title"
+        ],
+        "title": [
+          "H"
+        ],
+        "true-level": 1
+      }
+    }
+  ]
+}
