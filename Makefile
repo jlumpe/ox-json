@@ -3,6 +3,16 @@
 
 EASK ?= eask
 
+# When set (e.g. 28.2), run eask inside silex/emacs Docker (requires Docker).
+# scripts/eask-docker.sh uses -u $(id -u):$(id -g) so files aren't owned by root.
+EASK_DOCKER ?=
+ifneq ($(EASK_DOCKER),)
+  EASK := $(abspath scripts/eask-docker.sh) $(EASK_DOCKER)
+endif
+
+# Per-Emacs-version stamp so switching EASK_DOCKER re-runs install-deps.
+EASK_STAMP = .eask/.stamp$(if $(EASK_DOCKER),-$(EASK_DOCKER),)
+
 # Regex to filter test names (empty = run all non-interactive tests)
 TESTS_REGEXP=
 
@@ -29,10 +39,12 @@ COVERAGE_HTML=$(COVERAGE_DIR)/html
 
 
 # Install package and dependencies into .eask/
-.eask :
+$(EASK_STAMP) :
+	@mkdir -p .eask
 	$(EASK) install-deps --dev
+	@touch $@
 
-install-deps : $(if $(NO_INSTALL_DEPS),,.eask)
+install-deps : $(if $(NO_INSTALL_DEPS),,$(EASK_STAMP))
 
 byte-compile-strict : install-deps
 	$(EASK) emacs --batch \

@@ -155,7 +155,20 @@ Supporting files:
 
 ## Makefile
 
-The Makefile is a thin facade over Eask — short `make` commands for local development. CI calls `eask` directly. All targets depend on `install-deps`, which uses a `.eask/` stamp file (via `eask install-deps --dev`).
+The Makefile is a thin facade over Eask — short `make` commands for local development. CI calls `eask` directly. All targets depend on `install-deps`, which uses a stamp file under `.eask/` (via `eask install-deps --dev`).
+
+To test against a specific Emacs version without installing it locally, set `EASK_DOCKER` to a
+dotted version (e.g. `28.2`). Make then runs eask inside a
+[silex/emacs](https://hub.docker.com/r/silex/emacs) container with the project bind-mounted
+(requires Docker). Because eask in the image is installed under `/root`, the container runs as
+root and `scripts/eask-docker.sh` reassigns ownership of the project tree to your UID/GID when
+the command finishes. Dependencies are tracked per version via `.eask/.stamp` or
+`.eask/.stamp-<version>`.
+
+```bash
+EASK_DOCKER=28.2 make test
+EASK_DOCKER=29.1 make org-version
+```
 
 | Target | Description |
 |--------|-------------|
@@ -179,6 +192,7 @@ The Makefile is a thin facade over Eask — short `make` commands for local deve
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `EASK` | `eask` | Eask executable |
+| `EASK_DOCKER` | _(empty)_ | Emacs version for Docker (e.g. `28.2`); runs eask in `silex/emacs:<version>-eask` |
 | `EXPORT_STRICT` | `0` | Set to `1` to enable `(:json-strict t)` when running `export-test-org` |
 | `NO_INSTALL_DEPS` | _(empty)_ | Set to any non-empty value to skip dependency installation |
 | `TESTS_REGEXP` | _(empty)_ | When set, filter ERT tests by name (default runs all via `eask test ert`) |
