@@ -49,8 +49,6 @@
           ("true-level" . t)
           ; And these seem to have a different value in 9.7 vs 9.6
           ("mode" . t)
-          ("archivedp" . t)
-          ("footnote-section-p" . t)
           ("type-explicit-p" . t)
           ("range-type" . t)
         )

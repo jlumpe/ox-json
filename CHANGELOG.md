@@ -30,6 +30,9 @@
 
 ### Bug fixes
 
+- Resolve Org 9.7 headline deferred properties (`:archivedp`, `:footnote-section-p`,
+  etc.) with force-undefer when enumerating node properties. Shared deferred
+  placeholders with `auto-undefer-p` nil were previously exported as `true`.
 - Fix improper quoting in `cl-case` link-type branches.
 - Fix incorrect argument order in `ox-json--type-error` calls.
 

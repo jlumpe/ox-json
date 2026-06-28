@@ -113,10 +113,14 @@ considered when enumerating a node's properties:
 node's properties and handles both of these changes."
   (if (fboundp 'org-element-properties-map)
     (let ((expanded-properties nil))
+      ;; Org 9.7 stores some headline properties (e.g. :archivedp,
+      ;; :footnote-section-p) as shared deferred values with
+      ;; auto-undefer-p nil.  Undefer with `force' so resolved values
+      ;; replace those placeholders; otherwise they encode as true.
       (org-element-properties-map
        (lambda (name value)
          (setq expanded-properties (plist-put expanded-properties name value)))
-       node t)
+       node 'force)
       expanded-properties)
     ; for org versions < 9.7, just return the property list, which is the second
     ; element of the list
