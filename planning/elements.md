@@ -22,6 +22,11 @@ properly.
 - [x] Entities
 - [x] Line breaks
 
+#### 📝 To add
+
+- [ ] Subscript/superscript with complex braced content (e.g. `x_{n+1}`)
+- [ ] Subscript/superscript with markup inside braces
+
 
 ### Headings
 
@@ -58,7 +63,7 @@ properly.
   - (`drawers` tested in `drawers.org`)
 
 
-#### Problems
+#### ⛔ Problems
 
 - **Integer priority values**: [docs](https://orgmode.org/manual/Priorities.html) state integers can
   be two digits (up to 64), but the raw org property value is a character code, so unsure how that
@@ -67,6 +72,11 @@ properly.
 - **Multiple planning keywords under single headline**: Only the first seems to be included in
   headline properties, the rest appear in the headline's section contents as a paragraph. This
   appears to be an Org mode problem.
+
+#### 📝 To add
+
+- [ ] `#+SEQ_TODO:` — custom TODO keyword sequence
+- [ ] `#+TYP_TODO:` — separate type vs action TODO keywords
 
 
 ### Lists
@@ -88,6 +98,10 @@ properly.
   - [x] Partial (`[-]`) — exported as `"checkbox": "trans"`
 
 Note: bullet always exported verbatim, even out-of-order ordered bullets without counter.
+
+#### 📝 To add
+
+- [ ] Paragraph separation and blank lines within list items
 
 
 ### Footnotes
@@ -118,6 +132,15 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
   - [x] `target-ref`: see internal links above
   - [x] `is-internal`
 
+#### 📝 To add
+
+- [ ] Plain link — bare URL (e.g. `https://example.com`); `format: "plain"`
+- [ ] Angle link — `<https://example.com>`; `format: "angle"`
+- [ ] Protocol links — `id:`, `doi:`, `info:`, `elisp:`, `shell:`, etc.; distinct `type`
+  property on `link` node
+- [ ] File link with search option — e.g. `[[file:foo.org::*Heading]]`,
+  `[[file:foo.org::123]]`; `search-option` property on `link` node
+
 
 ### Tables
 
@@ -127,11 +150,16 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
 - [x] Column groups — `<`, `>`, `<>` markers present as cell content
 - [ ] Table formula (`#+TBLFM:`)
 
-#### Problems
+#### ⛔ Problems
 
 - **`#+TBLFM:` not linked to table**: The formula is exported as a standalone
   `keyword` node (`key: "TBLFM"`) that precedes the table in the section. The
   table node's own `tblfm` property is `null`.
+
+#### 📝 To add
+
+- [ ] Column width and alignment markers — `<l>`, `<r>`, `<c>`, `<N>` in column group rows
+- [ ] table.el table — `table` node with `type: "table.el"`
 
 
 ### Blocks
@@ -148,7 +176,7 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
 - [ ] Comment block (`#+begin_comment`)
 - [x] Fixed-width area (`: ` prefix)
 
-#### Problems
+#### ⛔ Problems
 
 - **Source block with `:exports results`**: The source block in `blocks.org` uses
   `:exports results`, so the `src-block` node is not exported — only the
@@ -157,6 +185,13 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
   via the named blocks).
 - **Comment block not exported**: The `#+begin_comment` block content is
   intentionally excluded from export; no `comment-block` node appears.
+
+#### 📝 To add
+
+- [ ] Inline source block — `src_LANG{code}` or `src_LANG[options]{code}`; `inline-src-block`
+  node
+- [ ] Line numbers in source/example blocks — `-n` / `+n` switches; `number-lines` property
+- [ ] Coderefs — `(ref:name)` label in block + `[[(name)]]` link; `label` property on nodes
 
 
 ### Timestamps
@@ -180,6 +215,10 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
 - [x] Warning period (`-3d`) — `warning: {type: "all", unit: "day", value: 3}`
   in deadline timestamp
 
+#### 📝 To add
+
+- [ ] Catch-up repeater (`++1w`) — `"repeater-type": "catch-up"`
+
 
 ### Drawers
 
@@ -198,7 +237,7 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
 - [ ] Custom drawer (e.g. LOGBOOK)
 - [x] Arbitrary drawer with body content — `drawer` node with `drawer-name` property
 
-#### Problems
+#### ⛔ Problems
 
 - **Case-insensitive key normalization**: `:case_sensitive: one` and
   `:CASE_sensitive: two` both normalize to `CASE_SENSITIVE`. The second entry
@@ -231,13 +270,21 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
 - [ ] Inline call syntax (`call_name()`)
 - [ ] Call line syntax (`#+CALL:`)
 
-#### Problems
+#### ⛔ Problems
 
 - **Inline call evaluated, not represented**: `call_add-one()` is evaluated and
   its result (`3`) is exported as a `verbatim` node. No `inline-babel-call` node
   appears in the output.
 - **`#+CALL:` evaluated, not represented**: The call line result is exported as a
   `fixed-width` node with `value: "3"`. No `babel-call` node appears.
+
+#### 📝 To add
+
+- [ ] Source block properties — `:language`, `:switches`, `:parameters`, `:number-lines`,
+  `:retain-labels`, etc. on `src-block` node
+- [ ] `#+NAME:` on non-src elements (tables, paragraphs, etc.)
+- [ ] `#+RESULTS:` keyword
+- [ ] Noweb references — `<<block>>` inside src blocks
 
 
 ### Misc
@@ -267,7 +314,7 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
   `back-end` and `value`
 - [x] Arbitrary keyword (`#+KEY: value`) — `keyword` node
 
-#### Problems
+#### ⛔ Problems
 
 - **`#+description:` with markup not parsed into document properties**: The
   description value `"Description with /markup/ *in* _it_"` is exported as a raw
@@ -281,3 +328,32 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
   inlinetask is parsed as nested bold markup rather than being recognised as an
   inlinetask end. The section body contains a deeply nested `bold` tree wrapping
   `"**"` instead of a clean inlinetask body.
+
+#### 📝 To add
+
+- [ ] `#+INCLUDE:` directive — include content from another file
+- [ ] `#+STARTUP:` options — parsing options (may not produce export nodes)
+
+
+## To add
+
+Features not yet covered by any `tests/export/*.org` fixture. Add a new example file (or files)
+when implementing.
+
+### Citations
+
+- [ ] Citation reference — `[cite:@key]`; `citation-reference` node
+- [ ] Citation with style — `[cite/style:@key]`; `citation` node
+
+### Affiliated keywords
+
+Element metadata attached to the following element (e.g. table, block, link).
+
+- [ ] `#+CAPTION:` — `caption` affiliated property
+- [ ] `#+ATTR_HTML:` — `attr_html` affiliated property
+- [ ] `#+ATTR_LATEX:` — `attr_latex` affiliated property
+- [ ] Other `#+ATTR_*:` backends — e.g. `#+ATTR_JSON:`
+
+### File-level properties
+
+- [ ] `#+PROPERTY:` — file-level property inheritance and defaults
