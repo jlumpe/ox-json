@@ -10,7 +10,9 @@
     ],
     "description": [],
     "email": "test@example.com",
-    "filetags": [],
+    "filetags": [
+      "file-tag"
+    ],
     "language": "en",
     "title": [
       "Headings"
@@ -32,8 +34,26 @@
           "properties": {
             "key": "TITLE",
             "mode": "top-comment",
-            "post-blank": 1,
             "value": "Headings"
+          }
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org34540e8",
+          "properties": {
+            "key": "FILETAGS",
+            "value": ":file-tag:"
+          }
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org79aac9c",
+          "properties": {
+            "key": "TODO",
+            "post-blank": 1,
+            "value": "TODO | DONE CANCELED"
           }
         }
       ]
@@ -42,7 +62,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org8950e07",
-      "tags-all": [],
+      "tags-all": [
+        "file-tag"
+      ],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -60,7 +82,9 @@
           "$$data_type": "org-node",
           "type": "headline",
           "ref": "org5a78db4",
-          "tags-all": [],
+          "tags-all": [
+            "file-tag"
+          ],
           "drawer": {},
           "properties": {
             "level": 2,
@@ -79,7 +103,9 @@
               "$$data_type": "org-node",
               "type": "headline",
               "ref": "orgb6834b1",
-              "tags-all": [],
+              "tags-all": [
+                "file-tag"
+              ],
               "drawer": {},
               "properties": {
                 "level": 3,
@@ -98,7 +124,9 @@
                   "$$data_type": "org-node",
                   "type": "headline",
                   "ref": "orgfe31192",
-                  "tags-all": [],
+                  "tags-all": [
+                    "file-tag"
+                  ],
                   "drawer": {},
                   "properties": {
                     "level": 4,
@@ -117,7 +145,9 @@
                       "$$data_type": "org-node",
                       "type": "headline",
                       "ref": "org9bf32ce",
-                      "tags-all": [],
+                      "tags-all": [
+                        "file-tag"
+                      ],
                       "drawer": {},
                       "properties": {
                         "level": 5,
@@ -136,12 +166,14 @@
                           "$$data_type": "org-node",
                           "type": "headline",
                           "ref": "org22bdb51",
-                          "tags-all": [],
+                          "tags-all": [
+                            "file-tag"
+                          ],
                           "drawer": {},
                           "properties": {
                             "level": 6,
                             "mode": "section",
-                            "post-blank": 1,
+                            "post-blank": 2,
                             "raw-value": "Level 6",
                             "secondary": [
                               ":title"
@@ -166,140 +198,340 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "orgfb6e679",
-      "tags-all": [],
+      "tags-all": [
+        "file-tag"
+      ],
       "drawer": {},
       "properties": {
         "level": 1,
-        "raw-value": "states",
+        "post-blank": 2,
+        "raw-value": "Markup: /italic/ *bold* _underline_ ~code~ =verbatim= +strike-through+",
         "secondary": [
           ":title"
         ],
         "title": [
+          "Markup: ",
+          {
+            "$$data_type": "org-node",
+            "type": "italic",
+            "ref": "org588bebf",
+            "properties": {
+              "post-blank": 1
+            },
+            "contents": [
+              "italic"
+            ]
+          },
+          {
+            "$$data_type": "org-node",
+            "type": "bold",
+            "ref": "org1ddd1fa",
+            "properties": {
+              "post-blank": 1
+            },
+            "contents": [
+              "bold"
+            ]
+          },
+          {
+            "$$data_type": "org-node",
+            "type": "underline",
+            "ref": "org886ef35",
+            "properties": {
+              "post-blank": 1
+            },
+            "contents": [
+              "underline"
+            ]
+          },
+          {
+            "$$data_type": "org-node",
+            "type": "code",
+            "ref": "org9422172",
+            "properties": {
+              "post-blank": 1,
+              "value": "code"
+            }
+          },
+          {
+            "$$data_type": "org-node",
+            "type": "verbatim",
+            "ref": "orge2df522",
+            "properties": {
+              "post-blank": 1,
+              "value": "verbatim"
+            }
+          },
+          {
+            "$$data_type": "org-node",
+            "type": "strike-through",
+            "ref": "org9cb68a4",
+            "properties": {},
+            "contents": [
+              "strike-through"
+            ]
+          }
+        ],
+        "true-level": 1
+      }
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org04c8511",
+      "tags-all": [
+        "file-tag"
+      ],
+      "drawer": {},
+      "properties": {
+        "level": 1,
+        "pre-blank": 1,
+        "raw-value": "=TODO= states",
+        "secondary": [
+          ":title"
+        ],
+        "title": [
+          {
+            "$$data_type": "org-node",
+            "type": "verbatim",
+            "ref": "org3041e98",
+            "properties": {
+              "post-blank": 1,
+              "value": "TODO"
+            }
+          },
           "states"
         ],
-        "todo-keyword": "TODO",
-        "todo-type": "todo",
         "true-level": 1
       },
       "contents": [
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "orgd5e79c0",
-          "tags-all": [],
+          "ref": "orgbc84f60",
+          "tags-all": [
+            "file-tag"
+          ],
           "drawer": {},
           "properties": {
             "level": 2,
             "mode": "section",
-            "raw-value": "Task one",
+            "raw-value": "Keywords",
             "secondary": [
               ":title"
             ],
             "title": [
-              "Task one"
+              "Keywords"
             ],
-            "todo-keyword": "TODO",
-            "todo-type": "todo",
             "true-level": 2
-          }
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "headline",
+              "ref": "org345d91d",
+              "tags-all": [
+                "file-tag"
+              ],
+              "drawer": {},
+              "properties": {
+                "level": 3,
+                "mode": "section",
+                "raw-value": "Task one",
+                "secondary": [
+                  ":title"
+                ],
+                "title": [
+                  "Task one"
+                ],
+                "todo-keyword": "TODO",
+                "todo-type": "todo",
+                "true-level": 3
+              }
+            },
+            {
+              "$$data_type": "org-node",
+              "type": "headline",
+              "ref": "org41bb311",
+              "tags-all": [
+                "file-tag"
+              ],
+              "drawer": {},
+              "properties": {
+                "level": 3,
+                "raw-value": "Task two",
+                "secondary": [
+                  ":title"
+                ],
+                "title": [
+                  "Task two"
+                ],
+                "todo-keyword": "DONE",
+                "todo-type": "done",
+                "true-level": 3
+              }
+            },
+            {
+              "$$data_type": "org-node",
+              "type": "headline",
+              "ref": "org112033b",
+              "tags-all": [
+                "file-tag"
+              ],
+              "drawer": {},
+              "properties": {
+                "level": 3,
+                "post-blank": 1,
+                "raw-value": "Task three (custom keyword)",
+                "secondary": [
+                  ":title"
+                ],
+                "title": [
+                  "Task three (custom keyword)"
+                ],
+                "todo-keyword": "CANCELED",
+                "todo-type": "done",
+                "true-level": 3
+              }
+            }
+          ]
         },
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "orged801f0",
-          "tags-all": [],
+          "ref": "orgcc40d68",
+          "tags-all": [
+            "file-tag"
+          ],
           "drawer": {},
           "properties": {
             "level": 2,
-            "raw-value": "Task two",
+            "raw-value": "Priority cookies",
             "secondary": [
               ":title"
             ],
             "title": [
-              "Task two"
+              "Priority cookies"
             ],
-            "todo-keyword": "DONE",
-            "todo-type": "done",
             "true-level": 2
-          }
-        },
-        {
-          "$$data_type": "org-node",
-          "type": "headline",
-          "ref": "org97ff31e",
-          "tags-all": [],
-          "drawer": {},
-          "properties": {
-            "level": 2,
-            "priority": "A",
-            "raw-value": "High priority",
-            "secondary": [
-              ":title"
-            ],
-            "title": [
-              "High priority"
-            ],
-            "todo-keyword": "TODO",
-            "todo-type": "todo",
-            "true-level": 2
-          }
-        },
-        {
-          "$$data_type": "org-node",
-          "type": "headline",
-          "ref": "org54dc184",
-          "tags-all": [],
-          "drawer": {},
-          "properties": {
-            "level": 2,
-            "priority": "B",
-            "raw-value": "Medium priority",
-            "secondary": [
-              ":title"
-            ],
-            "title": [
-              "Medium priority"
-            ],
-            "todo-keyword": "TODO",
-            "todo-type": "todo",
-            "true-level": 2
-          }
-        },
-        {
-          "$$data_type": "org-node",
-          "type": "headline",
-          "ref": "orge82de08",
-          "tags-all": [],
-          "drawer": {},
-          "properties": {
-            "level": 2,
-            "post-blank": 1,
-            "priority": "C",
-            "raw-value": "Low priority",
-            "secondary": [
-              ":title"
-            ],
-            "title": [
-              "Low priority"
-            ],
-            "todo-keyword": "TODO",
-            "todo-type": "todo",
-            "true-level": 2
-          }
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "headline",
+              "ref": "orgb36b9a4",
+              "tags-all": [
+                "file-tag"
+              ],
+              "drawer": {},
+              "properties": {
+                "level": 3,
+                "mode": "section",
+                "priority": "A",
+                "raw-value": "Priority A",
+                "secondary": [
+                  ":title"
+                ],
+                "title": [
+                  "Priority A"
+                ],
+                "todo-keyword": "TODO",
+                "todo-type": "todo",
+                "true-level": 3
+              }
+            },
+            {
+              "$$data_type": "org-node",
+              "type": "headline",
+              "ref": "orgd89ca3b",
+              "tags-all": [
+                "file-tag"
+              ],
+              "drawer": {},
+              "properties": {
+                "level": 3,
+                "priority": "B",
+                "raw-value": "Priority B",
+                "secondary": [
+                  ":title"
+                ],
+                "title": [
+                  "Priority B"
+                ],
+                "todo-keyword": "TODO",
+                "todo-type": "todo",
+                "true-level": 3
+              }
+            },
+            {
+              "$$data_type": "org-node",
+              "type": "headline",
+              "ref": "orgee225be",
+              "tags-all": [
+                "file-tag"
+              ],
+              "drawer": {},
+              "properties": {
+                "level": 3,
+                "priority": "1",
+                "raw-value": "Priority 1",
+                "secondary": [
+                  ":title"
+                ],
+                "title": [
+                  "Priority 1"
+                ],
+                "todo-keyword": "TODO",
+                "todo-type": "todo",
+                "true-level": 3
+              }
+            },
+            {
+              "$$data_type": "org-node",
+              "type": "headline",
+              "ref": "orgaebb45d",
+              "tags-all": [
+                "file-tag"
+              ],
+              "drawer": {},
+              "properties": {
+                "level": 3,
+                "post-blank": 2,
+                "raw-value": "[#10] Priority 10",
+                "secondary": [
+                  ":title"
+                ],
+                "title": [
+                  "[#10] Priority 10"
+                ],
+                "todo-keyword": "TODO",
+                "todo-type": "todo",
+                "true-level": 3
+              }
+            }
+          ]
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org04c8511",
-      "tags-all": [],
+      "ref": "orgec79af1",
+      "tags-all": [
+        "file-tag",
+        "tag1",
+        "tag2"
+      ],
       "drawer": {},
       "properties": {
         "level": 1,
         "raw-value": "Tags",
         "secondary": [
           ":title"
+        ],
+        "tags": [
+          "tag1",
+          "tag2"
         ],
         "title": [
           "Tags"
@@ -309,34 +541,17 @@
       "contents": [
         {
           "$$data_type": "org-node",
-          "type": "section",
-          "ref": "org1095095",
-          "properties": {
-            "mode": "section"
-          },
-          "contents": [
-            {
-              "$$data_type": "org-node",
-              "type": "paragraph",
-              "ref": "orgb4c7513",
-              "properties": {
-                "mode": "planning"
-              },
-              "contents": [
-                ":tag1:tag2:\n"
-              ]
-            }
-          ]
-        },
-        {
-          "$$data_type": "org-node",
           "type": "headline",
-          "ref": "orgcc40d68",
-          "tags-all": [],
+          "ref": "org25bd303",
+          "tags-all": [
+            "file-tag",
+            "tag1",
+            "tag2"
+          ],
           "drawer": {},
           "properties": {
             "level": 2,
-            "post-blank": 1,
+            "mode": "section",
             "raw-value": "Child with inherited tags",
             "secondary": [
               ":title"
@@ -346,34 +561,47 @@
             ],
             "true-level": 2
           }
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "headline",
+          "ref": "orge14e412",
+          "tags-all": [
+            "file-tag",
+            "tag1",
+            "tag2",
+            "tag3"
+          ],
+          "drawer": {},
+          "properties": {
+            "level": 2,
+            "post-blank": 2,
+            "raw-value": "Child with additional tags",
+            "secondary": [
+              ":title"
+            ],
+            "tags": [
+              "tag3"
+            ],
+            "title": [
+              "Child with additional tags"
+            ],
+            "true-level": 2
+          }
         }
       ]
     },
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "orgec79af1",
-      "tags-all": [],
+      "ref": "org753a788",
+      "tags-all": [
+        "file-tag"
+      ],
       "drawer": {},
       "properties": {
-        "deadline": {
-          "$$data_type": "timestamp",
-          "start": "2024-01-15",
-          "end": "2024-01-15",
-          "type": "active",
-          "raw-value": "<2024-01-15 Mon>",
-          "repeater": {
-            "type": null,
-            "unit": null,
-            "value": null
-          },
-          "warning": {
-            "type": null,
-            "unit": null,
-            "value": null
-          }
-        },
         "level": 1,
+        "pre-blank": 1,
         "raw-value": "Planning keywords",
         "secondary": [
           ":title"
@@ -386,46 +614,227 @@
       "contents": [
         {
           "$$data_type": "org-node",
-          "type": "section",
-          "ref": "org1bec060",
+          "type": "headline",
+          "ref": "org074dcc7",
+          "tags-all": [
+            "file-tag"
+          ],
+          "drawer": {},
           "properties": {
-            "mode": "section"
+            "deadline": {
+              "$$data_type": "timestamp",
+              "start": "2024-01-15",
+              "end": "2024-01-15",
+              "type": "active",
+              "raw-value": "<2024-01-15 Mon>",
+              "repeater": {
+                "type": null,
+                "unit": null,
+                "value": null
+              },
+              "warning": {
+                "type": null,
+                "unit": null,
+                "value": null
+              }
+            },
+            "level": 2,
+            "mode": "section",
+            "raw-value": "Deadline",
+            "secondary": [
+              ":title"
+            ],
+            "title": [
+              "Deadline"
+            ],
+            "true-level": 2
           },
           "contents": [
             {
               "$$data_type": "org-node",
-              "type": "paragraph",
-              "ref": "org08d9c23",
+              "type": "section",
+              "ref": "org6693785",
               "properties": {
-                "mode": "property-drawer",
-                "post-blank": 1
+                "mode": "section"
+              }
+            }
+          ]
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "headline",
+          "ref": "org8d769be",
+          "tags-all": [
+            "file-tag"
+          ],
+          "drawer": {},
+          "properties": {
+            "level": 2,
+            "raw-value": "Scheduled",
+            "scheduled": {
+              "$$data_type": "timestamp",
+              "start": "2024-01-20",
+              "end": "2024-01-20",
+              "type": "active",
+              "raw-value": "<2024-01-20 Sat>",
+              "repeater": {
+                "type": null,
+                "unit": null,
+                "value": null
+              },
+              "warning": {
+                "type": null,
+                "unit": null,
+                "value": null
+              }
+            },
+            "secondary": [
+              ":title"
+            ],
+            "title": [
+              "Scheduled"
+            ],
+            "true-level": 2
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "section",
+              "ref": "org9fda2b1",
+              "properties": {
+                "mode": "section"
+              }
+            }
+          ]
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "headline",
+          "ref": "orgdd1a25b",
+          "tags-all": [
+            "file-tag"
+          ],
+          "drawer": {},
+          "properties": {
+            "closed": {
+              "$$data_type": "timestamp",
+              "start": "2024-01-10T14:30:00",
+              "end": "2024-01-10T14:30:00",
+              "type": "inactive",
+              "raw-value": "[2024-01-10 Wed 14:30]",
+              "repeater": {
+                "type": null,
+                "unit": null,
+                "value": null
+              },
+              "warning": {
+                "type": null,
+                "unit": null,
+                "value": null
+              }
+            },
+            "level": 2,
+            "raw-value": "Closed",
+            "secondary": [
+              ":title"
+            ],
+            "title": [
+              "Closed"
+            ],
+            "true-level": 2
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "section",
+              "ref": "org5b37181",
+              "properties": {
+                "mode": "section"
+              }
+            }
+          ]
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "headline",
+          "ref": "org3a3bff4",
+          "tags-all": [
+            "file-tag"
+          ],
+          "drawer": {},
+          "properties": {
+            "deadline": {
+              "$$data_type": "timestamp",
+              "start": "2024-01-15",
+              "end": "2024-01-15",
+              "type": "active",
+              "raw-value": "<2024-01-15 Mon>",
+              "repeater": {
+                "type": null,
+                "unit": null,
+                "value": null
+              },
+              "warning": {
+                "type": null,
+                "unit": null,
+                "value": null
+              }
+            },
+            "level": 2,
+            "raw-value": "Multiple",
+            "secondary": [
+              ":title"
+            ],
+            "title": [
+              "Multiple"
+            ],
+            "true-level": 2
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "section",
+              "ref": "org638a80f",
+              "properties": {
+                "mode": "section"
               },
               "contents": [
-                "SCHEDULED: ",
                 {
                   "$$data_type": "org-node",
-                  "type": "timestamp",
-                  "ref": "org0a99b5e",
-                  "start": "2024-01-20",
-                  "end": "2024-01-20",
+                  "type": "paragraph",
+                  "ref": "orga342fc8",
                   "properties": {
-                    "raw-value": "<2024-01-20 Sat>",
-                    "type": "active"
-                  }
-                },
-                "\nCLOSED: ",
-                {
-                  "$$data_type": "org-node",
-                  "type": "timestamp",
-                  "ref": "org13d610e",
-                  "start": "2024-01-10T14:30:00",
-                  "end": "2024-01-10T14:30:00",
-                  "properties": {
-                    "raw-value": "[2024-01-10 Wed 14:30]",
-                    "type": "inactive"
-                  }
-                },
-                "\n"
+                    "mode": "property-drawer",
+                    "post-blank": 2
+                  },
+                  "contents": [
+                    "SCHEDULED: ",
+                    {
+                      "$$data_type": "org-node",
+                      "type": "timestamp",
+                      "ref": "orgc375cff",
+                      "start": "2024-01-20",
+                      "end": "2024-01-20",
+                      "properties": {
+                        "raw-value": "<2024-01-20 Sat>",
+                        "type": "active"
+                      }
+                    },
+                    "\nCLOSED: ",
+                    {
+                      "$$data_type": "org-node",
+                      "type": "timestamp",
+                      "ref": "org75347b0",
+                      "start": "2024-01-10T14:30:00",
+                      "end": "2024-01-10T14:30:00",
+                      "properties": {
+                        "raw-value": "[2024-01-10 Wed 14:30]",
+                        "type": "inactive"
+                      }
+                    },
+                    "\n"
+                  ]
+                }
               ]
             }
           ]
@@ -435,8 +844,10 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org753a788",
-      "tags-all": [],
+      "ref": "org71a8606",
+      "tags-all": [
+        "file-tag"
+      ],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -453,8 +864,10 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org074dcc7",
-          "tags-all": [],
+          "ref": "org14e5b64",
+          "tags-all": [
+            "file-tag"
+          ],
           "drawer": {},
           "properties": {
             "level": 2,
@@ -467,7 +880,7 @@
               {
                 "$$data_type": "org-node",
                 "type": "statistics-cookie",
-                "ref": "org18f61c1",
+                "ref": "org5adb426",
                 "properties": {
                   "post-blank": 1,
                   "value": "[1/2]"
@@ -481,8 +894,10 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org8d769be",
-          "tags-all": [],
+          "ref": "orgf4c2ebd",
+          "tags-all": [
+            "file-tag"
+          ],
           "drawer": {},
           "properties": {
             "level": 2,
@@ -494,7 +909,7 @@
               {
                 "$$data_type": "org-node",
                 "type": "statistics-cookie",
-                "ref": "orgcd8b4a4",
+                "ref": "org7fc0cbd",
                 "properties": {
                   "post-blank": 1,
                   "value": "[50%]"

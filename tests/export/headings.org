@@ -1,4 +1,6 @@
 #+title: Headings
+#+filetags: :file-tag:
+#+TODO: TODO | DONE CANCELED
 
 * Level 1
 ** Level 2
@@ -7,21 +9,45 @@
 ***** Level 5
 ****** Level 6
 
-* TODO states
-** TODO Task one
-** DONE Task two
-** TODO [#A] High priority
-** TODO [#B] Medium priority
-** TODO [#C] Low priority
 
-* Tags
-:tag1:tag2:
+* Markup: /italic/ *bold* _underline_ ~code~ =verbatim= +strike-through+
+
+
+* =TODO= states
+
+** Keywords
+*** TODO Task one
+*** DONE Task two
+*** CANCELED Task three (custom keyword)
+
+** Priority cookies
+*** TODO [#A] Priority A
+*** TODO [#B] Priority B
+*** TODO [#1] Priority 1
+*** TODO [#10] Priority 10
+
+
+* Tags :tag1:tag2:
 ** Child with inherited tags
+** Child with additional tags :tag3:
+
 
 * Planning keywords
+
+** Deadline
+DEADLINE: <2024-01-15 Mon>
+
+** Scheduled
+SCHEDULED: <2024-01-20 Sat>
+
+** Closed
+CLOSED: [2024-01-10 Wed 14:30]
+
+** Multiple
 DEADLINE: <2024-01-15 Mon>
 SCHEDULED: <2024-01-20 Sat>
 CLOSED: [2024-01-10 Wed 14:30]
+
 
 * Statistics cookies
 ** [1/2] Half done

@@ -27,8 +27,6 @@ properly.
 
 ### Headings
 
-**⚠️Needs human review⚠️**
-
 - Heading levels
   - [x] Level 1
   - [x] Level 2
@@ -36,31 +34,41 @@ properly.
   - [x] Level 4
   - [x] Level 5
   - [x] Level 6
-- TODO states
+- [x] Markup
+- [x] TODO states
   - [x] TODO
   - [x] DONE
-- [x] Priority cookies (`[#A]`, `[#B]`, `[#C]`) - exported as strings, not integers
-- [ ] Tags
-- Planning keywords
-  - [x] DEADLINE — present in headline properties
-  - [ ] SCHEDULED
-  - [ ] CLOSED
-- Statistics cookies
+  - [x] Custom state
+- [ ] Priority cookies
+  - [x] Character values - exported as strings, not integers
+  - [x] Single-digit integer values (also a string)
+  - [ ] Multi-digit integer values
+- [x] Tags
+- [ ] Planning keywords
+  - [x] Individual DEADLINE
+  - [x] Individual SCHEDULED
+  - [x] Individual CLOSED
+  - [ ] Multiple in single headline
+- [x] Statistics cookies
   - [x] Fraction (`[1/2]`)
   - [x] Percentage (`[50%]`)
-- Extra properties:
-  - [ ] `tags-all`
+- [x] Extra properties:
+  - [x] `tags-all`
+    - [x] Includes file tags
+    - [x] Inherits parent
+    - [x] Inherits + extends parent
+  - (`drawers` tested in `drawers.org`)
+
 
 #### Problems
 
-- **Tags and inherited tags**: In `headings.org`, `:tag1:tag2:` is written as body
-  text on the line below the heading rather than on the heading line itself
-  (`* Tags :tag1:tag2:`), so it is treated as a paragraph and `tags-all` is `[]`
-  for all headings. Headline-level tags are not tested.
-- **SCHEDULED and CLOSED not in headline properties**: Only `deadline` appears in
-  the headline's properties object. `scheduled` and `closed` appear only inside
-  the section body as a paragraph containing plain text and timestamp nodes (with
-  `start`/`end` at the top level of the timestamp object).
+- **Integer priority values**: [docs](https://orgmode.org/manual/Priorities.html) state integers can
+  be two digits (up to 64), but the raw org property value is a character code, so unsure how that
+  would work. Headline with priority 10 does not include the property at all. May need to set
+  `org-priority-highest`/`org-priority-lowest`.
+- **Multiple planning keywords under single headline**: Only the first seems to be included in
+  headline properties, the rest appear in the headline's section contents as a paragraph. This
+  appears to be an Org mode problem.
 
 
 ### Lists
