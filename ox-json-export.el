@@ -276,23 +276,36 @@ encoded JSON array or a list of pre-encoded strings.
 
 It is expected for all transcoding functions to call this function to do most
 of the work, possibly using the keyword arguments to override behavior."
-  (unless (stringp contents)
-    (setq contents (ox-json-encode-array-raw contents)))
-  (when extra-properties
-    (setq properties (append properties extra-properties)))
-  (when properties
-    (setq properties (ox-json--sort-alist-by-key properties)))
-  (ox-json-encode-alist-raw
-    "org-node"
-    (let ((base `(
-        (type . ,(json-encode-string (symbol-name (org-element-type node))))
-        (ref . ,(json-encode-string ref))
-        ,@extra
-        (properties . ,(ox-json-encode-alist-raw nil properties info)))))
-      (if (string= contents "[]")
-          base
-        (append base (list (cons 'contents contents)))))
-    info))
+  (let
+    ((omit-defaults (plist-get info :json-omit-default-property-values))
+     (properties-encoded)
+     (base))
+    ; Encode contents unless given a pre-encoded string
+    (unless (stringp contents)
+      (setq contents (ox-json-encode-array-raw contents)))
+    ; Combine extra properties and sort alphabetically by key
+    (when extra-properties
+      (setq properties (append properties extra-properties)))
+    (when properties
+      (setq properties (ox-json--sort-alist-by-key properties)))
+    ; Encode properties
+    (setq properties-encoded (ox-json-encode-alist-raw nil properties info))
+    ; Build base JSON object
+    (setq base
+      (ox-json-make-alist info `(
+        (type string ,(symbol-name (org-element-type node)))
+        (ref string ,ref))))
+    ; Add properties (unless empty and defaults are omitted)
+    (unless (and (string= properties-encoded "{}") omit-defaults)
+      (add-to-list 'base (cons 'properties properties-encoded) t))
+    ; Add extra
+    (when extra
+      (nconc base extra))
+    ; Add contents (unless empty and defaults are omitted)
+    (unless (and (string= contents "[]") omit-defaults)
+      (add-to-list 'base (cons 'contents contents) t))
+    ; Encode all
+    (ox-json-encode-alist-raw "org-node" base info)))
 
 
 ;;; Transcoder functions
@@ -389,31 +402,32 @@ at the top level."
 
 LINK is the parsed link object.
 INFO is the plist of export options."
-  (let* ((link-type (intern (org-element-property :type link)))
-         (is-internal nil)
-         (target-ref nil))
+  (let ((link-type (intern (org-element-property :type link)))
+        (is-internal nil)
+        (target)
+        (target-ref nil)
+        (properties nil))
     (when (memq link-type '(custom-id fuzzy radio))
       (setq is-internal t)
-      (let* ((target
-              ; At least one of these functions throws an error if it doesn't resolve
-              (condition-case nil
-                (cl-case link-type
-                  (custom-id
-                    (org-export-resolve-id-link link info))
-                  (fuzzy
-                    (org-export-resolve-fuzzy-link link info))
-                  (radio
-                    (org-export-resolve-radio-link link info)))
-                ; TODO: handle more specific error type?
-                (error nil))))
-        (when target
-          (setq target-ref (ox-json--get-reference target info)))))
-    (ox-json-make-alist
-      info
-      `(
-        (is-internal bool ,is-internal)
-        (target-ref string ,target-ref)
-        (is-inline-image bool ,(org-export-inline-image-p link))))))
+      (setq target
+        ; At least one of these functions throws an error if it doesn't resolve
+        (condition-case nil
+          (cl-case link-type
+            (custom-id
+              (org-export-resolve-id-link link info))
+            (fuzzy
+              (org-export-resolve-fuzzy-link link info))
+            (radio
+              (org-export-resolve-radio-link link info)))
+          ; TODO: handle more specific error type?
+          (error nil)))
+      (when target
+        (setq target-ref (ox-json--get-reference target info))
+        (add-to-list 'properties `(target-ref string ,target-ref) t)))
+    (add-to-list 'properties `(is-internal bool ,is-internal) t)
+    (when (org-export-inline-image-p link)
+      (add-to-list 'properties '(is-inline-image bool t) t))
+    (ox-json-make-alist info properties)))
 
 (defun ox-json-transcode-link (link _contents info)
   "Transcode a link object to JSON.

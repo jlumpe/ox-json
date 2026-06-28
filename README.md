@@ -68,11 +68,11 @@ All nodes (elements and objects) in the document tree are exported like:
 
 - `"type"` (string): node type returned by `org-element-type`
 - `"properties"` (object): property names and values obtained from `org-element-property`. Leading
-  colons in the keys are omitted.
+  colons in the keys are omitted. Omitted by default if empty.
 - `ref` (string): unique string assigned to all nodes during the export process, from
   `org-export-get-reference`.
 - `"contents"`: encoded return value of `org-element-contents`. Items are either more org nodes or
-  strings.
+  strings. Omitted by default if empty.
 
 See the [Org element API](https://orgmode.org/worg/dev/org-element-api.html) documentation for a
 complete list of all node types and properties. Also see the section
@@ -137,9 +137,10 @@ Additional properties:
 
 - `:json-data-type-property`: Name of the property added to JSON objects which indicates the type of
   data they represent. Set to `nil` to disable.
-- `:json-omit-default-property-values`: When non-nil, node properties whose value equals the
+- `:json-omit-default-property-values`: When non-nil, builtin node properties whose value equals the
   configured default are omitted from export. Defaults are defined in
-  `ox-json-default-property-values` (not customizable currently).
+  `ox-json-default-property-values` (not customizable currently). Also omits `"properties"` and
+  `"contents"` entirely if empty, as well as some other added keys for certain node types.
 
 
 ## Related software

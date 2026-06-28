@@ -18,15 +18,16 @@
 
 ### Changes to output format
 
-- Omit the `contents` key from exported nodes when it is empty.
 - Custom type-specific node properties/fields have been moved from inside `"properties"` to the
   outer level, to distinguish them from Org's builtin properties:
   - `headline` nodes: `tags-all`
   - `link` nodes: `target-ref`, `is-internal`, `is-inline-image`
   - `timestamp` nodes: `start`, `end`
 - Node `properties` objects now export keys in alphabetical order.
-- Omit default node property values from export. Set the `:json-omit-default-property-values` to
-  `nil` to restore old behavior.
+- Omit certain default or empty values from export to reduce file size. Set the
+  `:json-omit-default-property-values` to `nil` to restore old behavior.
+  - Omit the `"contents"` and `"properties"` keys from nodes entirely when empty.
+  - Within `"properties"`, omit certain common values like `"archivedp": null` in headlines.
 
 ### Bug fixes
 
