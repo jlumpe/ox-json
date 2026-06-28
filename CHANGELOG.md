@@ -18,6 +18,7 @@
 
 ### Changes to output format
 
+- Node `properties` objects now export keys in alphabetical order.
 - `headline` nodes:
   - The added `tags-all` property has been moved from `"properties"` to the top level object.
 

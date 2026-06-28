@@ -254,6 +254,8 @@ of the work, possibly using the keyword arguments to override behavior."
     (setq contents (ox-json-encode-array-raw contents)))
   (when extra-properties
     (setq properties (append properties extra-properties)))
+  (when properties
+    (setq properties (ox-json--sort-alist-by-key properties)))
   (ox-json-encode-alist-raw
     "org-node"
     `(
@@ -309,7 +311,7 @@ CONTENTS is a string containing the encoded document contents,
 but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
   (let* ((ox-json--current-node "<document root>")
-         (properties (ox-json-document-properties info))
+         (properties (ox-json--sort-alist-by-key (ox-json-document-properties info)))
          (properties-encoded (ox-json-encode-alist-raw nil properties info))
          (parse-tree (plist-get info :parse-tree))
          (contents-encoded (ox-json-export-contents parse-tree info)))

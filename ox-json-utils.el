@@ -76,6 +76,24 @@
   (ox-json--loop-plist (key value plist)
     collect (cons key value)))
 
+(defun ox-json--json-key-string (key)
+  "Return the JSON object key string for KEY, mirroring `json-encode-key'."
+  (cond
+    ((symbolp key)
+     (let ((name (symbol-name key)))
+       (if (eq (aref name 0) ?\:)
+           (substring name 1)
+         name)))
+    ((stringp key) key)
+    (t (format "%s" key))))
+
+(defun ox-json--sort-alist-by-key (alist)
+  "Return a copy of ALIST sorted alphabetically by JSON object key."
+  (sort (copy-sequence alist)
+        (lambda (a b)
+          (string< (ox-json--json-key-string (car a))
+                   (ox-json--json-key-string (car b))))))
+
 
 ;;; Org-mode utility code
 
