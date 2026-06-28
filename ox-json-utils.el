@@ -130,9 +130,9 @@ node's properties and handles both of these changes."
   "Return DATUM's path as a list of sibling indices from the parse-tree root.
 Each index is the 0-based position of the node within its parent's
 `org-element-contents'."
-  (let (path node)
+  (let (path node parent)
     (setq node datum)
-    (while-let ((parent (org-element-property :parent node)))
+    (while (setq parent (org-element-property :parent node))
       (push (or (cl-position node (org-element-contents parent) :test #'eq) 0)
             path)
       (setq node parent))
