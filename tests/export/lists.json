@@ -70,26 +70,6 @@
               "ref": "org7b4b3a2",
               "properties": {
                 "mode": "planning",
-                "structure": [
-                  [
-                    35,
-                    0,
-                    "- ",
-                    null,
-                    null,
-                    null,
-                    46
-                  ],
-                  [
-                    46,
-                    0,
-                    "+ ",
-                    null,
-                    null,
-                    null,
-                    57
-                  ]
-                ],
                 "type": "unordered"
               },
               "contents": [
@@ -197,44 +177,6 @@
               "properties": {
                 "mode": "planning",
                 "post-blank": 1,
-                "structure": [
-                  [
-                    87,
-                    0,
-                    "1. ",
-                    null,
-                    null,
-                    null,
-                    96
-                  ],
-                  [
-                    96,
-                    0,
-                    "2. ",
-                    null,
-                    null,
-                    null,
-                    106
-                  ],
-                  [
-                    106,
-                    0,
-                    "1) ",
-                    null,
-                    null,
-                    null,
-                    115
-                  ],
-                  [
-                    115,
-                    0,
-                    "2) ",
-                    null,
-                    null,
-                    null,
-                    125
-                  ]
-                ],
                 "type": "ordered"
               },
               "contents": [
@@ -411,44 +353,6 @@
               "properties": {
                 "mode": "planning",
                 "post-blank": 1,
-                "structure": [
-                  [
-                    214,
-                    0,
-                    "- ",
-                    null,
-                    null,
-                    null,
-                    268
-                  ],
-                  [
-                    223,
-                    2,
-                    "- ",
-                    null,
-                    null,
-                    null,
-                    237
-                  ],
-                  [
-                    237,
-                    2,
-                    "- ",
-                    null,
-                    null,
-                    null,
-                    268
-                  ],
-                  [
-                    251,
-                    4,
-                    "- ",
-                    null,
-                    null,
-                    null,
-                    268
-                  ]
-                ],
                 "type": "unordered"
               },
               "contents": [
@@ -478,44 +382,6 @@
                       "type": "plain-list",
                       "ref": "org5544f04",
                       "properties": {
-                        "structure": [
-                          [
-                            214,
-                            0,
-                            "- ",
-                            null,
-                            null,
-                            null,
-                            268
-                          ],
-                          [
-                            223,
-                            2,
-                            "- ",
-                            null,
-                            null,
-                            null,
-                            237
-                          ],
-                          [
-                            237,
-                            2,
-                            "- ",
-                            null,
-                            null,
-                            null,
-                            268
-                          ],
-                          [
-                            251,
-                            4,
-                            "- ",
-                            null,
-                            null,
-                            null,
-                            268
-                          ]
-                        ],
                         "type": "unordered"
                       },
                       "contents": [
@@ -568,44 +434,6 @@
                               "type": "plain-list",
                               "ref": "org6c880c3",
                               "properties": {
-                                "structure": [
-                                  [
-                                    214,
-                                    0,
-                                    "- ",
-                                    null,
-                                    null,
-                                    null,
-                                    268
-                                  ],
-                                  [
-                                    223,
-                                    2,
-                                    "- ",
-                                    null,
-                                    null,
-                                    null,
-                                    237
-                                  ],
-                                  [
-                                    237,
-                                    2,
-                                    "- ",
-                                    null,
-                                    null,
-                                    null,
-                                    268
-                                  ],
-                                  [
-                                    251,
-                                    4,
-                                    "- ",
-                                    null,
-                                    null,
-                                    null,
-                                    268
-                                  ]
-                                ],
                                 "type": "unordered"
                               },
                               "contents": [
@@ -678,35 +506,6 @@
               "ref": "orgb8e9498",
               "properties": {
                 "mode": "planning",
-                "structure": [
-                  [
-                    286,
-                    0,
-                    "- ",
-                    null,
-                    "[ ]",
-                    null,
-                    302
-                  ],
-                  [
-                    302,
-                    0,
-                    "- ",
-                    null,
-                    "[X]",
-                    null,
-                    318
-                  ],
-                  [
-                    318,
-                    0,
-                    "- ",
-                    null,
-                    "[-]",
-                    null,
-                    337
-                  ]
-                ],
                 "type": "unordered"
               },
               "contents": [

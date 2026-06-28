@@ -195,7 +195,8 @@ be overridden with the :json-exporters option.")
       :key string
       :value string)
     plain-list (
-      :structure array)
+      ;; :structure array)
+      :structure nil)
     planning (
       :closed timestamp
       :deadline timestamp
