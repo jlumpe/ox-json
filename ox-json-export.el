@@ -53,7 +53,7 @@ INFO is the plist of export options."
 STRING is a collection of tags joined by colon characters.
 INFO is the plist of export options."
   (if string
-    (ox-json-encode-array (s-split ":" string t) info 'string t)
+    (ox-json-encode-array (s-split ":" string t) info 'string :single-line t)
     "[]"))
 
 (defun ox-json-export-secondary-string (sstring info)
@@ -115,24 +115,24 @@ INFO is the plist of export options."
                (value number ,(org-element-property :warning-value timestamp))))))))
 
 (defun ox-json-export-contents (node info)
-  "Export the contents of org element/object NODE as a JSON array.
+  "Export the contents of org element/object NODE as a list of encoded items.
 
 INFO is the plist of export options.
 
+Each list element is a string of encoded JSON data for one child of NODE.
 This is used in place of the \"contents\" argument passed to the transcoder
 functions in order to control how the transcoded values of each child node
 are joined together, which apparently cannot be overridden. This shouldn't
 result in too much extra work being done because the exported value of each
 node is memoized."
   (cl-assert (ox-json--is-node node))
-  (ox-json-encode-array-raw
-    (cl-loop
-      with encoded-items = nil
-      for item in (org-element-contents node)
-      do (let ((encoded (ox-json-export-data item info)))
-           (unless (s-blank? encoded)
-             (push encoded encoded-items)))
-      finally return (nreverse encoded-items))))
+  (cl-loop
+    with encoded-items = nil
+    for item in (org-element-contents node)
+    do (let ((encoded (ox-json-export-data item info)))
+         (unless (s-blank? encoded)
+           (push encoded encoded-items)))
+    finally return (nreverse encoded-items)))
 
 (defun ox-json--get-property-types (node-type info)
   "Get property type plists for a given node type.
@@ -277,21 +277,21 @@ encoded JSON array or a list of pre-encoded strings.
 It is expected for all transcoding functions to call this function to do most
 of the work, possibly using the keyword arguments to override behavior."
   (unless (stringp contents)
-    (setq contents (ox-json-encode-array-raw contents)))
+    (setq contents (ox-json-encode-array-raw contents info :omit-empty t)))
+  ; Add extra properties
   (when extra-properties
     (setq properties (append properties extra-properties)))
+  ; Sort properties alphabetically by key
   (when properties
     (setq properties (ox-json--sort-alist-by-key properties)))
   (ox-json-encode-alist-raw
     "org-node"
-    (let ((base `(
-        (type . ,(json-encode-string (symbol-name (org-element-type node))))
-        (ref . ,(json-encode-string ref))
-        ,@extra
-        (properties . ,(ox-json-encode-alist-raw nil properties info)))))
-      (if (string= contents "[]")
-          base
-        (append base (list (cons 'contents contents)))))
+    `(
+      (type . ,(json-encode-string (symbol-name (org-element-type node))))
+      (ref . ,(json-encode-string ref))
+      (properties . ,(ox-json-encode-alist-raw nil properties info))
+      (contents . ,contents)
+      ,@extra)
     info))
 
 
@@ -342,13 +342,14 @@ INFO is the plist of export options."
          (properties (ox-json--sort-alist-by-key (ox-json-document-properties info)))
          (properties-encoded (ox-json-encode-alist-raw nil properties info))
          (parse-tree (plist-get info :parse-tree))
-         (contents-encoded (ox-json-export-contents parse-tree info)))
+         (contents-encoded
+           (ox-json-encode-array-raw
+             (ox-json-export-contents parse-tree info)
+             info)))
     (ox-json-encode-alist-raw
       "org-document"
-      (let ((base `((properties . ,properties-encoded))))
-        (if (string= contents-encoded "[]")
-            base
-          (append base (list (cons 'contents contents-encoded)))))
+      `((properties . ,properties-encoded)
+        (contents . ,contents-encoded))
       info)))
 
 (cl-defun ox-json-transcode-headline (headline _contents info &rest kw &key extra)
@@ -369,7 +370,7 @@ at the top level."
      (props-encoded
        (ox-json--export-properties-for-type 'headline regular-props info))
      (drawer-encoded
-       (ox-json-encode-plist nil drawer-props info 'string)))
+       (ox-json-encode-plist nil drawer-props info :valuetype 'string)))
     ; Add "drawer" object to top-level JSON properties
     (push
       (cons "drawer" drawer-encoded)

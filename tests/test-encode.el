@@ -119,7 +119,18 @@
   (should-error (ox-json-encode-array '(1 t nil "foo" foo) info 'string))
   ; Single/multi-line
   (should (string= (ox-json-encode-array '(1 2 3) info 'number) "[\n1,\n2,\n3\n]"))
-  (should (string= (ox-json-encode-array '(1 2 3) info 'number t) "[1, 2, 3]")))
+  (should (string= (ox-json-encode-array '(1 2 3) info 'number :single-line t) "[1, 2, 3]"))
+  ; Omit sentinel
+  (decode-compare
+    (ox-json-encode-array (list 1 ox-json-omit 3) info)
+    [1 3])
+  (decode-compare
+    (ox-json-encode-array-raw (list "1" ox-json-omit "3") info)
+    [1 3])
+  (should (eq (ox-json-encode-array-raw nil info :omit-empty t) ox-json-omit))
+  (should (eq (ox-json-encode-array-raw (list ox-json-omit) info :omit-empty t) ox-json-omit))
+  (should (eq (ox-json-encode-array nil info t :omit-empty t) ox-json-omit))
+  (should (eq (ox-json-encode-array (list ox-json-omit) info t :omit-empty t) ox-json-omit)))
 
 (ert-deftest test-encode-alist ()
   ; Auto value type
@@ -132,21 +143,37 @@
     (json-obj info "mytype"))
   ; Bool value type
   (decode-compare
-    (ox-json-encode-alist "mytype" '((true . t) (true2 . 1) (false . nil)) info 'bool)
+    (ox-json-encode-alist "mytype" '((true . t) (true2 . 1) (false . nil)) info :valuetype 'bool)
     (json-obj info "mytype" :true t :true2 t :false :json-false))
   (decode-compare
-    (ox-json-encode-alist "mytype" '((true . t) (false . nil)) info '(bool t))
+    (ox-json-encode-alist "mytype" '((true . t) (false . nil)) info :valuetype '(bool t))
     (json-obj info "mytype" :true t :false :json-false))
-  (should-error (ox-json-encode-alist "mytype" '((true . 1) (false . nil)) info '(bool t)))
+  (should-error (ox-json-encode-alist "mytype" '((true . 1) (false . nil)) info :valuetype '(bool t)))
   ; String value type
   (decode-compare
-    (ox-json-encode-alist "mytype" '((string . "foo") (symbol . foo) (null . nil)) info 'string)
+    (ox-json-encode-alist "mytype" '((string . "foo") (symbol . foo) (null . nil)) info :valuetype 'string)
     (json-obj info "mytype" :string "foo" :symbol "foo" :null :json-null))
   ; No data type property
   (let ((info2 (org-combine-plists info '(:json-data-type-property nil))))
     (decode-compare
       (ox-json-encode-alist "ignored" '((foo . "bar")) info2)
-      (json-obj info2 nil :foo "bar"))))
+      (json-obj info2 nil :foo "bar")))
+  ; Omit sentinel
+  (decode-compare
+    (ox-json-encode-alist "mytype" (list (cons 'a 1) (cons 'b ox-json-omit) (cons 'c "foo")) info)
+    (json-obj info "mytype" :a 1 :c "foo"))
+  ; Omit sentinel (pre-encoded values)
+  (decode-compare
+    (ox-json-encode-alist-raw "mytype"
+      (list (cons 'a "1") (cons 'b ox-json-omit) (cons 'c "\"foo\""))
+      info)
+    (json-obj info "mytype" :a 1 :c "foo"))
+  (should (eq (ox-json-encode-alist-raw "mytype" nil info :omit-empty t) ox-json-omit))
+  (should (eq (ox-json-encode-alist-raw "mytype" (list (cons 'a ox-json-omit)) info :omit-empty t)
+              ox-json-omit))
+  (should (eq (ox-json-encode-alist "mytype" nil info :omit-empty t) ox-json-omit))
+  (should (eq (ox-json-encode-alist "mytype" (list (cons 'a ox-json-omit)) info :omit-empty t)
+              ox-json-omit)))
 
 
 (ert-deftest test-encode-plist ()
@@ -160,21 +187,35 @@
     (json-obj info "mytype"))
   ; Bool value type
   (decode-compare
-    (ox-json-encode-plist "mytype" '(:true t :true2 1 :false nil) info 'bool)
+    (ox-json-encode-plist "mytype" '(:true t :true2 1 :false nil) info :valuetype 'bool)
     (json-obj info "mytype" :true t :true2 t :false :json-false))
   (decode-compare
-    (ox-json-encode-plist "mytype" '(:true t :false nil) info '(bool t))
+    (ox-json-encode-plist "mytype" '(:true t :false nil) info :valuetype '(bool t))
     (json-obj info "mytype" :true t :false :json-false))
-  (should-error (ox-json-encode-plist "mytype" '(:true 1 :false nil) info '(bool t)))
+  (should-error (ox-json-encode-plist "mytype" '(:true 1 :false nil) info :valuetype '(bool t)))
   ; String value type
   (decode-compare
-    (ox-json-encode-plist "mytype" '(:string "foo" :symbol foo :null nil) info 'string)
+    (ox-json-encode-plist "mytype" '(:string "foo" :symbol foo :null nil) info :valuetype 'string)
     (json-obj info "mytype" :string "foo" :symbol "foo" :null :json-null))
   ; No data type property
   (let ((info2 (org-combine-plists info '(:json-data-type-property nil))))
     (decode-compare
       (ox-json-encode-plist "ignored" '(:foo "bar") info2)
-      (json-obj info2 nil :foo "bar"))))
+      (json-obj info2 nil :foo "bar")))
+  ; Omit sentinel
+  (decode-compare
+    (ox-json-encode-plist "mytype" `(:a 1 :b ,ox-json-omit :c "foo") info)
+    (json-obj info "mytype" :a 1 :c "foo"))
+  ; Omit sentinel (pre-encoded values)
+  (decode-compare
+    (ox-json-encode-plist-raw "mytype" `(:a "1" :b ,ox-json-omit :c "\"foo\"") info)
+    (json-obj info "mytype" :a 1 :c "foo"))
+  (should (eq (ox-json-encode-plist-raw "mytype" nil info :omit-empty t) ox-json-omit))
+  (should (eq (ox-json-encode-plist-raw "mytype" `(:a ,ox-json-omit) info :omit-empty t)
+              ox-json-omit))
+  (should (eq (ox-json-encode-plist "mytype" nil info :omit-empty t) ox-json-omit))
+  (should (eq (ox-json-encode-plist "mytype" `(:a ,ox-json-omit) info :omit-empty t)
+              ox-json-omit)))
 
 
 ;;; Changing default encoding functions

@@ -40,6 +40,20 @@
 (declare-function ox-json-encode-auto "ox-json-encode")
 
 
+;;; Constants
+
+(defconst ox-json-omit (make-symbol "ox-json-omit")
+  "Sentinel for values that should be omitted from JSON objects and arrays.
+
+When a key's value is this symbol in an alist or plist passed to
+`ox-json-encode-alist', `ox-json-encode-plist', or related functions,
+that key is not included in the encoded object. List items equal to this
+symbol are omitted from arrays encoded with `ox-json-encode-array' and
+`ox-json-encode-array-raw'.
+
+With :omit-empty non-nil, those encoders return this symbol instead of an
+empty object or array.")
+
 ;;; Private constants
 
 (defconst ox-json--absent (make-symbol "ox-json--absent")

@@ -149,39 +149,61 @@ INFO is the plist of export options."
     (t
       (ox-json--type-error "number" value info))))
 
-(defun ox-json-encode-array-raw (array &optional _info single-line)
+(cl-defun ox-json-encode-array-raw (array &optional _info &key single-line omit-empty)
   "Encode array to JSON given its already-encoded items.
 
 ARRAY is a list of strings with encoded JSON data.
 INFO is the plist of export options.
-If SINGLE-LINE is non-nil will put all items on same line, otherwise will use
-one line per item."
+If :single-line is non-nil will put all items on same line, otherwise will use
+one line per item.
+
+Items equal to `ox-json-omit' are omitted from the output.
+If :omit-empty is non-nil and no items remain, return `ox-json-omit'."
+  ; Filter out ox-json-omit values
+  (setq array (cl-remove ox-json-omit array :test #'eq))
   (if array
+    ; Non-empty
     (if single-line
       (format "[%s]" (s-join ", " array))
       (format "[\n%s\n]" (s-join ",\n" array)))
-    "[]"))
+    ; Empty
+    (if omit-empty ox-json-omit "[]")))
 
-(defun ox-json-encode-alist-raw (data-type alist &optional info)
+(cl-defun ox-json-encode-alist-raw (data-type alist &optional info &key omit-empty)
   "Encode alist ALIST containing pre-encoded values into JSON object.
 
 DATA-TYPE is the data type string of the returned object.
-INFO is the plist of export options"
-  (let ((data-type-property (plist-get info :json-data-type-property)))
-    (when (and data-type-property data-type)
-      (push (cons data-type-property (json-encode-string data-type)) alist))
-    (format "{\n%s\n}"
-      (s-join ",\n"
-        (cl-loop
-          for (key . value) in alist
-          collect (format "%s: %s" (json-encode-key key) (s-trim value)))))))
+INFO is the plist of export options.
 
-(defun ox-json-encode-plist-raw (data-type plist &optional info)
+Pairs whose value is `ox-json-omit' are omitted from the output.
+If :omit-empty is non-nil and no pairs remain, return `ox-json-omit'."
+  ; Filter out ox-json-omit values
+  (setq alist
+    (cl-loop
+      for (key . value) in alist
+      unless (eq value ox-json-omit)
+      collect (cons key value)))
+  (if (and omit-empty (not alist))
+    ox-json-omit
+    (let ((data-type-property (plist-get info :json-data-type-property)))
+      (when (and data-type-property data-type)
+        (push (cons data-type-property (json-encode-string data-type)) alist))
+      (format "{\n%s\n}"
+        (s-join ",\n"
+          (cl-loop
+            for (key . value) in alist
+            collect (format "%s: %s" (json-encode-key key) (s-trim value))))))))
+
+(cl-defun ox-json-encode-plist-raw (data-type plist &optional info &key omit-empty)
   "Encode plist PLIST containing pre-encoded values into JSON object.
 
 DATA-TYPE is the data type string of the returned object.
-INFO is the plist of export options."
-  (ox-json-encode-alist-raw data-type (ox-json--plist-to-alist plist) info))
+INFO is the plist of export options.
+
+Pairs whose value is `ox-json-omit' are omitted from the output.
+If :omit-empty is non-nil and no pairs remain, return `ox-json-omit'."
+  (ox-json-encode-alist-raw data-type (ox-json--plist-to-alist plist) info
+    :omit-empty omit-empty))
 
 (defun ox-json-encode-auto (value &optional info)
   "Encode VALUE to JSON when its type is not known ahead of time.
@@ -233,49 +255,61 @@ INFO is the plist of export options."
       (apply encoder value info args)
       (ox-json--error info "Unknown type symbol %s" type))))
 
-(cl-defun ox-json-encode-array (array &optional info (itemtype t) single-line)
+(cl-defun ox-json-encode-array (array &optional info (itemtype t) &key single-line omit-empty)
   "Encode the list ARRAY as a JSON array.
 
 INFO is the plist of export options.
 ITEMTYPE is optional and is the type to pass to `ox-json-encode-with-type'
 to encode the items of the array. By default `ox-json-encode-auto' is used.
-If SINGLE-LINE is non-nil will put all items on same line, otherwise will use
-one line per item."
+If :single-line is non-nil will put all items on same line, otherwise will use
+one line per item.
+
+Items equal to `ox-json-omit' are omitted from the output.
+If :omit-empty is non-nil and no items remain, return `ox-json-omit'."
   (ox-json-encode-array-raw
     (cl-loop
       for item in array
+      unless (eq item ox-json-omit)
       collect (ox-json-encode-with-type itemtype item info))
     info
-    single-line))
+    :single-line single-line
+    :omit-empty omit-empty))
 
-(cl-defun ox-json-encode-alist (data-type alist &optional info (valuetype t))
+(cl-defun ox-json-encode-alist (data-type alist &optional info &key (valuetype t) omit-empty)
   "Encode the alist ALIST as a JSON object.
 
 DATA-TYPE is a data type string to add to the JSON object.
 INFO is the plist of export options.
-VALUETYPE is optional and is the type to pass to `ox-json-encode-with-type'
-to encode the values of each key-value pair. By default
-`ox-json-encode-auto' is used."
+:valuetype is the type to pass to `ox-json-encode-with-type' to encode the
+values of each key-value pair. By default `ox-json-encode-auto' is used.
+
+Pairs whose value is `ox-json-omit' are omitted from the output.
+If :omit-empty is non-nil and no pairs remain, return `ox-json-omit'."
   (ox-json-encode-alist-raw
     data-type
     (cl-loop
       for (key . value) in alist
+      unless (eq value ox-json-omit)
       collect (cons key (ox-json-encode-with-type valuetype value info)))
-    info))
+    info
+    :omit-empty omit-empty))
 
-(cl-defun ox-json-encode-plist (data-type plist &optional info (valuetype t))
+(cl-defun ox-json-encode-plist (data-type plist &optional info &key (valuetype t) omit-empty)
   "Encode the plist PLIST as a JSON object.
 
 DATA-TYPE is a data type string to add to the JSON object.
 INFO is the plist of export options.
-VALUETYPE is optional and is the type to pass to `ox-json-encode-with-type'
-to encode the values of each key-value pair. By default
-`ox-json-encode-auto' is used."
+:valuetype is the type to pass to `ox-json-encode-with-type' to encode the
+values of each key-value pair. By default `ox-json-encode-auto' is used.
+
+Pairs whose value is `ox-json-omit' are omitted from the output.
+If :omit-empty is non-nil and no pairs remain, return `ox-json-omit'."
   (ox-json-encode-alist
     data-type
     (ox-json--plist-to-alist plist)
     info
-    valuetype))
+    :valuetype valuetype
+    :omit-empty omit-empty))
 
 (defun ox-json-make-alist (info properties)
   "Make an alist with JSON-encoded values of heterogeneous types.
@@ -284,9 +318,10 @@ INFO is the plist of export options.
 PROPERTIES is a list of (key type value) forms for each property of the JSON
 object. Each value will be JSON-encoded with `ox-json-encode-with-type'
 according to the type symbol given. Values with a type of nil will be considered
-to be already encoded."
+to be already encoded. Entries whose value is `ox-json-omit' are omitted."
   (cl-loop
     for (key type value) in properties
+    unless (eq value ox-json-omit)
     collect
     (cons
       key
