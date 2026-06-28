@@ -147,9 +147,17 @@ The test suite uses Emacs's built-in ERT (Emacs Lisp Regression Testing) framewo
 Supporting files:
 
 - `ox-json-test-helpers.el` — shared test infrastructure: sets up the export backend and `info` plist, provides `encoded=` (whitespace-insensitive JSON string comparison), `json-obj` (builds expected hash-table objects), `decode-compare` (round-trip encode-then-decode comparison), `with-json-decode-explicit` (macro that configures unambiguous JSON decoding settings), and recursive JSON structure comparison via `json-compare` (supports `:ignore` lists and pluggable object comparison functions).
-- `tests/export/*.org` — Org fixture files covering headlines, markup, blocks, lists, tables, links, timestamps, footnotes, LaTeX, Babel, drawers, and miscellaneous elements.
-- `tests/export/*.json` — exported JSON snapshots checked into version control; regenerated with `make update-exports`.
-- `tests/update-exports.el` — batch script that re-exports all `.org` fixtures to `.json`.
+
+
+### Example files
+
+Example `.org` files in `tests/export/` are intended to cover the entire set of Org elements and
+syntax. The list of features is also tracked in `planning/elements.md`.
+
+The corresponding exported JSON files are also present in the same directory and in version control.
+`tests/test-export.el` tests that the result of exporting each `.org` file matches the saved `.json`
+file. The `tests/update-exports.el` script re-exports all `.org` files and overwrites the `.json`
+files.
 
 
 ## Makefile
