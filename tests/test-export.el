@@ -14,42 +14,124 @@
   "Directory containing .org fixture files and .json snapshots.")
 
 
-; JSON object keys to ignore in comparison based on $$data_type
-; Alist, values are ignore alists to pass to (json-compare)
-(setq ignore-by-data-type
+; JSON object keys to ignore in comparison based on $$data_type and Org version
+; Expect the JSON saved in version control to have been exported with the latest Org version, there
+; will be some differences if we're using an older version.
+; Structure is nested alists:
+; * First level keys are Org major/minor version lists, e.g. (9 6), or nil for all versions.
+;   Values are merged for entries whose version is greater than or equal to the current Org
+;   major/minor version when exporting.
+; * Second level keys are $$data_type keys. Values are ignore alists to pass to (json-compare)
+(setq ignore-by-data-type-version
   '(
-    ("org-document"
-      ("properties"
-        ("creator" . t)
-        ("email" . t)
+    ; Ignore in all versions
+    (nil
+      ("org-document"
+        ("properties"
+          ("creator" . t)
+        )
+      )
+      ("org-node"
+        ("properties"
+        )
       )
     )
-    ("org-node"
-      ; This changes in every export
-      ("ref" . t)
-      ("target-ref" . t)
-      ("properties"
-        ; Introduced in org 9.6
-        ("mode" . t)
-        ; Seems to have a different value in 9.6 vs others?
-        ("post-blank" . t)
-        ; Added in org 9.7
-        ; Not sure if all are useful, some should probably be excluded from export
-        ("cached" . t)
-        ("deferred" . t)
-        ("raw-value" . t)
-        ("structure" . t)
-        ("secondary" . t)
-        ("true-level" . t)
-        ; And these seem to have a different value in 9.7...
-        ("archivedp" . t)
-        ("footnote-section-p" . t)
-        ("type-explicit-p" . t)
-        ("range-type" . t)
+    ((9 6)
+      ("org-node"
+        ("properties"
+          ; Added in org 9.7
+          ; Not sure if all are useful, some should probably be excluded from export
+          ("cached" . t)
+          ("deferred" . t)
+          ("raw-value" . t)
+          ("structure" . t)
+          ("secondary" . t)
+          ("true-level" . t)
+          ; And these seem to have a different value in 9.7 vs 9.6
+          ("mode" . t)
+          ("archivedp" . t)
+          ("footnote-section-p" . t)
+          ("type-explicit-p" . t)
+          ("range-type" . t)
+        )
       )
     )
-  )
-)
+    ((9 5)
+      ("org-node"
+        ; Specific failure in headings.org - 9.6 is case sensitive, 9.5 is not
+        ("drawer" . t)
+        ("properties"
+          ; Seems to have a different value in 9.6 vs others?
+          ("post-blank" . t)
+          ; Added in 9.6
+          ("parameters" . t)  ; In special-block
+        )
+      )
+    )
+  ))
+
+
+(defun -json-org-version-list ()
+  "Return current Org major/minor version as a list, e.g. (9 6)."
+  (let ((version (version-to-list org-version)))
+    (list (nth 0 version) (nth 1 version))))
+
+
+(defun -json-version-applies-p (entry-version current-version)
+  "Return non-nil when ENTRY-VERSION applies on CURRENT-VERSION.
+ENTRY-VERSION is nil for all versions, otherwise a major/minor list."
+  (or (null entry-version)
+      (version-list-<= current-version entry-version)))
+
+
+(defun -json-alist-delete (key alist)
+  (cl-remove-if (lambda (item) (equal key (car item))) alist))
+
+
+(defun -json-merge-ignore-alists (&rest alists)
+  "Deep-merge ignore alists, combining keys from all inputs."
+  (cl-loop
+    with result = '()
+    for alist in alists
+    do (dolist (item alist)
+         (let* ((key (car item))
+                (val (cdr item))
+                (existing (alist-get-equal key result)))
+           (setq result
+                 (if (not existing)
+                     (cons item result)
+                   (if (or (equal existing t) (equal val t))
+                       (cons (cons key t) (-json-alist-delete key result))
+                     (if (and (listp existing) (listp val))
+                         (cons (cons key (-json-merge-ignore-alists existing val))
+                               (-json-alist-delete key result))
+                       (cons item (-json-alist-delete key result))))))))
+    finally return result))
+
+
+(defun -json-build-ignore-by-data-type (version-alist)
+  "Combine VERSION-ALIST entries that apply to the current Org version."
+  (let ((current-version (-json-org-version-list))
+        (by-type (make-hash-table :test 'equal)))
+    (dolist (version-entry version-alist)
+      (let ((entry-version (car version-entry))
+            (type-alist (cdr version-entry)))
+        (when (-json-version-applies-p entry-version current-version)
+          (dolist (type-entry type-alist)
+            (let ((data-type (car type-entry))
+                  (ignore (cdr type-entry)))
+              (puthash data-type
+                       (-json-merge-ignore-alists
+                        ignore (gethash data-type by-type))
+                       by-type))))))
+    (let (result)
+      (maphash (lambda (key value) (push (cons key value) result)) by-type)
+      result)))
+
+
+; Merge applicable entries from ignore-by-data-type-version based on Org version
+(setq ignore-by-data-type
+  (-json-build-ignore-by-data-type ignore-by-data-type-version))
 
 
 (defun -json-cmp-exported-objects (table1 table2 opts path ignore)
