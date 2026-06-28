@@ -16,9 +16,6 @@ EASK_STAMP = .eask/.stamp$(if $(EASK_DOCKER),-$(EASK_DOCKER),)
 # Regex to filter test names (empty = run all non-interactive tests)
 TESTS_REGEXP=
 
-# Set to 1 to enable (:json-strict t) in export-test-org rule
-EXPORT_STRICT=0
-
 # If non-empty, install-deps rule is a no-op (for running in container with deps already installed)
 NO_INSTALL_DEPS=
 
