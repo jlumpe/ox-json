@@ -284,12 +284,14 @@ of the work, possibly using the keyword arguments to override behavior."
     (setq properties (ox-json--sort-alist-by-key properties)))
   (ox-json-encode-alist-raw
     "org-node"
-    `(
-      (type . ,(json-encode-string (symbol-name (org-element-type node))))
-      (ref . ,(json-encode-string ref))
-      ,@extra
-      (properties . ,(ox-json-encode-alist-raw nil properties info))
-      (contents . ,contents))
+    (let ((base `(
+        (type . ,(json-encode-string (symbol-name (org-element-type node))))
+        (ref . ,(json-encode-string ref))
+        ,@extra
+        (properties . ,(ox-json-encode-alist-raw nil properties info)))))
+      (if (string= contents "[]")
+          base
+        (append base (list (cons 'contents contents)))))
     info))
 
 
@@ -343,9 +345,10 @@ INFO is the plist of export options."
          (contents-encoded (ox-json-export-contents parse-tree info)))
     (ox-json-encode-alist-raw
       "org-document"
-      `(
-         (properties . ,properties-encoded)
-         (contents . ,contents-encoded))
+      (let ((base `((properties . ,properties-encoded))))
+        (if (string= contents-encoded "[]")
+            base
+          (append base (list (cons 'contents contents-encoded)))))
       info)))
 
 (cl-defun ox-json-transcode-headline (headline _contents info &rest kw &key extra)

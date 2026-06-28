@@ -18,6 +18,7 @@
 
 ### Changes to output format
 
+- Omit the `contents` key from exported nodes when it is empty.
 - Node `properties` objects now export keys in alphabetical order.
 - Omit default node property values from export. Set the `:json-omit-default-property-values` to
   `nil` to restore old behavior.
