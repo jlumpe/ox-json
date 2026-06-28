@@ -139,10 +139,20 @@ list."
         (apply 'format msg rem)))
 
 
+(defun -json-decode-scalar-p (value)
+  "Return non-nil when VALUE is a JSON scalar from explicit decode."
+  (or (stringp value)
+      (numberp value)
+      (memq value '(t :json-null :json-false))))
+
+
 (defun -json-cmp-types (data1 data2 opts path)
+  "Whether the general type of DATA1 and DATA2 are the same (array, object, or scalar)."
   (let ((type1 (if data1 (type-of data1)))
         (type2 (if data2 (type-of data2))))
-    (equal type1 type2)))
+    (or (equal type1 type2)
+        (and (-json-decode-scalar-p data1)
+             (-json-decode-scalar-p data2)))))
 
 (put
     '-json-cmp-types

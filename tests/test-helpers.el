@@ -28,3 +28,17 @@
     (should (equal
               (sort (hash-table-keys obj2) #'string<)
               '("bar" "foo")))))
+
+
+(ert-deftest test-json-compare-decode-scalars ()
+  "Cross-type JSON scalars (e.g. null vs bool vs string) compare by value."
+  (should (json-compare :json-null :json-null))
+  (should (json-compare :json-false :json-false))
+  (should (json-compare t t))
+  (should (json-compare "foo" "foo"))
+  (should-error (json-compare :json-null :json-false))
+  (should-error (json-compare :json-null t))
+  (should-error (json-compare :json-null "foo"))
+  (should-error (json-compare :json-false t))
+  (should-error (json-compare :json-false "foo"))
+  (should-error (json-compare t "foo")))
