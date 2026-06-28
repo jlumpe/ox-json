@@ -11,7 +11,10 @@
   ; Disable Emacs version control integration (can slow down scripts)
   vc-handled-backends nil
   ; Don't ask for confirmation when evaluating babel code
-  org-confirm-babel-evaluate nil)
+  org-confirm-babel-evaluate nil
+  ; Match ERT batch backtrace limits so update-exports failures stay readable
+  print-length 10
+  print-level 5)
 
 ; Export options plist for test-export.el and update-exports.el
 (setq ox-json-test-export-options
