@@ -424,7 +424,7 @@ but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
   (let ((ox-json--current-node link))
     (ox-json-export-node-base link info
-      :extra-properties (ox-json-link-extra-properties link info))))
+      :extra (ox-json-link-extra-properties link info))))
 
 (defun ox-json-timestamp-extra-properties (timestamp info)
   "Get additional properties to export from a timestamp object.
@@ -446,7 +446,7 @@ but its value is ignored (`ox-json-export-contents' is used instead).
 INFO is the plist of export options."
   (let ((ox-json--current-node timestamp))
     (ox-json-export-node-base timestamp info
-      :extra-properties (ox-json-timestamp-extra-properties timestamp info))))
+      :extra (ox-json-timestamp-extra-properties timestamp info))))
 
 
 ;;; Filter functions

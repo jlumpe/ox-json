@@ -293,8 +293,6 @@ These can be overridden with the :json-property-types option.")
     link (
       :application nil
       :search-option nil
-      :target-ref nil
-      :is-inline-image nil
     )
     timestamp (
       :range-type nil

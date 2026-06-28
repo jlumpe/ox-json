@@ -19,11 +19,14 @@
 ### Changes to output format
 
 - Omit the `contents` key from exported nodes when it is empty.
+- Custom type-specific node properties/fields have been moved from inside `"properties"` to the
+  outer level, to distinguish them from Org's builtin properties:
+  - `headline` nodes: `tags-all`
+  - `link` nodes: `target-ref`, `is-internal`, `is-inline-image`
+  - `timestamp` nodes: `start`, `end`
 - Node `properties` objects now export keys in alphabetical order.
 - Omit default node property values from export. Set the `:json-omit-default-property-values` to
   `nil` to restore old behavior.
-- `headline` nodes:
-  - The added `tags-all` property has been moved from `"properties"` to the top level object.
 
 ### Bug fixes
 

@@ -92,6 +92,9 @@ represented as `nil` in elisp (don`t get me started).
 
 ## Node types with specific handling
 
+Some specific node types have additional properties added. These are at the outer level instead of
+under the `"properties"` key to distinguish them from Org's builtin properties.
+
 ### headline
 
 Additional properties:
