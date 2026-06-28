@@ -276,23 +276,26 @@ encoded JSON array or a list of pre-encoded strings.
 
 It is expected for all transcoding functions to call this function to do most
 of the work, possibly using the keyword arguments to override behavior."
-  (unless (stringp contents)
-    (setq contents (ox-json-encode-array-raw contents info :omit-empty t)))
-  ; Add extra properties
-  (when extra-properties
-    (setq properties (append properties extra-properties)))
-  ; Sort properties alphabetically by key
-  (when properties
-    (setq properties (ox-json--sort-alist-by-key properties)))
-  (ox-json-encode-alist-raw
-    "org-node"
-    `(
-      (type . ,(json-encode-string (symbol-name (org-element-type node))))
-      (ref . ,(json-encode-string ref))
-      (properties . ,(ox-json-encode-alist-raw nil properties info))
-      (contents . ,contents)
-      ,@extra)
-    info))
+  (let
+    ((omit-defaults (plist-get info :json-omit-default-property-values)))
+    ; Encode contents unless given a pre-encoded string
+    (unless (stringp contents)
+      (setq contents (ox-json-encode-array-raw contents info :omit-empty omit-defaults)))
+    ; Add extra properties
+    (when extra-properties
+      (setq properties (append properties extra-properties)))
+    ; Sort properties alphabetically by key
+    (when properties
+      (setq properties (ox-json--sort-alist-by-key properties)))
+    (ox-json-encode-alist-raw
+      "org-node"
+      `(
+        (type . ,(json-encode-string (symbol-name (org-element-type node))))
+        (ref . ,(json-encode-string ref))
+        (properties . ,(ox-json-encode-alist-raw nil properties info :omit-empty omit-defaults))
+        ,@extra
+        (contents . ,contents))
+      info)))
 
 
 ;;; Transcoder functions
@@ -392,29 +395,30 @@ LINK is the parsed link object.
 INFO is the plist of export options."
   (let* ((link-type (intern (org-element-property :type link)))
          (is-internal nil)
-         (target-ref nil))
+         (target)
+         (target-ref ox-json-omit))
     (when (memq link-type '(custom-id fuzzy radio))
       (setq is-internal t)
-      (let* ((target
-              ; At least one of these functions throws an error if it doesn't resolve
-              (condition-case nil
-                (cl-case link-type
-                  (custom-id
-                    (org-export-resolve-id-link link info))
-                  (fuzzy
-                    (org-export-resolve-fuzzy-link link info))
-                  (radio
-                    (org-export-resolve-radio-link link info)))
-                ; TODO: handle more specific error type?
-                (error nil))))
-        (when target
-          (setq target-ref (ox-json--get-reference target info)))))
+      (setq target
+        ; At least one of these functions throws an error if it doesn't resolve
+        (condition-case nil
+          (cl-case link-type
+            (custom-id
+              (org-export-resolve-id-link link info))
+            (fuzzy
+              (org-export-resolve-fuzzy-link link info))
+            (radio
+              (org-export-resolve-radio-link link info)))
+          ; TODO: handle more specific error type?
+          (error nil)))
+      (when target
+        (setq target-ref (ox-json--get-reference target info))))
     (ox-json-make-alist
       info
       `(
         (is-internal bool ,is-internal)
         (target-ref string ,target-ref)
-        (is-inline-image bool ,(org-export-inline-image-p link))))))
+        (is-inline-image bool ,(or (org-export-inline-image-p link) ox-json-omit))))))
 
 (defun ox-json-transcode-link (link _contents info)
   "Transcode a link object to JSON.
