@@ -105,11 +105,11 @@ MAXLEN is the number of characters to truncate the representation of VALUE at."
 
 ;;; Encoders for generic data types
 
-(defun ox-json-encode-bool (value &optional info strict)
+(cl-defun ox-json-encode-bool (value &optional info (strict t))
   "Encode VALUE to JSON as boolean.
 
 INFO is the plist of export options.
-If STRICT is true will only accept t as a true value and raise/return
+If STRICT is true (default) will only accept t as a true value and raise/return
 an error otherwise. If false will accept any truthy value."
   (cond
     ((not value)

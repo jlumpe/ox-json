@@ -43,6 +43,7 @@
 - Add `DEVELOPER.md` developer guide.
 - Add test coverage reporting via `undercover`.
 - Makefile refactored as a thin facade over Eask.
+- Use strict bool parsing by default (properties marked as bools must be `nil` or `t`).
 
 
 ## 0.3.0

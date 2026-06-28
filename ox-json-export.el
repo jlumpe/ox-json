@@ -413,7 +413,8 @@ INFO is the plist of export options."
       `(
         (is-internal bool ,is-internal)
         (target-ref string ,target-ref)
-        (is-inline-image bool ,(org-export-inline-image-p link))))))
+        ; org-export-inline-image-p not t for truthy, disable strict bool encoding
+        (is-inline-image (bool nil) ,(org-export-inline-image-p link))))))
 
 (defun ox-json-transcode-link (link _contents info)
   "Transcode a link object to JSON.

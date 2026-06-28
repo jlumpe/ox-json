@@ -20,11 +20,11 @@
 ;;; Fixed-type scalar encoding functions
 
 (ert-deftest test-encode-bool ()
-  ; Non-strict (default)
-  (should (string= (ox-json-encode-bool t info) "true"))
-  (should (string= (ox-json-encode-bool nil info) "false"))
-  (should (string= (ox-json-encode-bool 0 info) "true"))
-  (should (string= (ox-json-encode-bool "foo" info) "true"))
+  ; Non-strict
+  (should (string= (ox-json-encode-bool t info nil) "true"))
+  (should (string= (ox-json-encode-bool nil info nil) "false"))
+  (should (string= (ox-json-encode-bool 0 info nil) "true"))
+  (should (string= (ox-json-encode-bool "foo" info nil) "true"))
   ; Strict
   (should (string= (ox-json-encode-bool t info t) "true"))
   (should (string= (ox-json-encode-bool nil info t) "false"))
@@ -70,10 +70,10 @@
   )
 
 (ert-deftest test-encode-with-type ()
-  ; Bool
-  (should (string= (ox-json-encode-with-type 'bool nil info) "false"))
-  (should (string= (ox-json-encode-with-type 'bool t info) "true"))
-  (should (string= (ox-json-encode-with-type 'bool "foo" info) "true"))
+  ; Bool (non-strict)
+  (should (string= (ox-json-encode-with-type '(bool nil) nil info) "false"))
+  (should (string= (ox-json-encode-with-type '(bool nil) t info) "true"))
+  (should (string= (ox-json-encode-with-type '(bool nil) "foo" info) "true"))
   ; Bool (strict)
   (should (string= (ox-json-encode-with-type '(bool t) nil info) "false"))
   (should (string= (ox-json-encode-with-type '(bool t) t info) "true"))
@@ -91,7 +91,7 @@
   (should (encoded= (ox-json-encode-with-type 'array '(1 nil t) info) "[1, null, true]"))
   ; Array with item type
   (should (encoded=
-            (ox-json-encode-with-type '(array bool) '(nil t) info)
+            (ox-json-encode-with-type '(array (bool t)) '(nil t) info)
             "[false, true]")))
 
 
@@ -104,10 +104,11 @@
     [1 t :json-null "foo" "foo"])
   ; Empty
   (should (string= (ox-json-encode-array nil info) "[]"))
-  ; Bool item type
+  ; Bool item type (non-strict)
   (decode-compare
-    (ox-json-encode-array '(1 t nil "foo" foo) info 'bool)
+    (ox-json-encode-array '(1 t nil "foo" foo) info '(bool nil))
     [t t :json-false t t])
+  ; Bool item type (strict)
   (decode-compare
     (ox-json-encode-array '(t nil) info '(bool t))
     [t :json-false])
@@ -130,10 +131,11 @@
   (decode-compare
     (ox-json-encode-alist "mytype" nil info)
     (json-obj info "mytype"))
-  ; Bool value type
+  ; Bool value type (non-strict)
   (decode-compare
-    (ox-json-encode-alist "mytype" '((true . t) (true2 . 1) (false . nil)) info 'bool)
+    (ox-json-encode-alist "mytype" '((true . t) (true2 . 1) (false . nil)) info '(bool nil))
     (json-obj info "mytype" :true t :true2 t :false :json-false))
+  ; Bool value type (strict)
   (decode-compare
     (ox-json-encode-alist "mytype" '((true . t) (false . nil)) info '(bool t))
     (json-obj info "mytype" :true t :false :json-false))
@@ -158,10 +160,11 @@
   (decode-compare
     (ox-json-encode-plist "mytype" nil info)
     (json-obj info "mytype"))
-  ; Bool value type
+  ; Bool value type (non-strict)
   (decode-compare
-    (ox-json-encode-plist "mytype" '(:true t :true2 1 :false nil) info 'bool)
+    (ox-json-encode-plist "mytype" '(:true t :true2 1 :false nil) info '(bool nil))
     (json-obj info "mytype" :true t :true2 t :false :json-false))
+  ; Bool value type (strict)
   (decode-compare
     (ox-json-encode-plist "mytype" '(:true t :false nil) info '(bool t))
     (json-obj info "mytype" :true t :false :json-false))

@@ -217,9 +217,11 @@ be overridden with the :json-exporters option.")
     statistics-cookie (
       :value string)
     subscript (
-      :use-brackets-p bool)
+      ; Uses integer value for true, disable strict bool encoding
+      :use-brackets-p (bool nil))
     superscript (
-      :use-brackets-p bool)
+      ; Same as subscript
+      :use-brackets-p (bool nil))
     table (
       :tblfm t
       :type string
