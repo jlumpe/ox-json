@@ -346,7 +346,8 @@ at the top level."
       extra)
     ; Add list of tags including inherited
     (push
-      (cons 'tags-all (ox-json-encode-array (org-get-tags) info 'string))
+      (cons 'tags-all
+        (ox-json-encode-array (ox-json-headline-tags-all headline info) info 'string))
       regular-encoded)
     (apply #'ox-json-export-node-base headline info
       :properties regular-encoded

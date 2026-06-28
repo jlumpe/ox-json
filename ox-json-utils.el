@@ -132,6 +132,25 @@ ZONE is a time zone to pass to `format-time-string'."
       (year
         (format-time-string "%Y-%m-%d" (encode-time 0 0 0 day month year zone) zone)))))
 
+(defun ox-json-headline-tags-all (headline info)
+  "Return all tags for HEADLINE, including inherited tags and filetags.
+
+HEADLINE is a headline element from the parse tree.
+INFO is the plist of export options.
+
+`org-get-tags' depends on point being at the headline in the Org buffer.
+Org 9.6+ sets point during export transcoding; older versions do not."
+  (let ((begin (org-element-property :begin headline)))
+    (if begin
+        (with-current-buffer
+            (or (plist-get info :buffer)
+                (org-element-property :buffer headline)
+                (current-buffer))
+          (save-excursion
+            (goto-char begin)
+            (org-get-tags)))
+      (org-get-tags))))
+
 (defun ox-json--is-drawer-property-name (name &optional _info)
   "Try to determine if a headline property name came from a property drawer.
 
