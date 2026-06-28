@@ -57,6 +57,7 @@
     alist            ,#'ox-json-encode-alist
     timestamp        ,#'ox-json-export-timestamp-property
     tag-string       ,#'ox-json-encode-tag-string
+    char             ,#'ox-json-encode-char
     t                ,#'ox-json-encode-auto)
   "Default exporter function for each element property type.
 
@@ -144,7 +145,7 @@ be overridden with the :json-exporters option.")
       :deadline timestamp
       :footnote-section-p bool
       :level number
-      :priority number
+      :priority char
       :quotedp bool
       :raw-value string
       :scheduled timestamp

@@ -39,6 +39,23 @@
   (should (string= (ox-json-encode-string nil info) "null"))
   (should-error (ox-json-encode-string 0 info)))
 
+(ert-deftest test-encode-char ()
+  (should (string= (ox-json-encode-char nil info) "null"))
+  (should (string= (ox-json-encode-char ?a info) "\"a\""))
+  (should (string= (ox-json-encode-char ?\n info) "\"\\n\""))
+  (should (string= (ox-json-encode-char ?\" info) "\"\\\"\""))
+  (should (string= (ox-json-encode-char ?\0 info) "\"\\u0000\""))
+  (should (string= (ox-json-encode-char 0 info) "\"\\u0000\""))
+  (should (string= (ox-json-encode-char "a" info) "\"a\""))
+  (should (string= (ox-json-encode-char "foo" info) "\"foo\""))
+  (should (string= (ox-json-encode-char "foo \" \\" info) "\"foo \\\" \\\\\""))
+  (should-error (ox-json-encode-char -1 info))
+  (should-error (ox-json-encode-char 1.5 info))
+  (should-error (ox-json-encode-char 'foo info))
+  (decode-compare
+    (ox-json-encode-char -1 info-nonstrict)
+    (json-obj info-nonstrict "error" 'message "Expected character code integer or string, got -1")))
+
 (ert-deftest test-encode-number ()
   (should (string= (ox-json-encode-number 0 info) "0"))
   (should (string= (ox-json-encode-number 1.5 info) "1.5"))

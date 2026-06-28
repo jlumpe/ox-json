@@ -27,6 +27,7 @@
 - Node `properties` objects now export keys in alphabetical order.
 - Omit default node property values from export. Set the `:json-omit-default-property-values` to
   `nil` to restore old behavior.
+- Export single-character properties (`headline` `priority`) as strings instead of character codes.
 
 ### Bug fixes
 

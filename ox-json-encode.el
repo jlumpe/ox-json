@@ -137,6 +137,21 @@ Also accepts symbols."
     (t
       (ox-json--type-error "string or symbol" value info))))
 
+(defun ox-json-encode-char (value &optional info)
+  "Encode VALUE to JSON as a single-character string or null.
+
+VALUE must be a character code integer, string (not checked for length in this case), or nil.
+INFO is the plist of export options."
+  (cond
+    ((not value)
+      "null")
+    ((characterp value)
+      (json-encode-string (char-to-string value)))
+    ((stringp value)
+      (json-encode-string value))
+    (t
+      (ox-json--type-error "character code integer or string" value info))))
+
 (defun ox-json-encode-number (value &optional info)
   "Encode VALUE to JSON as number or null.
 
