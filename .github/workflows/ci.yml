@@ -13,25 +13,58 @@ jobs:
       fail-fast: false
       matrix:
         emacs-version:
-          - 27-2
-          - 28-2
-          - 29-1
-          - snapshot
+          - 27-2  # Org 9.4
+          - 28-2  # Org 9.5
+          - 29-4  # Org 9.6
         allow-failure: [false]
         include:
-          - emacs-version: 26-3
+          - emacs-version: 26-3  # Org 9.1
+            allow-failure: true
+          - emacs-version: 30-2  # Org 9.7
+            allow-failure: true
+          - emacs-version: snapshot
             allow-failure: true
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install Emacs ${{ matrix.emacs-version }}
-      uses: purcell/setup-emacs@master
+    - name: Fetch setup-emacs
+      uses: actions/checkout@v4
       with:
-        version: ${{ matrix.emacs-version }}
+        repository: purcell/setup-emacs
+        ref: v8.0
+        path: .ci/setup-emacs
+
+    # Install Nix once — this part succeeds reliably; only the Emacs flake fetch
+    # hits 429 throttling, so we keep the two operations in separate steps.
+    - name: Install Nix
+      run: |
+        if ! type -p nix &>/dev/null; then
+          env INPUT_EXTRA_NIX_CONFIG= \
+              INPUT_INSTALL_OPTIONS= \
+              INPUT_INSTALL_URL= \
+              INPUT_NIX_PATH="nixpkgs=channel:nixos-unstable" \
+              INPUT_ENABLE_KVM=true \
+              bash .ci/setup-emacs/install-nix.sh
+        fi
+
+    # Retry only the Emacs flake fetch, which is what actually hits 429.
+    # Add a random delay to stagger the initial attempts across matrix jobs.
+    - name: Install Emacs ${{ matrix.emacs-version }}
+      uses: nick-fields/retry@v4
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        timeout_minutes: 5
+        max_attempts: 3
+        retry_wait_seconds: 60
+        command: |
+          sleep $((RANDOM % 10))
+          nix profile install --accept-flake-config \
+            "github:purcell/nix-emacs-ci#emacs-${{ matrix.emacs-version }}"
 
     - name: Install Eask
-      uses: emacs-eask/setup-eask@master
+      uses: emacs-eask/setup-eask@v3
       with:
         version: 'snapshot'
 
