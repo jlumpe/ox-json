@@ -8,8 +8,6 @@ properly.
 
 ### Markup
 
-**⚠️Needs human review⚠️**
-
 - Basic:
   - [x] bold
   - [x] italic
@@ -73,31 +71,23 @@ properly.
 
 ### Lists
 
-**⚠️Needs human review⚠️**
-
 - Unordered lists
   - [x] `-` bullet
   - [x] `+` bullet
-  - [ ] `*` bullet
+  - [x] `*` bullet (only allowed if nested)
 - Ordered lists
   - [x] `1.` style
   - [x] `1)` style
-- [ ] Description list (`term :: definition`)
+  - [x] Override number (`[@20]`, exported as `counter` property, omitted from tested paragraph)
+- [x] Description list (`term :: definition`) - term appears in `tag` property, definition in
+  `paragraph` element in `contents`.
 - [x] Nested lists
 - Checkbox items
   - [x] Unchecked (`[ ]`) — exported as `"checkbox": "off"`
   - [x] Checked (`[X]`) — exported as `"checkbox": "on"`
   - [x] Partial (`[-]`) — exported as `"checkbox": "trans"`
 
-#### Problems
-
-- **`*` bullet parsed as headline**: In `lists.org`, `* Item three` is parsed by
-  org as a level-1 headline rather than an unordered list item, so the `*` bullet
-  type is never represented as a list `item` node.
-- **Description list not parsed as `plain-list`**: `Term one :: Definition one`
-  and `Term two :: Definition two` are exported as a plain text paragraph
-  (`"Term one :: Definition one\nTerm two :: Definition two\n"`) rather than as a
-  `plain-list` of type `descriptive` with `tag` entries.
+Note: bullet always exported verbatim, even out-of-order ordered bullets without counter.
 
 
 ### Footnotes

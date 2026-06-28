@@ -1,25 +1,39 @@
 #+title: Lists
 
 * Unordered lists
+
 - Item one
 + Item two
-* Item three
+- Nested unordered
+  - 1.1
+  + 1.2
+  * 1.3
++ Nested ordered
+  1. 2.1
+  2) 2.2
+
 
 * Ordered lists
+
 1. First
 2. Second
 1) Third
 2) Fourth
+5. Nested unordered
+  - 1.1
+  + 1.2
+  * 1.3
+6. Nested ordered
+  1. 2.1
+  2) 2.2
+20. [@20] Override value (20)
+
+
 
 * Description list
-Term one :: Definition one
-Term two :: Definition two
+- Term one :: Definition one
++ Term two :: Definition two
 
-* Nested list
-- Parent
-  - Child one
-  - Child two
-    - Grandchild
 
 * Checkbox items
 - [ ] Todo item
