@@ -104,6 +104,27 @@ node's properties and handles both of these changes."
     ; element of the list
     (cadr node)))
 
+(defun ox-json--node-structural-path (datum)
+  "Return DATUM's path as a list of sibling indices from the parse-tree root.
+Each index is the 0-based position of the node within its parent's
+`org-element-contents'."
+  (let (path node)
+    (setq node datum)
+    (while-let ((parent (org-element-property :parent node)))
+      (push (or (cl-position node (org-element-contents parent) :test #'eq) 0)
+            path)
+      (setq node parent))
+    path))
+
+(defun ox-json--format-structural-ref (datum)
+  "Return a deterministic ref string for DATUM based on its structural path.
+The ref is stable across Org versions because it does not depend on buffer
+positions, which can shift between parser versions."
+  (let* ((type (org-element-type datum))
+         (path (ox-json--node-structural-path datum))
+         (key (format "%s:%s" type (mapconcat #'number-to-string path ","))))
+    (format "org%s" (substring (secure-hash 'sha256 key) 0 7))))
+
 (defun ox-json--is-node (value)
   "Check if VALUE is an org element/object."
   (and

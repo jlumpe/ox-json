@@ -65,9 +65,10 @@
 ;;   (indent properly), `minimal' (remove whitespace), and nil (nothing, maybe faster?).
 
 ;; :json-deterministic-refs (bool) - When non-nil, node refs are derived from
-;;   the element's :begin buffer position rather than a random number, producing
-;;   refs that are stable across repeated exports of identical source. Defaults
-;;   to nil (random refs, original behavior).
+;;   the element's structural path in the parse tree rather than a random number,
+;;   producing refs that are stable across repeated exports of identical source
+;;   and across Org versions (unlike buffer positions, which can shift between
+;;   parser versions). Defaults to nil (random refs, original behavior).
 
 ;;; Code:
 
@@ -123,7 +124,7 @@
      (:json-include-extra-properties nil nil t)
      ; How to post-process the final output
      (:json-postprocess nil nil 'pretty)
-     ; Derive node refs from :begin position instead of random numbers
+     ; Derive node refs from structural path instead of random numbers
      (:json-deterministic-refs nil nil nil))
   ;; Menu
   :menu-entry

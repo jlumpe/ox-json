@@ -209,13 +209,12 @@ JSON-encoded values."
 (defun ox-json--get-reference (datum info)
   "Return a stable or random reference for DATUM, depending on options.
 When `:json-deterministic-refs' is non-nil, the ref is derived from
-DATUM's `:begin' buffer position.  Otherwise delegates to
+DATUM's structural path in the parse tree.  Otherwise delegates to
 `org-export-get-reference' (random)."
   (if (plist-get info :json-deterministic-refs)
       (let ((cache (plist-get info :internal-references)))
         (or (car (rassq datum cache))
-            (let* ((pos (org-element-property :begin datum))
-                   (ref (format "org%07x" pos)))
+            (let ((ref (ox-json--format-structural-ref datum)))
               (plist-put info :internal-references
                          (cons (cons ref datum) cache))
               ref)))

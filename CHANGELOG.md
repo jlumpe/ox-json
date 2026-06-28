@@ -13,8 +13,8 @@
 - New export options:
   - `:json-postprocess` (`pretty`, `minimal`, or nil): to control final JSON formatting (default
     `:pretty`).
-  - `:json-deterministic-refs` (`t` or nil): Make element `ref` values deterministic (based on
-    buffer position) (default nil).
+  - `:json-deterministic-refs` (`t` or nil): Make element `ref` values deterministic
+    (based on structural path in the parse tree) (default nil).
 
 ### Changes to output format
 
