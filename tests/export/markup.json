@@ -44,9 +44,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000012",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Basic markup",
         "pre-blank": 0,
         "level": 1,
@@ -157,9 +157,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000061",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Subscript and superscript",
         "pre-blank": 0,
         "level": 1,
@@ -284,9 +284,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00000a9",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Entities",
         "pre-blank": 0,
         "level": 1,
@@ -401,9 +401,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00000d4",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Line breaks",
         "pre-blank": 0,
         "level": 1,

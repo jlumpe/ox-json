@@ -44,9 +44,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000011",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "External links",
         "pre-blank": 0,
         "level": 1,
@@ -132,9 +132,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000065",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "File links",
         "pre-blank": 0,
         "level": 1,
@@ -220,9 +220,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00000a5",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Internal links",
         "pre-blank": 0,
         "level": 1,
@@ -298,11 +298,11 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00000df",
+      "tags-all": [],
       "drawer": {
         "CUSTOM_ID": "custom-id"
       },
       "properties": {
-        "tags-all": [],
         "raw-value": "Custom ID target",
         "pre-blank": 0,
         "level": 1,
@@ -367,9 +367,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org000012b",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Radio links",
         "pre-blank": 0,
         "level": 1,
@@ -450,9 +450,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000166",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Image links",
         "pre-blank": 0,
         "level": 1,

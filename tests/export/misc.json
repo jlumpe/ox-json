@@ -119,12 +119,12 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00000ae",
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
       "drawer": {},
       "properties": {
-        "tags-all": [
-          "foo",
-          "bar"
-        ],
         "raw-value": "Horizontal rule",
         "pre-blank": 0,
         "level": 1,
@@ -169,12 +169,12 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00000c7",
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
       "drawer": {},
       "properties": {
-        "tags-all": [
-          "foo",
-          "bar"
-        ],
         "raw-value": "Comment",
         "pre-blank": 0,
         "level": 1,
@@ -208,12 +208,12 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00000eb",
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
       "drawer": {},
       "properties": {
-        "tags-all": [
-          "foo",
-          "bar"
-        ],
         "raw-value": "Clock entry",
         "pre-blank": 0,
         "level": 1,
@@ -247,12 +247,12 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000139",
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
       "drawer": {},
       "properties": {
-        "tags-all": [
-          "foo",
-          "bar"
-        ],
         "raw-value": "Diary sexp",
         "pre-blank": 0,
         "level": 1,
@@ -298,12 +298,12 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000169",
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
       "drawer": {},
       "properties": {
-        "tags-all": [
-          "foo",
-          "bar"
-        ],
         "raw-value": "Dynamic block",
         "pre-blank": 0,
         "level": 1,
@@ -444,12 +444,12 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00001e5",
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
       "drawer": {},
       "properties": {
-        "tags-all": [
-          "foo",
-          "bar"
-        ],
         "raw-value": "Inlinetask",
         "pre-blank": 0,
         "level": 1,
@@ -471,12 +471,12 @@
           "$$data_type": "org-node",
           "type": "headline",
           "ref": "org00001f2",
+          "tags-all": [
+            "foo",
+            "bar"
+          ],
           "drawer": {},
           "properties": {
-            "tags-all": [
-              "foo",
-              "bar"
-            ],
             "raw-value": "Inline task",
             "pre-blank": 0,
             "level": 8,
@@ -557,12 +557,12 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000227",
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
       "drawer": {},
       "properties": {
-        "tags-all": [
-          "foo",
-          "bar"
-        ],
         "raw-value": "Macro",
         "pre-blank": 0,
         "level": 1,
@@ -609,12 +609,12 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org000023e",
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
       "drawer": {},
       "properties": {
-        "tags-all": [
-          "foo",
-          "bar"
-        ],
         "raw-value": "Target",
         "pre-blank": 0,
         "level": 1,
@@ -671,12 +671,12 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000258",
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
       "drawer": {},
       "properties": {
-        "tags-all": [
-          "foo",
-          "bar"
-        ],
         "raw-value": "Export snippet",
         "pre-blank": 0,
         "level": 1,
@@ -734,12 +734,12 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org000027f",
+      "tags-all": [
+        "foo",
+        "bar"
+      ],
       "drawer": {},
       "properties": {
-        "tags-all": [
-          "foo",
-          "bar"
-        ],
         "raw-value": "Keyword",
         "pre-blank": 0,
         "level": 1,

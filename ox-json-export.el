@@ -336,7 +336,7 @@ at the top level."
      (all-props (ox-json-node-properties headline))
      (`(,regular-props . ,drawer-props)
        (ox-json--separate-drawer-properties all-props info))
-     (regular-encoded
+     (props-encoded
        (ox-json--export-properties-for-type 'headline regular-props info))
      (drawer-encoded
        (ox-json-encode-plist nil drawer-props info 'string)))
@@ -348,9 +348,9 @@ at the top level."
     (push
       (cons 'tags-all
         (ox-json-encode-array (ox-json-headline-tags-all headline info) info 'string))
-      regular-encoded)
+      extra)
     (apply #'ox-json-export-node-base headline info
-      :properties regular-encoded
+      :properties props-encoded
       :extra extra
       kw)))
 

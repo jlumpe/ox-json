@@ -44,6 +44,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000013",
+      "tags-all": [],
       "drawer": {
         "FOO": "abc123 this is plain text",
         "MARKUP": "*abc* /def/ [[google.com][a link]]",
@@ -56,7 +57,6 @@
         "CUSTOM_ID": "custom-drawer-id"
       },
       "properties": {
-        "tags-all": [],
         "raw-value": "Property drawer",
         "pre-blank": 0,
         "level": 1,
@@ -90,9 +90,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000162",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Custom drawer",
         "pre-blank": 0,
         "level": 1,
@@ -126,9 +126,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00001a4",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Arbitrary drawer",
         "pre-blank": 0,
         "level": 1,

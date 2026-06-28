@@ -44,9 +44,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000015",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Labeled footnotes",
         "pre-blank": 0,
         "level": 1,
@@ -105,9 +105,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000044",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Inline footnotes",
         "pre-blank": 0,
         "level": 1,
@@ -168,9 +168,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000085",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Named footnotes",
         "pre-blank": 0,
         "level": 1,
@@ -231,9 +231,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00000c7",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Footnote definitions",
         "pre-blank": 0,
         "level": 1,

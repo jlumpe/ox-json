@@ -97,6 +97,7 @@ represented as `nil` in elisp (don`t get me started).
 Additional properties:
 
 - `"drawer"` (object): Properties defined in `:PROPERTIES:` drawer.
+- `"all-tags"` (array of strings): All tags including those inherited from parents.
 
 
 ### link

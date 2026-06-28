@@ -16,6 +16,11 @@
   - `:json-deterministic-refs` (`t` or nil): Make element `ref` values deterministic (based on
     buffer position) (default nil).
 
+### Changes to output format
+
+- `headline` nodes:
+  - The added `tags-all` property has been moved from `"properties"` to the top level object.
+
 ### Bug fixes
 
 - Fix improper quoting in `cl-case` link-type branches.

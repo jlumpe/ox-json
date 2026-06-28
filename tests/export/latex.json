@@ -44,9 +44,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000011",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Inline LaTeX",
         "pre-blank": 0,
         "level": 1,
@@ -115,9 +115,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000040",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Display math",
         "pre-blank": 0,
         "level": 1,
@@ -185,9 +185,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000078",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "LaTeX environment",
         "pre-blank": 0,
         "level": 1,

@@ -83,9 +83,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000075",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Inline call syntax",
         "pre-blank": 0,
         "level": 1,
@@ -142,9 +142,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00000ae",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Call line syntax",
         "pre-blank": 0,
         "level": 1,

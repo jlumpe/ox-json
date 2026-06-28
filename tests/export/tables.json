@@ -44,9 +44,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000012",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Basic table",
         "pre-blank": 0,
         "level": 1,
@@ -208,9 +208,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org0000065",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Column groups",
         "pre-blank": 0,
         "level": 1,
@@ -360,9 +360,9 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org00000a3",
+      "tags-all": [],
       "drawer": {},
       "properties": {
-        "tags-all": [],
         "raw-value": "Table formula",
         "pre-blank": 0,
         "level": 1,
