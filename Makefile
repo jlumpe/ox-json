@@ -106,3 +106,9 @@ clean :
 # Re-export all .org fixtures in tests/export/ to .json snapshots
 update-exports : install-deps
 	$(EASK) emacs --batch -l tests/update-exports.el
+
+update-exports-pretty :
+	for file in $(wildcard tests/export/*.json); do \
+	  scripts/json-to-markdown.py $$file $${file%.json}.md; \
+	  scripts/json-to-html.py $$file $${file%.json}.html; \
+	done
