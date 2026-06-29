@@ -43,6 +43,7 @@
 
 ### Other
 
+- Raise minimum supported versions of Emacs from 26.1 to 27.1 and Org from 9 to 9.4.
 - Split into multiple source files.
 - Adopt [Eask](https://emacs-eask.github.io/) for dependency management, byte compilation, and CI.
 - Add `DEVELOPER.md` developer guide.

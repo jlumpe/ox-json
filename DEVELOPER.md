@@ -29,8 +29,8 @@
 
 Runtime (declared in the `Package-Requires` header of `ox-json.el` and `depends-on` in `Eask`):
 
-- Emacs >= 26.1
-- `org` >= 9
+- Emacs >= 27.1
+- `org` >= 9.4
 - `s` >= 1.12
 
 Development-only (declared in the `(development ...)` block of `Eask`): `package-lint`, `undercover`.
@@ -215,15 +215,14 @@ CI is defined in `.github/workflows/ci.yml` and runs on every push and pull requ
 
 The workflow tests against multiple Emacs versions (the comments note the bundled Org version):
 
-- 27.2 (Org 9.4)
+- 27.2 (Org 9.4) — minimum supported version
 - 28.2 (Org 9.5)
 - 29.4 (Org 9.6)
 - 30.2 (Org 9.7)
-- 26.3 (Org 9.1) — allowed to fail
 - snapshot (latest development build) — allowed to fail
 
 The matrix uses `fail-fast: false` so all Emacs versions are tested even if one fails. The per-job
-`continue-on-error: ${{ matrix.allow-failure }}` setting lets the 26.3 and snapshot jobs fail
+`continue-on-error: ${{ matrix.allow-failure }}` setting lets the snapshot job fail
 without blocking the overall workflow.
 
 

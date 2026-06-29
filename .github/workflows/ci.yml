@@ -19,8 +19,6 @@ jobs:
           - 30-2  # Org 9.7
         allow-failure: [false]
         include:
-          - emacs-version: 26-3  # Org 9.1
-            allow-failure: true
           - emacs-version: snapshot
             allow-failure: true
 

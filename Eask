@@ -13,8 +13,8 @@
 (source "melpa")
 (source "jcs-elpa")
 
-(depends-on "emacs" "26.1")
-(depends-on "org" "9")
+(depends-on "emacs" "27.1")
+(depends-on "org" "9.4")
 (depends-on "s" "1.12")
 
 (development
