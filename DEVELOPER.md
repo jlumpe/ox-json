@@ -14,11 +14,12 @@
 | `ox-json-utils.el` | Internal utility functions |
 | `ox-json-encode.el` | JSON encoding functions |
 | `ox-json-export.el` | Org element export handlers |
-| `ox-json-docs.org` | User-facing documentation (Org format) |
 | `tests/` | ERT test suite and helpers |
 | `tests/run-coverage.el` | Single-process test runner used by `make coverage` |
 | `coverage/` | Coverage output directory (not checked in) |
-| `tests/export/` | Org fixture files and exported JSON snapshots |
+| `tests/export/` | Org fixture files, exported JSON snapshots, and gitignored Markdown/HTML review views |
+| `scripts/` | Helper scripts: `eask-docker.sh` and the `json-to-markdown.py`/`json-to-html.py` review-view generators |
+| `planning/` | Planning notes, including `elements.md` (feature-coverage tracking) |
 | `Eask` | Package metadata, dependencies, and Eask build config |
 | `Makefile` | Additional automation (interactive testing, export regeneration) |
 | `.github/workflows/ci.yml` | GitHub Actions CI config |
@@ -140,7 +141,7 @@ The test suite uses Emacs's built-in ERT (Emacs Lisp Regression Testing) framewo
 | File | What it tests |
 |------|---------------|
 | `test-encode.el` | Low-level encoding functions: booleans, strings, numbers, tag strings, arrays, alists, plists, auto-type detection, and custom type encoders |
-| `test-export.el` | Full document export — exports each `.org` file in `tests/export/` with `(:json-strict t)` and compares against its saved `.json` snapshot; also checks export invariants. Certain properties that vary across Org versions or export runs (e.g. `ref`, `creator`, `email`, and various properties introduced in Org 9.6 and 9.7) are ignored during comparison. |
+| `test-export.el` | Full document export — defines one ERT test per `.org` file in `tests/export/`, exports it with the deterministic options in `ox-json-test-export-options` (`:json-strict t`, `:json-deterministic-refs t`, fixed author/date/email), and compares against its saved `.json` snapshot; also checks export invariants. Because refs and metadata are made deterministic, only properties that genuinely vary are ignored during comparison: `creator` (Emacs version), `pre-blank`/`post-blank` (vary in CI), and various properties introduced in Org 9.5/9.6/9.7. |
 | `test-utils.el` | Internal utility functions: alist merging, plist-to-alist conversion, plist lookup across multiple plists, node detection, plist looping |
 | `test-helpers.el` | Self-tests for the test helper functions themselves (`encoded=`, `json-obj`) |
 
@@ -188,11 +189,11 @@ EASK_DOCKER=29.1 make org-version
 | `checkdoc` | Run `checkdoc` on all `ox-json*.el` files |
 | `test-interactive` | Open an Emacs session with test files loaded for interactive `M-x ert` |
 | `coverage` | Run tests with `undercover.el` and write `coverage/lcov.info`; generates HTML with `genhtml` if available |
-| `export-test-org` | Re-export `tests/test.org` to `test.json` (use `EXPORT_STRICT=1` for strict mode) |
 | `emacs` | Open Emacs with the project and test load-path configured |
 | `org-version` | Print the version of `org-mode` in use |
 | `clean` | Remove byte-compiled `.elc` files, `.eask/`, and `coverage/` |
 | `update-exports` | Re-export all `.org` fixtures in `tests/export/` to `.json` snapshots |
+| `update-exports-pretty` | Regenerate the gitignored `.md`/`.html` review views from the `.json` snapshots |
 
 
 ### Key Makefile variables
@@ -201,7 +202,6 @@ EASK_DOCKER=29.1 make org-version
 |----------|---------|-------------|
 | `EASK` | `eask` | Eask executable |
 | `EASK_DOCKER` | _(empty)_ | Emacs version for Docker (e.g. `28.2`); runs eask in `silex/emacs:<version>-eask` |
-| `EXPORT_STRICT` | `0` | Set to `1` to enable `(:json-strict t)` when running `export-test-org` |
 | `NO_INSTALL_DEPS` | _(empty)_ | Set to any non-empty value to skip dependency installation |
 | `TESTS_REGEXP` | _(empty)_ | When set, filter ERT tests by name (default runs all via `eask test ert`) |
 
@@ -213,28 +213,34 @@ CI is defined in `.github/workflows/ci.yml` and runs on every push and pull requ
 
 ### Matrix
 
-The workflow tests against multiple Emacs versions using [`purcell/setup-emacs`](https://github.com/purcell/setup-emacs):
+The workflow tests against multiple Emacs versions (the comments note the bundled Org version):
 
-- 26.3 (allowed to fail — Org 9.7 dropped support for Emacs 26)
-- 27.2
-- 28.2
-- 29.1
-- snapshot (latest development build)
+- 27.2 (Org 9.4)
+- 28.2 (Org 9.5)
+- 29.4 (Org 9.6)
+- 30.2 (Org 9.7)
+- 26.3 (Org 9.1) — allowed to fail
+- snapshot (latest development build) — allowed to fail
 
-The matrix uses `fail-fast: false` so all Emacs versions are tested even if one fails. Emacs 26.3 uses `continue-on-error: true` so its failure won't block the overall workflow.
+The matrix uses `fail-fast: false` so all Emacs versions are tested even if one fails. The per-job
+`continue-on-error: ${{ matrix.allow-failure }}` setting lets the 26.3 and snapshot jobs fail
+without blocking the overall workflow.
 
 
 ### Steps
 
-For each Emacs version the job:
+The [`purcell/setup-emacs`](https://github.com/purcell/setup-emacs) action is **not** used directly. That action installs Nix and fetches the Emacs flake in a single step, and the flake fetch frequently hits GitHub API rate limits (HTTP 429), which fails the whole step with no opportunity to retry just the part that failed. Instead the workflow splits the action's two operations into separate steps and reuses only the action's `install-nix.sh` script, so that the throttling-prone flake fetch can be retried on its own without reinstalling Nix each time.
 
-1. Checks out the repository.
-2. Installs the target Emacs version via `purcell/setup-emacs`.
-3. Installs Eask via `emacs-eask/setup-eask`.
-4. Runs `eask install-deps --dev` to install all dependencies.
-5. Prints the installed `org-mode` version for debugging.
-6. Runs `eask compile` — byte-compiles the package.
-7. Runs `eask test ert tests/test-*.el` — executes the full ERT test suite.
+Each Emacs version is provided by the [`purcell/nix-emacs-ci`](https://github.com/purcell/nix-emacs-ci) flake, so the job has to set up Nix first. For each Emacs version the job:
+
+1. Checks out the repository, plus a checkout of `purcell/setup-emacs` (pinned to `v8.0`) whose `install-nix.sh` script is reused.
+2. Installs Nix via that `install-nix.sh` script (skipped if Nix is already present). This part succeeds reliably, so it's kept separate from the flake fetch below.
+3. Installs the target Emacs from the `nix-emacs-ci` flake with `nix profile install`, wrapped in `nick-fields/retry` (3 attempts, staggered) because the flake fetch is the operation that actually hits GitHub's 429 throttling.
+4. Installs Eask via `emacs-eask/setup-eask` (`snapshot`).
+5. Runs `eask install-deps --dev` to install all dependencies.
+6. Prints the installed `org-mode` version for debugging.
+7. Runs `eask compile` — byte-compiles the package.
+8. Runs `eask test ert tests/test-*.el` — executes the full ERT test suite.
 
 
 ## Linting and style checks
@@ -258,7 +264,7 @@ The export tests (`test-export.el`) compare live exports of each `.org` file in 
 make update-exports
 ```
 
-The comparison ignores properties that are known to vary across Org versions or export runs (e.g. `ref`, `creator`, `email`, `target-ref`, and various properties introduced in Org 9.6 and 9.7). This ignore list is defined in `tests/test-export.el` in the `ignore-by-data-type` variable.
+The comparison ignores properties that are known to vary across Org versions or export runs (e.g. `creator`, `pre-blank`/`post-blank`, and various properties introduced in Org 9.5/9.6/9.7). This ignore list is defined in `tests/test-export.el` in the `ignore-by-data-type-version` variable, keyed by Org version so that entries only apply on the versions where they are needed. (Refs, author, date, and email do not need ignoring because `ox-json-test-export-options` makes them deterministic.)
 
 
 ## Tips

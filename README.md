@@ -25,7 +25,7 @@ An exported document looks like:
   "$$data_type": "org-document",
   "properties": {
     "title": ["Test file"],
-    "file_tags": ["foo","bar"],
+    "filetags": ["foo","bar"],
     "author": ["jlumpe"],
     "creator": "Emacs 26.2 (Org mode 9.2.4)",
     "date": [],
@@ -76,12 +76,12 @@ All nodes (elements and objects) in the document tree are exported like:
 
 See the [Org element API](https://orgmode.org/worg/dev/org-element-api.html) documentation for a
 complete list of all node types and properties. Also see the section
-[Node types with specific handling](node-types-with-specific-handling).
+[Node types with specific handling](#node-types-with-specific-handling).
 
 
 ### Additional notes
 
-The `"$$data-type"` property is added to JSON objects to indicate the type of structured data they
+The `"$$data_type"` property is added to JSON objects to indicate the type of structured data they
 contain. This is meant to make it easier for external tools to interpret. Objects lacking this
 property represent simple key-value mappings with no additional implied structure.
 
@@ -100,7 +100,7 @@ under the `"properties"` key to distinguish them from Org's builtin properties.
 Additional properties:
 
 - `"drawer"` (object): Properties defined in `:PROPERTIES:` drawer.
-- `"all-tags"` (array of strings): All tags including those inherited from parents.
+- `"tags-all"` (array of strings): All tags including those inherited from parents.
 
 
 ### link
@@ -134,12 +134,19 @@ Additional properties:
 | `:json-strict`                        | bool      | `nil`                                          |
 | `:json-include-extra-properties`      | bool      | `t`                                            |
 | `:json-omit-default-property-values`  | bool      | `t`                                            |
+| `:json-postprocess`                   | symbol    | `pretty`                                       |
+| `:json-deterministic-refs`            | bool      | `nil`                                          |
 
 - `:json-data-type-property`: Name of the property added to JSON objects which indicates the type of
   data they represent. Set to `nil` to disable.
 - `:json-omit-default-property-values`: When non-nil, node properties whose value equals the
   configured default are omitted from export. Defaults are defined in
   `ox-json-default-property-values` (not customizable currently).
+- `:json-postprocess`: How to format the final output. `pretty` indents the JSON, `minimal` strips
+  whitespace, and `nil` leaves the output unmodified.
+- `:json-deterministic-refs`: When non-nil, node `ref` values are derived from each node's structural
+  path in the parse tree rather than a random number, producing refs that are stable across repeated
+  exports of identical source (and across Org versions). Defaults to `nil` (random refs).
 
 
 ## Related software

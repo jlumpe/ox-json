@@ -11,7 +11,7 @@ Notes for AI agents working on `ox-json`, an Org mode JSON export backend.
 | `*.json` | **Snapshot output** — compared by `tests/test-export.el` |
 | `*.md`, `*.html` | **Review views** — from `.json`; gitignored; not used by tests |
 
-Feature coverage: `planning/elements.md` (checkboxes + `#### Problems`).
+Feature coverage: `planning/elements.md` (checkboxes + `#### ⛔ Problems` / `#### 📝 To add` sections).
 
 ```bash
 make update-exports          # .org → .json

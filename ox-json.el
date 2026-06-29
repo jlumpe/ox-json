@@ -25,8 +25,8 @@
 ;;; Commentary:
 
 ;; Org mode export backend for exporting the document syntax tree to JSON.
-;; The main entry points are `ox-json-export-as-json' and
-;; `ox-json-export-to-json'. It can also be used through the built-in
+;; The main entry points are `ox-json-export-to-buffer' and
+;; `ox-json-export-to-file'. It can also be used through the built-in
 ;; export dispatcher through `org-export-dispatch'.
 
 ;; Export options:
