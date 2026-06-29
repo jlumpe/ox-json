@@ -267,6 +267,62 @@ make update-exports
 The comparison ignores properties that are known to vary across Org versions or export runs (e.g. `creator`, `pre-blank`/`post-blank`, and various properties introduced in Org 9.5/9.6/9.7). This ignore list is defined in `tests/test-export.el` in the `ignore-by-data-type-version` variable, keyed by Org version so that entries only apply on the versions where they are needed. (Refs, author, date, and email do not need ignoring because `ox-json-test-export-options` makes them deterministic.)
 
 
+## MELPA and releasing
+
+`ox-json` is distributed through [MELPA](https://melpa.org/#/ox-json). There are two MELPA channels and they behave very differently:
+
+- **MELPA (unstable)** builds automatically from the **latest commit on the default branch** (`main`) whenever it pulls from GitHub. There is no manual publish step — anything merged to `main` becomes the next MELPA build, usually within a day.
+- **[MELPA Stable](https://stable.melpa.org/#/ox-json)** builds from the **most recent git tag** that looks like a version number. A new stable release is published only when a corresponding tag is pushed to GitHub.
+
+### Branching implications
+
+Because plain MELPA tracks `main` directly, **anything broken on `main` ships to users automatically**. To avoid this:
+
+- Do day-to-day development on **feature branches**, not `main`.
+- Only merge into `main` once the work is **relatively stable** — compiling cleanly, passing tests, and not mid-refactor.
+- Treat `main` as releasable at all times.
+
+### Cutting a release
+
+A release is just a version-number git tag (e.g. `v0.4.0`) pushed to GitHub; MELPA Stable picks it up on its next build. Before tagging, work through the checklist below.
+
+#### Pre-release checklist
+
+1. **Make sure `main` is up to date** with all changes intended for the release.
+2. **Update the version number** — keep these in sync:
+   - the `;; Version:` header in `ox-json.el`
+   - the version string in `Eask`
+3. **Update `CHANGELOG.md`** — rename the top `## Dev` section to the new version number (and add a fresh empty `## Dev` section above it for future work). Review that the entries accurately describe what changed since the last release.
+4. **Byte-compile cleanly:**
+   ```bash
+   make byte-compile-strict
+   ```
+   Fix any warnings not in the deliberately-suppressed categories (`docstrings`, `obsolete`, `suspicious`).
+5. **Run the linters** and fix reported problems:
+   ```bash
+   make lint       # package-lint — MELPA header/dependency/naming checks
+   make checkdoc   # checkdoc — docstring conventions
+   ```
+   `package-lint` in particular gates MELPA acceptance, so it must be clean.
+6. **Run the full test suite**, ideally against multiple Emacs/Org versions:
+   ```bash
+   make test
+   EASK_DOCKER=30.2 make test   # repeat for other supported versions
+   ```
+7. **Regenerate export snapshots** if export output changed, and confirm the diff is intentional:
+   ```bash
+   make update-exports
+   ```
+8. **Review the docs** (`README.md`, `DEVELOPER.md`, `AGENTS.md`) for anything made inaccurate by the release.
+9. **Commit** the version bump and changelog, then **tag and push:**
+   ```bash
+   git tag v0.4.0
+   git push origin main --tags
+   ```
+
+After pushing the tag, confirm the new version appears on [MELPA Stable](https://stable.melpa.org/#/ox-json) once it rebuilds.
+
+
 ## Tips
 
 - Eask installs dependencies into `.eask/<emacs-version>/elpa/`, keeping them completely separate from your personal `~/.emacs.d`. You can safely delete `.eask/` at any time and re-run `make install-deps` or `eask install-deps --dev` to restore it.
