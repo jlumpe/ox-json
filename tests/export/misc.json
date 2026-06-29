@@ -139,7 +139,37 @@
           "ref": "org1095095",
           "properties": {
             "mode": "section"
-          }
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "clock",
+              "ref": "org5ea98ba",
+              "properties": {
+                "duration": "1:00",
+                "mode": "planning",
+                "post-blank": 2,
+                "status": "closed",
+                "value": {
+                  "$$data_type": "timestamp",
+                  "start": "2024-01-15T10:00:00",
+                  "end": "2024-01-15T11:00:00",
+                  "type": "inactive-range",
+                  "raw-value": "[2024-01-15 Mon 10:00]--[2024-01-15 Mon 11:00]",
+                  "repeater": {
+                    "type": null,
+                    "unit": null,
+                    "value": null
+                  },
+                  "warning": {
+                    "type": null,
+                    "unit": null,
+                    "value": null
+                  }
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -618,8 +648,60 @@
               "contents": [
                 {
                   "$$data_type": "org-node",
+                  "type": "clock",
+                  "ref": "orga8d71d5",
+                  "properties": {
+                    "duration": "2:23",
+                    "status": "closed",
+                    "value": {
+                      "$$data_type": "timestamp",
+                      "start": "2024-06-10T14:00:00",
+                      "end": "2024-06-10T16:23:00",
+                      "type": "inactive-range",
+                      "raw-value": "[2024-06-10 Mon 14:00]--[2024-06-10 Mon 16:23]",
+                      "repeater": {
+                        "type": null,
+                        "unit": null,
+                        "value": null
+                      },
+                      "warning": {
+                        "type": null,
+                        "unit": null,
+                        "value": null
+                      }
+                    }
+                  }
+                },
+                {
+                  "$$data_type": "org-node",
+                  "type": "clock",
+                  "ref": "org3832f7e",
+                  "properties": {
+                    "duration": "1:45",
+                    "status": "closed",
+                    "value": {
+                      "$$data_type": "timestamp",
+                      "start": "2024-06-09T23:30:00",
+                      "end": "2024-06-10T01:15:00",
+                      "type": "inactive-range",
+                      "raw-value": "[2024-06-09 Sun 23:30]--[2024-06-10 Mon 01:15]",
+                      "repeater": {
+                        "type": null,
+                        "unit": null,
+                        "value": null
+                      },
+                      "warning": {
+                        "type": null,
+                        "unit": null,
+                        "value": null
+                      }
+                    }
+                  }
+                },
+                {
+                  "$$data_type": "org-node",
                   "type": "plain-list",
-                  "ref": "orgfe29a3c",
+                  "ref": "org73f8a19",
                   "properties": {
                     "type": "unordered"
                   },
@@ -627,7 +709,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "item",
-                      "ref": "org8133c1d",
+                      "ref": "orgb159805",
                       "properties": {
                         "bullet": "- ",
                         "mode": "item",
@@ -639,14 +721,14 @@
                         {
                           "$$data_type": "org-node",
                           "type": "paragraph",
-                          "ref": "orgad94eea",
+                          "ref": "orgd99ba9f",
                           "properties": {},
                           "contents": [
                             "CLOSING NOTE ",
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "orgf0621e3",
+                              "ref": "orgf215723",
                               "start": "2024-06-10T16:23:00",
                               "end": "2024-06-10T16:23:00",
                               "properties": {
@@ -658,7 +740,7 @@
                             {
                               "$$data_type": "org-node",
                               "type": "line-break",
-                              "ref": "orgce5a25c",
+                              "ref": "orgede5364",
                               "properties": {}
                             },
                             "Closing note\n"
@@ -669,7 +751,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "item",
-                      "ref": "orgfbb5430",
+                      "ref": "org547ce55",
                       "properties": {
                         "bullet": "- ",
                         "mode": "item",
@@ -681,14 +763,14 @@
                         {
                           "$$data_type": "org-node",
                           "type": "paragraph",
-                          "ref": "org83e4bdf",
+                          "ref": "org21e2c2a",
                           "properties": {},
                           "contents": [
                             "State \"DONE\"       from \"REVIEW\"     ",
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "orgfdf72af",
+                              "ref": "orgbdc56da",
                               "start": "2024-06-10T16:23:00",
                               "end": "2024-06-10T16:23:00",
                               "properties": {
@@ -700,7 +782,7 @@
                             {
                               "$$data_type": "org-node",
                               "type": "line-break",
-                              "ref": "orgcdd3a7c",
+                              "ref": "org8981acd",
                               "properties": {}
                             },
                             "State change note\n"
@@ -711,7 +793,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "item",
-                      "ref": "orgd8105ba",
+                      "ref": "org9c3f83d",
                       "properties": {
                         "bullet": "- ",
                         "mode": "item",
@@ -723,14 +805,14 @@
                         {
                           "$$data_type": "org-node",
                           "type": "paragraph",
-                          "ref": "orga01b8ec",
+                          "ref": "org3feddf7",
                           "properties": {},
                           "contents": [
                             "State \"REVIEW\"     from \"NEXT\"       ",
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "org800e79a",
+                              "ref": "orga5d7180",
                               "start": "2024-06-10T12:02:00",
                               "end": "2024-06-10T12:02:00",
                               "properties": {
@@ -747,8 +829,34 @@
                 },
                 {
                   "$$data_type": "org-node",
+                  "type": "clock",
+                  "ref": "org055e102",
+                  "properties": {
+                    "duration": "1:30",
+                    "status": "closed",
+                    "value": {
+                      "$$data_type": "timestamp",
+                      "start": "2024-06-08T09:00:00",
+                      "end": "2024-06-08T10:30:00",
+                      "type": "inactive-range",
+                      "raw-value": "[2024-06-08 Sat 09:00]--[2024-06-08 Sat 10:30]",
+                      "repeater": {
+                        "type": null,
+                        "unit": null,
+                        "value": null
+                      },
+                      "warning": {
+                        "type": null,
+                        "unit": null,
+                        "value": null
+                      }
+                    }
+                  }
+                },
+                {
+                  "$$data_type": "org-node",
                   "type": "plain-list",
-                  "ref": "org6f95df3",
+                  "ref": "orgec71c26",
                   "properties": {
                     "type": "unordered"
                   },
@@ -756,7 +864,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "item",
-                      "ref": "org36add00",
+                      "ref": "org87ea255",
                       "properties": {
                         "bullet": "- ",
                         "mode": "item",
@@ -768,14 +876,14 @@
                         {
                           "$$data_type": "org-node",
                           "type": "paragraph",
-                          "ref": "orgcaf7703",
+                          "ref": "org7af582b",
                           "properties": {},
                           "contents": [
                             "State \"NEXT\"       from \"TODO\"       ",
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "orgea1c735",
+                              "ref": "org63594f1",
                               "start": "2024-06-08T09:00:00",
                               "end": "2024-06-08T09:00:00",
                               "properties": {
@@ -791,7 +899,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "item",
-                      "ref": "org62237c3",
+                      "ref": "orga00313c",
                       "properties": {
                         "bullet": "- ",
                         "mode": "item",
@@ -803,14 +911,14 @@
                         {
                           "$$data_type": "org-node",
                           "type": "paragraph",
-                          "ref": "orgbcea800",
+                          "ref": "org0d67b42",
                           "properties": {},
                           "contents": [
                             "Note taken on ",
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "orgb9a5c51",
+                              "ref": "org2c707e7",
                               "start": "2024-06-09T11:15:00",
                               "end": "2024-06-09T11:15:00",
                               "properties": {
@@ -822,7 +930,7 @@
                             {
                               "$$data_type": "org-node",
                               "type": "line-break",
-                              "ref": "org8a36127",
+                              "ref": "org905a433",
                               "properties": {}
                             },
                             "Some note\n"
@@ -833,7 +941,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "item",
-                      "ref": "org4d00834",
+                      "ref": "org8f96e40",
                       "properties": {
                         "bullet": "- ",
                         "mode": "item",
@@ -845,14 +953,14 @@
                         {
                           "$$data_type": "org-node",
                           "type": "paragraph",
-                          "ref": "org958059e",
+                          "ref": "org36d9874",
                           "properties": {},
                           "contents": [
                             "Rescheduled from \"",
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "org0876f32",
+                              "ref": "orgb46f3bd",
                               "start": "2024-06-05",
                               "end": "2024-06-05",
                               "properties": {
@@ -864,7 +972,7 @@
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "org37ca364",
+                              "ref": "orgc890c8d",
                               "start": "2024-06-08T09:00:00",
                               "end": "2024-06-08T09:00:00",
                               "properties": {
@@ -876,7 +984,7 @@
                             {
                               "$$data_type": "org-node",
                               "type": "line-break",
-                              "ref": "orgc9e9ee2",
+                              "ref": "org8f9f6a1",
                               "properties": {}
                             },
                             "Rescheduled reason\n"
@@ -887,7 +995,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "item",
-                      "ref": "org0a6c7ae",
+                      "ref": "orgf6d4b17",
                       "properties": {
                         "bullet": "- ",
                         "mode": "item",
@@ -899,14 +1007,14 @@
                         {
                           "$$data_type": "org-node",
                           "type": "paragraph",
-                          "ref": "org6bdbeaf",
+                          "ref": "org5c71de7",
                           "properties": {},
                           "contents": [
                             "Not scheduled, was \"",
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "org06935ff",
+                              "ref": "org1ab3a43",
                               "start": "2024-06-08",
                               "end": "2024-06-08",
                               "properties": {
@@ -918,7 +1026,7 @@
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "org54e6b35",
+                              "ref": "org58f6e29",
                               "start": "2024-06-10T16:23:00",
                               "end": "2024-06-10T16:23:00",
                               "properties": {
@@ -934,7 +1042,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "item",
-                      "ref": "org18bf52a",
+                      "ref": "org565846d",
                       "properties": {
                         "bullet": "- ",
                         "mode": "item",
@@ -946,14 +1054,14 @@
                         {
                           "$$data_type": "org-node",
                           "type": "paragraph",
-                          "ref": "orgd11f392",
+                          "ref": "orge49c014",
                           "properties": {},
                           "contents": [
                             "New deadline from \"",
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "org7a2eed6",
+                              "ref": "orgc2477a8",
                               "start": "2024-06-09",
                               "end": "2024-06-09",
                               "properties": {
@@ -965,7 +1073,7 @@
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "orgde4a934",
+                              "ref": "org2ede8af",
                               "start": "2024-06-08T09:01:00",
                               "end": "2024-06-08T09:01:00",
                               "properties": {
@@ -981,7 +1089,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "item",
-                      "ref": "org369ad6c",
+                      "ref": "org247f97a",
                       "properties": {
                         "bullet": "- ",
                         "mode": "item",
@@ -993,14 +1101,14 @@
                         {
                           "$$data_type": "org-node",
                           "type": "paragraph",
-                          "ref": "org5bb1b4a",
+                          "ref": "org3ac536b",
                           "properties": {},
                           "contents": [
                             "Removed deadline, was \"",
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "org4c35086",
+                              "ref": "org4126e21",
                               "start": "2024-06-12",
                               "end": "2024-06-12",
                               "properties": {
@@ -1012,7 +1120,7 @@
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "org9ced4d4",
+                              "ref": "org1922691",
                               "start": "2024-06-10T16:23:00",
                               "end": "2024-06-10T16:23:00",
                               "properties": {
@@ -1028,7 +1136,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "item",
-                      "ref": "org8d33f44",
+                      "ref": "org49aaef8",
                       "properties": {
                         "bullet": "- ",
                         "mode": "item",
@@ -1040,14 +1148,14 @@
                         {
                           "$$data_type": "org-node",
                           "type": "paragraph",
-                          "ref": "orgc3236f3",
+                          "ref": "org5c689a2",
                           "properties": {},
                           "contents": [
                             "Refiled on ",
                             {
                               "$$data_type": "org-node",
                               "type": "timestamp",
-                              "ref": "org8f89c02",
+                              "ref": "org8296194",
                               "start": "2024-06-10T16:25:00",
                               "end": "2024-06-10T16:25:00",
                               "properties": {

@@ -281,7 +281,9 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
   becomes `"Hello, World!"`
 - [x] Horizontal rule (`-----`) — `horizontal-rule` node
 - [ ] Comment line (`# ...`)
-- [ ] Clock entry (`CLOCK:`)
+- [x] Clock entry (`CLOCK:`) — `clock` node with `duration`, `status: "closed"`, and
+  nested `timestamp` `value` (`inactive-range` with `start`/`end`); requires
+  `:with-clocks t`
 - [x] Diary sexp — `diary-sexp` node with `value` containing the sexp string
 - [x] Dynamic block (`#+BEGIN: ... #+END:`) — `dynamic-block` node with
   `block-name` and `arguments`
@@ -290,21 +292,19 @@ Note: bullet always exported verbatim, even out-of-order ordered bullets without
 - [x] Export snippet (`@@backend:content@@`) — `export-snippet` node with
   `back-end` and `value`
 - [x] Arbitrary keyword (`#+KEY: value`) — `keyword` node
-- [ ] `LOGBOOK` drawer
+- [x] `LOGBOOK` drawer — `drawer` node with `drawer-name: "LOGBOOK"`; clocks as
+  `clock` nodes, log notes as list items with parsed timestamps; requires
+  `:with-drawers t` and `:with-clocks t`
 - [x] Custom drawer with body content - `drawer` node with `drawer-name` property, content is a nested `paragraph` element.
 
 #### ⛔ Problems
 
 - **Comment lines not exported**: `# This is a comment line` produces no node in
   the section body; the `comment` element type is absent.
-- **CLOCK entries not exported**: `CLOCK: [...]--[...] => 1:00` produces no node;
-  the `clock` element type is absent from the section body.
 - **Inlinetask closing line misinterpreted**: The `********` closing marker of the
   inlinetask is parsed as nested bold markup rather than being recognised as an
   inlinetask end. The section body contains a deeply nested `bold` tree wrapping
   `"**"` instead of a clean inlinetask body.
-- **LOGBOOK drawer not exported**: The `:LOGBOOK:` drawer content is absent (the section has no
-  contents block). Org treats LOGBOOK as a special drawer and excludes it from export.
 
 #### 📝 To add
 

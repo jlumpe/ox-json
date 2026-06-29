@@ -23,8 +23,9 @@
     :author ("Test User")
     :date ("2026-01-01")
     :email "test@example.com"
-    ; Don't exclude logbook drawers
+    ; Don't exclude logbook drawers and clock elements
     :with-drawers t
+    :with-clocks t
     ; ox-json options
     :json-strict t
     :json-deterministic-refs t
