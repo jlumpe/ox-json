@@ -25,12 +25,12 @@ An exported document looks like:
   "$$data_type": "org-document",
   "properties": {
     "title": ["Test file"],
-    "filetags": ["foo","bar"],
-    "author": ["jlumpe"],
-    "creator": "Emacs 26.2 (Org mode 9.2.4)",
-    "date": [],
+    "filetags": ["foo", "bar"],
+    "author": ["Jared Lumpe"],
+    "creator": "Emacs 30.2 (Org mode 9.7.11)",
+    "date": ["2026-01-01"],
     "description": ["Test file"],
-    "email": "jlumpe@*****.org",
+    "email": "jared@example.com",
     "language": "en"
   },
   "contents": [
