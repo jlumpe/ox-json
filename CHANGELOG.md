@@ -38,6 +38,8 @@
   placeholders with `auto-undefer-p` nil were previously exported as `true`.
 - Fix improper quoting in `cl-case` link-type branches.
 - Fix incorrect argument order in `ox-json--type-error` calls.
+- Fix `wrong-number-of-arguments` crash during JSON post-processing on Emacs
+  versions before 28.1, where `json-pretty-print-buffer` takes no arguments.
 
 ### Other
 

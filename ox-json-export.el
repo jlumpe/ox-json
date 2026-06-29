@@ -475,7 +475,11 @@ INFO is the plist of export options."
         (if (fboundp 'json-pretty-print-buffer)
           (with-temp-buffer
             (insert text)
-            (json-pretty-print-buffer (eq postprocess 'minimal))
+            ; The MINIMIZE argument was only added in Emacs 28.1
+            (if (and (eq postprocess 'minimal)
+                     (>= (cdr (func-arity 'json-pretty-print-buffer)) 1))
+              (json-pretty-print-buffer t)
+              (json-pretty-print-buffer))
             (buffer-string))
           (warn "Unable to post-process JSON, json-pretty-print-buffer not available.")
           text))
