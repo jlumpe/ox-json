@@ -3,6 +3,9 @@
 
 ## Dev
 
+
+## 0.4.0
+
 ### Features
 
 - Org mode 9.7 support ([#9](https://github.com/jlumpe/ox-json/pull/9), thanks to [tcahill](https://github.com/tcahill) for the contribution):

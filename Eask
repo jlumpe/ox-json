@@ -1,7 +1,7 @@
 ;; -*- mode: eask; lexical-binding: t -*-
 
 (package "ox-json"
-         "0.3.0"
+         "0.4.0"
          "JSON export backend for Org mode")
 
 (website-url "https://github.com/jlumpe/ox-json")
