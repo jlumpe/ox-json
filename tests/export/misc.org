@@ -51,7 +51,23 @@ Inline task body
 
 * Logbook drawer
 :LOGBOOK:
-- State change from TODO to DONE
+CLOCK: [2024-06-10 Mon 14:00]--[2024-06-10 Mon 16:23] =>  2:23
+CLOCK: [2024-06-09 Sun 23:30]--[2024-06-10 Mon 01:15] =>  1:45
+- CLOSING NOTE [2024-06-10 Mon 16:23] \\
+  Closing note
+- State "DONE"       from "REVIEW"     [2024-06-10 Mon 16:23] \\
+  State change note
+- State "REVIEW"     from "NEXT"       [2024-06-10 Mon 12:02]
+CLOCK: [2024-06-08 Sat 09:00]--[2024-06-08 Sat 10:30] =>  1:30
+- State "NEXT"       from "TODO"       [2024-06-08 Sat 09:00]
+- Note taken on [2024-06-09 Sun 11:15] \\
+  Some note
+- Rescheduled from "<2024-06-05 Wed>" on [2024-06-08 Sat 09:00] \\
+  Rescheduled reason
+- Not scheduled, was "<2024-06-08 Sat>" on [2024-06-10 Mon 16:23]
+- New deadline from "<2024-06-09 Sun>" on [2024-06-08 Sat 09:01]
+- Removed deadline, was "<2024-06-12 Wed>" on [2024-06-10 Mon 16:23]
+- Refiled on [2024-06-10 Mon 16:25]
 :end:
 
 
