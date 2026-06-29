@@ -1,0 +1,98 @@
+{
+  "$$data_type": "org-document",
+  "properties": {
+    "author": [
+      "Alternate author"
+    ],
+    "creator": "Emacs 30.2 (Org mode 9.7.11)",
+    "date": [
+      "1999-01-01"
+    ],
+    "description": [],
+    "email": "alternate@example.com",
+    "filetags": [
+      "foo",
+      "bar"
+    ],
+    "language": "en",
+    "title": [
+      "Document"
+    ]
+  },
+  "contents": [
+    {
+      "$$data_type": "org-node",
+      "type": "section",
+      "ref": "org354809b",
+      "properties": {
+        "mode": "first-section"
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org636f48c",
+          "properties": {
+            "key": "TITLE",
+            "mode": "top-comment",
+            "value": "Document"
+          }
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org34540e8",
+          "properties": {
+            "key": "AUTHOR",
+            "value": "Alternate author"
+          }
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org79aac9c",
+          "properties": {
+            "key": "DATE",
+            "value": "1999-01-01"
+          }
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org6e9c275",
+          "properties": {
+            "key": "EMAIL",
+            "value": "alternate@example.com"
+          }
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org3f33d2c",
+          "properties": {
+            "key": "FILETAGS",
+            "value": ":foo:bar:"
+          }
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "org9d8e8ba",
+          "properties": {
+            "key": "DESCRIPTION",
+            "value": "Description with /markup/ *in* _it_"
+          }
+        },
+        {
+          "$$data_type": "org-node",
+          "type": "keyword",
+          "ref": "orgb4b3c64",
+          "properties": {
+            "key": "OPTIONS",
+            "value": "toc:t"
+          }
+        }
+      ]
+    }
+  ]
+}

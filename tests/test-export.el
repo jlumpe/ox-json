@@ -189,5 +189,5 @@ ENTRY-VERSION is nil for all versions, otherwise a major/minor list."
 (ox-json-def-export-test "footnotes")
 (ox-json-def-export-test "latex")
 (ox-json-def-export-test "babel")
-(ox-json-def-export-test "drawers")
 (ox-json-def-export-test "misc")
+(ox-json-def-export-test "document")

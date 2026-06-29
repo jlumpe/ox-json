@@ -2,18 +2,15 @@
   "$$data_type": "org-document",
   "properties": {
     "author": [
-      "Test Author"
+      "Test User"
     ],
     "creator": "Emacs 30.2 (Org mode 9.7.11)",
     "date": [
-      "2024-01-15"
+      "2026-01-01"
     ],
     "description": [],
     "email": "test@example.com",
-    "filetags": [
-      "foo",
-      "bar"
-    ],
+    "filetags": [],
     "language": "en",
     "title": [
       "Misc"
@@ -35,6 +32,7 @@
           "properties": {
             "key": "TITLE",
             "mode": "top-comment",
+            "post-blank": 1,
             "value": "Misc"
           }
         },
@@ -43,54 +41,8 @@
           "type": "keyword",
           "ref": "org34540e8",
           "properties": {
-            "key": "AUTHOR",
-            "value": "Test Author"
-          }
-        },
-        {
-          "$$data_type": "org-node",
-          "type": "keyword",
-          "ref": "org79aac9c",
-          "properties": {
-            "key": "DATE",
-            "value": "2024-01-15"
-          }
-        },
-        {
-          "$$data_type": "org-node",
-          "type": "keyword",
-          "ref": "org6e9c275",
-          "properties": {
-            "key": "FILETAGS",
-            "value": ":foo:bar:"
-          }
-        },
-        {
-          "$$data_type": "org-node",
-          "type": "keyword",
-          "ref": "org3f33d2c",
-          "properties": {
-            "key": "DESCRIPTION",
-            "value": "Description with /markup/ *in* _it_"
-          }
-        },
-        {
-          "$$data_type": "org-node",
-          "type": "keyword",
-          "ref": "org9d8e8ba",
-          "properties": {
-            "key": "OPTIONS",
-            "post-blank": 1,
-            "value": "toc:t"
-          }
-        },
-        {
-          "$$data_type": "org-node",
-          "type": "keyword",
-          "ref": "orgb4b3c64",
-          "properties": {
             "key": "MACRO",
-            "post-blank": 1,
+            "post-blank": 2,
             "value": "hello Hello, $1!"
           }
         }
@@ -100,10 +52,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org8950e07",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
+      "tags-all": [],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -131,7 +80,7 @@
               "ref": "org8868b15",
               "properties": {
                 "mode": "planning",
-                "post-blank": 1
+                "post-blank": 2
               }
             }
           ]
@@ -142,10 +91,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "orgfb6e679",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
+      "tags-all": [],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -173,10 +119,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org04c8511",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
+      "tags-all": [],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -204,10 +147,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "orgec79af1",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
+      "tags-all": [],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -235,7 +175,7 @@
               "ref": "org1085c65",
               "properties": {
                 "mode": "planning",
-                "post-blank": 1,
+                "post-blank": 2,
                 "value": "%%(org-agenda-date-from-calendar)"
               }
             }
@@ -247,10 +187,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org753a788",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
+      "tags-all": [],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -280,7 +217,7 @@
                 "arguments": ":hlines 1 :id local",
                 "block-name": "columnview",
                 "mode": "planning",
-                "post-blank": 1
+                "post-blank": 2
               },
               "contents": [
                 {
@@ -372,10 +309,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org71a8606",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
+      "tags-all": [],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -393,10 +327,7 @@
           "$$data_type": "org-node",
           "type": "headline",
           "ref": "org14e5b64",
-          "tags-all": [
-            "foo",
-            "bar"
-          ],
+          "tags-all": [],
           "drawer": {},
           "properties": {
             "level": 8,
@@ -427,7 +358,7 @@
                   "ref": "org48ea5cf",
                   "properties": {
                     "mode": "planning",
-                    "post-blank": 1
+                    "post-blank": 2
                   },
                   "contents": [
                     "Inline task body\n",
@@ -469,10 +400,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "orge3066e0",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
+      "tags-all": [],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -500,7 +428,7 @@
               "ref": "org6b63ea9",
               "properties": {
                 "mode": "planning",
-                "post-blank": 1
+                "post-blank": 2
               },
               "contents": [
                 "Hello, World!\n"
@@ -514,10 +442,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org871e643",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
+      "tags-all": [],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -545,7 +470,7 @@
               "ref": "orgf66591b",
               "properties": {
                 "mode": "planning",
-                "post-blank": 1
+                "post-blank": 2
               },
               "contents": [
                 {
@@ -567,10 +492,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org5c794c1",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
+      "tags-all": [],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -598,7 +520,7 @@
               "ref": "org8345076",
               "properties": {
                 "mode": "planning",
-                "post-blank": 1
+                "post-blank": 2
               },
               "contents": [
                 {
@@ -621,10 +543,7 @@
       "$$data_type": "org-node",
       "type": "headline",
       "ref": "org658f461",
-      "tags-all": [
-        "foo",
-        "bar"
-      ],
+      "tags-all": [],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -653,8 +572,87 @@
               "properties": {
                 "key": "CUSTOM_KEY",
                 "mode": "planning",
+                "post-blank": 2,
                 "value": "custom value"
               }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "org0405457",
+      "tags-all": [],
+      "drawer": {},
+      "properties": {
+        "level": 1,
+        "raw-value": "Logbook drawer",
+        "secondary": [
+          ":title"
+        ],
+        "title": [
+          "Logbook drawer"
+        ],
+        "true-level": 1
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "orgc867950",
+          "properties": {
+            "mode": "section"
+          }
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "orga5478dd",
+      "tags-all": [],
+      "drawer": {},
+      "properties": {
+        "level": 1,
+        "raw-value": "Custom drawer",
+        "secondary": [
+          ":title"
+        ],
+        "title": [
+          "Custom drawer"
+        ],
+        "true-level": 1
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "orga46ca5d",
+          "properties": {
+            "mode": "section"
+          },
+          "contents": [
+            {
+              "$$data_type": "org-node",
+              "type": "drawer",
+              "ref": "org0b936f3",
+              "properties": {
+                "drawer-name": "CUSTOM",
+                "mode": "planning"
+              },
+              "contents": [
+                {
+                  "$$data_type": "org-node",
+                  "type": "paragraph",
+                  "ref": "org98e93e3",
+                  "properties": {},
+                  "contents": [
+                    "Drawer content line one\nDrawer content line two\n"
+                  ]
+                }
+              ]
             }
           ]
         }

@@ -282,6 +282,46 @@
       "tags-all": [
         "file-tag"
       ],
+      "drawer": {
+        "FOO": "abc123 this is plain text",
+        "MARKUP": "*abc* /def/ [[google.com][a link]]",
+        "WHITESPACE_TRIMMED": "trimmed value",
+        "ADD_STUFF": "abc (def ghi)",
+        "CASE_SENSITIVE": "two",
+        "_": "non-alphabetical",
+        "123": "numeric key",
+        "ID": "asdfjkl;12354",
+        "CUSTOM_ID": "custom-drawer-id"
+      },
+      "properties": {
+        "level": 1,
+        "raw-value": "Property drawer",
+        "secondary": [
+          ":title"
+        ],
+        "title": [
+          "Property drawer"
+        ],
+        "true-level": 1
+      },
+      "contents": [
+        {
+          "$$data_type": "org-node",
+          "type": "section",
+          "ref": "org1095095",
+          "properties": {
+            "mode": "section"
+          }
+        }
+      ]
+    },
+    {
+      "$$data_type": "org-node",
+      "type": "headline",
+      "ref": "orgec79af1",
+      "tags-all": [
+        "file-tag"
+      ],
       "drawer": {},
       "properties": {
         "level": 1,
@@ -294,7 +334,7 @@
           {
             "$$data_type": "org-node",
             "type": "verbatim",
-            "ref": "org3041e98",
+            "ref": "orge82cdd5",
             "properties": {
               "post-blank": 1,
               "value": "TODO"
@@ -308,7 +348,7 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "orgbc84f60",
+          "ref": "org25bd303",
           "tags-all": [
             "file-tag"
           ],
@@ -329,7 +369,7 @@
             {
               "$$data_type": "org-node",
               "type": "headline",
-              "ref": "org345d91d",
+              "ref": "org5b64795",
               "tags-all": [
                 "file-tag"
               ],
@@ -352,7 +392,7 @@
             {
               "$$data_type": "org-node",
               "type": "headline",
-              "ref": "org41bb311",
+              "ref": "orgcca1777",
               "tags-all": [
                 "file-tag"
               ],
@@ -374,7 +414,7 @@
             {
               "$$data_type": "org-node",
               "type": "headline",
-              "ref": "org112033b",
+              "ref": "orgcbe6029",
               "tags-all": [
                 "file-tag"
               ],
@@ -399,7 +439,7 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "orgcc40d68",
+          "ref": "orge14e412",
           "tags-all": [
             "file-tag"
           ],
@@ -419,7 +459,7 @@
             {
               "$$data_type": "org-node",
               "type": "headline",
-              "ref": "orgb36b9a4",
+              "ref": "org1b0db3d",
               "tags-all": [
                 "file-tag"
               ],
@@ -443,7 +483,7 @@
             {
               "$$data_type": "org-node",
               "type": "headline",
-              "ref": "orgd89ca3b",
+              "ref": "orgdbcdda8",
               "tags-all": [
                 "file-tag"
               ],
@@ -466,7 +506,7 @@
             {
               "$$data_type": "org-node",
               "type": "headline",
-              "ref": "orgee225be",
+              "ref": "org35059b0",
               "tags-all": [
                 "file-tag"
               ],
@@ -489,7 +529,7 @@
             {
               "$$data_type": "org-node",
               "type": "headline",
-              "ref": "orgaebb45d",
+              "ref": "orge9ed57f",
               "tags-all": [
                 "file-tag"
               ],
@@ -516,7 +556,7 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "orgec79af1",
+      "ref": "org753a788",
       "tags-all": [
         "file-tag",
         "tag1",
@@ -542,7 +582,7 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org25bd303",
+          "ref": "org074dcc7",
           "tags-all": [
             "file-tag",
             "tag1",
@@ -565,7 +605,7 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "orge14e412",
+          "ref": "org8d769be",
           "tags-all": [
             "file-tag",
             "tag1",
@@ -594,7 +634,7 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org753a788",
+      "ref": "org71a8606",
       "tags-all": [
         "file-tag"
       ],
@@ -615,7 +655,7 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org074dcc7",
+          "ref": "org14e5b64",
           "tags-all": [
             "file-tag"
           ],
@@ -653,7 +693,7 @@
             {
               "$$data_type": "org-node",
               "type": "section",
-              "ref": "org6693785",
+              "ref": "org9a8a2ac",
               "properties": {
                 "mode": "section"
               }
@@ -663,7 +703,7 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org8d769be",
+          "ref": "orgf4c2ebd",
           "tags-all": [
             "file-tag"
           ],
@@ -700,7 +740,7 @@
             {
               "$$data_type": "org-node",
               "type": "section",
-              "ref": "org9fda2b1",
+              "ref": "orgc27b8bd",
               "properties": {
                 "mode": "section"
               }
@@ -710,7 +750,7 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "orgdd1a25b",
+          "ref": "org2bded4f",
           "tags-all": [
             "file-tag"
           ],
@@ -747,7 +787,7 @@
             {
               "$$data_type": "org-node",
               "type": "section",
-              "ref": "org5b37181",
+              "ref": "org7908ec6",
               "properties": {
                 "mode": "section"
               }
@@ -757,7 +797,7 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org3a3bff4",
+          "ref": "org7269fad",
           "tags-all": [
             "file-tag"
           ],
@@ -794,7 +834,7 @@
             {
               "$$data_type": "org-node",
               "type": "section",
-              "ref": "org638a80f",
+              "ref": "org59db47c",
               "properties": {
                 "mode": "section"
               },
@@ -802,7 +842,7 @@
                 {
                   "$$data_type": "org-node",
                   "type": "paragraph",
-                  "ref": "orga342fc8",
+                  "ref": "orgc5c8f55",
                   "properties": {
                     "mode": "property-drawer",
                     "post-blank": 2
@@ -812,7 +852,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "timestamp",
-                      "ref": "orgc375cff",
+                      "ref": "org19b9d7a",
                       "start": "2024-01-20",
                       "end": "2024-01-20",
                       "properties": {
@@ -824,7 +864,7 @@
                     {
                       "$$data_type": "org-node",
                       "type": "timestamp",
-                      "ref": "org75347b0",
+                      "ref": "org0db9a22",
                       "start": "2024-01-10T14:30:00",
                       "end": "2024-01-10T14:30:00",
                       "properties": {
@@ -844,7 +884,7 @@
     {
       "$$data_type": "org-node",
       "type": "headline",
-      "ref": "org71a8606",
+      "ref": "orge3066e0",
       "tags-all": [
         "file-tag"
       ],
@@ -864,7 +904,7 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "org14e5b64",
+          "ref": "org85192f9",
           "tags-all": [
             "file-tag"
           ],
@@ -880,7 +920,7 @@
               {
                 "$$data_type": "org-node",
                 "type": "statistics-cookie",
-                "ref": "org5adb426",
+                "ref": "org875b08e",
                 "properties": {
                   "post-blank": 1,
                   "value": "[1/2]"
@@ -894,7 +934,7 @@
         {
           "$$data_type": "org-node",
           "type": "headline",
-          "ref": "orgf4c2ebd",
+          "ref": "org1e156a6",
           "tags-all": [
             "file-tag"
           ],
@@ -909,7 +949,7 @@
               {
                 "$$data_type": "org-node",
                 "type": "statistics-cookie",
-                "ref": "org7fc0cbd",
+                "ref": "orga4187c8",
                 "properties": {
                   "post-blank": 1,
                   "value": "[50%]"

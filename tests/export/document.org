@@ -1,0 +1,7 @@
+#+title: Document
+#+author: Alternate author
+#+date: 1999-01-01
+#+email: alternate@example.com
+#+filetags: :foo:bar:
+#+description: Description with /markup/ *in* _it_
+#+OPTIONS: toc:t

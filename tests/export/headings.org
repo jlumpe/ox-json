@@ -13,6 +13,23 @@
 * Markup: /italic/ *bold* _underline_ ~code~ =verbatim= +strike-through+
 
 
+* Property drawer
+:PROPERTIES:
+:foo: abc123 this is plain text
+:markup: *abc* /def/ [[google.com][a link]]
+:whitespace_trimmed:        trimmed value
+:add_stuff: abc
+:add_stuff+: def
+:add_stuff+: ghi
+:case_sensitive: one
+:CASE_sensitive: two
+:_: non-alphabetical
+:123: numeric key
+:ID: asdfjkl;12354
+:CUSTOM_ID: custom-drawer-id
+:end:
+
+
 * =TODO= states
 
 ** Keywords
