@@ -1,6 +1,6 @@
 ;;; ox-json-utils.el --- Utility functions for ox-json  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2019 - 2023 Jared Lumpe
+;; Copyright (C) 2019 - 2026 Jared Lumpe
 
 ;; Author: Jared Lumpe <jared@jaredlumpe.com>
 
