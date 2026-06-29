@@ -62,7 +62,7 @@
   "Default exporter function for each element property type.
 
 Plist mapping property symbols in
-`ox-json-default-property-types' to exporter functions. These can
+`ox-json-default-property-types' to exporter functions.  These can
 be overridden with the :json-exporters option.")
 
 (defconst ox-json-default-property-types
@@ -255,11 +255,11 @@ be overridden with the :json-exporters option.")
       :value string))
   "Default type symbols for properties of all Org element/object types.
 
-Nested set of plists. Keys are element/object type symbols as
+Nested set of plists.  Keys are element/object type symbols as
 returned by `org-element-type', along with \"all\" which sets the
-defaults for all types. The values are plists mapping property
+defaults for all types.  The values are plists mapping property
 symbols (starting with colons) to type symbols in
-`ox-json-default-type-exporters'. A value of nil means to ignore
+`ox-json-default-type-exporters'.  A value of nil means to ignore
 the property.
 
 These can be overridden with the :json-property-types option.")
@@ -311,13 +311,13 @@ property will NOT be exported.")
 
 
 ;;; Variables
-(defgroup ox-json nil "Customization for the ox-json package" :group 'outline)
+(defgroup ox-json nil "Customization for the ox-json package." :group 'outline)
 
 
 ;;; Private globals
 
 (defvar ox-json--current-node nil
-  "The current org node being transcoded, or a string indicating the current export context.
+  "The org node currently being transcoded, or the current export context.
 
 Used for error reporting.")
 

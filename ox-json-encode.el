@@ -47,7 +47,9 @@ ARGS are objects to insert into MSG using `format-message'."
     `((message string ,(apply #'format-message msg args)))))
 
 (defun ox-json--signal-error (msg &rest args)
-  "Signal an error, adding information on the current element being transcoded if applicable.
+  "Signal an error, adding information on the current element.
+
+If applicable, the error includes which element is being transcoded.
 
 MSG is the error message.
 ARGS are objects to insert into MSG using `format-message'."
@@ -109,8 +111,8 @@ MAXLEN is the number of characters to truncate the representation of VALUE at."
   "Encode VALUE to JSON as boolean.
 
 INFO is the plist of export options.
-If STRICT is true (default) will only accept t as a true value and raise/return
-an error otherwise. If false will accept any truthy value."
+If STRICT is true (default) will only accept t as a true value and
+raise/return an error otherwise.  If false will accept any truthy value."
   (cond
     ((not value)
       "false")
@@ -140,8 +142,8 @@ Also accepts symbols."
 (defun ox-json-encode-char (value &optional info)
   "Encode VALUE to JSON as a single-character string or null.
 
-VALUE must be a character code integer, string (not checked for length in this case), or nil.
-INFO is the plist of export options."
+VALUE must be a character code integer, string (length not checked), or
+nil.  INFO is the plist of export options."
   (cond
     ((not value)
       "null")
@@ -205,9 +207,10 @@ INFO is the plist of export options.
 
 Handles strings, numbers, and org elements/objects without a problem.
 Non-empty lists which are not elements/objects are recursively encoded as
-JSON arrays. Symbols are encoded as strings except for t which is encoded
-as true. This function cannot tell whether a nil value should correspond to an
-empty array, false, or null. A null value is arbitrarily returned in this case."
+JSON arrays.  Symbols are encoded as strings except for t which is encoded
+as true.  This function cannot tell whether a nil value should correspond to
+an empty array, false, or null.  A null value is arbitrarily returned in
+this case."
   (cond
     ((not value)
       "null")
@@ -235,11 +238,11 @@ INFO is the plist of export options."
     ox-json-default-type-exporters))
 
 (defun ox-json-encode-with-type (type value info)
-  "Encode a VALUE to JSON given its type.
+  "Encode VALUE to JSON given its type.
 
-TYPE is a key in the plist under the :json-exporters option. It may also be a list
-containing the key followed by additional arguments to pass to the encoder
-function.
+TYPE is a key in the plist under the :json-exporters option.  It may also
+be a list containing the key followed by additional arguments to pass to
+the encoder function.
 INFO is the plist of export options."
   (let* ((typekey (if (listp type) (car type) type))
          (args (if (listp type) (cdr type) nil))
@@ -253,9 +256,9 @@ INFO is the plist of export options."
 
 INFO is the plist of export options.
 ITEMTYPE is optional and is the type to pass to `ox-json-encode-with-type'
-to encode the items of the array. By default `ox-json-encode-auto' is used.
-If SINGLE-LINE is non-nil will put all items on same line, otherwise will use
-one line per item."
+to encode the items of the array.  By default `ox-json-encode-auto' is used.
+If SINGLE-LINE is non-nil will put all items on same line, otherwise will
+use one line per item."
   (ox-json-encode-array-raw
     (cl-loop
       for item in array
@@ -269,7 +272,7 @@ one line per item."
 DATA-TYPE is a data type string to add to the JSON object.
 INFO is the plist of export options.
 VALUETYPE is optional and is the type to pass to `ox-json-encode-with-type'
-to encode the values of each key-value pair. By default
+to encode the values of each key-value pair.  By default
 `ox-json-encode-auto' is used."
   (ox-json-encode-alist-raw
     data-type
@@ -284,7 +287,7 @@ to encode the values of each key-value pair. By default
 DATA-TYPE is a data type string to add to the JSON object.
 INFO is the plist of export options.
 VALUETYPE is optional and is the type to pass to `ox-json-encode-with-type'
-to encode the values of each key-value pair. By default
+to encode the values of each key-value pair.  By default
 `ox-json-encode-auto' is used."
   (ox-json-encode-alist
     data-type
@@ -297,9 +300,9 @@ to encode the values of each key-value pair. By default
 
 INFO is the plist of export options.
 PROPERTIES is a list of (key type value) forms for each property of the JSON
-object. Each value will be JSON-encoded with `ox-json-encode-with-type'
-according to the type symbol given. Values with a type of nil will be considered
-to be already encoded."
+object.  Each value will be JSON-encoded with `ox-json-encode-with-type'
+according to the type symbol given.  Values with a type of nil will be
+considered to be already encoded."
   (cl-loop
     for (key type value) in properties
     collect

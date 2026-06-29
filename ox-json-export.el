@@ -161,7 +161,9 @@ INFO is the plist of export options."
          (equal value default-val))))
 
 (defun ox-json--remove-default-properties (property-plist node-type)
-  "Return a copy of PROPERTY-PLIST with default-valued properties removed."
+  "Return a copy of PROPERTY-PLIST with default-valued properties removed.
+
+NODE-TYPE is the symbol returned by `org-element-type'."
   (let ((result nil))
     (ox-json--loop-plist (key value property-plist)
       do (unless (ox-json--is-default-property-value key value node-type)
@@ -207,8 +209,9 @@ JSON-encoded values."
       type-plists)))
 
 (defun ox-json--skip-property (property)
-  "Return non-nil if an element property PROPERTY should be skipped, regardless of the value of the
-:json-property-types option."
+  "Return non-nil if element property PROPERTY should be skipped.
+
+Regardless of the value of the :json-property-types option."
   ; Apparently 9.7 introduces some private property names, skip these.
   (cl-search "--" (symbol-name property)))
 
@@ -217,11 +220,11 @@ JSON-encoded values."
 
 PROPERTY-PLIST is a plist containing the property values.
 DEFAULT-TYPE is the type symbol to be used for properties not found in
-TYPE-PLISTS. A value of nil means these properties will be ignored.
+TYPE-PLISTS.  A value of nil means these properties will be ignored.
 INFO is the plist of export options.
-TYPE-PLISTS is a sequence of plists containing the type symbols used to encode
-property values with (see `ox-json-encode-with-type'). The lookup stops at the
-first match, so earlier plists override later ones.
+TYPE-PLISTS is a sequence of plists containing the type symbols used to
+encode property values with (see `ox-json-encode-with-type').  The lookup
+stops at the first match, so earlier plists override later ones.
 
 Returns an alist where the items are property names and their
 JSON-encoded values."
@@ -234,6 +237,8 @@ JSON-encoded values."
 
 (defun ox-json--get-reference (datum info)
   "Return a stable or random reference for DATUM, depending on options.
+
+INFO is the plist of export options.
 When `:json-deterministic-refs' is non-nil, the ref is derived from
 DATUM's structural path in the parse tree.  Otherwise delegates to
 `org-export-get-reference' (random)."
@@ -261,18 +266,19 @@ INFO is the plist of export options.
 PROPERTY-TYPES is a plist of type symbols which override the default way of
 determining how to encode property values (see equivalent argument in
 `ox-json-export-properties').
-PROPERTIES is an alist of pre-encoded property values that will be used in place
-of the return value of `ox-json-export-properties' if given (passing a
+PROPERTIES is an alist of pre-encoded property values that will be used in
+place of the return value of `ox-json-export-properties' if given (passing a
 value of nil will result in no properties being included).
+REF is the stable or random reference string for NODE.
 EXTRA-PROPERTIES is an alist of pre-encoded property values to add to the
-automatically-derived ones instead of replacing them, as the PROPERTIES argument
-does.
-EXTRA is an alist of keys and pre-encoded values to add directly to the returned
-JSON object at the top level (note that this is not checked for conflicts with
-the existing keys).
+automatically-derived ones instead of replacing them, as the PROPERTIES
+argument does.
+EXTRA is an alist of keys and pre-encoded values to add directly to the
+returned JSON object at the top level (note that this is not checked for
+conflicts with the existing keys).
 CONTENTS overrides the default way of encoding the node's contents with
-`ox-json-export-node-contents'. It can either be a string containing the entire
-encoded JSON array or a list of pre-encoded strings.
+`ox-json-export-node-contents'.  It can either be a string containing the
+entire encoded JSON array or a list of pre-encoded strings.
 
 It is expected for all transcoding functions to call this function to do most
 of the work, possibly using the keyword arguments to override behavior."

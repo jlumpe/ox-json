@@ -98,8 +98,10 @@
 ;;; Org-mode utility code
 
 (defun ox-json-node-properties (node)
-  "Org v9.7 introduced two significant changes to the AST that must be
-considered when enumerating a node's properties:
+  "Return the property plist for org element or object NODE.
+
+Org v9.7 introduced two significant AST changes that must be considered
+when enumerating a node's properties:
 
      1. Some properties which were previously present in the property
      list (e.g. :begin and :end) are now stored as elements of a vector
