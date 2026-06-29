@@ -9,7 +9,9 @@
   - Handle deferred properties and the `:standard-properties` vector via `org-element-properties-map`
   - Skip private properties (names containing `--`)
   - Stop exporting `:post-affiliated`, `:robust-begin`, and `:robust-end`
-  - Export test now compares full document output against checked-in reference JSON (`tests/test.json`).
+  - Export tests now compare full document output against checked-in reference JSON. The single
+    `tests/test.org`/`test.json` pair was replaced by a set of topic-focused fixtures in
+    `tests/export/` (one `.org`/`.json` pair per feature area), each with its own ERT test.
 - New export options:
   - `:json-postprocess` (`pretty`, `minimal`, or nil): to control final JSON formatting (default
     `:pretty`).
@@ -45,6 +47,10 @@
 - Add test coverage reporting via `undercover`.
 - Makefile refactored as a thin facade over Eask.
 - Use strict bool parsing by default (properties marked as bools must be `nil` or `t`).
+- Add `scripts/json-to-markdown.py` and `scripts/json-to-html.py` to render exported JSON as
+  human-readable Markdown/HTML for reviewing fixtures (`make update-exports-pretty`).
+- Add `scripts/eask-docker.sh` and `EASK_DOCKER` Makefile support for testing against specific
+  Emacs versions in a `silex/emacs` container.
 
 
 ## 0.3.0
